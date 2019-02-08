@@ -1,22 +1,33 @@
 package DB;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.sql.*;
 import java.util.*;
 
 public class MySqlDB implements AutoCloseable {
 
+	private final static String configFile = "database.config";
 	private Connection con ;	
-	private static String user;
-	private static String password;
 
-	public MySqlDB(String server, String databaseName, String user, String password) throws DatabaseException {
+	public MySqlDB() throws DatabaseException {
 		try {
-            con = DriverManager.getConnection("jdbc:mysql://" + server + "/" + databaseName + "?user=" + user + "&password=" + password + "");
+			JsonObject obj = new JsonParser().parse(new FileReader(configFile)).getAsJsonObject();
+			String server = obj.get("server").getAsString();
+			String schema = obj.get("schema").getAsString();
+			String user = obj.get("user").getAsString();
+			String password = obj.get("password").getAsString();
+            con = DriverManager.getConnection("jdbc:mysql://" + server + "/" + schema + "?user=" + user + "&password=" + password + "");
 
 		} catch (SQLException ex) {
 			throw new DatabaseException("Error al Conectar con la base de datos." + ex.getMessage());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
-    }
+	}
 
 	@Override
 	public void close() throws DatabaseException {
