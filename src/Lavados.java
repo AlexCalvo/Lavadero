@@ -19,49 +19,63 @@ public class Lavados
 	    private Tam Tam;
 	    private double Precio;
 	    private int Telefono;
-	    private Propietarios Prop;
+	    private Propietario Prop;
 	    private Trabajador Trab;
 
         public static List<Lavados> ListaLavados(Lavados l)
         {
-            List<Lavados> lista = new ArrayList<Lavados>();
-            MySqlDB miBD = new MySqlDB();
-            
-            for(Object[] tupla : miBD.Select("SELECT ID FROM Lavados WHERE Matricula = "+l.getMatricula()+ ";" )){
-            	lista.add(new Lavados((int)tupla[1]));
-            }
-            
+     	   List<Lavados> lista = new ArrayList<Lavados>();
+
+           try(MySqlDB miBD = new MySqlDB()) {
+               
+               for(Object[] tupla : miBD.Select("SELECT ID FROM Lavados WHERE Matricula = "+l.getMatricula()+ ";" )){
+               	lista.add(new Lavados((int)tupla[1]));
+               }
+           }catch (DatabaseException e) {
+               e.printStackTrace();
+           }
+        	
             return lista;
         }
 
         public Lavados(int id)
         {
-        	MySqlDB miBD = new MySqlDB();
-        	Object[] tupla = miBD.Select("SELECT*FROM Lavados WHERE "
-        			+ "ID = "+ id + ";").get(0);
-        	ID = (int)tupla[0];
-      	    Matricula = (String)tupla[1];
-      	    Marca = (String)tupla[2];
-      	    Modelo = (String)tupla[3];
-      	    Hora = (String)tupla[4];
-      	    Tam = (Tam)tupla[5];
-      	    Precio = (double)tupla[6];
-      	    Telefono = (int)tupla[7];
-      	    Prop = (Propietarios)tupla[8];
-      	    Trab = (Trabajador)tupla[9];
-      	    
+        	try(MySqlDB miBD = new MySqlDB()){
+        		Object[] tupla = miBD.Select("SELECT*FROM Lavados WHERE "
+            			+ "ID = "+ id + ";").get(0);
+            	ID = (int)tupla[0];
+          	    Matricula = (String)tupla[1];
+          	    Marca = (String)tupla[2];
+          	    Modelo = (String)tupla[3];
+          	    Hora = (String)tupla[4];
+          	    Tam = (Tam)tupla[5];
+          	    Precio = (double)tupla[6];
+          	    Telefono = (int)tupla[7];
+          	    Prop = (Propietario)tupla[8];
+          	    Trab = (Trabajador)tupla[9];
+          	    
+        	}catch (DatabaseException e) {
+                e.printStackTrace();
+            }
+        	
+        	
         	
          }
 
 		public Lavados(int ID, String Matricula, String Marca, String Modelo,String Hora,Tam Tam,
-		double Precio, int Telefono, Propietarios Prop, Trabajador Trab)
+		double Precio, int Telefono, Propietario Prop, Trabajador Trab)
          {
-             MySqlDB miBD = new MySqlDB();
-             miBD.Insert("INSERT INTO Lavados VALUES(" 
-            		 +ID+ ", '"+Matricula+"', '"+Marca+"','"+Modelo+"','"+Hora+"',"+Tam+","+
-            		 Precio+","+Telefono+","+Prop+","+Trab+");");
-             
-             this.ID = ID;
+			try (MySqlDB miBD = new MySqlDB()){
+
+	             miBD.Insert("INSERT INTO Lavados VALUES(" 
+	            		 +ID+ ", '"+Matricula+"', '"+Marca+"','"+Modelo+"','"+Hora+"',"+Tam+","+
+	            		 Precio+","+Telefono+","+Prop+","+Trab+");");
+	             
+	             this.ID = ID;
+			}catch (DatabaseException e) {
+	            e.printStackTrace();
+	        }
+          
          }
 
        
@@ -178,11 +192,11 @@ public class Lavados
 				e.printStackTrace();
 			}		}
 
-		public Propietarios getProp() {
+		public Propietario getProp() {
 			return Prop;
 		}
 
-		public void setProp(Propietarios prop) {
+		public void setProp(Propietario prop) {
 			try(MySqlDB miBD = new MySqlDB()) {
 				miBD.Update("UPDATE Lavados SET Propietarios = "+prop+" where ID = "+this.getID());
 			
@@ -207,19 +221,23 @@ public class Lavados
 		}
 
 		public void BorrarLavados(){
-			 MySqlDB miBD = new MySqlDB();
-        	 miBD.Delete("DELETE FROM Lavados WHERE ID = "
-        			 +this.ID+ "';");
-        	 ID = -1;
-       	    Matricula = null;
-       	    Marca = null;
-       	    Modelo = null;
-       	    Hora = null;
-       	    Tam = null;
-       	    Precio = -1;
-       	    Telefono =-1;;
-       	    Prop = null;
-       	    Trab = null;
+			 try (MySqlDB miBD = new MySqlDB()){
+				 miBD.Delete("DELETE FROM Lavados WHERE ID = "
+	        			 +this.ID+"';");
+	        	 ID = -1;
+	       	    Matricula = null;
+	       	    Marca = null;
+	       	    Modelo = null;
+	       	    Hora = null;
+	       	    Tam = null;
+	       	    Precio = -1;
+	       	    Telefono =-1;;
+	       	    Prop = null;
+	       	    Trab = null;
+			 }catch (DatabaseException e) {
+		            e.printStackTrace();
+		        }
+        	 
          }
 
 		@Override
