@@ -3,56 +3,67 @@ import java.util.*;
 import DB.DatabaseException;
 import DB.MySqlDB;
 
-import java.text.SimpleDateFormat;
-
 public class Lavados
 {
-	 
-	    private int ID;//clave principal
-	    private String Matricula;
-	    private String Marca;
-	    private String Modelo;
-	    private String Hora;
+	    
+	    public static final String[] columnas = {"ID", "Matricula", "marca", "modelo", "hora", "Tam", "precio", "telefono", "Propietario", "Trabajador"};
+    
+	    private int id;//clave principal
+	    private String matricula;
+	    private String marca;
+	    private String modelo;
+	    private String hora;
+	    private String fecha;
 	    private enum Tam{
 	    	Tipo1,Tipo2,Tipo3;//Los que sean
 	    }
-	    private Tam Tam;
-	    private double Precio;
-	    private int Telefono;
-	    private Propietario Prop;
-	    private Trabajador Trab;
+	    private Tam tam;
+	    private double precio;
+	    private String telefono;
+	    private Propietario prop;
+	    private Trabajador trab;
 
-        public static List<Lavados> ListaLavados(Lavados l)
-        {
+        public static List<Lavados> ListaLavados() {
      	   List<Lavados> lista = new ArrayList<Lavados>();
 
            try(MySqlDB miBD = new MySqlDB()) {
                
-               for(Object[] tupla : miBD.Select("SELECT ID FROM Lavados WHERE Matricula = "+l.getMatricula()+ ";" )){
-               	lista.add(new Lavados((int)tupla[1]));
+               for(Object[] tupla : miBD.Select("SELECT * FROM Lavados" )){
+                   int id = (int)tupla[0];
+                   String matricula = (String)tupla[1];
+                   String marca = (String)tupla[2];
+                   String modelo = (String)tupla[3];
+                   String hora = (String)tupla[4];
+                   String fecha = (String)tupla[5];
+                   Tam tam = (Tam)tupla[6];
+                   double precio = (double)tupla[7];
+                   String telefono = (String) tupla[8];
+                   Propietario prop = new Propietario((int)tupla[9]);
+                   Trabajador trab = new Trabajador((int)tupla[10]);
+                   lista.add(new Lavados(id, matricula, marca,modelo, hora, fecha, tam, precio,telefono, prop, trab));
                }
-           }catch (DatabaseException e) {
+           } catch (DatabaseException e) {
                e.printStackTrace();
            }
         	
             return lista;
         }
 
-        public Lavados(int id)
-        {
+        public Lavados(int id) {
         	try(MySqlDB miBD = new MySqlDB()){
         		Object[] tupla = miBD.Select("SELECT*FROM Lavados WHERE "
-            			+ "ID = "+ id + ";").get(0);
-            	ID = (int)tupla[0];
-          	    Matricula = (String)tupla[1];
-          	    Marca = (String)tupla[2];
-          	    Modelo = (String)tupla[3];
-          	    Hora = (String)tupla[4];
-          	    Tam = (Tam)tupla[5];
-          	    Precio = (double)tupla[6];
-          	    Telefono = (int)tupla[7];
-          	    Prop = (Propietario)tupla[8];
-          	    Trab = (Trabajador)tupla[9];
+            			+ "id = "+ id + ";").get(0);
+                this.id = (int)tupla[0];
+                this.matricula = (String)tupla[1];
+                this.marca = (String)tupla[2];
+                this.modelo = (String)tupla[3];
+                this.hora = (String)tupla[4];
+                this.fecha = (String)tupla[5];
+                this.tam = (Tam)tupla[6];
+          	    this.precio = (double)tupla[7];
+          	    this.telefono = (String) tupla[8];
+          	    this.prop = (Propietario)tupla[9];
+          	    this.trab = (Trabajador)tupla[10];
           	    
         	}catch (DatabaseException e) {
                 e.printStackTrace();
@@ -62,16 +73,42 @@ public class Lavados
         	
          }
 
-		public Lavados(int ID, String Matricula, String Marca, String Modelo,String Hora,Tam Tam,
-		double Precio, int Telefono, Propietario Prop, Trabajador Trab)
-         {
+    private Lavados(int id, String matricula, String marca, String modelo, String hora, String fecha, Tam tam,
+                    double precio, String telefono, Propietario prop, Trabajador trab) {
+        this.id = id;
+        this.matricula = matricula;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.hora = hora;
+        this.fecha = fecha;
+        this.tam = tam;
+        this.precio = precio;
+        this.telefono = telefono;
+        this.prop = prop;
+        this.trab = trab;
+    }
+
+    public Lavados(String matricula, String marca, String modelo, String hora, String fecha, Tam tam,
+                   double precio, String telefono, Propietario prop, Trabajador trab) {
 			try (MySqlDB miBD = new MySqlDB()){
 
-	             miBD.Insert("INSERT INTO Lavados VALUES(" 
-	            		 +ID+ ", '"+Matricula+"', '"+Marca+"','"+Modelo+"','"+Hora+"',"+Tam+","+
-	            		 Precio+","+Telefono+","+Prop+","+Trab+");");
+	             miBD.Insert("INSERT INTO Lavados VALUES('"+matricula+"', '"+marca+"','"+modelo+"','"+hora+"',"+tam+","+
+                         this.precio +","+ this.telefono +","+ this.prop.getId() +","+ this.trab.getId() +");");
+
+                //Get new ID
+                Object[] tupla = miBD.Select("select MAX(id) from Lavados").get(0);
 	             
-	             this.ID = ID;
+	             this.id = (int)tupla[0];
+	             this.matricula = matricula;
+	             this.marca = marca;
+	             this.modelo = modelo;
+	             this.hora = hora;
+	             this.fecha = fecha;
+	             this.tam = tam;
+	             this.precio = precio;
+	             this.telefono = telefono;
+	             this.prop = prop;
+	             this.trab = trab;
 			}catch (DatabaseException e) {
 	            e.printStackTrace();
 	        }
@@ -81,140 +118,130 @@ public class Lavados
        
 		
 
-		public int getID() {
-			return ID;
+		public int getId() {
+			return id;
 		}
-
-		public void setID(int iD) {
-			try(MySqlDB miBD = new MySqlDB()) {
-				miBD.Update("UPDATE Lavados SET ID = "+iD+" where ID = "+this.getID());
-			
-				this.ID = iD;
-			}catch(DatabaseException e) {
-				e.printStackTrace();
-			}
-		}
-
+		
 		public String getMatricula() {
-			return Matricula;
+			return matricula;
 		}
 
 		public void setMatricula(String matricula) {
 			try(MySqlDB miBD = new MySqlDB()) {
-				miBD.Update("UPDATE Lavados SET Matricula = "+matricula+" where ID = "+this.getID());
+				miBD.Update("UPDATE Lavados SET matricula = "+matricula+" where id = "+this.getId());
 			
-				this.Matricula = matricula;
+				this.matricula = matricula;
 			}catch(DatabaseException e) {
 				e.printStackTrace();
 			}
 		}
 
 		public String getMarca() {
-			return Marca;
+			return marca;
 		}
 
 		public void setMarca(String marca) {
 			try(MySqlDB miBD = new MySqlDB()) {
-				miBD.Update("UPDATE Lavados SET Marca = "+marca+" where ID = "+this.getID());
+				miBD.Update("UPDATE Lavados SET marca = "+marca+" where id = "+this.getId());
 			
-				this.Marca = marca;
+				this.marca = marca;
 			}catch(DatabaseException e) {
 				e.printStackTrace();
 			}
 		}
 
 		public String getModelo() {
-			return Modelo;
+			return modelo;
 		}
 
 		public void setModelo(String modelo) {
 			try(MySqlDB miBD = new MySqlDB()) {
-				miBD.Update("UPDATE Lavados SET Modelo = "+modelo+" where ID = "+this.getID());
+				miBD.Update("UPDATE Lavados SET modelo = "+modelo+" where id = "+this.getId());
 			
-				this.Modelo = modelo;
+				this.modelo = modelo;
 			}catch(DatabaseException e) {
 				e.printStackTrace();
 			}
 		}
 
 		public String getHora() {
-			return Hora;
+			return hora;
 		}
 
 		public void setHora(String hora) {
 			try(MySqlDB miBD = new MySqlDB()) {
-				miBD.Update("UPDATE Lavados SET Hora = "+hora+" where ID = "+this.getID());
+				miBD.Update("UPDATE Lavados SET hora = "+hora+" where id = "+this.getId());
 			
-				this.Hora = hora;
+				this.hora = hora;
 			}catch(DatabaseException e) {
 				e.printStackTrace();
 			}
 		}
 
 		public Tam getTam() {
-			return Tam;
+			return tam;
 		}
 
 		public void setTam(Tam tam) {
 			try(MySqlDB miBD = new MySqlDB()) {
-				miBD.Update("UPDATE Lavados SET Tam = "+tam+" where ID = "+this.getID());
+				miBD.Update("UPDATE Lavados SET tam = "+tam+" where id = "+this.getId());
 			
-				this.Tam = tam;
+				this.tam = tam;
 			}catch(DatabaseException e) {
 				e.printStackTrace();
 			}
 		}
 
 		public double getPrecio() {
-			return Precio;
+			return precio;
 		}
 
 		public void setPrecio(double precio) {
 			try(MySqlDB miBD = new MySqlDB()) {
-				miBD.Update("UPDATE Lavados SET Precio = "+precio+" where ID = "+this.getID());
+				miBD.Update("UPDATE Lavados SET precio = "+precio+" where id = "+this.getId());
 			
-				this.Precio = precio;
+				this.precio = precio;
 			}catch(DatabaseException e) {
 				e.printStackTrace();
 			}
 		}
 
-		public int getTelefono() {
-			return Telefono;
+		public String getTelefono() {
+			return telefono;
 		}
 
-		public void setTelefono(int telefono) {
+		public void setTelefono(String telefono) {
 			try(MySqlDB miBD = new MySqlDB()) {
-				miBD.Update("UPDATE Lavados SET Telefono = "+telefono+" where ID = "+this.getID());
+				miBD.Update("UPDATE Lavados SET telefono = "+telefono+" where id = "+this.getId());
 			
-				this.Telefono = telefono;
+				this.telefono = telefono;
 			}catch(DatabaseException e) {
 				e.printStackTrace();
 			}		}
 
 		public Propietario getProp() {
-			return Prop;
+			return prop;
 		}
 
 		public void setProp(Propietario prop) {
 			try(MySqlDB miBD = new MySqlDB()) {
-				miBD.Update("UPDATE Lavados SET Propietarios = "+prop+" where ID = "+this.getID());
+				miBD.Update("UPDATE Lavados SET Propietarios = "+prop.getId()+" where id = "+this.getId());
 			
-				this.Prop = prop;
+				this.prop = prop;
 			}catch(DatabaseException e) {
 				e.printStackTrace();
 			}
 		}
 
 		public Trabajador getTrab() {
-			return Trab;
+			return trab;
 		}
 
 		public void setTrab(Trabajador trab) {
 			try(MySqlDB miBD = new MySqlDB()) {
-				miBD.Update("UPDATE Lavados SET Trabajador = "+trab+" where ID = "+this.getID());
+				miBD.Update("UPDATE Lavados SET Trabajador = "+trab.getId()+" where id = "+this.getId());
 			
-				this.Trab = trab;
+				this.trab = trab;
 			}catch(DatabaseException e) {
 				e.printStackTrace();
 			}
@@ -222,18 +249,18 @@ public class Lavados
 
 		public void BorrarLavados(){
 			 try (MySqlDB miBD = new MySqlDB()){
-				 miBD.Delete("DELETE FROM Lavados WHERE ID = "
-	        			 +this.ID+"';");
-	        	 ID = -1;
-	       	    Matricula = null;
-	       	    Marca = null;
-	       	    Modelo = null;
-	       	    Hora = null;
-	       	    Tam = null;
-	       	    Precio = -1;
-	       	    Telefono =-1;;
-	       	    Prop = null;
-	       	    Trab = null;
+				 miBD.Delete("DELETE FROM Lavados WHERE id = "
+	        			 +this.id+"';");
+	        	 id = -1;
+	       	    matricula = null;
+	       	    marca = null;
+	       	    modelo = null;
+	       	    hora = null;
+	       	    tam = null;
+	       	    precio = -1;
+	       	    telefono = null;
+	       	    prop = null;
+	       	    trab = null;
 			 }catch (DatabaseException e) {
 		            e.printStackTrace();
 		        }
@@ -242,8 +269,8 @@ public class Lavados
 
 		@Override
 		public String toString() {
-			return "Lavados [ID=" + ID + ", Matricula=" + Matricula + ", Marca=" + Marca + ", Modelo=" + Modelo
-					+ ", Hora=" + Hora + ", Tam=" + Tam + ", Precio=" + Precio + ", Telefono=" + Telefono + "]";
+			return "Lavados [id=" + id + ", matricula=" + matricula + ", marca=" + marca + ", modelo=" + modelo
+					+ ", hora=" + hora + ", tam=" + tam + ", precio=" + precio + ", telefono=" + telefono + "]";
 		}
        
 }
