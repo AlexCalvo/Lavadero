@@ -11,6 +11,7 @@ public class Test {
     public static void main(String[] args)  {
         JFrame frame = new JFrame("");
         JTabbedPane panel = new GUIPanel();
+        JTabbedPane panel2 = new GUITrabajador();
 
         frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
