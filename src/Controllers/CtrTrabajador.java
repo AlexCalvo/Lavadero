@@ -16,10 +16,16 @@ public class CtrTrabajador implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+        System.out.println(actionEvent.getActionCommand());
         switch (actionEvent.getActionCommand()) {
-            case "":
+            case "Insertar":
+                System.out.println("Insertando");
                 break;
-            case "2":
+            case "Modificar":
+                System.out.println("Modificando");
+                break;
+            case "Eliminar":
+                System.out.println("Eliminando");
                 break;
             default:
                 break;

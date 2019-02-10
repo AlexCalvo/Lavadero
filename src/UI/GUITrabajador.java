@@ -54,11 +54,16 @@ public class GUITrabajador extends GUIPanel {
           panelBotones.add(bMod);
           panelBotones.add(bEli);
           return panelBotones;
-      }
+     }
 
-      public void addController(ActionListener ctr) {
-
-      }
+     public void addController(ActionListener ctr) {
+        bIns.addActionListener(ctr);
+        bIns.setActionCommand("Insertar");
+        bMod.addActionListener(ctr);
+        bMod.setActionCommand("Modificar");
+        bEli.addActionListener(ctr);
+        bEli.setActionCommand("Eliminar");
+     }
      
      private class TrabajadorTableModel extends AbstractTableModel{
     	 
