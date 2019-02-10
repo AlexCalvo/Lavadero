@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS `Lavadero`.`Modelo` ;
 
 CREATE TABLE IF NOT EXISTS `Lavadero`.`Modelo` (
   `Nombre` VARCHAR(100) NOT NULL,
-  `Precio` INT NOT NULL,
+  `Precio` DOUBLE NOT NULL,
   `Marca` VARCHAR(45) NULL,
   PRIMARY KEY (`Nombre`))
 ENGINE = InnoDB;
