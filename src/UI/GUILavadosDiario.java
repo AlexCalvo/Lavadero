@@ -4,7 +4,6 @@ import Models.Lavados;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
 import com.github.lgooddatepicker.components.TimePickerSettings;
-import com.sun.xml.internal.ws.api.server.Container;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -44,11 +43,9 @@ public class GUILavadosDiario extends GUIPanel {
         this.setLayout(new BorderLayout());
         tableLavados = new JTable(new LavadosDiariosTableModel());
 
-        this.add(new JScrollPane(tableLavados), BorderLayout.NORTH);
+        this.add(new JScrollPane(tableLavados), BorderLayout.CENTER);
 
-        this.add(createSouthPanel(), BorderLayout.CENTER);
-        this.add(createButtonPanel(),BorderLayout.PAGE_END);
-
+        this.add(createSouthPanel(), BorderLayout.SOUTH);
     }
 
     private Component createSouthPanel() {
@@ -62,16 +59,14 @@ public class GUILavadosDiario extends GUIPanel {
         panel.add(create2ElementPanel(lTelefono, tTelefono));
         panel.add(create2ElementPanel(lPropietario, tPropietario));
         panel.add(create2ElementPanel(lTrabajador, tTrabajador));
-       
-       
-
-        return panel;
+        panel.add(createButtonPanel());
+               return panel;
     }
     
     private Component createButtonPanel() {
     	JPanel panelBotones = new JPanel();
         panelBotones.setLayout(new FlowLayout());
-        panelBotones.add(new JButton("Añadir"));
+        panelBotones.add(new JButton("Insertar"));
         panelBotones.add(new JButton("Modificar"));
         panelBotones.add(new JButton("Eliminar"));
         return panelBotones;

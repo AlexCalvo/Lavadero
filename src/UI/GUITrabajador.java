@@ -45,7 +45,7 @@ public class GUITrabajador extends GUIPanel {
      private Component createButtonPanel() {
       	JPanel panelBotones = new JPanel();
           panelBotones.setLayout(new FlowLayout());
-          panelBotones.add(new JButton("Añadir"));
+          panelBotones.add(new JButton("Insertar"));
           panelBotones.add(new JButton("Modificar"));
           panelBotones.add(new JButton("Eliminar"));
           return panelBotones;
