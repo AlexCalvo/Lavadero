@@ -13,7 +13,7 @@ import java.awt.BorderLayout;
 import java.time.LocalTime;
 import java.util.List;
 
-public class GUILavados extends GUIPanel {
+public class GUILavadosDiario extends GUIPanel {
 
     private Component panelGeneral;
     private JTable tableLavados;
@@ -40,7 +40,7 @@ public class GUILavados extends GUIPanel {
     private JTextField tPropietario = new JTextField();
     private JTextField tTrabajador = new JTextField();
 
-    public GUILavados() {
+    public GUILavadosDiario() {
         createPanelDiario();
     }
 

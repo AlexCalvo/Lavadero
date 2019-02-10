@@ -12,7 +12,7 @@ public class GUIMain extends JTabbedPane {
 
 
     public GUIMain() {
-        panelDiario = new JScrollPane(new GUILavados());
+        panelDiario = new JScrollPane(new GUILavadosDiario());
         this.addTab("Diario", panelDiario);
 
         panelGeneral = new JScrollPane();
