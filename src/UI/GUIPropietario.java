@@ -1,7 +1,13 @@
 package UI;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+
+import Models.Lavados;
+import Models.Propietario;
+
 import java.awt.*;
+import java.util.List;
 
 public class GUIPropietario extends GUIPanel {
 	 private JTabbedPane tabPanel;
@@ -21,12 +27,9 @@ public class GUIPropietario extends GUIPanel {
      private void createPanelPropietario() {
          this.setLayout(new BorderLayout());
 
-         Object rowData[][] = { { "1" },
-                 { "1" } };
-         Object columnNames[] = { "Column One"};
-         tablePropietario = new JTable(rowData, columnNames);
+         tablePropietario = new JTable(new PropietarioTableModel());
 
-         this.add(tablePropietario, BorderLayout.CENTER);
+         this.add(new JScrollPane(tablePropietario), BorderLayout.CENTER);
 
          this.add(createSouthPanel(), BorderLayout.SOUTH);
      }
@@ -40,6 +43,47 @@ public class GUIPropietario extends GUIPanel {
        
          
          return panel;
+     }
+     
+     private class PropietarioTableModel extends AbstractTableModel {
+
+         private String[] columnNames;
+         private Object[][] data;
+
+         public PropietarioTableModel() {
+             columnNames = Propietario.columnas;
+             List<Propietario> lista = Propietario.listaPropietarios();
+             data = new Object[lista.size()][columnNames.length];
+             for (int i = 0;i < lista.size(); i++) {
+                 data[i] = lista.get(i).asArray();
+             }
+         }
+
+         @Override
+         public int getRowCount() {
+             return data.length;
+         }
+
+         @Override
+         public String getColumnName(int col) {
+             return columnNames[col];
+         }
+
+         @Override
+         public int getColumnCount() {
+             return columnNames.length;
+         }
+
+         @Override
+         public Object getValueAt(int row, int col) {
+             return data[row][col];
+         }
+
+         @Override
+         public void setValueAt(Object value, int row, int col) {
+             data[row][col] = value;
+             fireTableCellUpdated(row, col);
+         }
      }
 
 }

@@ -8,6 +8,9 @@ import java.util.List;
 
 public class Propietario {
 
+    public static final String[] columnas = {"ID", "Nombre", "Telefono"};
+
+	
     private int id;
     private String nombre;
     private String telefono;
@@ -96,5 +99,13 @@ public class Propietario {
     @Override
     public String toString() {
         return this.getNombre();
+    }
+    public Object[] asArray() {
+        Object[] tmp = new Object[10];
+        tmp[0] = id;
+        tmp[1] =nombre;
+        tmp[2]= telefono;
+
+        return tmp;
     }
 }

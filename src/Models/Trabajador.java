@@ -8,10 +8,13 @@ import java.util.List;
 
 public class Trabajador {
 
+    public static final String[] columnas = {"ID", "Nombre"};
+
+	
     private int id;
     private String nombre;
 
-    public List<Trabajador> listaPropietarios() {
+    public static List<Trabajador> listaTrabajador() {
         List<Trabajador> lista = new ArrayList<Trabajador>();
         try(MySqlDB db = new MySqlDB()) {
             for (Object[] tupla: db.Select("Select * from Trabajador")) {
@@ -77,5 +80,13 @@ public class Trabajador {
     @Override
     public String toString() {
         return this.getNombre();
+    }
+
+	public Object[] asArray() {
+        Object[] tmp = new Object[10];
+        tmp[0] = id;
+        tmp[1] =nombre;
+
+        return tmp;
     }
 }
