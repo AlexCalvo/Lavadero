@@ -1,7 +1,10 @@
 package UI;
 
+import Controllers.CtrTrabajador;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class GUIMain extends JTabbedPane {
     private Component panelDiario;
@@ -23,6 +26,7 @@ public class GUIMain extends JTabbedPane {
         this.addTab("Propietarios", panelPropietario);
 
         panelTrabajador = new GUITrabajador();
+        ActionListener trabCtr = new CtrTrabajador(panelTrabajador);
         this.addTab("Trabajador", panelTrabajador);
 
         panelModelo = new GUIModelo();

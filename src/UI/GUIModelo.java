@@ -18,7 +18,11 @@ public class GUIModelo extends GUIPanel {
      
      private JTextField tPrecio = new JTextField();
      private JTextField tNombre = new JTextField();
-     private JTextField tMarca = new JTextField(); 
+     private JTextField tMarca = new JTextField();
+
+    private JButton bIns = new JButton("Insertar");
+    private JButton bMod = new JButton("Modificar");
+    private JButton bEli = new JButton("Eliminar");
      
      public GUIModelo() {
          createPanelPropietario();
@@ -50,9 +54,9 @@ public class GUIModelo extends GUIPanel {
      private Component createButtonPanel() {
      	JPanel panelBotones = new JPanel();
          panelBotones.setLayout(new FlowLayout());
-         panelBotones.add(new JButton("Insertar"));
-         panelBotones.add(new JButton("Modificar"));
-         panelBotones.add(new JButton("Eliminar"));
+         panelBotones.add(bIns);
+         panelBotones.add(bMod);
+         panelBotones.add(bEli);
          return panelBotones;
      }
      

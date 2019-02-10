@@ -4,16 +4,21 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import Models.Lavados;
 import Models.Trabajador;
 
 public class GUITrabajador extends GUIPanel {
-	 private JTabbedPane tabPanel;
-	 private Component panelGeneral;
-	 private JTable tableTrabajador;
-	 
+	private JTabbedPane tabPanel;
+	private Component panelGeneral;
+	private JTable tableTrabajador;
+
+	private JButton bIns = new JButton("Insertar");
+    private JButton bMod = new JButton("Modificar");
+    private JButton bEli = new JButton("Eliminar");
+
      private JLabel lNombre = new JLabel("Nombre:");
    
      private JTextField tNombre = new JTextField();
@@ -45,10 +50,14 @@ public class GUITrabajador extends GUIPanel {
      private Component createButtonPanel() {
       	JPanel panelBotones = new JPanel();
           panelBotones.setLayout(new FlowLayout());
-          panelBotones.add(new JButton("Insertar"));
-          panelBotones.add(new JButton("Modificar"));
-          panelBotones.add(new JButton("Eliminar"));
+          panelBotones.add(bIns);
+          panelBotones.add(bMod);
+          panelBotones.add(bEli);
           return panelBotones;
+      }
+
+      public void addController(ActionListener ctr) {
+
       }
      
      private class TrabajadorTableModel extends AbstractTableModel{
