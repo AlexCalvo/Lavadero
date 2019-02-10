@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Propietario {
 
-    public static final String[] columnas = {"ID", "Nombre", "Telefono"};
+    public static final String[] columnas = {"DNI", "Nombre", "Telefono"};
 
 	
     private String id;
@@ -22,7 +22,7 @@ public class Propietario {
                 String id = (String) tupla[0];
                 String nombre = (String)tupla[1];
                 String telefono = (String)tupla[2];
-                lista.add(new Propietario(id, nombre, telefono));
+                lista.add(new Propietario(id, nombre, telefono, true));
             }
         } catch (DatabaseException e) {
             e.printStackTrace();
@@ -30,15 +30,15 @@ public class Propietario {
         return lista;
     }
 
-    private Propietario(String id, String nombre, String telefono) {
+    private Propietario(String id, String nombre, String telefono, boolean onlyLocal) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
     }
 
-    public Propietario(int id) {
+    public Propietario(String id) {
         try(MySqlDB db = new MySqlDB()) {
-            Object[] tupla = db.Select("select * from Propietarios where id = " + id).get(0);
+            Object[] tupla = db.Select("select * from Propietarios where id = '" + id + "'").get(0);
 
             this.id = (String) tupla[0];
             this.nombre = (String)tupla[1];
@@ -48,14 +48,11 @@ public class Propietario {
         }
     }
 
-    public Propietario(String nombre, String telefono) {
+    public Propietario(String id, String nombre, String telefono) {
         try(MySqlDB db = new MySqlDB()) {
-            db.Insert("insert into Propietarios values('" + nombre + "', '" + telefono + "')");
+            db.Insert("insert into Propietarios values('" + id + "', '" + nombre + "', '" + telefono + "')");
 
-            //Get new ID
-            Object[] tupla = db.Select("select MAX(id) from Propietarios").get(0);
-
-            this.id = (String)tupla[0];
+            this.id = id;
             this.nombre = nombre;
             this.telefono = telefono;
         } catch (DatabaseException e) {

@@ -12,15 +12,13 @@ import DB.MySqlDB;
 public class Lavados
 {
 	    
-	    public static final String[] columnas = {"ID", "Matricula", "marca", "modelo", "hora", "fecha", "precio", "telefono", "Propietario", "Trabajador"};
+	    public static final String[] columnas = {"ID", "Matricula", "modelo", "hora", "fecha", "telefono", "Propietario", "Trabajador"};
     
 	    private int id;//clave principal
 	    private String matricula;
-	    private String marca;
 	    private Modelo modelo;
 	    private LocalTime hora;
 	    private LocalDate fecha;
-	    private double precio;
 	    private String telefono;
 	    private Propietario prop;
 	    private Trabajador trab;
@@ -33,16 +31,13 @@ public class Lavados
                for(Object[] tupla : miBD.Select("SELECT * FROM Lavados" )){
                    int id = (int)tupla[0];
                    String matricula = (String)tupla[1];
-                   String marca = (String)tupla[2];
-                   Modelo modelo = (Modelo)tupla[3];
-                   LocalTime hora = ((Time)tupla[4]).toLocalTime();
-                   LocalDate fecha = ((Date)tupla[5]).toLocalDate();
-                   String tam = (String)tupla[6];
-                   double precio = ((Integer)tupla[7]).doubleValue();
-                   String telefono = (String) tupla[8];
-                   Propietario prop = new Propietario((int)tupla[9]);
-                   Trabajador trab = new Trabajador((int)tupla[10]);
-                   lista.add(new Lavados(id, matricula, marca,modelo, hora, fecha, tam, precio,telefono, prop, trab));
+                   Modelo modelo = new Modelo((String)tupla[2]);
+                   LocalTime hora = ((Time)tupla[3]).toLocalTime();
+                   LocalDate fecha = ((Date)tupla[4]).toLocalDate();
+                   String telefono = (String) tupla[5];
+                   Propietario prop = new Propietario((String)tupla[6]);
+                   Trabajador trab = new Trabajador((int)tupla[7]);
+                   lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
                }
            } catch (DatabaseException e) {
                e.printStackTrace();
@@ -57,14 +52,12 @@ public class Lavados
             			+ "id = "+ id + ";").get(0);
                 this.id = (int)tupla[0];
                 this.matricula = (String)tupla[1];
-                this.marca = (String)tupla[2];
-                this.modelo = (Modelo)tupla[3];
-                this.hora = ((Time)tupla[4]).toLocalTime();
-                this.fecha = ((Date)tupla[5]).toLocalDate();
-          	    this.precio = (double)tupla[7];
-          	    this.telefono = (String) tupla[8];
-          	    this.prop = (Propietario)tupla[9];
-          	    this.trab = (Trabajador)tupla[10];
+                this.modelo = (Modelo)tupla[2];
+                this.hora = ((Time)tupla[3]).toLocalTime();
+                this.fecha = ((Date)tupla[4]).toLocalDate();
+          	    this.telefono = (String) tupla[5];
+          	    this.prop = (Propietario)tupla[6];
+          	    this.trab = (Trabajador)tupla[7];
           	    
         	}catch (DatabaseException e) {
                 e.printStackTrace();
@@ -74,15 +67,13 @@ public class Lavados
         	
          }
 
-    private Lavados(int id, String matricula, String marca, Modelo modelo, LocalTime hora, LocalDate fecha, String tam,
-                    double precio, String telefono, Propietario prop, Trabajador trab) {
+    private Lavados(int id, String matricula, Modelo modelo, LocalTime hora, LocalDate fecha,
+                    String telefono, Propietario prop, Trabajador trab) {
         this.id = id;
         this.matricula = matricula;
-        this.marca = marca;
         this.modelo = modelo;
         this.hora = hora;
         this.fecha = fecha;
-        this.precio = precio;
         this.telefono = telefono;
         this.prop = prop;
         this.trab = trab;
@@ -92,19 +83,16 @@ public class Lavados
                    double precio, String telefono, Propietario prop, Trabajador trab) {
 			try (MySqlDB miBD = new MySqlDB()){
 
-	             miBD.Insert("INSERT INTO Lavados VALUES('"+matricula+"', '"+marca+"','"+modelo+"','"+hora.toString()+"',"+
-                         this.precio +","+ this.telefono +","+ this.prop.getId() +","+ this.trab.getId() +");");
+	             miBD.Insert("INSERT INTO Lavados VALUES('"+matricula+"', '"+modelo+"','"+hora.toString()+"', '" + fecha.toString() + "'"+ this.telefono +","+ this.prop.getId() +","+ this.trab.getId() +");");
 
                 //Get new ID
                 Object[] tupla = miBD.Select("select MAX(id) from Lavados").get(0);
 	             
 	             this.id = (int)tupla[0];
 	             this.matricula = matricula;
-	             this.marca = marca;
 	             this.modelo = modelo;
 	             this.hora = hora;
 	             this.fecha = fecha;
-	             this.precio = precio;
 	             this.telefono = telefono;
 	             this.prop = prop;
 	             this.trab = trab;
@@ -134,20 +122,6 @@ public class Lavados
 			e.printStackTrace();
 		}
 	}
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        try(MySqlDB miBD = new MySqlDB()) {
-            miBD.Update("UPDATE Lavados SET marca = "+marca+" where id = "+this.getId());
-
-            this.marca = marca;
-        }catch(DatabaseException e) {
-            e.printStackTrace();
-        }
-    }
 
     public Modelo getModelo() {
         return modelo;
@@ -190,22 +164,6 @@ public class Lavados
             e.printStackTrace();
         }
     }
-
-  
-
-		public double getPrecio() {
-			return precio;
-		}
-
-		public void setPrecio(double precio) {
-			try(MySqlDB miBD = new MySqlDB()) {
-				miBD.Update("UPDATE Lavados SET precio = "+precio+" where id = "+this.getId());
-			
-				this.precio = precio;
-			}catch(DatabaseException e) {
-				e.printStackTrace();
-			}
-		}
 
 		public String getTelefono() {
 			return telefono;
@@ -254,10 +212,8 @@ public class Lavados
 	        			 +this.id+"';");
 	        	 id = -1;
 	       	    matricula = null;
-	       	    marca = null;
 	       	    modelo = null;
 	       	    hora = null;
-	       	    precio = -1;
 	       	    telefono = null;
 	       	    prop = null;
 	       	    trab = null;
@@ -269,22 +225,20 @@ public class Lavados
 
 		@Override
 		public String toString() {
-			return "Lavados [id=" + id + ", matricula=" + matricula + ", marca=" + marca + ", modelo=" + modelo
-					+ ", hora=" + hora.toString() + ", precio=" + precio + ", telefono=" + telefono + "]";
+			return "Lavados [id=" + id + ", matricula=" + matricula + ", modelo=" + modelo
+					+ ", hora=" + hora.toString() + ", telefono=" + telefono + "]";
 		}
 
 		public Object[] asArray() {
             Object[] tmp = new Object[columnas.length];
             tmp[0] = id;
             tmp[1] = matricula;
-            tmp[2] = marca;
-            tmp[3] = modelo;
-            tmp[4] = hora;
-            tmp[5] = fecha;
-            tmp[7] = precio;
-            tmp[8] = telefono;
-            tmp[9] = prop;
-            tmp[10] = trab;
+            tmp[2] = modelo;
+            tmp[3] = hora;
+            tmp[4] = fecha;
+            tmp[5] = telefono;
+            tmp[6] = prop;
+            tmp[7] = trab;
 
             return tmp;
         }

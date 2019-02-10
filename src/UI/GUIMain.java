@@ -8,6 +8,7 @@ public class GUIMain extends JTabbedPane {
     private Component panelGeneral;
     private Component panelPropietario;
     private Component panelTrabajador;
+    private Component panelModelo;
 
 
 
@@ -23,6 +24,9 @@ public class GUIMain extends JTabbedPane {
 
         panelTrabajador = new GUITrabajador();
         this.addTab("Trabajador", panelTrabajador);
+
+        panelModelo = new GUIModelo();
+        this.addTab("Modelos", panelModelo);
     }
 
 }

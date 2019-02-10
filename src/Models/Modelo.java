@@ -21,7 +21,7 @@ public class Modelo {
                 String nombre = (String) tupla[0];
                 double precio = (double)tupla[1];
                 String marca = (String)tupla[2];
-                lista.add(new Modelo(nombre,precio,marca));
+                lista.add(new Modelo(nombre,precio,marca, true));
             }
         } catch (DatabaseException e) {
             e.printStackTrace();
@@ -40,6 +40,12 @@ public class Modelo {
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
+    }
+
+    private Modelo(String nombre, double precio,String marca, boolean onlyLocal) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.marca = marca;
     }
 
     public Modelo(String nombre, double precio,String marca) {
