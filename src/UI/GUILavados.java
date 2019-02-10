@@ -1,12 +1,16 @@
 package UI;
 
 import Models.Lavados;
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.TimePicker;
+import com.github.lgooddatepicker.components.TimePickerSettings;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
+import java.time.LocalTime;
 import java.util.List;
 
 public class GUILavados extends GUIPanel {
@@ -27,8 +31,9 @@ public class GUILavados extends GUIPanel {
     private JTextField tMatricula = new JTextField();
     private JTextField tMarca = new JTextField();
     private JTextField tModelo = new JTextField();
-    private JTextField tHora = new JTextField();
-    private JTextField tFecha = new JTextField();
+    private TimePicker tHora = createTimePicker();
+    //private JTextField tFecha = new JTextField();
+    private DatePicker tFecha = new DatePicker();
     private JTextField tTam = new JTextField();
     private JTextField tPrecio = new JTextField();
     private JTextField tTelefono = new JTextField();
@@ -106,5 +111,11 @@ public class GUILavados extends GUIPanel {
             data[row][col] = value;
             fireTableCellUpdated(row, col);
         }
+    }
+    private TimePicker createTimePicker() {
+        TimePickerSettings settings = new TimePickerSettings();
+        settings.generatePotentialMenuTimes(TimePickerSettings.TimeIncrement.FifteenMinutes, LocalTime.of(7, 0), LocalTime.of(21, 0));
+        settings.use24HourClockFormat();
+        return new TimePicker(settings);
     }
 }
