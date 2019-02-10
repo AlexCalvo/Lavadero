@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
@@ -14,8 +15,8 @@ public class MySqlDB implements AutoCloseable {
 	private Connection con ;	
 
 	public MySqlDB() throws DatabaseException {
-		try {
-			JsonObject obj = new JsonParser().parse(new FileReader(configFile)).getAsJsonObject();
+		try (FileReader file = new FileReader(configFile)){
+			JsonObject obj = new JsonParser().parse(file).getAsJsonObject();
 			String server = obj.get("server").getAsString();
 			String schema = obj.get("schema").getAsString();
 			String user = obj.get("user").getAsString();
@@ -25,6 +26,8 @@ public class MySqlDB implements AutoCloseable {
 		} catch (SQLException ex) {
 			throw new DatabaseException("Error al Conectar con la base de datos." + ex.getMessage());
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
