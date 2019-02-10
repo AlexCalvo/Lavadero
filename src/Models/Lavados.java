@@ -12,15 +12,14 @@ import DB.MySqlDB;
 public class Lavados
 {
 	    
-	    public static final String[] columnas = {"ID", "Matricula", "marca", "modelo", "hora", "fecha", "Tam", "precio", "telefono", "Propietario", "Trabajador"};
+	    public static final String[] columnas = {"ID", "Matricula", "marca", "modelo", "hora", "fecha", "precio", "telefono", "Propietario", "Trabajador"};
     
 	    private int id;//clave principal
 	    private String matricula;
 	    private String marca;
-	    private String modelo;
+	    private Modelo modelo;
 	    private LocalTime hora;
 	    private LocalDate fecha;
-	    private String tam;
 	    private double precio;
 	    private String telefono;
 	    private Propietario prop;
@@ -35,7 +34,7 @@ public class Lavados
                    int id = (int)tupla[0];
                    String matricula = (String)tupla[1];
                    String marca = (String)tupla[2];
-                   String modelo = (String)tupla[3];
+                   Modelo modelo = (Modelo)tupla[3];
                    LocalTime hora = ((Time)tupla[4]).toLocalTime();
                    LocalDate fecha = ((Date)tupla[5]).toLocalDate();
                    String tam = (String)tupla[6];
@@ -59,10 +58,9 @@ public class Lavados
                 this.id = (int)tupla[0];
                 this.matricula = (String)tupla[1];
                 this.marca = (String)tupla[2];
-                this.modelo = (String)tupla[3];
+                this.modelo = (Modelo)tupla[3];
                 this.hora = ((Time)tupla[4]).toLocalTime();
                 this.fecha = ((Date)tupla[5]).toLocalDate();
-                this.tam = (String)tupla[6];
           	    this.precio = (double)tupla[7];
           	    this.telefono = (String) tupla[8];
           	    this.prop = (Propietario)tupla[9];
@@ -76,7 +74,7 @@ public class Lavados
         	
          }
 
-    private Lavados(int id, String matricula, String marca, String modelo, LocalTime hora, LocalDate fecha, String tam,
+    private Lavados(int id, String matricula, String marca, Modelo modelo, LocalTime hora, LocalDate fecha, String tam,
                     double precio, String telefono, Propietario prop, Trabajador trab) {
         this.id = id;
         this.matricula = matricula;
@@ -84,18 +82,17 @@ public class Lavados
         this.modelo = modelo;
         this.hora = hora;
         this.fecha = fecha;
-        this.tam = tam;
         this.precio = precio;
         this.telefono = telefono;
         this.prop = prop;
         this.trab = trab;
     }
 
-    public Lavados(String matricula, String marca, String modelo, LocalTime hora, LocalDate fecha, String tam,
+    public Lavados(String matricula, String marca, Modelo modelo, LocalTime hora, LocalDate fecha,
                    double precio, String telefono, Propietario prop, Trabajador trab) {
 			try (MySqlDB miBD = new MySqlDB()){
 
-	             miBD.Insert("INSERT INTO Lavados VALUES('"+matricula+"', '"+marca+"','"+modelo+"','"+hora.toString()+"',"+tam+","+
+	             miBD.Insert("INSERT INTO Lavados VALUES('"+matricula+"', '"+marca+"','"+modelo+"','"+hora.toString()+"',"+
                          this.precio +","+ this.telefono +","+ this.prop.getId() +","+ this.trab.getId() +");");
 
                 //Get new ID
@@ -107,7 +104,6 @@ public class Lavados
 	             this.modelo = modelo;
 	             this.hora = hora;
 	             this.fecha = fecha;
-	             this.tam = tam;
 	             this.precio = precio;
 	             this.telefono = telefono;
 	             this.prop = prop;
@@ -153,11 +149,11 @@ public class Lavados
         }
     }
 
-    public String getModelo() {
+    public Modelo getModelo() {
         return modelo;
     }
 
-    public void setModelo(String modelo) {
+    public void setModelo(Modelo modelo) {
         try(MySqlDB miBD = new MySqlDB()) {
             miBD.Update("UPDATE Lavados SET modelo = "+modelo+" where id = "+this.getId());
 
@@ -195,19 +191,7 @@ public class Lavados
         }
     }
 
-    public String getTam() {
-			return tam;
-		}
-
-		public void setTam(String tam) {
-			try(MySqlDB miBD = new MySqlDB()) {
-				miBD.Update("UPDATE Lavados SET tam = "+tam+" where id = "+this.getId());
-
-				this.tam = tam;
-			}catch(DatabaseException e) {
-				e.printStackTrace();
-			}
-		}
+  
 
 		public double getPrecio() {
 			return precio;
@@ -273,7 +257,6 @@ public class Lavados
 	       	    marca = null;
 	       	    modelo = null;
 	       	    hora = null;
-	       	    tam = null;
 	       	    precio = -1;
 	       	    telefono = null;
 	       	    prop = null;
@@ -287,7 +270,7 @@ public class Lavados
 		@Override
 		public String toString() {
 			return "Lavados [id=" + id + ", matricula=" + matricula + ", marca=" + marca + ", modelo=" + modelo
-					+ ", hora=" + hora.toString() + ", tam=" + tam + ", precio=" + precio + ", telefono=" + telefono + "]";
+					+ ", hora=" + hora.toString() + ", precio=" + precio + ", telefono=" + telefono + "]";
 		}
 
 		public Object[] asArray() {
@@ -298,7 +281,6 @@ public class Lavados
             tmp[3] = modelo;
             tmp[4] = hora;
             tmp[5] = fecha;
-            tmp[6] = tam;
             tmp[7] = precio;
             tmp[8] = telefono;
             tmp[9] = prop;

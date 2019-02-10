@@ -18,24 +18,18 @@ public class GUILavadosDiario extends GUIPanel {
     private Component panelGeneral;
     private JTable tableLavados;
     private JLabel lMatricula =new JLabel("Matricula:");
-    private JLabel lMarca =  new JLabel("Marca:");
     private JLabel lModelo = new JLabel("Modelo:");
     private JLabel lHora = new JLabel("Hora:");
     private JLabel lFecha = new JLabel("Fecha:");
-    private JLabel lTam = new JLabel("Tamano:");
-    private JLabel lPrecio = new JLabel("Precio:");
     private JLabel lTelefono = new JLabel("Telefono:");
     private JLabel lPropietario = new JLabel("Propietario:");
     private JLabel lTrabajador =  new JLabel("Trabajador:");
 
     private JTextField tMatricula = new JTextField();
-    private JTextField tMarca = new JTextField();
     private JTextField tModelo = new JTextField();
     private TimePicker tHora = createTimePicker();
     //private JTextField tFecha = new JTextField();
     private DatePicker tFecha = new DatePicker();
-    private JTextField tTam = new JTextField();
-    private JTextField tPrecio = new JTextField();
     private JTextField tTelefono = new JTextField();
     private JTextField tPropietario = new JTextField();
     private JTextField tTrabajador = new JTextField();
@@ -59,12 +53,9 @@ public class GUILavadosDiario extends GUIPanel {
         panel.setLayout(new GridLayout(5,2,5,5));
 
         panel.add(create2ElementPanel(lMatricula, tMatricula));
-        panel.add(create2ElementPanel(lMarca, tMarca));
         panel.add(create2ElementPanel(lModelo, tModelo));
         panel.add(create2ElementPanel(lHora, tHora));
         panel.add(create2ElementPanel(lFecha, tFecha));
-        panel.add(create2ElementPanel(lTam, tTam));
-        panel.add(create2ElementPanel(lPrecio, tPrecio));
         panel.add(create2ElementPanel(lTelefono, tTelefono));
         panel.add(create2ElementPanel(lPropietario, tPropietario));
         panel.add(create2ElementPanel(lTrabajador, tTrabajador));

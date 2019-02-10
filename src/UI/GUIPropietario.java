@@ -16,9 +16,11 @@ public class GUIPropietario extends GUIPanel {
 	 
      private JLabel lNombre = new JLabel("Nombre:");
      private JLabel lID = new JLabel("ID:");
+     private JLabel lTelefono = new JLabel("Telefono:");
      
      private JTextField tID = new JTextField();
      private JTextField tNombre = new JTextField();
+     private JTextField tTelefono = new JTextField(); 
      
      public GUIPropietario() {
          createPanelPropietario();
@@ -40,6 +42,7 @@ public class GUIPropietario extends GUIPanel {
 
          panel.add(create2ElementPanel(lID, tID));  
          panel.add(create2ElementPanel(lNombre, tNombre));
+         panel.add(create2ElementPanel(lTelefono, tTelefono));
        
          
          return panel;

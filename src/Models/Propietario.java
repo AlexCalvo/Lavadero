@@ -11,7 +11,7 @@ public class Propietario {
     public static final String[] columnas = {"ID", "Nombre", "Telefono"};
 
 	
-    private int id;
+    private String id;
     private String nombre;
     private String telefono;
 
@@ -19,7 +19,7 @@ public class Propietario {
         List<Propietario> lista = new ArrayList<Propietario>();
         try(MySqlDB db = new MySqlDB()) {
             for (Object[] tupla: db.Select("Select * from Propietarios")) {
-                int id = (int) tupla[0];
+                String id = (String) tupla[0];
                 String nombre = (String)tupla[1];
                 String telefono = (String)tupla[2];
                 lista.add(new Propietario(id, nombre, telefono));
@@ -30,7 +30,7 @@ public class Propietario {
         return lista;
     }
 
-    private Propietario(int id, String nombre, String telefono) {
+    private Propietario(String id, String nombre, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -40,7 +40,7 @@ public class Propietario {
         try(MySqlDB db = new MySqlDB()) {
             Object[] tupla = db.Select("select * from Propietarios where id = " + id).get(0);
 
-            this.id = (int) tupla[0];
+            this.id = (String) tupla[0];
             this.nombre = (String)tupla[1];
             this.telefono = (String)tupla[2];
         } catch (DatabaseException e) {
@@ -55,7 +55,7 @@ public class Propietario {
             //Get new ID
             Object[] tupla = db.Select("select MAX(id) from Propietarios").get(0);
 
-            this.id = (int)tupla[0];
+            this.id = (String)tupla[0];
             this.nombre = nombre;
             this.telefono = telefono;
         } catch (DatabaseException e) {
@@ -63,7 +63,7 @@ public class Propietario {
         }
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
