@@ -37,9 +37,19 @@ public class GUITrabajador extends GUIPanel {
          panel.setLayout(new GridLayout(1,2,5,5));
 
          panel.add(create2ElementPanel(lNombre, tNombre));
+         panel.add(createButtonPanel());
          
          return panel;
      }
+     
+     private Component createButtonPanel() {
+      	JPanel panelBotones = new JPanel();
+          panelBotones.setLayout(new FlowLayout());
+          panelBotones.add(new JButton("Añadir"));
+          panelBotones.add(new JButton("Modificar"));
+          panelBotones.add(new JButton("Eliminar"));
+          return panelBotones;
+      }
      
      private class TrabajadorTableModel extends AbstractTableModel{
     	 

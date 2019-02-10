@@ -41,10 +41,21 @@ public class GUIModelo extends GUIPanel {
          panel.add(create2ElementPanel(lPrecio, tPrecio));  
          panel.add(create2ElementPanel(lNombre, tNombre));
          panel.add(create2ElementPanel(lMarca, tMarca));
-       
+         panel.add(createButtonPanel());
          
          return panel;
      }
+     
+     
+     private Component createButtonPanel() {
+     	JPanel panelBotones = new JPanel();
+         panelBotones.setLayout(new FlowLayout());
+         panelBotones.add(new JButton("Añadir"));
+         panelBotones.add(new JButton("Modificar"));
+         panelBotones.add(new JButton("Eliminar"));
+         return panelBotones;
+     }
+     
      
      private class ModeloTableModel extends AbstractTableModel {
 

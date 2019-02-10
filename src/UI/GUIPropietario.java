@@ -43,10 +43,23 @@ public class GUIPropietario extends GUIPanel {
          panel.add(create2ElementPanel(lID, tID));  
          panel.add(create2ElementPanel(lNombre, tNombre));
          panel.add(create2ElementPanel(lTelefono, tTelefono));
+         panel.add(createButtonPanel());
        
+       	
+        
+        return panel;
          
-         return panel;
+         
      }
+     
+     private Component createButtonPanel() {
+      	JPanel panelBotones = new JPanel();
+          panelBotones.setLayout(new FlowLayout());
+          panelBotones.add(new JButton("Añadir"));
+          panelBotones.add(new JButton("Modificar"));
+          panelBotones.add(new JButton("Eliminar"));
+          return panelBotones;
+      }
      
      private class PropietarioTableModel extends AbstractTableModel {
 
