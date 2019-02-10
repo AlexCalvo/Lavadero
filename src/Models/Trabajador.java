@@ -1,3 +1,5 @@
+package Models;
+
 import DB.DatabaseException;
 import DB.MySqlDB;
 
@@ -12,7 +14,7 @@ public class Trabajador {
     public List<Trabajador> listaPropietarios() {
         List<Trabajador> lista = new ArrayList<Trabajador>();
         try(MySqlDB db = new MySqlDB()) {
-            for (Object[] tupla: db.Select("Select * from Propietarios")) {
+            for (Object[] tupla: db.Select("Select * from Trabajador")) {
                 int id = (int) tupla[0];
                 String nombre = (String)tupla[1];
                 lista.add(new Trabajador(id, nombre));
@@ -30,7 +32,7 @@ public class Trabajador {
 
     public Trabajador(int id) {
         try(MySqlDB db = new MySqlDB()) {
-            Object[] tupla = db.Select("select * from Propietarios where id = " + id).get(0);
+            Object[] tupla = db.Select("select * from Trabajador where id = " + id).get(0);
 
             this.id = (int) tupla[0];
             this.nombre = (String)tupla[1];
@@ -41,10 +43,10 @@ public class Trabajador {
 
     public Trabajador(String nombre) {
         try(MySqlDB db = new MySqlDB()) {
-            db.Insert("insert into Propietarios values('" + nombre + "')");
+            db.Insert("insert into Trabajador values('" + nombre + "')");
 
             //Get new ID
-            Object[] tupla = db.Select("select MAX(id) from Propietarios").get(0);
+            Object[] tupla = db.Select("select MAX(id) from Trabajador").get(0);
 
             this.id = (int)tupla[0];
             this.nombre = nombre;
@@ -63,12 +65,17 @@ public class Trabajador {
 
     public void setNombre(String nombre) {
         try(MySqlDB db = new MySqlDB()) {
-            db.Update("update Propietarios set nombre = '" + nombre + "' where id = " + this.getId());
+            db.Update("update Trabajador set nombre = '" + nombre + "' where id = " + this.getId());
 
             this.nombre = nombre;
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return this.getNombre();
     }
 }

@@ -1,3 +1,5 @@
+package Models;
+
 import DB.DatabaseException;
 import DB.MySqlDB;
 
@@ -89,5 +91,10 @@ public class Propietario {
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.getNombre();
     }
 }
