@@ -11,6 +11,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -74,6 +75,11 @@ public class GUILavadosDiario extends GUIPanel {
         panelBotones.add(bMod);
         panelBotones.add(bEli);
         return panelBotones;
+    }
+
+    @Override
+    public void addController(ActionListener ctr) {
+
     }
 
     private class LavadosDiariosTableModel extends AbstractTableModel {

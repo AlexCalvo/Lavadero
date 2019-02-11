@@ -7,26 +7,27 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class GUIMain extends JTabbedPane {
-    private Component panelDiario;
-    private Component panelGeneral;
-    private Component panelPropietario;
-    private Component panelTrabajador;
-    private Component panelModelo;
+    private GUIPanel panelDiario;
+    private GUIPanel panelGeneral;
+    private GUIPanel panelPropietario;
+    private GUIPanel panelTrabajador;
+    private GUIPanel panelModelo;
 
 
 
     public GUIMain() {
-        panelDiario = new JScrollPane(new GUILavadosDiario());
-        this.addTab("Diario", panelDiario);
+        panelDiario = new GUILavadosDiario();
+        this.addTab("Diario", new JScrollPane(panelDiario));
 
-        panelGeneral = new JScrollPane();
-        this.addTab("General", panelGeneral);
+        panelGeneral = null;
+        this.addTab("General", new JScrollPane(panelGeneral));
 
-        panelPropietario = new JScrollPane(new GUIPropietario());
-        this.addTab("Propietarios", panelPropietario);
+        panelPropietario = new GUIPropietario();
+        this.addTab("Propietarios", new JScrollPane(panelPropietario));
 
         panelTrabajador = new GUITrabajador();
         ActionListener trabCtr = new CtrTrabajador(panelTrabajador);
+        panelTrabajador.addController(trabCtr);
         this.addTab("Trabajador", panelTrabajador);
 
         panelModelo = new GUIModelo();

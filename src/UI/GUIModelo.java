@@ -5,6 +5,7 @@ import javax.swing.table.AbstractTableModel;
 
 import Models.Modelo;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class GUIModelo extends GUIPanel {
@@ -59,9 +60,14 @@ public class GUIModelo extends GUIPanel {
          panelBotones.add(bEli);
          return panelBotones;
      }
-     
-     
-     private class ModeloTableModel extends AbstractTableModel {
+
+    @Override
+    public void addController(ActionListener ctr) {
+
+    }
+
+
+    private class ModeloTableModel extends AbstractTableModel {
 
          private String[] columnNames;
          private Object[][] data;

@@ -7,6 +7,7 @@ import Models.Lavados;
 import Models.Propietario;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class GUIPropietario extends GUIPanel {
@@ -64,8 +65,13 @@ public class GUIPropietario extends GUIPanel {
          panelBotones.add(bEli);
           return panelBotones;
       }
-     
-     private class PropietarioTableModel extends AbstractTableModel {
+
+    @Override
+    public void addController(ActionListener ctr) {
+
+    }
+
+    private class PropietarioTableModel extends AbstractTableModel {
 
          private String[] columnNames;
          private Object[][] data;

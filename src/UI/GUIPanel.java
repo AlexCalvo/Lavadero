@@ -2,6 +2,7 @@ package UI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public abstract class GUIPanel extends JPanel {
 
@@ -12,4 +13,5 @@ public abstract class GUIPanel extends JPanel {
         return panel;
     }
 
+    public abstract void addController(ActionListener ctr);
 }

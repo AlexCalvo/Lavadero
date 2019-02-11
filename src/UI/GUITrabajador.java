@@ -56,6 +56,7 @@ public class GUITrabajador extends GUIPanel {
           return panelBotones;
      }
 
+     @Override
      public void addController(ActionListener ctr) {
         bIns.addActionListener(ctr);
         bIns.setActionCommand("Insertar");
