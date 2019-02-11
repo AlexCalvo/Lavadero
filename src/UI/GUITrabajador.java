@@ -71,7 +71,19 @@ public class GUITrabajador extends GUIPanel {
         bEli.setActionCommand("Eliminar");
         tableTrabajador.getSelectionModel().addListSelectionListener((ListSelectionListener) ctr);
      }
-     
+
+     public String getFieldNombre() {
+         return this.tNombre.getText();
+     }
+
+     public void setFieldNombre(String string) {
+         this.tNombre.setText(string);
+     }
+
+     public void reloadData() {
+         ((TrabajadorTableModel)tableTrabajador.getModel()).reloadData();
+     }
+
      private class TrabajadorTableModel extends AbstractTableModel{
     	 
     	 private String[] columnNames;
@@ -84,6 +96,15 @@ public class GUITrabajador extends GUIPanel {
              for (int i = 0;i < lista.size(); i++) {
                  data[i] = lista.get(i).asArray();
              }
+         }
+
+         public void reloadData() {
+             List<Trabajador> lista = Trabajador.listaTrabajador();
+             data = new Object[lista.size()][columnNames.length];
+             for (int i = 0;i < lista.size(); i++) {
+                 data[i] = lista.get(i).asArray();
+             }
+             fireTableDataChanged();
          }
 
          @Override

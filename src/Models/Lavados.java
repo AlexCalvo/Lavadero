@@ -209,17 +209,17 @@ public class Lavados
 		public void BorrarLavados(){
 			 try (MySqlDB miBD = new MySqlDB()){
 				 miBD.Delete("DELETE FROM Lavados WHERE id = "
-	        			 +this.id+"';");
-	        	 id = -1;
-	       	    matricula = null;
-	       	    modelo = null;
-	       	    hora = null;
-	       	    telefono = null;
-	       	    prop = null;
-	       	    trab = null;
+	        			 +this.id+";");
+				 id = -1;
+				 matricula = null;
+	       	     modelo = null;
+	       	     hora = null;
+	       	     telefono = null;
+	       	     prop = null;
+	       	     trab = null;
 			 }catch (DatabaseException e) {
 		            e.printStackTrace();
-		        }
+		     }
         	 
          }
 

@@ -46,12 +46,14 @@ public class Trabajador {
 
     public Trabajador(String nombre) {
         try(MySqlDB db = new MySqlDB()) {
-            db.Insert("insert into Trabajador values('" + nombre + "')");
 
             //Get new ID
             Object[] tupla = db.Select("select MAX(id) from Trabajador").get(0);
+            db.Insert("insert into Trabajador values(" + ((int)tupla[0] + 1) + ", '" + nombre + "')");
 
-            this.id = (int)tupla[0];
+
+
+            this.id = (int)tupla[0] + 1;
             this.nombre = nombre;
         } catch (DatabaseException e) {
             e.printStackTrace();
@@ -75,6 +77,17 @@ public class Trabajador {
             e.printStackTrace();
         }
 
+    }
+
+    public void delete() {
+        try (MySqlDB miBD = new MySqlDB()){
+            miBD.Delete("DELETE FROM Trabajador WHERE id = "
+                    +this.id+";");
+            id = -1;
+            nombre = null;
+        }catch (DatabaseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

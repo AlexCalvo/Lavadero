@@ -25,13 +25,29 @@ public class CtrTrabajador implements ActionListener, ListSelectionListener {
         System.out.println(actionEvent.getActionCommand());
         switch (actionEvent.getActionCommand()) {
             case "Insertar":
-                System.out.println("Insertando");
+                if (!view.getFieldNombre().equals("")) {
+                    selectedTrabajador = new Trabajador(view.getFieldNombre());
+                    view.reloadData();
+                    view.setFieldNombre("");
+                    selectedTrabajador = null;
+                }
                 break;
             case "Modificar":
-                System.out.println("Modificando");
+                if (selectedTrabajador != null) {
+                    if (!view.getFieldNombre().equals("")) {
+                        selectedTrabajador.setNombre(view.getFieldNombre());
+                        view.reloadData();
+                        view.setFieldNombre("");
+                        selectedTrabajador = null;
+                    }
+                }
                 break;
             case "Eliminar":
-                System.out.println("Eliminando");
+                if (selectedTrabajador != null) {
+                    selectedTrabajador.delete();
+                    view.reloadData();
+                    selectedTrabajador = null;
+                }
                 break;
             default:
                 break;
