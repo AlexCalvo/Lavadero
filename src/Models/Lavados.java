@@ -52,12 +52,12 @@ public class Lavados {
                     + "id = " + id + ";").get(0);
             this.id = (int) tupla[0];
             this.matricula = (String) tupla[1];
-            this.modelo = (Modelo) tupla[2];
+            this.modelo = new Modelo((String) tupla[2]);
             this.hora = ((Time) tupla[3]).toLocalTime();
             this.fecha = ((Date) tupla[4]).toLocalDate();
             this.telefono = (String) tupla[5];
-            this.prop = (Propietario) tupla[6];
-            this.trab = (Trabajador) tupla[7];
+            this.prop = new Propietario((String) tupla[6]);
+            this.trab = new Trabajador((int) tupla[7]);
 
         } catch (DatabaseException e) {
             e.printStackTrace();

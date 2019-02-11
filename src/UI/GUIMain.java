@@ -1,12 +1,13 @@
 package UI;
 
+import Controllers.CtrLavados;
 import Controllers.CtrTrabajador;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class GUIMain extends JTabbedPane {
-    private GUIPanel panelDiario;
+    private GUILavadosDiario panelDiario;
     private GUIPanel panelGeneral;
     private GUIPanel panelPropietario;
     private GUITrabajador panelTrabajador;
@@ -15,6 +16,8 @@ public class GUIMain extends JTabbedPane {
 
     public GUIMain() {
         panelDiario = new GUILavadosDiario();
+        ActionListener lavCtr = new CtrLavados(panelDiario);
+        panelDiario.addController(lavCtr);
         this.addTab("Diario", new JScrollPane(panelDiario));
 
         panelGeneral = null;

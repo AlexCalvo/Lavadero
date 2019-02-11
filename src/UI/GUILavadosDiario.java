@@ -4,12 +4,16 @@ import Models.Lavados;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
 import com.github.lgooddatepicker.components.TimePickerSettings;
+import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GUILavadosDiario extends GUIPanel {
@@ -43,7 +47,8 @@ public class GUILavadosDiario extends GUIPanel {
 
     private void createPanelDiario() {
         this.setLayout(new BorderLayout(0,10));
-        tableLavados = new JTable(new LavadosDiariosTableModel());
+        tableLavados = new JTable(new LavadosDiariosTableModel(LocalDate.now()));
+        tFecha.setDate(LocalDate.now());
 
         this.add(create2ElementPanel(lFecha, tFecha), BorderLayout.NORTH);
         this.add(new JScrollPane(tableLavados), BorderLayout.CENTER);
@@ -76,9 +81,29 @@ public class GUILavadosDiario extends GUIPanel {
         return panelBotones;
     }
 
+    public JTable getTable() {
+        return tableLavados;
+    }
+
     @Override
     public void addController(ActionListener ctr) {
+        bIns.addActionListener(ctr);
+        bIns.setActionCommand("Insertar");
+        bMod.addActionListener(ctr);
+        bMod.setActionCommand("Modificar");
+        bEli.addActionListener(ctr);
+        bEli.setActionCommand("Eliminar");
+        tableLavados.getSelectionModel().addListSelectionListener((ListSelectionListener) ctr);
+        tFecha.addDateChangeListener((DateChangeListener)ctr);
+    }
 
+    public void reloadData() {
+        reloadData(tFecha.getDate());
+    }
+
+    public void reloadData(LocalDate date) {
+        this.tableLavados.getSelectionModel().clearSelection();
+        ((LavadosDiariosTableModel) tableLavados.getModel()).reloadData(date);
     }
 
     private class LavadosDiariosTableModel extends AbstractTableModel {
@@ -86,15 +111,39 @@ public class GUILavadosDiario extends GUIPanel {
         private String[] columnNames;
         private Object[][] data;
 
-        public LavadosDiariosTableModel() {
+        public LavadosDiariosTableModel(LocalDate date) {
             columnNames = Lavados.columnas;
-            List<Lavados> lista = Lavados.listaLavados();
+            List<Lavados> lista = new ArrayList<Lavados>();
+
+            for (Lavados lav :Lavados.listaLavados()) {
+                if (lav.getFecha().equals(date))
+                    lista.add(lav);
+            }
+
             data = new Object[lista.size()][columnNames.length];
             for (int i = 0; i < lista.size(); i++) {
+                if (!lista.get(i).getFecha().equals(date))
+                    continue;
                 data[i] = lista.get(i).asArray();
             }
         }
 
+        public void reloadData(LocalDate date) {
+            List<Lavados> lista = new ArrayList<Lavados>();
+
+            for (Lavados lav :Lavados.listaLavados()) {
+                if (lav.getFecha().equals(date))
+                    lista.add(lav);
+            }
+
+            data = new Object[lista.size()][columnNames.length];
+            for (int i = 0; i < lista.size(); i++) {
+                if (!lista.get(i).getFecha().equals(date))
+                    continue;
+                data[i] = lista.get(i).asArray();
+            }
+            fireTableDataChanged();
+        }
         @Override
         public int getRowCount() {
             return data.length;
