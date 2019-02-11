@@ -60,10 +60,12 @@ public class CtrTrabajador implements ActionListener, ListSelectionListener {
             int lastIndex = listSelectionEvent.getLastIndex();
             ListSelectionModel selectionModel = view.getTable().getSelectionModel();
             TableModel model = view.getTable().getModel();
-            int index = (int) ((selectionModel.isSelectedIndex(lastIndex)) ? model.getValueAt(lastIndex, 0) : model.getValueAt(firstindex, 0));
+            if (selectionModel.isSelectionEmpty())
+                return;
+            int id = (int) ((selectionModel.isSelectedIndex(lastIndex)) ? model.getValueAt(lastIndex, 0) : model.getValueAt(firstindex, 0));
 
 
-            selectedTrabajador = new Trabajador(index);
+            selectedTrabajador = new Trabajador(id);
             System.out.println(selectedTrabajador);
 
         }

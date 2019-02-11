@@ -79,6 +79,7 @@ public class GUITrabajador extends GUIPanel {
     }
 
     public void reloadData() {
+        this.tableTrabajador.getSelectionModel().clearSelection();
         ((TrabajadorTableModel) tableTrabajador.getModel()).reloadData();
     }
 
