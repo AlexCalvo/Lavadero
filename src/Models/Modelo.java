@@ -17,7 +17,7 @@ public class Modelo {
     public static List<Modelo> listaModelos() {
         List<Modelo> lista = new ArrayList<Modelo>();
         try (MySqlDB db = new MySqlDB()) {
-            for (Object[] tupla : db.Select("Select * from Modelo")) {
+            for (Object[] tupla : db.Select("Select * from Modelo;")) {
                 String nombre = (String) tupla[0];
                 double precio = (double) tupla[1];
                 String marca = (String) tupla[2];
@@ -32,7 +32,7 @@ public class Modelo {
 
     public Modelo(String nombre) {
         try (MySqlDB db = new MySqlDB()) {
-            Object[] tupla = db.Select("select * from Modelo where nombre = " + nombre).get(0);
+            Object[] tupla = db.Select("select * from Modelo where nombre = '" + nombre+"';").get(0);
 
             this.nombre = (String) tupla[0];
             this.precio = (double) tupla[1];
@@ -50,10 +50,10 @@ public class Modelo {
 
     public Modelo(String nombre, double precio, String marca) {
         try (MySqlDB db = new MySqlDB()) {
-            db.Insert("insert into Modelo values('" + nombre + "', " + precio + ", '" + marca + "')");
+            db.Insert("insert into Modelo values('" + nombre + "'," + precio + ",'" + marca + "');");
 
             //Get new ID
-            Object[] tupla = db.Select("select MAX(id) from Modelo").get(0);
+            Object[] tupla = db.Select("select MAX(nombre) from Modelo").get(0);
 
             this.nombre = nombre;
             this.precio = precio;
@@ -70,7 +70,7 @@ public class Modelo {
 
     public void setNombre(String nombre) {
         try (MySqlDB db = new MySqlDB()) {
-            db.Update("update Modelo set nombre = '" + nombre + "' where nombre = " + this.getNombre());
+            db.Update("update Modelo set nombre = '" + nombre + "' where nombre = '" + this.getNombre()+"';");
 
             this.nombre = nombre;
         } catch (DatabaseException e) {
@@ -85,7 +85,7 @@ public class Modelo {
 
     public void setPrecio(double precio) {
         try (MySqlDB db = new MySqlDB()) {
-            db.Update("update Modelo set precio = '" + precio + "' where nombre = " + this.getNombre());
+            db.Update("update Modelo set precio = " + precio + " where nombre = '" + this.getNombre()+"';");
 
             this.precio = precio;
         } catch (DatabaseException e) {
@@ -99,9 +99,19 @@ public class Modelo {
 
     public void setMarca(String marca) {
         try (MySqlDB db = new MySqlDB()) {
-            db.Update("update Modelo set marca = '" + marca + "' where nombre = " + this.getNombre());
+            db.Update("update Modelo set marca = '" + marca + "' where nombre = '" + this.getNombre()+"';");
 
             this.marca = marca;
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void delete() {
+        try (MySqlDB miBD = new MySqlDB()) {
+            miBD.Delete("DELETE FROM Modelo WHERE nombre = '"
+                    + this.nombre + "';");
+            nombre = null;
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
