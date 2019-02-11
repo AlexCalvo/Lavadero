@@ -7,10 +7,7 @@ import com.github.lgooddatepicker.components.TimePickerSettings;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.time.LocalTime;
 import java.util.List;
@@ -19,13 +16,13 @@ public class GUILavadosDiario extends GUIPanel {
 
     private Component panelGeneral;
     private JTable tableLavados;
-    private JLabel lMatricula =new JLabel("Matricula:");
+    private JLabel lMatricula = new JLabel("Matricula:");
     private JLabel lModelo = new JLabel("Modelo:");
     private JLabel lHora = new JLabel("Hora:");
     private JLabel lFecha = new JLabel("Fecha:");
     private JLabel lTelefono = new JLabel("Telefono:");
     private JLabel lPropietario = new JLabel("Propietario:");
-    private JLabel lTrabajador =  new JLabel("Trabajador:");
+    private JLabel lTrabajador = new JLabel("Trabajador:");
 
     private JTextField tMatricula = new JTextField();
     private JTextField tModelo = new JTextField();
@@ -55,7 +52,7 @@ public class GUILavadosDiario extends GUIPanel {
 
     private Component createSouthPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5,2,5,5));
+        panel.setLayout(new GridLayout(5, 2, 5, 5));
 
         panel.add(create2ElementPanel(lMatricula, tMatricula));
         panel.add(create2ElementPanel(lModelo, tModelo));
@@ -65,11 +62,11 @@ public class GUILavadosDiario extends GUIPanel {
         panel.add(create2ElementPanel(lPropietario, tPropietario));
         panel.add(create2ElementPanel(lTrabajador, tTrabajador));
         panel.add(createButtonPanel());
-               return panel;
+        return panel;
     }
-    
+
     private Component createButtonPanel() {
-    	JPanel panelBotones = new JPanel();
+        JPanel panelBotones = new JPanel();
         panelBotones.setLayout(new FlowLayout());
         panelBotones.add(bIns);
         panelBotones.add(bMod);
@@ -91,7 +88,7 @@ public class GUILavadosDiario extends GUIPanel {
             columnNames = Lavados.columnas;
             List<Lavados> lista = Lavados.listaLavados();
             data = new Object[lista.size()][columnNames.length];
-            for (int i = 0;i < lista.size(); i++) {
+            for (int i = 0; i < lista.size(); i++) {
                 data[i] = lista.get(i).asArray();
             }
         }
@@ -122,6 +119,7 @@ public class GUILavadosDiario extends GUIPanel {
             fireTableCellUpdated(row, col);
         }
     }
+
     private TimePicker createTimePicker() {
         TimePickerSettings settings = new TimePickerSettings();
         settings.generatePotentialMenuTimes(TimePickerSettings.TimeIncrement.FifteenMinutes, LocalTime.of(7, 0), LocalTime.of(21, 0));

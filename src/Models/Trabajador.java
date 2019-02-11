@@ -10,16 +10,16 @@ public class Trabajador {
 
     public static final String[] columnas = {"ID", "Nombre"};
 
-	
+
     private int id;
     private String nombre;
 
     public static List<Trabajador> listaTrabajador() {
         List<Trabajador> lista = new ArrayList<Trabajador>();
-        try(MySqlDB db = new MySqlDB()) {
-            for (Object[] tupla: db.Select("Select * from Trabajador")) {
+        try (MySqlDB db = new MySqlDB()) {
+            for (Object[] tupla : db.Select("Select * from Trabajador")) {
                 int id = (int) tupla[0];
-                String nombre = (String)tupla[1];
+                String nombre = (String) tupla[1];
                 lista.add(new Trabajador(id, nombre));
             }
         } catch (DatabaseException e) {
@@ -34,26 +34,25 @@ public class Trabajador {
     }
 
     public Trabajador(int id) {
-        try(MySqlDB db = new MySqlDB()) {
+        try (MySqlDB db = new MySqlDB()) {
             Object[] tupla = db.Select("select * from Trabajador where id = " + id).get(0);
 
             this.id = (int) tupla[0];
-            this.nombre = (String)tupla[1];
+            this.nombre = (String) tupla[1];
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
     }
 
     public Trabajador(String nombre) {
-        try(MySqlDB db = new MySqlDB()) {
+        try (MySqlDB db = new MySqlDB()) {
 
             //Get new ID
             Object[] tupla = db.Select("select MAX(id) from Trabajador").get(0);
-            db.Insert("insert into Trabajador values(" + ((int)tupla[0] + 1) + ", '" + nombre + "')");
+            db.Insert("insert into Trabajador values(" + ((int) tupla[0] + 1) + ", '" + nombre + "')");
 
 
-
-            this.id = (int)tupla[0] + 1;
+            this.id = (int) tupla[0] + 1;
             this.nombre = nombre;
         } catch (DatabaseException e) {
             e.printStackTrace();
@@ -69,7 +68,7 @@ public class Trabajador {
     }
 
     public void setNombre(String nombre) {
-        try(MySqlDB db = new MySqlDB()) {
+        try (MySqlDB db = new MySqlDB()) {
             db.Update("update Trabajador set nombre = '" + nombre + "' where id = " + this.getId());
 
             this.nombre = nombre;
@@ -80,12 +79,12 @@ public class Trabajador {
     }
 
     public void delete() {
-        try (MySqlDB miBD = new MySqlDB()){
+        try (MySqlDB miBD = new MySqlDB()) {
             miBD.Delete("DELETE FROM Trabajador WHERE id = "
-                    +this.id+";");
+                    + this.id + ";");
             id = -1;
             nombre = null;
-        }catch (DatabaseException e) {
+        } catch (DatabaseException e) {
             e.printStackTrace();
         }
     }
@@ -95,10 +94,10 @@ public class Trabajador {
         return this.getNombre();
     }
 
-	public Object[] asArray() {
+    public Object[] asArray() {
         Object[] tmp = new Object[10];
         tmp[0] = id;
-        tmp[1] =nombre;
+        tmp[1] = nombre;
 
         return tmp;
     }

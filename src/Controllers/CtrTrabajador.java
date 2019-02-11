@@ -1,14 +1,12 @@
 package Controllers;
 
 import Models.Trabajador;
-import UI.GUIPanel;
 import UI.GUITrabajador;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -62,7 +60,7 @@ public class CtrTrabajador implements ActionListener, ListSelectionListener {
             int lastIndex = listSelectionEvent.getLastIndex();
             ListSelectionModel selectionModel = view.getTable().getSelectionModel();
             TableModel model = view.getTable().getModel();
-            int index = (int)((selectionModel.isSelectedIndex(lastIndex))?model.getValueAt(lastIndex, 0):model.getValueAt(firstindex, 0));
+            int index = (int) ((selectionModel.isSelectedIndex(lastIndex)) ? model.getValueAt(lastIndex, 0) : model.getValueAt(firstindex, 0));
 
 
             selectedTrabajador = new Trabajador(index);

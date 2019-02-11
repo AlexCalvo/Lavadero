@@ -3,7 +3,6 @@ package UI;
 import Controllers.CtrTrabajador;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class GUIMain extends JTabbedPane {
@@ -12,7 +11,6 @@ public class GUIMain extends JTabbedPane {
     private GUIPanel panelPropietario;
     private GUITrabajador panelTrabajador;
     private GUIPanel panelModelo;
-
 
 
     public GUIMain() {

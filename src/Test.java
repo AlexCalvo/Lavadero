@@ -9,7 +9,7 @@ public class Test {
 
     private final static String configFile = "database.config";
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         JFrame frame = new JFrame("");
         JTabbedPane panel = new GUIMain();
 
@@ -18,7 +18,6 @@ public class Test {
         frame.setMinimumSize(new Dimension(640, 480));
         frame.pack();
         frame.setVisible(true);
-
 
 
         try (MySqlDB db = new MySqlDB()) {
