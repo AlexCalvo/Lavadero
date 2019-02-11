@@ -42,9 +42,10 @@ public class GUILavadosDiario extends GUIPanel {
     }
 
     private void createPanelDiario() {
-        this.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout(0,10));
         tableLavados = new JTable(new LavadosDiariosTableModel());
 
+        this.add(create2ElementPanel(lFecha, tFecha), BorderLayout.NORTH);
         this.add(new JScrollPane(tableLavados), BorderLayout.CENTER);
 
         this.add(createSouthPanel(), BorderLayout.SOUTH);
@@ -52,16 +53,17 @@ public class GUILavadosDiario extends GUIPanel {
 
     private Component createSouthPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 2, 5, 5));
+        panel.setLayout(new GridLayout(4, 2, 5, 5));
 
         panel.add(create2ElementPanel(lMatricula, tMatricula));
         panel.add(create2ElementPanel(lModelo, tModelo));
         panel.add(create2ElementPanel(lHora, tHora));
-        panel.add(create2ElementPanel(lFecha, tFecha));
         panel.add(create2ElementPanel(lTelefono, tTelefono));
         panel.add(create2ElementPanel(lPropietario, tPropietario));
         panel.add(create2ElementPanel(lTrabajador, tTrabajador));
-        panel.add(createButtonPanel());
+        panel.add(new JPanel());
+        panel.add(createButtonPanel(), BorderLayout.SOUTH);
+
         return panel;
     }
 
