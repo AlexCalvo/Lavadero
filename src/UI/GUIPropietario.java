@@ -1,8 +1,10 @@
 package UI;
 
 import Models.Propietario;
+import Models.Trabajador;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -50,9 +52,33 @@ public class GUIPropietario extends GUIPanel {
 
 
         return panel;
-
-
     }
+    
+    
+    public String getFieldNombre() {
+        return this.tNombre.getText();
+    }
+
+    public void setFieldNombre(String string) {
+        this.tNombre.setText(string);
+    }
+    
+    public String getFieldId() {
+        return this.tID.getText();
+    }
+
+    public void setFieldId(String string) {
+        this.tID.setText(string);
+    }
+    
+    public String getFieldTelefono() {
+        return this.tTelefono.getText();
+    }
+
+    public void setFieldTelefono(String string) {
+        this.tTelefono.setText(string);
+    }
+    
 
     private Component createButtonPanel() {
         JPanel panelBotones = new JPanel();
@@ -63,11 +89,27 @@ public class GUIPropietario extends GUIPanel {
         return panelBotones;
     }
 
-    @Override
-    public void addController(ActionListener ctr) {
-
+    public void reloadData() {
+        this.tablePropietario.getSelectionModel().clearSelection();
+        ((PropietarioTableModel) tablePropietario.getModel()).reloadData();
     }
 
+    public JTable getTable() {
+        return tablePropietario;
+    }
+
+    @Override
+    public void addController(ActionListener ctr) {
+        bIns.addActionListener(ctr);
+        bIns.setActionCommand("Insertar");
+        bMod.addActionListener(ctr);
+        bMod.setActionCommand("Modificar");
+        bEli.addActionListener(ctr);
+        bEli.setActionCommand("Eliminar");
+        tablePropietario.getSelectionModel().addListSelectionListener((ListSelectionListener) ctr);
+    }
+    
+    
     private class PropietarioTableModel extends AbstractTableModel {
 
         private String[] columnNames;
@@ -81,6 +123,16 @@ public class GUIPropietario extends GUIPanel {
                 data[i] = lista.get(i).asArray();
             }
         }
+        
+        public void reloadData() {
+            List<Propietario> lista = Propietario.listaPropietarios();
+            data = new Object[lista.size()][columnNames.length];
+            for (int i = 0; i < lista.size(); i++) {
+                data[i] = lista.get(i).asArray();
+            }
+            fireTableDataChanged();
+        }
+
 
         @Override
         public int getRowCount() {

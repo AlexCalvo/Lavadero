@@ -59,10 +59,32 @@ public class Propietario {
             e.printStackTrace();
         }
     }
+    
+    public void delete() {
+        try (MySqlDB miBD = new MySqlDB()) {
+            miBD.Delete("DELETE FROM Propietarios WHERE id = '"+ this.id + "';");
+            id = null;
+            nombre = null;
+            telefono = null;
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+    }
 
     public String getId() {
         return id;
-    }
+    }	
+    
+    public void setId(String id) {
+		  try (MySqlDB db = new MySqlDB()) {
+	            db.Update("update Propietarios set id ='"+ id + "' where id = '" + this.id+"';");
+
+	            this.id =id;
+	        } catch (DatabaseException e) {
+	            e.printStackTrace();
+	        }
+		}
+    
 
     public String getNombre() {
         return nombre;
@@ -70,7 +92,7 @@ public class Propietario {
 
     public void setNombre(String nombre) {
         try (MySqlDB db = new MySqlDB()) {
-            db.Update("update Propietarios set nombre = '" + nombre + "' where id = " + this.getId());
+            db.Update("update Propietarios set nombre = '" + nombre + "' where id = '" + this.getId()+"';");
 
             this.nombre = nombre;
         } catch (DatabaseException e) {
@@ -85,7 +107,7 @@ public class Propietario {
 
     public void setTelefono(String telefono) {
         try (MySqlDB db = new MySqlDB()) {
-            db.Update("update Propietarios set telefono = '" + telefono + "' where id = " + this.getId());
+            db.Update("update Propietarios set telefono = '" + telefono + "' where id = '" + this.getId()+"';");
 
             this.telefono = telefono;
         } catch (DatabaseException e) {
@@ -106,4 +128,5 @@ public class Propietario {
 
         return tmp;
     }
+
 }
