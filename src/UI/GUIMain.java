@@ -10,7 +10,7 @@ public class GUIMain extends JTabbedPane {
     private GUIPanel panelDiario;
     private GUIPanel panelGeneral;
     private GUIPanel panelPropietario;
-    private GUIPanel panelTrabajador;
+    private GUITrabajador panelTrabajador;
     private GUIPanel panelModelo;
 
 

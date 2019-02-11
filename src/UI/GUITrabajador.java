@@ -1,6 +1,7 @@
 package UI;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
 import java.awt.*;
@@ -56,7 +57,11 @@ public class GUITrabajador extends GUIPanel {
           return panelBotones;
      }
 
-     @Override
+    public JTable getTable() {
+        return tableTrabajador;
+    }
+
+    @Override
      public void addController(ActionListener ctr) {
         bIns.addActionListener(ctr);
         bIns.setActionCommand("Insertar");
@@ -64,6 +69,7 @@ public class GUITrabajador extends GUIPanel {
         bMod.setActionCommand("Modificar");
         bEli.addActionListener(ctr);
         bEli.setActionCommand("Eliminar");
+        tableTrabajador.getSelectionModel().addListSelectionListener((ListSelectionListener) ctr);
      }
      
      private class TrabajadorTableModel extends AbstractTableModel{
