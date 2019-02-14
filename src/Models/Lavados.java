@@ -78,16 +78,18 @@ public class Lavados {
         this.trab = trab;
     }
 
-    public Lavados(String matricula, String marca, Modelo modelo, LocalTime hora, LocalDate fecha,
-                   double precio, String telefono, Propietario prop, Trabajador trab) {
+    public Lavados(String matricula, Modelo modelo, LocalTime hora, LocalDate fecha,
+                   String telefono, Propietario prop, Trabajador trab) {
         try (MySqlDB miBD = new MySqlDB()) {
-
-            miBD.Insert("INSERT INTO Lavados VALUES('" + matricula + "', '" + modelo + "','" + hora.toString() + "', '" + fecha.toString() + "'" + this.telefono + "," + this.prop.getId() + "," + this.trab.getId() + ");");
 
             //Get new ID
             Object[] tupla = miBD.Select("select MAX(id) from Lavados").get(0);
 
-            this.id = (int) tupla[0];
+            miBD.Insert("INSERT INTO Lavados VALUES(" + ((int)tupla[0] +1) + ", '" + matricula + "', '" + modelo + "','" + hora.toString() + "', '" + fecha.toString() + "','" + telefono + "','" + prop.getId() + "'," + trab.getId() + ");");
+
+
+
+            this.id = (int) tupla[0] +1;
             this.matricula = matricula;
             this.modelo = modelo;
             this.hora = hora;
@@ -112,7 +114,7 @@ public class Lavados {
 
     public void setMatricula(String matricula) {
         try (MySqlDB miBD = new MySqlDB()) {
-            miBD.Update("UPDATE Lavados SET matricula = " + matricula + " where id = " + this.getId());
+            miBD.Update("UPDATE Lavados SET matricula = '" + matricula + "' where id = " + this.getId());
 
             this.matricula = matricula;
         } catch (DatabaseException e) {
@@ -126,7 +128,7 @@ public class Lavados {
 
     public void setModelo(Modelo modelo) {
         try (MySqlDB miBD = new MySqlDB()) {
-            miBD.Update("UPDATE Lavados SET modelo = " + modelo + " where id = " + this.getId());
+            miBD.Update("UPDATE Lavados SET modelo = '" + modelo + "' where id = " + this.getId());
 
             this.modelo = modelo;
         } catch (DatabaseException e) {
@@ -140,7 +142,7 @@ public class Lavados {
 
     public void setHora(LocalTime hora) {
         try (MySqlDB miBD = new MySqlDB()) {
-            miBD.Update("UPDATE Lavados SET hora = " + hora.toString() + " where id = " + this.getId());
+            miBD.Update("UPDATE Lavados SET hora = '" + hora.toString() + "' where id = " + this.getId());
 
             this.hora = hora;
         } catch (DatabaseException e) {
@@ -154,7 +156,7 @@ public class Lavados {
 
     public void setFecha(LocalDate fecha) {
         try (MySqlDB miBD = new MySqlDB()) {
-            miBD.Update("UPDATE Lavados SET fecha = " + fecha.toString() + " where id = " + this.getId());
+            miBD.Update("UPDATE Lavados SET fecha = '" + fecha.toString() + "' where id = " + this.getId());
 
             this.fecha = fecha;
         } catch (DatabaseException e) {
@@ -168,7 +170,7 @@ public class Lavados {
 
     public void setTelefono(String telefono) {
         try (MySqlDB miBD = new MySqlDB()) {
-            miBD.Update("UPDATE Lavados SET telefono = " + telefono + " where id = " + this.getId());
+            miBD.Update("UPDATE Lavados SET telefono = '" + telefono + "' where id = " + this.getId());
 
             this.telefono = telefono;
         } catch (DatabaseException e) {
@@ -182,7 +184,7 @@ public class Lavados {
 
     public void setProp(Propietario prop) {
         try (MySqlDB miBD = new MySqlDB()) {
-            miBD.Update("UPDATE Lavados SET Propietarios = " + prop.getId() + " where id = " + this.getId());
+            miBD.Update("UPDATE Lavados SET Propietarios_id = '" + prop.getId() + "' where id = " + this.getId());
 
             this.prop = prop;
         } catch (DatabaseException e) {
@@ -196,7 +198,7 @@ public class Lavados {
 
     public void setTrab(Trabajador trab) {
         try (MySqlDB miBD = new MySqlDB()) {
-            miBD.Update("UPDATE Lavados SET Trabajador = " + trab.getId() + " where id = " + this.getId());
+            miBD.Update("UPDATE Lavados SET Trabajador_id = " + trab.getId() + " where id = " + this.getId());
 
             this.trab = trab;
         } catch (DatabaseException e) {
@@ -204,7 +206,7 @@ public class Lavados {
         }
     }
 
-    public void BorrarLavados() {
+    public void delete() {
         try (MySqlDB miBD = new MySqlDB()) {
             miBD.Delete("DELETE FROM Lavados WHERE id = "
                     + this.id + ";");

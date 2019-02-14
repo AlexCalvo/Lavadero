@@ -1,16 +1,21 @@
 package UI;
 
 import Models.Lavados;
+import Models.Modelo;
+import Models.Propietario;
+import Models.Trabajador;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
 import com.github.lgooddatepicker.components.TimePickerSettings;
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
+import com.mxrck.autocompleter.TextAutoCompleter;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.security.PublicKey;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -30,12 +35,15 @@ public class GUILavadosDiario extends GUIPanel {
 
     private JTextField tMatricula = new JTextField();
     private JTextField tModelo = new JTextField();
+    private TextAutoCompleter autoModelo = createAutoCompleterModelo(tModelo);
     private TimePicker tHora = createTimePicker();
     //private JTextField tFecha = new JTextField();
     private DatePicker tFecha = new DatePicker();
     private JTextField tTelefono = new JTextField();
     private JTextField tPropietario = new JTextField();
+    private TextAutoCompleter autoPropietario = createAutoCompleterPropietario(tPropietario);
     private JTextField tTrabajador = new JTextField();
+    private TextAutoCompleter autoTrabajador = createAutoCompleterTrabajador(tTrabajador);
 
     private JButton bIns = new JButton("Insertar");
     private JButton bMod = new JButton("Modificar");
@@ -70,6 +78,70 @@ public class GUILavadosDiario extends GUIPanel {
         panel.add(createButtonPanel(), BorderLayout.SOUTH);
 
         return panel;
+    }
+
+    public String getFieldMatricula() {
+        return this.tMatricula.getText();
+    }
+
+    public void setFieldMatricula(String string) {
+        this.tMatricula.setText(string);
+    }
+
+    public Modelo getFieldModelo() {
+        return (Modelo) this.autoModelo.findItem(autoModelo.getItemSelected().toString());
+    }
+
+    public void setFieldModelo(Modelo modelo) {
+        if (modelo == null)
+            this.tModelo.setText("");
+        else
+            this.tModelo.setText(modelo.toString());
+    }
+
+    public LocalTime getFieldHora() {
+        return this.tHora.getTime();
+    }
+
+    public LocalDate getFieldFecha() {
+        return this.tFecha.getDate();
+    }
+
+    public void setFieldHora(LocalTime time) {
+        if (time == null)
+            this.tHora.setText("");
+        else
+            this.tHora.setText(time.toString());
+    }
+
+    public String getFieldTelefono() {
+        return this.tTelefono.getText();
+    }
+
+    public void setFieldTelefono(String string) {
+        this.tTelefono.setText(string);
+    }
+
+    public Propietario getFieldPropietario() {
+        return (Propietario) this.autoPropietario.findItem(autoPropietario.getItemSelected().toString());
+    }
+
+    public void setFieldPropietario(Propietario propietario) {
+        if (propietario == null)
+            this.tPropietario.setText("");
+        else
+            this.tPropietario.setText(propietario.getNombre());
+    }
+
+    public Trabajador getFieldTrabajador() {
+        return (Trabajador) this.autoTrabajador.findItem(autoTrabajador.getItemSelected().toString());
+    }
+
+    public void setFieldTrabajador(Trabajador trabajador) {
+        if (trabajador == null)
+            this.tTrabajador.setText("");
+        else
+            this.tTrabajador.setText(trabajador.getNombre());
     }
 
     private Component createButtonPanel() {
@@ -176,5 +248,32 @@ public class GUILavadosDiario extends GUIPanel {
         settings.generatePotentialMenuTimes(TimePickerSettings.TimeIncrement.FifteenMinutes, LocalTime.of(7, 0), LocalTime.of(21, 0));
         settings.use24HourClockFormat();
         return new TimePicker(settings);
+    }
+
+    private TextAutoCompleter createAutoCompleterModelo(JTextField textField) {
+        TextAutoCompleter tmp =  new TextAutoCompleter(textField);
+
+        ArrayList list = (ArrayList) Modelo.listaModelos();
+        tmp.addItems(list);
+
+        return tmp;
+    }
+
+    private TextAutoCompleter createAutoCompleterPropietario(JTextField textField) {
+        TextAutoCompleter tmp = new TextAutoCompleter(textField);
+
+        ArrayList list = (ArrayList) Propietario.listaPropietarios();
+        tmp.addItems(list);
+
+        return tmp;
+    }
+
+    private TextAutoCompleter createAutoCompleterTrabajador(JTextField textField) {
+        TextAutoCompleter tmp = new TextAutoCompleter(textField);
+
+        ArrayList list = (ArrayList) Trabajador.listaTrabajador();
+        tmp.addItems(list);
+
+        return tmp;
     }
 }

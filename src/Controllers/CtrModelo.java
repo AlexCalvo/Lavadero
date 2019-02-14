@@ -50,6 +50,9 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
                 if (selectedModelo != null) {
                     selectedModelo.delete();
                     view.reloadData();
+                    view.setFieldNombre("");
+                    view.setFieldPrecio("");
+                    view.setFieldMarca("");
                     selectedModelo = null;
                 }
                 break;

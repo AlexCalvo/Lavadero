@@ -43,6 +43,7 @@ public class CtrTrabajador implements ActionListener, ListSelectionListener {
                 if (selectedTrabajador != null) {
                     selectedTrabajador.delete();
                     view.reloadData();
+                    view.setFieldNombre("");
                     selectedTrabajador = null;
                 }
                 break;

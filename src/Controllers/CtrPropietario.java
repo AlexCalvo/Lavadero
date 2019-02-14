@@ -49,6 +49,9 @@ public class CtrPropietario implements ActionListener, ListSelectionListener {
                 if (selectedPropietario != null) {
                     selectedPropietario.delete();
                     view.reloadData();
+                    view.setFieldNombre("");
+                    view.setFieldNombre("");
+                    view.setFieldTelefono("");
                     selectedPropietario = null;
                 }
                 break;
