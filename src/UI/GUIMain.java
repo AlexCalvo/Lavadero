@@ -16,8 +16,8 @@ public class GUIMain extends JTabbedPane {
     private GUIModelo panelModelo;
 
     public GUIMain() {
-    	 panelGeneral = null;
-         this.addTab("General", new JScrollPane(panelGeneral));
+    	panelGeneral = null;
+        this.addTab("General", new JScrollPane(panelGeneral));
          
         panelDiario = new GUILavadosDiario();
         ActionListener lavCtr = new CtrLavados(panelDiario);

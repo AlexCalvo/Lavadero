@@ -45,6 +45,152 @@ public class Lavados {
 
         return lista;
     }
+    
+  //Todos los lavados entre dos fechas dadas
+    public static List<Lavados> listaLavadosPorFechas(LocalDate FechaIn,LocalDate FechaFin) {
+        List<Lavados> lista = new ArrayList<Lavados>();
+
+        try (MySqlDB miBD = new MySqlDB()) {
+
+            for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Fecha >= '"+FechaIn+"' and Fecha <='"+FechaFin+"';")) {
+                int id = (int) tupla[0];
+                String matricula = (String) tupla[1];
+                Modelo modelo = new Modelo((String) tupla[2]);
+                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                LocalDate fecha = ((Date) tupla[4]).toLocalDate();
+                String telefono = (String) tupla[5];
+                Propietario prop = new Propietario((String) tupla[6]);
+                Trabajador trab = new Trabajador((int) tupla[7]);
+                lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+            }
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+    
+    //Todos los lavados del coche con una matricula concreta
+    public static List<Lavados> listaLavadosPorMatricula(String m) {
+        List<Lavados> lista = new ArrayList<Lavados>();
+
+        try (MySqlDB miBD = new MySqlDB()) {
+
+            for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Matricula = '"+ m +"';")) {
+                int id = (int) tupla[0];
+                String matricula = (String) tupla[1];
+                Modelo modelo = new Modelo((String) tupla[2]);
+                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                LocalDate fecha = ((Date) tupla[4]).toLocalDate();
+                String telefono = (String) tupla[5];
+                Propietario prop = new Propietario((String) tupla[6]);
+                Trabajador trab = new Trabajador((int) tupla[7]);
+                lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+            }
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    //Dadas dos fechas, que muestre los coches que han ido x veces
+    public static List<Lavados> listaLavadosPorVecesFechas(LocalDate ini,LocalDate fin,int x) {
+        List<Lavados> lista = new ArrayList<Lavados>();
+
+        try (MySqlDB miBD = new MySqlDB()) {
+
+            for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Fecha >= '"+ini+"' and Fecha <='"+fin+"'"
+            		+ "  group by Matricula having count(Matricula) = "+x+";")) {
+                int id = (int) tupla[0];
+                String matricula = (String) tupla[1];
+                Modelo modelo = new Modelo((String) tupla[2]);
+                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                LocalDate fecha = ((Date) tupla[4]).toLocalDate();
+                String telefono = (String) tupla[5];
+                Propietario prop = new Propietario((String) tupla[6]);
+                Trabajador trab = new Trabajador((int) tupla[7]);
+                lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+            }
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+    
+    //Por veces sin fechas
+    public static List<Lavados> listaLavadosPorVeces(int x) {
+        List<Lavados> lista = new ArrayList<Lavados>();
+
+        try (MySqlDB miBD = new MySqlDB()) {
+
+            for (Object[] tupla : miBD.Select("SELECT * FROM Lavados group by Matricula having count(Matricula) = "+x+";")) {
+                int id = (int) tupla[0];
+                String matricula = (String) tupla[1];
+                Modelo modelo = new Modelo((String) tupla[2]);
+                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                LocalDate fecha = ((Date) tupla[4]).toLocalDate();
+                String telefono = (String) tupla[5];
+                Propietario prop = new Propietario((String) tupla[6]);
+                Trabajador trab = new Trabajador((int) tupla[7]);
+                lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+            }
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+    
+    //Por propietario
+    public static List<Lavados> listaLavadosPorVeces(Propietario p) {
+        List<Lavados> lista = new ArrayList<Lavados>();
+
+        try (MySqlDB miBD = new MySqlDB()) {
+
+            for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Propietario = "+p+";")) {
+                int id = (int) tupla[0];
+                String matricula = (String) tupla[1];
+                Modelo modelo = new Modelo((String) tupla[2]);
+                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                LocalDate fecha = ((Date) tupla[4]).toLocalDate();
+                String telefono = (String) tupla[5];
+                Propietario prop = new Propietario((String) tupla[6]);
+                Trabajador trab = new Trabajador((int) tupla[7]);
+                lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+            }
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+    
+    //Por trabajador
+    public static List<Lavados> listaLavadosPorVeces(Trabajador t) {
+        List<Lavados> lista = new ArrayList<Lavados>();
+
+        try (MySqlDB miBD = new MySqlDB()) {
+
+            for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Trabajador = "+t+";")) {
+                int id = (int) tupla[0];
+                String matricula = (String) tupla[1];
+                Modelo modelo = new Modelo((String) tupla[2]);
+                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                LocalDate fecha = ((Date) tupla[4]).toLocalDate();
+                String telefono = (String) tupla[5];
+                Propietario prop = new Propietario((String) tupla[6]);
+                Trabajador trab = new Trabajador((int) tupla[7]);
+                lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+            }
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+    
 
     public Lavados(int id) {
         try (MySqlDB miBD = new MySqlDB()) {
