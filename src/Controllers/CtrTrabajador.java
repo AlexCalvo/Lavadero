@@ -20,7 +20,6 @@ public class CtrTrabajador implements ActionListener, ListSelectionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        System.out.println(actionEvent.getActionCommand());
         switch (actionEvent.getActionCommand()) {
             case "Insertar":
                 if (!view.getFieldNombre().equals("")) {
@@ -66,7 +65,7 @@ public class CtrTrabajador implements ActionListener, ListSelectionListener {
 
 
             selectedTrabajador = new Trabajador(id);
-            System.out.println(selectedTrabajador);
+            view.setFieldNombre(selectedTrabajador.toString());
 
         }
     }

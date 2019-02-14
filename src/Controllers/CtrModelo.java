@@ -21,7 +21,6 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        System.out.println(actionEvent.getActionCommand());
         switch (actionEvent.getActionCommand()) {
             case "Insertar":
                 if (!view.getFieldNombre().equals("")) {
@@ -73,7 +72,9 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
 
 
             selectedModelo = new Modelo(id);
-            System.out.println(selectedModelo);
+            view.setFieldNombre(selectedModelo.getNombre());
+            view.setFieldMarca(selectedModelo.getMarca());
+            view.setFieldPrecio(selectedModelo.getPrecio() + "");
 
         }
     }

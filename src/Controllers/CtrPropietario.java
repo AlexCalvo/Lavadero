@@ -20,7 +20,6 @@ public class CtrPropietario implements ActionListener, ListSelectionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        System.out.println(actionEvent.getActionCommand());
         switch (actionEvent.getActionCommand()) {
             case "Insertar":
                 if (!view.getFieldId().equals("")) {
@@ -72,7 +71,9 @@ public class CtrPropietario implements ActionListener, ListSelectionListener {
 
 
             selectedPropietario = new Propietario(id);
-            System.out.println(selectedPropietario);
+            view.setFieldId(selectedPropietario.getId());
+            view.setFieldNombre(selectedPropietario.getNombre());
+            view.setFieldTelefono(selectedPropietario.getTelefono());
 
         }
     }
