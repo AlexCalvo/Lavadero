@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,8 @@ public class Lavados {
                 int id = (int) tupla[0];
                 String matricula = (String) tupla[1];
                 Modelo modelo = new Modelo((String) tupla[2]);
-                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                //TODO: Waiting on better fix
+                LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                 LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                 String telefono = (String) tupla[5];
                 Propietario prop = new Propietario((String) tupla[6]);
@@ -56,7 +58,8 @@ public class Lavados {
                 int id = (int) tupla[0];
                 String matricula = (String) tupla[1];
                 Modelo modelo = new Modelo((String) tupla[2]);
-                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                //TODO: Waiting on better fix
+                LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                 LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                 String telefono = (String) tupla[5];
                 Propietario prop = new Propietario((String) tupla[6]);
@@ -80,7 +83,8 @@ public class Lavados {
                 int id = (int) tupla[0];
                 String matricula = (String) tupla[1];
                 Modelo modelo = new Modelo((String) tupla[2]);
-                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                //TODO: Waiting on better fix
+                LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                 LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                 String telefono = (String) tupla[5];
                 Propietario prop = new Propietario((String) tupla[6]);
@@ -105,7 +109,8 @@ public class Lavados {
                 int id = (int) tupla[0];
                 String matricula = (String) tupla[1];
                 Modelo modelo = new Modelo((String) tupla[2]);
-                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                //TODO: Waiting on better fix
+                LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                 LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                 String telefono = (String) tupla[5];
                 Propietario prop = new Propietario((String) tupla[6]);
@@ -129,7 +134,8 @@ public class Lavados {
                 int id = (int) tupla[0];
                 String matricula = (String) tupla[1];
                 Modelo modelo = new Modelo((String) tupla[2]);
-                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                //TODO: Waiting on better fix
+                LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                 LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                 String telefono = (String) tupla[5];
                 Propietario prop = new Propietario((String) tupla[6]);
@@ -153,7 +159,8 @@ public class Lavados {
                 int id = (int) tupla[0];
                 String matricula = (String) tupla[1];
                 Modelo modelo = new Modelo((String) tupla[2]);
-                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                //TODO: Waiting on better fix
+                LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                 LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                 String telefono = (String) tupla[5];
                 Propietario prop = new Propietario((String) tupla[6]);
@@ -177,7 +184,8 @@ public class Lavados {
                 int id = (int) tupla[0];
                 String matricula = (String) tupla[1];
                 Modelo modelo = new Modelo((String) tupla[2]);
-                LocalTime hora = ((Time) tupla[3]).toLocalTime();
+                //TODO: Waiting on better fix
+                LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                 LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                 String telefono = (String) tupla[5];
                 Propietario prop = new Propietario((String) tupla[6]);
@@ -199,7 +207,8 @@ public class Lavados {
             this.id = (int) tupla[0];
             this.matricula = (String) tupla[1];
             this.modelo = new Modelo((String) tupla[2]);
-            this.hora = ((Time) tupla[3]).toLocalTime();
+            //TODO: Waiting on better fix
+            this.hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
             this.fecha = ((Date) tupla[4]).toLocalDate();
             this.telefono = (String) tupla[5];
             this.prop = new Propietario((String) tupla[6]);
