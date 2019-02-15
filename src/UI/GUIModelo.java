@@ -83,7 +83,7 @@ public class GUIModelo extends GUIPanel {
         return this.tNombre.getText();
     }
     public double getFieldPrecio() {
-        return Integer.parseInt(this.tPrecio.getText());
+        return Double.parseDouble(this.tPrecio.getText());
     }
     public String getFieldMarca() {
         return this.tMarca.getText();

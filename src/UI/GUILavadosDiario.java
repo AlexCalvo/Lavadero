@@ -15,7 +15,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.security.PublicKey;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -37,7 +36,6 @@ public class GUILavadosDiario extends GUIPanel {
     private JTextField tModelo = new JTextField();
     private TextAutoCompleter autoModelo = createAutoCompleterModelo(tModelo);
     private TimePicker tHora = createTimePicker();
-    //private JTextField tFecha = new JTextField();
     private DatePicker tFecha = new DatePicker();
     private JTextField tTelefono = new JTextField();
     private JTextField tPropietario = new JTextField();

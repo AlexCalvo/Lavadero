@@ -38,7 +38,7 @@ public class CtrPropietario implements ActionListener, ListSelectionListener {
                     	selectedPropietario.setNombre(view.getFieldNombre());
                     	selectedPropietario.setTelefono(view.getFieldTelefono());
                         view.reloadData();
-                        view.setFieldNombre("");
+                        view.setFieldId("");
                         view.setFieldNombre("");
                         view.setFieldTelefono("");
                         selectedPropietario = null;
@@ -49,7 +49,7 @@ public class CtrPropietario implements ActionListener, ListSelectionListener {
                 if (selectedPropietario != null) {
                     selectedPropietario.delete();
                     view.reloadData();
-                    view.setFieldNombre("");
+                    view.setFieldId("");
                     view.setFieldNombre("");
                     view.setFieldTelefono("");
                     selectedPropietario = null;
