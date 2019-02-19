@@ -54,9 +54,9 @@ public class GUILavadosGeneral extends GUIPanel {
     private void createPanelGeneral() {
         this.setLayout(new BorderLayout(0,10));
         tableLavados = new JTable(new LavadosGeneralTableModel(LocalDate.now()));
-        tFecha.setDate(LocalDate.now());
+        //tFecha.setDate(LocalDate.now());
 
-        this.add(create2ElementPanel(lFecha, tFecha), BorderLayout.NORTH);
+        //this.add(create2ElementPanel(lFecha, tFecha), BorderLayout.NORTH);
         this.add(new JScrollPane(tableLavados), BorderLayout.CENTER);
 
         this.add(createSouthPanel(), BorderLayout.SOUTH);
@@ -69,6 +69,7 @@ public class GUILavadosGeneral extends GUIPanel {
         panel.add(create2ElementPanel(lMatricula, tMatricula));
         panel.add(create2ElementPanel(lModelo, tModelo));
         panel.add(create2ElementPanel(lHora, tHora));
+        panel.add(create2ElementPanel(lFecha, tFecha));
         panel.add(create2ElementPanel(lTelefono, tTelefono));
         panel.add(create2ElementPanel(lPropietario, tPropietario));
         panel.add(create2ElementPanel(lTrabajador, tTrabajador));
@@ -104,6 +105,8 @@ public class GUILavadosGeneral extends GUIPanel {
     public LocalDate getFieldFecha() {
         return this.tFecha.getDate();
     }
+    
+    
 
     public void setFieldHora(LocalTime time) {
         if (time == null)
@@ -168,10 +171,10 @@ public class GUILavadosGeneral extends GUIPanel {
     }
 
     public void reloadData() {
-        reloadData(tFecha.getDate());
+       reloadData(tFecha.getDate());
     }
 
-    public void reloadData(LocalDate date) {
+   public void reloadData(LocalDate date) {
         this.tableLavados.getSelectionModel().clearSelection();
         ((LavadosGeneralTableModel) tableLavados.getModel()).reloadData(date);
     }
