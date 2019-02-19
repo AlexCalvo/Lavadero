@@ -1,6 +1,7 @@
 package UI;
 
 import Controllers.CtrLavados;
+import Controllers.CtrLavadosGeneral;
 import Controllers.CtrModelo;
 import Controllers.CtrPropietario;
 import Controllers.CtrTrabajador;
@@ -10,15 +11,18 @@ import java.awt.event.ActionListener;
 
 public class GUIMain extends JTabbedPane {
     private GUILavadosDiario panelDiario;
-    private GUIPanel panelGeneral;
+    private GUILavadosGeneral panelGeneral;
     private GUIPropietario panelPropietario;
     private GUITrabajador panelTrabajador;
     private GUIModelo panelModelo;
 
     public GUIMain() {
-    	panelGeneral = null;
-        this.addTab("General", new JScrollPane(panelGeneral));
-         
+    	panelGeneral = new GUILavadosGeneral();
+        ActionListener lavCtrg = new CtrLavadosGeneral(panelGeneral);
+        panelGeneral.addController(lavCtrg);
+        this.addTab("General", panelGeneral);
+        
+   
         panelDiario = new GUILavadosDiario();
         ActionListener lavCtr = new CtrLavados(panelDiario);
         panelDiario.addController(lavCtr);
