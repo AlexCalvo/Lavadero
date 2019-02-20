@@ -46,6 +46,13 @@ public class GUILavadosGeneral extends GUIPanel {
     private JButton bIns = new JButton("Insertar");
     private JButton bMod = new JButton("Modificar");
     private JButton bEli = new JButton("Eliminar");
+    private JButton bQueryEntreFechas = new JButton("Entre fechas");
+    private JButton bQueryMatricula = new JButton("Por matricula");
+    private JButton bQueryEntreFechasVeces = new JButton("entre fechas por veces");
+    private JButton bQueryPorVeces = new JButton("por veces");
+    private JButton bQueryPropietario = new JButton("por propietario");
+    private JButton bQueryTrabajador = new JButton("por trabajador");
+
 
     public GUILavadosGeneral() {
         createPanelGeneral();
@@ -64,8 +71,9 @@ public class GUILavadosGeneral extends GUIPanel {
 
     private Component createSouthPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 2, 5, 5));
+        panel.setLayout(new GridLayout(6, 2, 5, 5));
 
+        panel.add(createQueryButtons());
         panel.add(create2ElementPanel(lMatricula, tMatricula));
         panel.add(create2ElementPanel(lModelo, tModelo));
         panel.add(create2ElementPanel(lHora, tHora));
@@ -73,7 +81,6 @@ public class GUILavadosGeneral extends GUIPanel {
         panel.add(create2ElementPanel(lTelefono, tTelefono));
         panel.add(create2ElementPanel(lPropietario, tPropietario));
         panel.add(create2ElementPanel(lTrabajador, tTrabajador));
-        panel.add(new JPanel());
         panel.add(createButtonPanel(), BorderLayout.SOUTH);
 
         return panel;
@@ -152,6 +159,18 @@ public class GUILavadosGeneral extends GUIPanel {
         panelBotones.add(bMod);
         panelBotones.add(bEli);
         return panelBotones;
+    }
+
+    private Component createQueryButtons() {
+        JPanel panelQuery = new JPanel();
+        panelQuery.setLayout(new FlowLayout());
+        panelQuery.add(bQueryEntreFechas);
+        panelQuery.add(bQueryMatricula);
+        panelQuery.add(bQueryEntreFechasVeces);
+        panelQuery.add(bQueryPorVeces);
+        panelQuery.add(bQueryPropietario);
+        panelQuery.add(bQueryTrabajador);
+        return panelQuery;
     }
 
     public JTable getTable() {
