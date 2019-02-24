@@ -46,12 +46,21 @@ public class GUILavadosGeneral extends GUIPanel {
     private JButton bIns = new JButton("Insertar");
     private JButton bMod = new JButton("Modificar");
     private JButton bEli = new JButton("Eliminar");
-    private JButton bQueryEntreFechas = new JButton("Entre fechas");
-    private JButton bQueryMatricula = new JButton("Por matricula");
-    private JButton bQueryEntreFechasVeces = new JButton("entre fechas por veces");
-    private JButton bQueryPorVeces = new JButton("por veces");
-    private JButton bQueryPropietario = new JButton("por propietario");
-    private JButton bQueryTrabajador = new JButton("por trabajador");
+    
+    private JLabel lFechaInicial = new JLabel("Fecha Inicial:");
+    private JLabel lFechaFinal = new JLabel("Fecha Final:");
+    private JLabel lNumVeces = new JLabel("Numero Veces:");
+    private DatePicker tFechaInicial = new DatePicker();
+    private DatePicker tFechaFinal = new DatePicker();
+    private JTextField tNumVeces = new JTextField();
+    
+    
+    private JButton bQueryEntreFechas = new JButton("Entre Fechas");
+    private JButton bQueryMatricula = new JButton("Por Matricula");
+    private JButton bQueryEntreFechasVeces = new JButton("Entre Fechas por veces");
+    private JButton bQueryPorVeces = new JButton("Por Veces");
+    private JButton bQueryPropietario = new JButton("Por Propietario");
+    private JButton bQueryTrabajador = new JButton("Por Trabajador");
 
 
     public GUILavadosGeneral() {
@@ -61,27 +70,42 @@ public class GUILavadosGeneral extends GUIPanel {
     private void createPanelGeneral() {
         this.setLayout(new BorderLayout(0,10));
         tableLavados = new JTable(new LavadosGeneralTableModel(LocalDate.now()));
+        
         //tFecha.setDate(LocalDate.now());
-
         //this.add(create2ElementPanel(lFecha, tFecha), BorderLayout.NORTH);
+        
+        this.add(createNorthPanel(),BorderLayout.NORTH);
+        
         this.add(new JScrollPane(tableLavados), BorderLayout.CENTER);
-
         this.add(createSouthPanel(), BorderLayout.SOUTH);
+    }
+    
+    private Component createNorthPanel() {
+    	JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(5, 2, 4, 4));
+        
+        panel.add(create2ElementPanel(lFechaInicial, tFechaInicial));
+        panel.add(create2ElementPanel(lFechaFinal, tFechaFinal));
+        panel.add(create2ElementPanel(lNumVeces, tNumVeces));
+        panel.add(create2ElementPanel(lPropietario, tPropietario));
+        panel.add(create2ElementPanel(lTrabajador, tTrabajador));
+        
+        return panel;
     }
 
     private Component createSouthPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6, 2, 5, 5));
+        panel.setLayout(new GridLayout(1, 2, 5, 5));
 
         panel.add(createQueryButtons());
-        panel.add(create2ElementPanel(lMatricula, tMatricula));
-        panel.add(create2ElementPanel(lModelo, tModelo));
-        panel.add(create2ElementPanel(lHora, tHora));
-        panel.add(create2ElementPanel(lFecha, tFecha));
-        panel.add(create2ElementPanel(lTelefono, tTelefono));
-        panel.add(create2ElementPanel(lPropietario, tPropietario));
-        panel.add(create2ElementPanel(lTrabajador, tTrabajador));
-        panel.add(createButtonPanel(), BorderLayout.SOUTH);
+        //panel.add(create2ElementPanel(lMatricula, tMatricula));
+        //panel.add(create2ElementPanel(lModelo, tModelo));
+        //panel.add(create2ElementPanel(lHora, tHora));
+        //panel.add(create2ElementPanel(lFecha, tFecha));
+        //panel.add(create2ElementPanel(lTelefono, tTelefono));
+        //panel.add(create2ElementPanel(lPropietario, tPropietario));
+        //panel.add(create2ElementPanel(lTrabajador, tTrabajador));
+        //panel.add(createButtonPanel(), BorderLayout.SOUTH);
 
         return panel;
     }
@@ -185,6 +209,21 @@ public class GUILavadosGeneral extends GUIPanel {
         bMod.setActionCommand("Modificar");
         bEli.addActionListener(ctr);
         bEli.setActionCommand("Eliminar");
+        
+        bQueryEntreFechas.setActionCommand("EntreFechas");
+        bQueryEntreFechas.addActionListener(ctr);
+        bQueryEntreFechasVeces.setActionCommand("EntreFechasVeces");
+        bQueryEntreFechasVeces.addActionListener(ctr);
+        bQueryMatricula.setActionCommand("Matricula");
+        bQueryMatricula.addActionListener(ctr);
+        bQueryPorVeces.setActionCommand("Veces");
+        bQueryPorVeces.addActionListener(ctr);
+        bQueryPropietario.setActionCommand("Propietario");
+        bQueryPropietario.addActionListener(ctr);
+        bQueryTrabajador.setActionCommand("Trabajador");
+        bQueryTrabajador.addActionListener(ctr);
+        
+        
         tableLavados.getSelectionModel().addListSelectionListener((ListSelectionListener) ctr);
         tFecha.addDateChangeListener((DateChangeListener)ctr);
     }

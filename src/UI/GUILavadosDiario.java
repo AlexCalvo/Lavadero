@@ -43,6 +43,8 @@ public class GUILavadosDiario extends GUIPanel {
     private JTextField tTrabajador = new JTextField();
     private TextAutoCompleter autoTrabajador = createAutoCompleterTrabajador(tTrabajador);
 
+   
+    
     private JButton bIns = new JButton("Insertar");
     private JButton bMod = new JButton("Modificar");
     private JButton bEli = new JButton("Eliminar");
