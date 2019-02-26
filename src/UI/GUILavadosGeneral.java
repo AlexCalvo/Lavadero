@@ -82,7 +82,7 @@ public class GUILavadosGeneral extends GUIPanel {
     
     private Component createNorthPanel() {
     	JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6, 2, 4, 4));
+        panel.setLayout(new GridLayout(3, 4, 4, 4));
         
         panel.add(create2ElementPanel(lFechaInicial, tFechaInicial));
         panel.add(create2ElementPanel(lFechaFinal, tFechaFinal));
