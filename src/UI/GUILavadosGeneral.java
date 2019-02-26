@@ -69,7 +69,7 @@ public class GUILavadosGeneral extends GUIPanel {
 
     private void createPanelGeneral() {
         this.setLayout(new BorderLayout(0,10));
-        tableLavados = new JTable(new LavadosGeneralTableModel(LocalDate.now()));
+        tableLavados = new JTable(new LavadosGeneralTableModel());//LocalDate.now()));
         tableLavados.setRowHeight(25);
         //tFecha.setDate(LocalDate.now());
         //this.add(create2ElementPanel(lFecha, tFecha), BorderLayout.NORTH);
@@ -243,20 +243,20 @@ public class GUILavadosGeneral extends GUIPanel {
         private String[] columnNames;
         private Object[][] data;
 
-        public LavadosGeneralTableModel(LocalDate date) {
+        public LavadosGeneralTableModel() {
             columnNames = Lavados.columnas;
             List<Lavados> lista = new ArrayList<Lavados>();
 
             for (Lavados lav :Lavados.listaLavados()) {
-                if (lav.getFecha().equals(date))
+                //if (lav.getFecha().equals(date))
                     lista.add(lav);
             }
 
             data = new Object[lista.size()][columnNames.length];
             for (int i = 0; i < lista.size(); i++) {
-                if (!lista.get(i).getFecha().equals(date))
-                    continue;
-                data[i] = lista.get(i).asArray();
+               //if (!lista.get(i).getFecha().equals(date))
+                  //  continue;
+               data[i] = lista.get(i).asArray();
             }
         }
 
