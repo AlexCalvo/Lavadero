@@ -30,7 +30,7 @@ public class GUITrabajador extends GUIPanel {
         this.setLayout(new BorderLayout());
 
         tableTrabajador = new JTable(new TrabajadorTableModel());
-
+        tableTrabajador.setRowHeight(25);
         this.add(new JScrollPane(tableTrabajador), BorderLayout.CENTER);
 
         this.add(createSouthPanel(), BorderLayout.SOUTH);

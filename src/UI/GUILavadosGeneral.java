@@ -70,7 +70,7 @@ public class GUILavadosGeneral extends GUIPanel {
     private void createPanelGeneral() {
         this.setLayout(new BorderLayout(0,10));
         tableLavados = new JTable(new LavadosGeneralTableModel(LocalDate.now()));
-        
+        tableLavados.setRowHeight(25);
         //tFecha.setDate(LocalDate.now());
         //this.add(create2ElementPanel(lFecha, tFecha), BorderLayout.NORTH);
         

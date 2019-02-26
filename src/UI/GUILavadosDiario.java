@@ -56,6 +56,7 @@ public class GUILavadosDiario extends GUIPanel {
     private void createPanelDiario() {
         this.setLayout(new BorderLayout(0,10));
         tableLavados = new JTable(new LavadosDiariosTableModel(LocalDate.now()));
+        tableLavados.setRowHeight(25);
         tFecha.setDate(LocalDate.now());
 
         this.add(create2ElementPanel(lFecha, tFecha), BorderLayout.NORTH);

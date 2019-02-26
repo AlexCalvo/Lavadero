@@ -35,7 +35,7 @@ public class GUIPropietario extends GUIPanel {
         this.setLayout(new BorderLayout());
 
         tablePropietario = new JTable(new PropietarioTableModel());
-
+        tablePropietario.setRowHeight(25);
         this.add(new JScrollPane(tablePropietario), BorderLayout.CENTER);
 
         this.add(createSouthPanel(), BorderLayout.SOUTH);

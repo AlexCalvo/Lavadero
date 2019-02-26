@@ -37,6 +37,7 @@ public class GUIModelo extends GUIPanel {
         this.setLayout(new BorderLayout());
 
         tableModelo = new JTable(new ModeloTableModel());
+        tableModelo.setRowHeight(25);
 
         this.add(new JScrollPane(tableModelo), BorderLayout.CENTER);
 
