@@ -240,11 +240,17 @@ public class Lavados {
             //Get new ID
             Object[] tupla = miBD.Select("select MAX(id) from Lavados").get(0);
 
-            miBD.Insert("INSERT INTO Lavados VALUES(" + ((int)tupla[0] +1) + ", '" + matricula + "', '" + modelo + "','" + hora.toString() + "', '" + fecha.toString() + "','" + telefono + "','" + prop.getId() + "'," + trab.getId() + ");");
+            int newId;
+            if (tupla[0] == null)
+                newId = 1;
+            else
+                newId = (int) tupla[0] + 1;
+
+            miBD.Insert("INSERT INTO Lavados VALUES(" + newId + ", '" + matricula + "', '" + modelo + "','" + hora.toString() + "', '" + fecha.toString() + "','" + telefono + "','" + prop.getId() + "'," + trab.getId() + ");");
 
 
 
-            this.id = (int) tupla[0] +1;
+            this.id = newId;
             this.matricula = matricula;
             this.modelo = modelo;
             this.hora = hora;

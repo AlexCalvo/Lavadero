@@ -49,10 +49,17 @@ public class Trabajador {
 
             //Get new ID
             Object[] tupla = db.Select("select MAX(id) from Trabajador").get(0);
-            db.Insert("insert into Trabajador values(" + ((int) tupla[0] + 1) + ", '" + nombre + "')");
+
+            int newId;
+            if (tupla[0] == null)
+                newId = 1;
+            else
+                newId = (int) tupla[0] + 1;
+
+            db.Insert("insert into Trabajador values(" + newId + ", '" + nombre + "')");
 
 
-            this.id = (int) tupla[0] + 1;
+            this.id = newId;
             this.nombre = nombre;
         } catch (DatabaseException e) {
             e.printStackTrace();

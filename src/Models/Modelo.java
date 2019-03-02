@@ -52,9 +52,6 @@ public class Modelo {
         try (MySqlDB db = new MySqlDB()) {
             db.Insert("insert into Modelo values('" + nombre + "'," + precio + ",'" + marca + "');");
 
-            //Get new ID
-            Object[] tupla = db.Select("select MAX(nombre) from Modelo").get(0);
-
             this.nombre = nombre;
             this.precio = precio;
             this.marca = marca;
