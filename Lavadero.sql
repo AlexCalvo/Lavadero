@@ -3,10 +3,6 @@
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
 -- -----------------------------------------------------
 -- Schema Lavadero
 -- -----------------------------------------------------
@@ -64,12 +60,12 @@ DROP TABLE IF EXISTS `Lavadero`.`Lavados` ;
 CREATE TABLE IF NOT EXISTS `Lavadero`.`Lavados` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Matricula` VARCHAR(45) NULL DEFAULT NULL,
-  `Modelo` VARCHAR(100) NOT NULL,
+  `Modelo` VARCHAR(100) NULL,
   `Hora` TIME NULL DEFAULT NULL,
   `Fecha` DATE NULL DEFAULT NULL,
   `Telefono` VARCHAR(45) NULL DEFAULT NULL,
   `Propietarios_id` VARCHAR(45) NULL DEFAULT NULL,
-  `Trabajador_id` INT NOT NULL,
+  `Trabajador_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Lavados_Propietarios_idx` (`Propietarios_id` ASC),
   INDEX `fk_Lavados_Trabajador1_idx` (`Trabajador_id` ASC),
@@ -91,7 +87,3 @@ CREATE TABLE IF NOT EXISTS `Lavadero`.`Lavados` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
