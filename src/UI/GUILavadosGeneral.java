@@ -260,6 +260,18 @@ public class GUILavadosGeneral extends GUIPanel {
 		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByVeces(v);
 		
 	}
+
+    public void reloadEntreFechas(LocalDate fechaIni, LocalDate fechaFin) {
+        this.tableLavados.getSelectionModel().clearSelection();
+        ((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredEntreFechas(fechaIni, fechaFin);
+
+    }
+
+    public void reloadEntreFechasVeces(LocalDate fechaIni, LocalDate fechaFin, int x) {
+        this.tableLavados.getSelectionModel().clearSelection();
+        ((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredEntreFechasVeces(fechaIni, fechaFin, x);
+
+    }
     
     private class LavadosGeneralTableModel extends AbstractTableModel {
 
@@ -317,6 +329,26 @@ public class GUILavadosGeneral extends GUIPanel {
             }
             fireTableDataChanged();
 		}
+
+		public void fillFilteredEntreFechas(LocalDate ini, LocalDate fin) {
+            List<Lavados> lista = Lavados.listaLavadosPorFechas(ini, fin);
+
+            data = new Object[lista.size()][columnNames.length];
+            for (int i = 0; i < lista.size(); i++) {
+                data[i] = lista.get(i).asArray();
+            }
+            fireTableDataChanged();
+        }
+
+        public void fillFilteredEntreFechasVeces(LocalDate ini, LocalDate fin, int x) {
+            List<Lavados> lista = Lavados.listaLavadosPorVecesFechas(ini, fin, x);
+
+            data = new Object[lista.size()][columnNames.length];
+            for (int i = 0; i < lista.size(); i++) {
+                data[i] = lista.get(i).asArray();
+            }
+            fireTableDataChanged();
+        }
 
         @Override
         public int getRowCount() {

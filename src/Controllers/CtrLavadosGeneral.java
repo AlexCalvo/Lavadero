@@ -15,6 +15,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 public class CtrLavadosGeneral implements ActionListener, ListSelectionListener, DateChangeListener {
 
@@ -30,8 +31,25 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
         System.out.println(actionEvent.getActionCommand());
         switch (actionEvent.getActionCommand()) {
             case "EntreFechas":
+                try {
+                    LocalDate fechaIni = view.getFieldFechaIni();
+                    LocalDate fechaFin = view.getFieldFechaFin();
+                    view.reloadEntreFechas(fechaIni, fechaFin);
+
+                } catch (NullPointerException e) {
+
+                }
                 break;
             case "EntreFechasVeces":
+                try {
+                    LocalDate fechaIni = view.getFieldFechaIni();
+                    LocalDate fechaFin = view.getFieldFechaFin();
+                    int x = Integer.parseInt(view.getNumVeces());
+                    view.reloadEntreFechasVeces(fechaIni, fechaFin, x);
+
+                } catch (NullPointerException e) {
+
+                }
                 break;
             case "Matricula":
                 break;
