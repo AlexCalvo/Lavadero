@@ -36,6 +36,14 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
             case "Matricula":
                 break;
             case "Veces":
+            	try {
+            		int v = Integer.parseInt(view.getNumVeces());
+            		view.reloadVeces(v);
+            		
+            	} catch (NullPointerException e) {
+
+                }
+            	
                 break;
             case "Propietario":
                 try {

@@ -255,6 +255,12 @@ public class GUILavadosGeneral extends GUIPanel {
         ((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByPropietario(p);
     }
 
+	public void reloadVeces(int v) {
+		this.tableLavados.getSelectionModel().clearSelection();
+		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByVeces(v);
+		
+	}
+    
     private class LavadosGeneralTableModel extends AbstractTableModel {
 
         private String[] columnNames;
@@ -270,7 +276,9 @@ public class GUILavadosGeneral extends GUIPanel {
             }
         }
 
-        public void reloadData() {
+       
+
+		public void reloadData() {
             List<Lavados> lista = Lavados.listaLavados();
 
             data = new Object[lista.size()][columnNames.length];
@@ -281,7 +289,7 @@ public class GUILavadosGeneral extends GUIPanel {
         }
 
         public void fillFilteredByTrabajador(Trabajador t) {
-            List<Lavados> lista = Lavados.listaLavadosPorVeces(t);
+            List<Lavados> lista = Lavados.listaLavadosPorTrabajador(t);
 
             data = new Object[lista.size()][columnNames.length];
             for (int i = 0; i < lista.size(); i++) {
@@ -291,7 +299,7 @@ public class GUILavadosGeneral extends GUIPanel {
         }
 
         public void fillFilteredByPropietario(Propietario p) {
-            List<Lavados> lista = Lavados.listaLavadosPorVeces(p);
+            List<Lavados> lista = Lavados.listaLavadosPorPropietario(p);
 
             data = new Object[lista.size()][columnNames.length];
             for (int i = 0; i < lista.size(); i++) {
@@ -299,6 +307,16 @@ public class GUILavadosGeneral extends GUIPanel {
             }
             fireTableDataChanged();
         }
+        
+        public void fillFilteredByVeces(int v) {
+        	List<Lavados> lista = Lavados.listaLavadosPorVeces(v);
+
+            data = new Object[lista.size()][columnNames.length];
+            for (int i = 0; i < lista.size(); i++) {
+                data[i] = lista.get(i).asArray();
+            }
+            fireTableDataChanged();
+		}
 
         @Override
         public int getRowCount() {
@@ -360,4 +378,6 @@ public class GUILavadosGeneral extends GUIPanel {
 
         return tmp;
     }
+
+
 }

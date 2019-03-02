@@ -130,7 +130,7 @@ public class Lavados {
 
         try (MySqlDB miBD = new MySqlDB()) {
 
-            for (Object[] tupla : miBD.Select("SELECT * FROM Lavados group by Matricula having count(Matricula) = "+x+";")) {
+            for (Object[] tupla : miBD.Select("SELECT Matricula FROM Lavados group by Matricula having count(Matricula) = "+x+";")) {
                 int id = (int) tupla[0];
                 String matricula = (String) tupla[1];
                 Modelo modelo = new Modelo((String) tupla[2]);
@@ -150,7 +150,7 @@ public class Lavados {
     }
     
     //Por propietario
-    public static List<Lavados> listaLavadosPorVeces(Propietario p) {
+    public static List<Lavados> listaLavadosPorPropietario(Propietario p) {
         List<Lavados> lista = new ArrayList<Lavados>();
 
         try (MySqlDB miBD = new MySqlDB()) {
@@ -175,7 +175,7 @@ public class Lavados {
     }
     
     //Por trabajador
-    public static List<Lavados> listaLavadosPorVeces(Trabajador t) {
+    public static List<Lavados> listaLavadosPorTrabajador(Trabajador t) {
         List<Lavados> lista = new ArrayList<Lavados>();
 
         try (MySqlDB miBD = new MySqlDB()) {
