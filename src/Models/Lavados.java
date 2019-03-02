@@ -180,7 +180,7 @@ public class Lavados {
 
         try (MySqlDB miBD = new MySqlDB()) {
 
-            for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Trabajador = "+t+";")) {
+            for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Trabajador_id = "+t.getId()+";")) {
                 int id = (int) tupla[0];
                 String matricula = (String) tupla[1];
                 Modelo modelo = new Modelo((String) tupla[2]);

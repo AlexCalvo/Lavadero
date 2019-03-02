@@ -202,6 +202,7 @@ public class GUILavadosGeneral extends GUIPanel {
         return tableLavados;
     }
 
+
     @Override
     public void addController(ActionListener ctr) {
         bIns.addActionListener(ctr);
@@ -230,12 +231,13 @@ public class GUILavadosGeneral extends GUIPanel {
     }
 
     public void reloadData() {
-       reloadData(tFecha.getDate());
+        this.tableLavados.getSelectionModel().clearSelection();
+        ((LavadosGeneralTableModel) tableLavados.getModel()).reloadData();
     }
 
-   public void reloadData(LocalDate date) {
+    public void reloadTrabajador(Trabajador t) {
         this.tableLavados.getSelectionModel().clearSelection();
-        ((LavadosGeneralTableModel) tableLavados.getModel()).reloadData(date);
+        ((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByTrabajador(t);
     }
 
     private class LavadosGeneralTableModel extends AbstractTableModel {
@@ -245,37 +247,34 @@ public class GUILavadosGeneral extends GUIPanel {
 
         public LavadosGeneralTableModel() {
             columnNames = Lavados.columnas;
-            List<Lavados> lista = new ArrayList<Lavados>();
-
-            for (Lavados lav :Lavados.listaLavados()) {
-                //if (lav.getFecha().equals(date))
-                    lista.add(lav);
-            }
+            List<Lavados> lista = Lavados.listaLavados();
 
             data = new Object[lista.size()][columnNames.length];
             for (int i = 0; i < lista.size(); i++) {
-               //if (!lista.get(i).getFecha().equals(date))
-                  //  continue;
                data[i] = lista.get(i).asArray();
             }
         }
 
-        public void reloadData(LocalDate date) {
-            List<Lavados> lista = new ArrayList<Lavados>();
-
-            for (Lavados lav :Lavados.listaLavados()) {
-                if (lav.getFecha().equals(date))
-                    lista.add(lav);
-            }
+        public void reloadData() {
+            List<Lavados> lista = Lavados.listaLavados();
 
             data = new Object[lista.size()][columnNames.length];
             for (int i = 0; i < lista.size(); i++) {
-                if (!lista.get(i).getFecha().equals(date))
-                    continue;
                 data[i] = lista.get(i).asArray();
             }
             fireTableDataChanged();
         }
+
+        public void fillFilteredByTrabajador(Trabajador t) {
+            List<Lavados> lista = Lavados.listaLavadosPorVeces(t);
+
+            data = new Object[lista.size()][columnNames.length];
+            for (int i = 0; i < lista.size(); i++) {
+                data[i] = lista.get(i).asArray();
+            }
+            fireTableDataChanged();
+        }
+
         @Override
         public int getRowCount() {
             return data.length;

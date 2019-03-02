@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Lavados;
+import Models.Trabajador;
 import UI.GUILavadosDiario;
 import UI.GUILavadosGeneral;
 
@@ -27,52 +28,25 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
     public void actionPerformed(ActionEvent actionEvent) {
         System.out.println(actionEvent.getActionCommand());
         switch (actionEvent.getActionCommand()) {
-            case "Insertar":
-                selectedLavados = new Lavados(view.getFieldMatricula(), view.getFieldModelo(), view.getFieldHora(), view.getFieldFecha(),view.getFieldTelefono(), view.getFieldPropietario(), view.getFieldTrabajador());
-                view.reloadData();
-                view.setFieldModelo(null);
-                view.setFieldMatricula("");
-                view.setFieldHora(null);
-                view.setFieldTelefono("");
-                view.setFieldPropietario(null);
-                view.setFieldTrabajador(null);
-                selectedLavados = null;
+            case "EntreFechas":
                 break;
-            case "Modificar":
-                if (selectedLavados != null) {
-                    selectedLavados.setModelo(view.getFieldModelo());
-                    selectedLavados.setMatricula(view.getFieldMatricula());
-                    selectedLavados.setHora(view.getFieldHora());
-                    selectedLavados.setTelefono(view.getFieldTelefono());
-                    if (view.getFieldPropietario() != null)
-                        selectedLavados.setProp(view.getFieldPropietario());
+            case "EntreFechasVeces":
+                break;
+            case "Matricula":
+                break;
+            case "Veces":
+                break;
+            case "Propietario":
+                break;
+            case "Trabajador":
+                try {
+                    Trabajador t = view.getFieldTrabajador();
 
-                    selectedLavados.setTrab(view.getFieldTrabajador());
+                    view.reloadTrabajador(t);
+                } catch (NullPointerException e) {
 
-                    view.reloadData();
-                    view.setFieldModelo(null);
-                    view.setFieldMatricula("");
-                    view.setFieldHora(null);
-                    view.setFieldTelefono("");
-                    view.setFieldPropietario(null);
-                    view.setFieldTrabajador(null);
-                    selectedLavados = null;
                 }
-                break;
-            case "Eliminar":
-                if (selectedLavados != null) {
-                    selectedLavados.delete();
-                    view.reloadData();
-                    view.setFieldModelo(null);
-                    view.setFieldMatricula("");
-                    view.setFieldHora(null);
-                    view.setFieldTelefono("");
-                    view.setFieldPropietario(null);
-                    view.setFieldTrabajador(null);
-                    selectedLavados = null;
-                }
-                break;
-            default:
+
                 break;
         }
     }
@@ -104,6 +78,6 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
     @Override
     public void dateChanged(DateChangeEvent dateChangeEvent) {
         System.out.println("Fecha cambiada a " + dateChangeEvent.getNewDate());
-        view.reloadData(dateChangeEvent.getNewDate());
+        view.reloadData();
     }
 }
