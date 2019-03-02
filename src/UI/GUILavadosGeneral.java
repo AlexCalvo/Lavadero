@@ -134,12 +134,22 @@ public class GUILavadosGeneral extends GUIPanel {
         return this.tHora.getTime();
     }
 
-    public LocalDate getFieldFecha() {
-        return this.tFecha.getDate();
+    public LocalDate getFieldFechaIni() {
+        return this.tFechaInicial.getDate();
     }
     
+    public LocalDate getFieldFechaFin() {
+        return this.tFechaFinal.getDate();
+    }
     
-
+    public String getNumVeces() {
+    	return this.tNumVeces.getText();
+    }
+    
+    public void setNumVeces(String n) {
+    	this.tNumVeces.setText(n);
+    }
+    
     public void setFieldHora(LocalTime time) {
         if (time == null)
             this.tHora.setText("");
