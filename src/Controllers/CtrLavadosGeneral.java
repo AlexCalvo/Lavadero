@@ -94,6 +94,9 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
                 }
 
                 break;
+            case "Refrescar":
+                view.reloadData();
+                break;
         }
     }
 

@@ -61,6 +61,7 @@ public class GUILavadosGeneral extends GUIPanel {
     private JButton bQueryPorVeces = new JButton("Por Veces");
     private JButton bQueryPropietario = new JButton("Por Propietario");
     private JButton bQueryTrabajador = new JButton("Por Trabajador");
+    private JButton bRefrescar = new JButton("Refrescar");
 
 
     public GUILavadosGeneral() {
@@ -205,6 +206,7 @@ public class GUILavadosGeneral extends GUIPanel {
         panelQuery.add(bQueryPorVeces);
         panelQuery.add(bQueryPropietario);
         panelQuery.add(bQueryTrabajador);
+        panelQuery.add(bRefrescar);
         return panelQuery;
     }
 
@@ -234,6 +236,8 @@ public class GUILavadosGeneral extends GUIPanel {
         bQueryPropietario.addActionListener(ctr);
         bQueryTrabajador.setActionCommand("Trabajador");
         bQueryTrabajador.addActionListener(ctr);
+        bRefrescar.setActionCommand("Refrescar");
+        bRefrescar.addActionListener(ctr);
         
         
         tableLavados.getSelectionModel().addListSelectionListener((ListSelectionListener) ctr);
