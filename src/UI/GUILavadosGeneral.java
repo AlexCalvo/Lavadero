@@ -250,6 +250,11 @@ public class GUILavadosGeneral extends GUIPanel {
         ((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByTrabajador(t);
     }
 
+    public void reloadPropietario(Propietario p) {
+        this.tableLavados.getSelectionModel().clearSelection();
+        ((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByPropietario(p);
+    }
+
     private class LavadosGeneralTableModel extends AbstractTableModel {
 
         private String[] columnNames;
@@ -277,6 +282,16 @@ public class GUILavadosGeneral extends GUIPanel {
 
         public void fillFilteredByTrabajador(Trabajador t) {
             List<Lavados> lista = Lavados.listaLavadosPorVeces(t);
+
+            data = new Object[lista.size()][columnNames.length];
+            for (int i = 0; i < lista.size(); i++) {
+                data[i] = lista.get(i).asArray();
+            }
+            fireTableDataChanged();
+        }
+
+        public void fillFilteredByPropietario(Propietario p) {
+            List<Lavados> lista = Lavados.listaLavadosPorVeces(p);
 
             data = new Object[lista.size()][columnNames.length];
             for (int i = 0; i < lista.size(); i++) {

@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Lavados;
+import Models.Propietario;
 import Models.Trabajador;
 import UI.GUILavadosDiario;
 import UI.GUILavadosGeneral;
@@ -37,6 +38,14 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
             case "Veces":
                 break;
             case "Propietario":
+                try {
+                    Propietario p = view.getFieldPropietario();
+
+                    view.reloadPropietario(p);
+                } catch (NullPointerException e) {
+
+                }
+
                 break;
             case "Trabajador":
                 try {
