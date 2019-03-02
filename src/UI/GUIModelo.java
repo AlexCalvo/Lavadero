@@ -38,7 +38,8 @@ public class GUIModelo extends GUIPanel {
 
         tableModelo = new JTable(new ModeloTableModel());
         tableModelo.setRowHeight(25);
-
+        tableModelo.setFont(new java.awt.Font("Tahoma", 0, 15)); 
+        
         this.add(new JScrollPane(tableModelo), BorderLayout.CENTER);
 
         this.add(createSouthPanel(), BorderLayout.SOUTH);

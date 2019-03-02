@@ -57,6 +57,7 @@ public class GUILavadosDiario extends GUIPanel {
         this.setLayout(new BorderLayout(0,10));
         tableLavados = new JTable(new LavadosDiariosTableModel(LocalDate.now()));
         tableLavados.setRowHeight(25);
+        tableLavados.setFont(new java.awt.Font("Tahoma", 0, 15)); 
         tFecha.setDate(LocalDate.now());
 
         this.add(create2ElementPanel(lFecha, tFecha), BorderLayout.NORTH);

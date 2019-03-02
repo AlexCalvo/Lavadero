@@ -31,6 +31,7 @@ public class GUITrabajador extends GUIPanel {
 
         tableTrabajador = new JTable(new TrabajadorTableModel());
         tableTrabajador.setRowHeight(25);
+        tableTrabajador.setFont(new java.awt.Font("Tahoma", 0, 15)); 
         this.add(new JScrollPane(tableTrabajador), BorderLayout.CENTER);
 
         this.add(createSouthPanel(), BorderLayout.SOUTH);

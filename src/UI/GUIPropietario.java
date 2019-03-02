@@ -36,6 +36,7 @@ public class GUIPropietario extends GUIPanel {
 
         tablePropietario = new JTable(new PropietarioTableModel());
         tablePropietario.setRowHeight(25);
+        tablePropietario.setFont(new java.awt.Font("Tahoma", 0, 15)); 
         this.add(new JScrollPane(tablePropietario), BorderLayout.CENTER);
 
         this.add(createSouthPanel(), BorderLayout.SOUTH);

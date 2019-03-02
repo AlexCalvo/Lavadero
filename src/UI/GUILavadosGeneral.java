@@ -31,6 +31,8 @@ public class GUILavadosGeneral extends GUIPanel {
     private JLabel lTelefono = new JLabel("Telefono:");
     private JLabel lPropietario = new JLabel("Propietario:");
     private JLabel lTrabajador = new JLabel("Trabajador:");
+    
+    private JLabel lsumatorioPrecio = new JLabel("Total:");
 
     private JTextField tMatricula = new JTextField();
     private JTextField tModelo = new JTextField();
@@ -42,6 +44,8 @@ public class GUILavadosGeneral extends GUIPanel {
     private TextAutoCompleter autoPropietario = createAutoCompleterPropietario(tPropietario);
     private JTextField tTrabajador = new JTextField();
     private TextAutoCompleter autoTrabajador = createAutoCompleterTrabajador(tTrabajador);
+    
+    private JTextField tsumatorioPrecios = new JTextField();
 
     private JButton bIns = new JButton("Insertar");
     private JButton bMod = new JButton("Modificar");
@@ -72,6 +76,7 @@ public class GUILavadosGeneral extends GUIPanel {
         this.setLayout(new BorderLayout(0,10));
         tableLavados = new JTable(new LavadosGeneralTableModel());//LocalDate.now()));
         tableLavados.setRowHeight(25);
+        tableLavados.setFont(new java.awt.Font("Tahoma", 0, 15)); 
         //tFecha.setDate(LocalDate.now());
         //this.add(create2ElementPanel(lFecha, tFecha), BorderLayout.NORTH);
         
@@ -97,7 +102,7 @@ public class GUILavadosGeneral extends GUIPanel {
 
     private Component createSouthPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 2, 5, 5));
+        panel.setLayout(new GridLayout(1, 2, 6, 6));
 
         panel.add(createQueryButtons());
         //panel.add(create2ElementPanel(lMatricula, tMatricula));
@@ -187,8 +192,8 @@ public class GUILavadosGeneral extends GUIPanel {
         else
             this.tTrabajador.setText(trabajador.getNombre());
     }
-
-    private Component createButtonPanel() {
+/*
+ *  private Component createButtonPanel() {
         JPanel panelBotones = new JPanel();
         panelBotones.setLayout(new FlowLayout());
         panelBotones.add(bIns);
@@ -196,10 +201,14 @@ public class GUILavadosGeneral extends GUIPanel {
         panelBotones.add(bEli);
         return panelBotones;
     }
+ */
+   
 
     private Component createQueryButtons() {
         JPanel panelQuery = new JPanel();
         panelQuery.setLayout(new FlowLayout());
+        panelQuery.setLayout(new GridLayout(2, 2, 5, 5));
+
         panelQuery.add(bQueryEntreFechas);
         panelQuery.add(bQueryMatricula);
         panelQuery.add(bQueryEntreFechasVeces);
@@ -207,6 +216,7 @@ public class GUILavadosGeneral extends GUIPanel {
         panelQuery.add(bQueryPropietario);
         panelQuery.add(bQueryTrabajador);
         panelQuery.add(bRefrescar);
+        panelQuery.add(create2ElementPanel(lsumatorioPrecio,tsumatorioPrecios));
         return panelQuery;
     }
 
