@@ -375,6 +375,18 @@ public class GUILavadosGeneral extends GUIPanel {
             data[row][col] = value;
             fireTableCellUpdated(row, col);
         }
+
+
+
+		public void fillFilteredByMatricula(String m) {
+			List<Lavados> lista = Lavados.listaLavadosPorMatricula(m);
+
+            data = new Object[lista.size()][columnNames.length];
+            for (int i = 0; i < lista.size(); i++) {
+                data[i] = lista.get(i).asArray();
+            }
+            fireTableDataChanged();
+		}
     }
 
     private TimePicker createTimePicker() {
@@ -410,6 +422,12 @@ public class GUILavadosGeneral extends GUIPanel {
 
         return tmp;
     }
+
+	public void reloadMatricula(String m) {
+		this.tableLavados.getSelectionModel().clearSelection();
+		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByMatricula(m);
+	
+	}
 
 
 }
