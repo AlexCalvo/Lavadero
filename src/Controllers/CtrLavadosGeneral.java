@@ -49,6 +49,8 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 
                 } catch (NullPointerException e) {
 
+                } catch(NumberFormatException e) {
+
                 }
                 break;
             case "Matricula":
@@ -66,6 +68,8 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
             		view.reloadVeces(v);
             		
             	} catch (NullPointerException e) {
+
+                } catch (NumberFormatException e) {
 
                 }
             	
