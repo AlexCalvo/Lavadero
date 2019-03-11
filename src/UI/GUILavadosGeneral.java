@@ -75,6 +75,8 @@ public class GUILavadosGeneral extends GUIPanel {
     private void createPanelGeneral() {
         this.setLayout(new BorderLayout(0,10));
         tableLavados = new JTable(new LavadosGeneralTableModel());//LocalDate.now()));
+        calcularTotal();
+        tsumatorioPrecios.setEditable(false);
         tableLavados.setRowHeight(25);
         tableLavados.setFont(new java.awt.Font("Tahoma", 0, 15)); 
         //tFecha.setDate(LocalDate.now());
@@ -257,34 +259,55 @@ public class GUILavadosGeneral extends GUIPanel {
     public void reloadData() {
         this.tableLavados.getSelectionModel().clearSelection();
         ((LavadosGeneralTableModel) tableLavados.getModel()).reloadData();
+        calcularTotal();
     }
 
     public void reloadTrabajador(Trabajador t) {
         this.tableLavados.getSelectionModel().clearSelection();
         ((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByTrabajador(t);
+        calcularTotal();
     }
 
     public void reloadPropietario(Propietario p) {
         this.tableLavados.getSelectionModel().clearSelection();
         ((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByPropietario(p);
+        calcularTotal();
     }
 
 	public void reloadVeces(int v) {
 		this.tableLavados.getSelectionModel().clearSelection();
 		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByVeces(v);
-		
+        calcularTotal();
 	}
 
     public void reloadEntreFechas(LocalDate fechaIni, LocalDate fechaFin) {
         this.tableLavados.getSelectionModel().clearSelection();
         ((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredEntreFechas(fechaIni, fechaFin);
-
+        calcularTotal();
     }
 
     public void reloadEntreFechasVeces(LocalDate fechaIni, LocalDate fechaFin, int x) {
         this.tableLavados.getSelectionModel().clearSelection();
         ((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredEntreFechasVeces(fechaIni, fechaFin, x);
+        calcularTotal();
+    }
 
+    public void reloadMatricula(String m) {
+        this.tableLavados.getSelectionModel().clearSelection();
+        ((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByMatricula(m);
+        calcularTotal();
+    }
+
+    private void calcularTotal() {
+        double acumulador = 0;
+        double num = 0;
+
+        for (int i = 0; i < tableLavados.getRowCount(); i++) {
+            num = ((Modelo)tableLavados.getValueAt(i, 2)).getPrecio();
+            acumulador+=num;
+        }
+
+        tsumatorioPrecios.setText(acumulador + " $");
     }
     
     private class LavadosGeneralTableModel extends AbstractTableModel {
@@ -296,10 +319,7 @@ public class GUILavadosGeneral extends GUIPanel {
             columnNames = Lavados.columnas;
             List<Lavados> lista = Lavados.listaLavados();
 
-            data = new Object[lista.size()][columnNames.length];
-            for (int i = 0; i < lista.size(); i++) {
-               data[i] = lista.get(i).asArray();
-            }
+            alterTable(lista);
         }
 
        
@@ -307,56 +327,40 @@ public class GUILavadosGeneral extends GUIPanel {
 		public void reloadData() {
             List<Lavados> lista = Lavados.listaLavados();
 
-            data = new Object[lista.size()][columnNames.length];
-            for (int i = 0; i < lista.size(); i++) {
-                data[i] = lista.get(i).asArray();
-            }
-            fireTableDataChanged();
+            alterTable(lista);
         }
 
         public void fillFilteredByTrabajador(Trabajador t) {
             List<Lavados> lista = Lavados.listaLavadosPorTrabajador(t);
 
-            data = new Object[lista.size()][columnNames.length];
-            for (int i = 0; i < lista.size(); i++) {
-                data[i] = lista.get(i).asArray();
-            }
-            fireTableDataChanged();
+            alterTable(lista);
         }
 
         public void fillFilteredByPropietario(Propietario p) {
             List<Lavados> lista = Lavados.listaLavadosPorPropietario(p);
 
-            data = new Object[lista.size()][columnNames.length];
-            for (int i = 0; i < lista.size(); i++) {
-                data[i] = lista.get(i).asArray();
-            }
-            fireTableDataChanged();
+            alterTable(lista);
         }
         
         public void fillFilteredByVeces(int v) {
         	List<Lavados> lista = Lavados.listaLavadosPorVeces(v);
 
-            data = new Object[lista.size()][columnNames.length];
-            for (int i = 0; i < lista.size(); i++) {
-                data[i] = lista.get(i).asArray();
-            }
-            fireTableDataChanged();
+            alterTable(lista);
 		}
 
 		public void fillFilteredEntreFechas(LocalDate ini, LocalDate fin) {
             List<Lavados> lista = Lavados.listaLavadosPorFechas(ini, fin);
 
-            data = new Object[lista.size()][columnNames.length];
-            for (int i = 0; i < lista.size(); i++) {
-                data[i] = lista.get(i).asArray();
-            }
-            fireTableDataChanged();
+            alterTable(lista);
         }
 
         public void fillFilteredEntreFechasVeces(LocalDate ini, LocalDate fin, int x) {
             List<Lavados> lista = Lavados.listaLavadosPorVecesFechas(ini, fin, x);
 
+            alterTable(lista);
+        }
+
+        private void alterTable(List<Lavados> lista) {
             data = new Object[lista.size()][columnNames.length];
             for (int i = 0; i < lista.size(); i++) {
                 data[i] = lista.get(i).asArray();
@@ -437,11 +441,6 @@ public class GUILavadosGeneral extends GUIPanel {
         return tmp;
     }
 
-	public void reloadMatricula(String m) {
-		this.tableLavados.getSelectionModel().clearSelection();
-		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByMatricula(m);
-	
-	}
 
 
 }

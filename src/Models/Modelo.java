@@ -116,7 +116,7 @@ public class Modelo {
 
     @Override
     public String toString() {
-        return this.getNombre();
+        return this.getNombre() + " -  " + this.getPrecio() + " $";
     }
 
     public Object[] asArray() {
