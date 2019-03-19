@@ -250,7 +250,7 @@ public class Lavados {
             else
                 newId = (int) tupla[0] + 1;
 
-            miBD.Insert("INSERT INTO Lavados VALUES(" + newId + ", '" + matricula + "', '" + modelo + "','" + hora.toString() + "', '" + fecha.toString() + "','" + telefono + "','" + prop.getId() + "'," + trab.getId() + ");");
+            miBD.Insert("INSERT INTO Lavados VALUES(" + newId + ", '" + matricula + "', '" + modelo.getNombre() + "','" + hora.toString() + "', '" + fecha.toString() + "','" + telefono + "','" + prop.getId() + "'," + trab.getId() + ");");
 
 
 
