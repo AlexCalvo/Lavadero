@@ -293,7 +293,7 @@ public class Lavados {
 
     public void setModelo(Modelo modelo) {
         try (MySqlDB miBD = new MySqlDB()) {
-            miBD.Update("UPDATE Lavados SET modelo = '" + modelo + "' where id = " + this.getId());
+            miBD.Update("UPDATE Lavados SET modelo = '" + modelo.getNombre() + "' where id = " + this.getId());
 
             this.modelo = modelo;
         } catch (DatabaseException e) {
