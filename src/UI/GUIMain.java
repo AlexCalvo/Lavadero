@@ -12,12 +12,12 @@ import java.awt.event.ActionListener;
 public class GUIMain extends JTabbedPane {
     private GUILavadosDiario panelDiario;
     private GUILavadosGeneral panelGeneral;
-    private GUIComplementos panelPropietario;
+    private GUIComplementos panelComplementos;
     private GUITrabajador panelTrabajador;
     private GUIModelo panelModelo;
 
     public GUIMain() {
-    	panelGeneral = new GUILavadosGeneral();
+		panelGeneral = new GUILavadosGeneral();
         ActionListener lavCtrg = new CtrLavadosGeneral(panelGeneral);
         panelGeneral.addController(lavCtrg);
         this.addTab("General", panelGeneral);
@@ -28,10 +28,10 @@ public class GUIMain extends JTabbedPane {
         panelDiario.addController(lavCtr);
         this.addTab("Diario", new JScrollPane(panelDiario));
 
-        panelPropietario = new GUIComplementos();
-        ActionListener propCtr = new CtrComplementos(panelPropietario);
-        panelPropietario.addController(propCtr);
-        this.addTab("Propietarios", panelPropietario);
+        panelComplementos = new GUIComplementos();
+        ActionListener propCtr = new CtrComplementos(panelComplementos);
+        panelComplementos.addController(propCtr);
+        this.addTab("Propietarios", panelComplementos);
         
         panelTrabajador = new GUITrabajador();
         ActionListener trabCtr = new CtrTrabajador(panelTrabajador);

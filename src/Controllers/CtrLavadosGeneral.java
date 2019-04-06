@@ -19,114 +19,114 @@ import java.time.LocalDate;
 
 public class CtrLavadosGeneral implements ActionListener, ListSelectionListener, DateChangeListener {
 
-    private GUILavadosGeneral view;
-    private Lavados selectedLavados;
+	private GUILavadosGeneral view;
+	private Lavados selectedLavados;
 
-    public CtrLavadosGeneral(GUILavadosGeneral view) {
-        this.view = view;
-    }
+	public CtrLavadosGeneral(GUILavadosGeneral view) {
+		this.view = view;
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        System.out.println(actionEvent.getActionCommand());
-        switch (actionEvent.getActionCommand()) {
-            case "EntreFechas":
-                try {
-                    LocalDate fechaIni = view.getFieldFechaIni();
-                    LocalDate fechaFin = view.getFieldFechaFin();
-                    view.reloadEntreFechas(fechaIni, fechaFin);
+	@Override
+	public void actionPerformed(ActionEvent actionEvent) {
+		System.out.println(actionEvent.getActionCommand());
+		switch (actionEvent.getActionCommand()) {
+		case "EntreFechas":
+			try {
+				LocalDate fechaIni = view.getFieldFechaIni();
+				LocalDate fechaFin = view.getFieldFechaFin();
+				view.reloadEntreFechas(fechaIni, fechaFin);
 
-                } catch (NullPointerException e) {
+			} catch (NullPointerException e) {
 
-                }
-                break;
-            case "EntreFechasVeces":
-                try {
-                    LocalDate fechaIni = view.getFieldFechaIni();
-                    LocalDate fechaFin = view.getFieldFechaFin();
-                    int x = Integer.parseInt(view.getNumVeces());
-                    view.reloadEntreFechasVeces(fechaIni, fechaFin, x);
+			}
+			break;
+		case "EntreFechasVeces":
+			try {
+				LocalDate fechaIni = view.getFieldFechaIni();
+				LocalDate fechaFin = view.getFieldFechaFin();
+				int x = Integer.parseInt(view.getNumVeces());
+				view.reloadEntreFechasVeces(fechaIni, fechaFin, x);
 
-                } catch (NullPointerException e) {
+			} catch (NullPointerException e) {
 
-                } catch(NumberFormatException e) {
+			} catch (NumberFormatException e) {
 
-                }
-                break;
-            case "Matricula":
-            	try {
-            		String m = view.getFieldMatricula();
-            		view.reloadMatricula(m);
-            		
-            	}catch(NullPointerException e) {
+			}
+			break;
+		case "Matricula":
+			try {
+				String m = view.getFieldMatricula();
+				view.reloadMatricula(m);
 
-                }
-                break;
-            case "Veces":
-            	try {
-            		int v = Integer.parseInt(view.getNumVeces());
-            		view.reloadVeces(v);
-            		
-            	} catch (NullPointerException e) {
+			} catch (NullPointerException e) {
 
-                } catch (NumberFormatException e) {
+			}
+			break;
+		case "Veces":
+			try {
+				int v = Integer.parseInt(view.getNumVeces());
+				view.reloadVeces(v);
 
-                }
-            	
-                break;
-            case "Propietario":
-                try {
-                    Complementos p = view.getFieldPropietario();
+			} catch (NullPointerException e) {
 
-                    view.reloadPropietario(p);
-                } catch (NullPointerException e) {
+			} catch (NumberFormatException e) {
 
-                }
+			}
 
-                break;
-            case "Trabajador":
-                try {
-                    Trabajador t = view.getFieldTrabajador();
+			break;
+		case "Propietario":
+			try {
+				Complementos p = view.getFieldComplemento();
 
-                    view.reloadTrabajador(t);
-                } catch (NullPointerException e) {
+				view.reloadComplementos(p);
+			} catch (NullPointerException e) {
 
-                }
+			}
 
-                break;
-            case "Refrescar":
-                view.reloadData();
-                break;
-        }
-    }
+			break;
+		case "Trabajador":
+			try {
+				Trabajador t = view.getFieldTrabajador();
 
-    @Override
-    public void valueChanged(ListSelectionEvent listSelectionEvent) {
-        if (!listSelectionEvent.getValueIsAdjusting()) {
+				view.reloadTrabajador(t);
+			} catch (NullPointerException e) {
 
-            int firstindex = listSelectionEvent.getFirstIndex();
-            int lastIndex = listSelectionEvent.getLastIndex();
-            ListSelectionModel selectionModel = view.getTable().getSelectionModel();
-            TableModel model = view.getTable().getModel();
-            if (selectionModel.isSelectionEmpty())
-                return;
-            int id = (int) ((selectionModel.isSelectedIndex(lastIndex)) ? model.getValueAt(lastIndex, 0) : model.getValueAt(firstindex, 0));
+			}
 
+			break;
+		case "Refrescar":
+			view.reloadData();
+			break;
+		}
+	}
 
-            selectedLavados = new Lavados(id);
-            view.setFieldModelo(selectedLavados.getModelo());
-            view.setFieldMatricula(selectedLavados.getMatricula());
-            view.setFieldHora(selectedLavados.getHora());
-            view.setFieldTelefono(selectedLavados.getTelefono());
-            view.setFieldPropietario(selectedLavados.getProp());
-            view.setFieldTrabajador(selectedLavados.getTrab());
+	@Override
+	public void valueChanged(ListSelectionEvent listSelectionEvent) {
+		if (!listSelectionEvent.getValueIsAdjusting()) {
 
-        }
-    }
+			int firstindex = listSelectionEvent.getFirstIndex();
+			int lastIndex = listSelectionEvent.getLastIndex();
+			ListSelectionModel selectionModel = view.getTable().getSelectionModel();
+			TableModel model = view.getTable().getModel();
+			if (selectionModel.isSelectionEmpty())
+				return;
+			int id = (int) ((selectionModel.isSelectedIndex(lastIndex)) ? model.getValueAt(lastIndex, 0)
+					: model.getValueAt(firstindex, 0));
 
-    @Override
-    public void dateChanged(DateChangeEvent dateChangeEvent) {
-        System.out.println("Fecha cambiada a " + dateChangeEvent.getNewDate());
-        view.reloadData();
-    }
+			selectedLavados = new Lavados(id);
+			view.setFieldModelo(selectedLavados.getModelo());
+			view.setFieldMatricula(selectedLavados.getMatricula());
+			view.setFieldHora(selectedLavados.getHora());
+			view.setFieldTelefono(selectedLavados.getTelefono());
+			view.setFieldComplemento(selectedLavados.getProp());
+			view.setFieldTrabajador(selectedLavados.getTrab());
+
+		}
+	}
+
+	@Override
+	public void dateChanged(DateChangeEvent dateChangeEvent) {
+		System.out.println("Fecha cambiada a " + dateChangeEvent.getNewDate());
+		view.reloadData();
+	}
 }

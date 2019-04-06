@@ -16,7 +16,7 @@ public class Trabajador {
 
     public static List<Trabajador> listaTrabajador() {
         List<Trabajador> lista = new ArrayList<Trabajador>();
-        try (MySqlDB db = new MySqlDB()) {
+		try (MySqlDB db = new MySqlDB()) {
             for (Object[] tupla : db.Select("Select * from Trabajador")) {
                 int id = (int) tupla[0];
                 String nombre = (String) tupla[1];

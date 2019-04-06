@@ -62,7 +62,7 @@ public class GUILavadosGeneral extends GUIPanel {
 	private JButton bQueryMatricula = new JButton("Por Matricula");
 	private JButton bQueryEntreFechasVeces = new JButton("Entre Fechas por veces");
 	private JButton bQueryPorVeces = new JButton("Por Veces");
-	private JButton bQueryPropietario = new JButton("Por Propietario");
+	private JButton bQueryComplemento = new JButton("Por Complemento");
 	private JButton bQueryTrabajador = new JButton("Por Trabajador");
 	private JButton bRefrescar = new JButton("Refrescar");
 
@@ -171,15 +171,15 @@ public class GUILavadosGeneral extends GUIPanel {
 		this.tTelefono.setText(string);
 	}
 
-	public Complementos getFieldPropietario() {
+	public Complementos getFieldComplemento() {
 		return (Complementos) this.autoComplemento.findItem(autoComplemento.getItemSelected().toString());
 	}
 
-	public void setFieldPropietario(Complementos propietario) {
-		if (propietario == null)
+	public void setFieldComplemento(Complementos complemento) {
+		if (complemento == null)
 			this.tComplemento.setText("");
 		else
-			this.tComplemento.setText(propietario.getNombre());
+			this.tComplemento.setText(complemento.getNombre());
 	}
 
 	public Trabajador getFieldTrabajador() {
@@ -207,7 +207,7 @@ public class GUILavadosGeneral extends GUIPanel {
 		panelQuery.add(bQueryMatricula);
 		panelQuery.add(bQueryEntreFechasVeces);
 		panelQuery.add(bQueryPorVeces);
-		panelQuery.add(bQueryPropietario);
+		panelQuery.add(bQueryComplemento);
 		panelQuery.add(bQueryTrabajador);
 		panelQuery.add(bRefrescar);
 		panelQuery.add(create2ElementPanel(lsumatorioPrecio, tsumatorioPrecios));
@@ -235,8 +235,8 @@ public class GUILavadosGeneral extends GUIPanel {
 		bQueryMatricula.addActionListener(ctr);
 		bQueryPorVeces.setActionCommand("Veces");
 		bQueryPorVeces.addActionListener(ctr);
-		bQueryPropietario.setActionCommand("Propietario");
-		bQueryPropietario.addActionListener(ctr);
+		bQueryComplemento.setActionCommand("Complemento");
+		bQueryComplemento.addActionListener(ctr);
 		bQueryTrabajador.setActionCommand("Trabajador");
 		bQueryTrabajador.addActionListener(ctr);
 		bRefrescar.setActionCommand("Refrescar");
@@ -258,9 +258,9 @@ public class GUILavadosGeneral extends GUIPanel {
 		calcularTotal();
 	}
 
-	public void reloadPropietario(Complementos p) {
+	public void reloadComplementos(Complementos p) {
 		this.tableLavados.getSelectionModel().clearSelection();
-		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByPropietario(p);
+		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByComplemento(p);
 		calcularTotal();
 	}
 
@@ -324,8 +324,8 @@ public class GUILavadosGeneral extends GUIPanel {
 			alterTable(lista);
 		}
 
-		public void fillFilteredByPropietario(Complementos p) {
-			List<Lavados> lista = Lavados.listaLavadosPorPropietario(p);
+		public void fillFilteredByComplemento(Complementos p) {
+			List<Lavados> lista = Lavados.listaLavadosPorComplemento(p);
 
 			alterTable(lista);
 		}

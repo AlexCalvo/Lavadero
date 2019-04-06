@@ -24,11 +24,10 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
         switch (actionEvent.getActionCommand()) {
             case "Insertar":
                 if (!view.getFieldNombre().equals("")) {
-                    selectedModelo = new Modelo(view.getFieldNombre(),view.getFieldPrecio(),view.getFieldMarca());
+                    selectedModelo = new Modelo(view.getFieldNombre(),view.getFieldPrecio());
                     view.reloadData();
                     view.setFieldNombre("");
                     view.setFieldPrecio("");
-                    view.setFieldMarca("");
                     selectedModelo = null;
                 }
                 break;
@@ -37,11 +36,9 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
                     if (!view.getFieldNombre().equals("")) {
                         selectedModelo.setNombre(view.getFieldNombre());
                         selectedModelo.setPrecio(view.getFieldPrecio());
-                        selectedModelo.setMarca(view.getFieldMarca());
                         view.reloadData();
                         view.setFieldNombre("");
                         view.setFieldPrecio("");
-                        view.setFieldMarca("");
                         selectedModelo = null;
                     }
                 }
@@ -52,7 +49,6 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
                     view.reloadData();
                     view.setFieldNombre("");
                     view.setFieldPrecio("");
-                    view.setFieldMarca("");
                     selectedModelo = null;
                 }
                 break;
@@ -76,7 +72,6 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
 
             selectedModelo = new Modelo(id);
             view.setFieldNombre(selectedModelo.getNombre());
-            view.setFieldMarca(selectedModelo.getMarca());
             view.setFieldPrecio(selectedModelo.getPrecio() + "");
 
         }
