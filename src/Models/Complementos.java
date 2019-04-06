@@ -8,10 +8,9 @@ import java.util.List;
 
 public class Complementos {
 
-    public static final String[] columnas = {"DNI", "Nombre", "Precio"};
+    public static final String[] columnas = {"Nombre", "Precio"};
 
 
-    private String id;
     private String nombre;
     private double precio;
 
@@ -19,10 +18,9 @@ public class Complementos {
         List<Complementos> lista = new ArrayList<Complementos>();
         try (MySqlDB db = new MySqlDB()) {
             for (Object[] tupla : db.Select("Select * from Complementos")) {
-                String id = (String) tupla[0];
-                String nombre = (String) tupla[1];
-                double precio = (double) tupla[2];
-                lista.add(new Complementos(id, nombre, precio, true));
+                String nombre = (String) tupla[0];
+                double precio = (double) tupla[1];
+                lista.add(new Complementos(nombre, precio, true));
             }
         } catch (DatabaseException e) {
             e.printStackTrace();
@@ -30,29 +28,26 @@ public class Complementos {
         return lista;
     }
 
-    private Complementos(String id, String nombre, double precio, boolean onlyLocal) {
-        this.id = id;
+    private Complementos(String nombre, double precio, boolean onlyLocal) {
         this.nombre = nombre;
         this.precio = precio;
     }
 
-    public Complementos(String id) {
+    public Complementos(String nombre) {
         try (MySqlDB db = new MySqlDB()) {
-            Object[] tupla = db.Select("select * from Complementos where id = '" + id + "'").get(0);
+            Object[] tupla = db.Select("select * from Complementos where nombre = '" + nombre + "'").get(0);
 
-            this.id = (String) tupla[0];
-            this.nombre = (String) tupla[1];
-            this.precio = (double) tupla[2];
+            this.nombre = (String) tupla[0];
+            this.precio = (double) tupla[1];
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
     }
 
-    public Complementos(String id, String nombre, double precio) {
+    public Complementos( String nombre, double precio) {
         try (MySqlDB db = new MySqlDB()) {
-            db.Insert("insert into Complementos values('" + id + "', '" + nombre + "', '" + precio + "')");
+            db.Insert("insert into Complementos values('" + nombre + "', '" + precio + "')");
 
-            this.id = id;
             this.nombre = nombre;
             this.precio = precio;
         } catch (DatabaseException e) {
@@ -62,8 +57,7 @@ public class Complementos {
     
     public void delete() {
         try (MySqlDB miBD = new MySqlDB()) {
-            miBD.Delete("DELETE FROM Complementos WHERE id = '"+ this.id + "';");
-            id = null;
+            miBD.Delete("DELETE FROM Complementos WHERE nombre = '"+ this.nombre+ "';");
             nombre = null;
             precio = 0;
         } catch (DatabaseException e) {
@@ -71,19 +65,7 @@ public class Complementos {
         }
     }
 
-    public String getId() {
-        return id;
-    }	
-    
-    public void setId(String id) {
-		  try (MySqlDB db = new MySqlDB()) {
-	            db.Update("update Complementos set id ='"+ id + "' where id = '" + this.id+"';");
-
-	            this.id =id;
-	        } catch (DatabaseException e) {
-	            e.printStackTrace();
-	        }
-		}
+   
     
 
     public String getNombre() {
@@ -92,7 +74,7 @@ public class Complementos {
 
     public void setNombre(String nombre) {
         try (MySqlDB db = new MySqlDB()) {
-            db.Update("update Complementos set nombre = '" + nombre + "' where id = '" + this.getId()+"';");
+            db.Update("update Complementos set nombre = '" + nombre + "' where nombre = '" + this.getNombre()+"';");
 
             this.nombre = nombre;
         } catch (DatabaseException e) {
@@ -107,7 +89,7 @@ public class Complementos {
 
     public void setPrecio(double precio) {
         try (MySqlDB db = new MySqlDB()) {
-            db.Update("update Complementos set precio = '" + precio + "' where id = '" + this.getId()+"';");
+            db.Update("update Complementos set precio = '" + precio + "' where id = '" + this.getNombre()+"';");
 
             this.precio = precio;
         } catch (DatabaseException e) {
@@ -122,9 +104,8 @@ public class Complementos {
 
     public Object[] asArray() {
         Object[] tmp = new Object[10];
-        tmp[0] = id;
-        tmp[1] = nombre;
-        tmp[2] = precio;
+        tmp[0] = nombre;
+        tmp[1] = precio;
 
         return tmp;
     }

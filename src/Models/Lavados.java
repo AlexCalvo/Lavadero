@@ -162,7 +162,7 @@ public class Lavados {
 
 		try (MySqlDB miBD = new MySqlDB()) {
 
-			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Complementos_id = \"" + p.getId() + "\";")) {
+			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Complementos_nombre = \"" + p.getNombre() + "\";")) {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
@@ -251,7 +251,7 @@ public class Lavados {
 				newId = (int) tupla[0] + 1;
 
 			miBD.Insert("INSERT INTO Lavados VALUES(" + newId + ", '" + matricula + "', '" + modelo.getNombre() + "','"
-					+ hora.toString() + "', '" + fecha.toString() + "','" + telefono + "','" + prop.getId() + "',"
+					+ hora.toString() + "', '" + fecha.toString() + "','" + telefono + "','" + prop.getNombre() + "',"
 					+ trab.getId() + ");");
 
 			this.id = newId;
@@ -348,7 +348,7 @@ public class Lavados {
 
 	public void setProp(Complementos prop) {
 		try (MySqlDB miBD = new MySqlDB()) {
-			miBD.Update("UPDATE Lavados SET Propietarios_id = '" + prop.getId() + "' where id = " + this.getId());
+			miBD.Update("UPDATE Lavados SET Propietarios_id = '" + prop.getNombre() + "' where id = " + this.getId());
 
 			this.comp = prop;
 		} catch (DatabaseException e) {

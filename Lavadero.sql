@@ -14,7 +14,7 @@ USE `Lavadero` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Lavadero`.`Complementos` (
   `nombre` VARCHAR(45) NOT NULL,
-  `precio` INT(11) NOT NULL,
+  `precio` DOUBLE NOT NULL,
   PRIMARY KEY (`nombre`));
 
 

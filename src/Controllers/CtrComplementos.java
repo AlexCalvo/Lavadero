@@ -23,7 +23,7 @@ public class CtrComplementos implements ActionListener, ListSelectionListener {
         switch (actionEvent.getActionCommand()) {
             case "Insertar":
                 if (!view.getFieldId().equals("")) {
-                    selectedComplemento = new Complementos(view.getFieldId(),view.getFieldNombre(),view.getFieldPrecio());
+                    selectedComplemento = new Complementos(view.getFieldNombre(),view.getFieldPrecio());
                     view.reloadData();
                     view.setFieldId("");
                     view.setFieldNombre("");
@@ -34,7 +34,6 @@ public class CtrComplementos implements ActionListener, ListSelectionListener {
             case "Modificar":
                 if (selectedComplemento != null) {
                     if (!view.getFieldNombre().equals("")) {
-                    	selectedComplemento.setId(view.getFieldId());
                     	selectedComplemento.setNombre(view.getFieldNombre());
                     	selectedComplemento.setPrecio(view.getFieldPrecio());
                         view.reloadData();
@@ -74,7 +73,6 @@ public class CtrComplementos implements ActionListener, ListSelectionListener {
 
 
             selectedComplemento = new Complementos(id);
-            view.setFieldId(selectedComplemento.getId());
             view.setFieldNombre(selectedComplemento.getNombre());
             view.setFieldPrecio(selectedComplemento.getPrecio()+"");
 

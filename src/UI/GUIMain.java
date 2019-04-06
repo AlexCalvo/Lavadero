@@ -31,7 +31,7 @@ public class GUIMain extends JTabbedPane {
         panelComplementos = new GUIComplementos();
         ActionListener propCtr = new CtrComplementos(panelComplementos);
         panelComplementos.addController(propCtr);
-        this.addTab("Propietarios", panelComplementos);
+        this.addTab("Complementos", panelComplementos);
         
         panelTrabajador = new GUITrabajador();
         ActionListener trabCtr = new CtrTrabajador(panelTrabajador);
