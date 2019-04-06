@@ -21,7 +21,7 @@ public class Lavados {
     private LocalTime hora;
     private LocalDate fecha;
     private String telefono;
-    private Propietario prop;
+    private Complementos prop;
     private Trabajador trab;
 
     public static List<Lavados> listaLavados() {
@@ -37,7 +37,7 @@ public class Lavados {
                 LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                 LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                 String telefono = (String) tupla[5];
-                Propietario prop = new Propietario((String) tupla[6]);
+                Complementos prop = new Complementos((String) tupla[6]);
                 Trabajador trab = new Trabajador((int) tupla[7]);
                 lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
             }
@@ -62,7 +62,7 @@ public class Lavados {
                 LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                 LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                 String telefono = (String) tupla[5];
-                Propietario prop = new Propietario((String) tupla[6]);
+                Complementos prop = new Complementos((String) tupla[6]);
                 Trabajador trab = new Trabajador((int) tupla[7]);
                 lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
             }
@@ -87,7 +87,7 @@ public class Lavados {
                 LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                 LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                 String telefono = (String) tupla[5];
-                Propietario prop = new Propietario((String) tupla[6]);
+                Complementos prop = new Complementos((String) tupla[6]);
                 Trabajador trab = new Trabajador((int) tupla[7]);
                 lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
             }
@@ -114,7 +114,7 @@ public class Lavados {
                     LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                     LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                     String telefono = (String) tupla[5];
-                    Propietario prop = new Propietario((String) tupla[6]);
+                    Complementos prop = new Complementos((String) tupla[6]);
                     Trabajador trab = new Trabajador((int) tupla[7]);
                     lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
                 }
@@ -141,7 +141,7 @@ public class Lavados {
                     LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                     LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                     String telefono = (String) tupla[5];
-                    Propietario prop = new Propietario((String) tupla[6]);
+                    Complementos prop = new Complementos((String) tupla[6]);
                     Trabajador trab = new Trabajador((int) tupla[7]);
                     lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
                 }
@@ -154,7 +154,7 @@ public class Lavados {
     }
     
     //Por propietario
-    public static List<Lavados> listaLavadosPorPropietario(Propietario p) {
+    public static List<Lavados> listaLavadosPorPropietario(Complementos p) {
         List<Lavados> lista = new ArrayList<Lavados>();
 
         try (MySqlDB miBD = new MySqlDB()) {
@@ -167,7 +167,7 @@ public class Lavados {
                 LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                 LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                 String telefono = (String) tupla[5];
-                Propietario prop = new Propietario((String) tupla[6]);
+                Complementos prop = new Complementos((String) tupla[6]);
                 Trabajador trab = new Trabajador((int) tupla[7]);
                 lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
             }
@@ -192,7 +192,7 @@ public class Lavados {
                 LocalTime hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
                 LocalDate fecha = ((Date) tupla[4]).toLocalDate();
                 String telefono = (String) tupla[5];
-                Propietario prop = new Propietario((String) tupla[6]);
+                Complementos prop = new Complementos((String) tupla[6]);
                 Trabajador trab = new Trabajador((int) tupla[7]);
                 lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
             }
@@ -215,7 +215,7 @@ public class Lavados {
             this.hora = ((Time)tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
             this.fecha = ((Date) tupla[4]).toLocalDate();
             this.telefono = (String) tupla[5];
-            this.prop = new Propietario((String) tupla[6]);
+            this.prop = new Complementos((String) tupla[6]);
             this.trab = new Trabajador((int) tupla[7]);
 
         } catch (DatabaseException e) {
@@ -226,7 +226,7 @@ public class Lavados {
     }
 
     private Lavados(int id, String matricula, Modelo modelo, LocalTime hora, LocalDate fecha,
-                    String telefono, Propietario prop, Trabajador trab) {
+                    String telefono, Complementos prop, Trabajador trab) {
         this.id = id;
         this.matricula = matricula;
         this.modelo = modelo;
@@ -238,7 +238,7 @@ public class Lavados {
     }
 
     public Lavados(String matricula, Modelo modelo, LocalTime hora, LocalDate fecha,
-                   String telefono, Propietario prop, Trabajador trab) {
+                   String telefono, Complementos prop, Trabajador trab) {
         try (MySqlDB miBD = new MySqlDB()) {
 
             //Get new ID
@@ -343,11 +343,11 @@ public class Lavados {
         }
     }
 
-    public Propietario getProp() {
+    public Complementos getProp() {
         return prop;
     }
 
-    public void setProp(Propietario prop) {
+    public void setProp(Complementos prop) {
         try (MySqlDB miBD = new MySqlDB()) {
             miBD.Update("UPDATE Lavados SET Propietarios_id = '" + prop.getId() + "' where id = " + this.getId());
 

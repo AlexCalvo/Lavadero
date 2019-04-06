@@ -3,7 +3,7 @@ package UI;
 import Controllers.CtrLavados;
 import Controllers.CtrLavadosGeneral;
 import Controllers.CtrModelo;
-import Controllers.CtrPropietario;
+import Controllers.CtrComplementos;
 import Controllers.CtrTrabajador;
 
 import javax.swing.*;
@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 public class GUIMain extends JTabbedPane {
     private GUILavadosDiario panelDiario;
     private GUILavadosGeneral panelGeneral;
-    private GUIPropietario panelPropietario;
+    private GUIComplementos panelPropietario;
     private GUITrabajador panelTrabajador;
     private GUIModelo panelModelo;
 
@@ -28,8 +28,8 @@ public class GUIMain extends JTabbedPane {
         panelDiario.addController(lavCtr);
         this.addTab("Diario", new JScrollPane(panelDiario));
 
-        panelPropietario = new GUIPropietario();
-        ActionListener propCtr = new CtrPropietario(panelPropietario);
+        panelPropietario = new GUIComplementos();
+        ActionListener propCtr = new CtrComplementos(panelPropietario);
         panelPropietario.addController(propCtr);
         this.addTab("Propietarios", panelPropietario);
         

@@ -1,6 +1,6 @@
 package UI;
 
-import Models.Propietario;
+import Models.Complementos;
 import Models.Trabajador;
 
 import javax.swing.*;
@@ -10,34 +10,34 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class GUIPropietario extends GUIPanel {
+public class GUIComplementos extends GUIPanel {
     private JTabbedPane tabPanel;
     private Component panelGeneral;
-    private JTable tablePropietario;
+    private JTable tableComplemento;
 
     private JLabel lNombre = new JLabel("Nombre:");
     private JLabel lID = new JLabel("ID:");
-    private JLabel lTelefono = new JLabel("Telefono:");
+    private JLabel lPrecio = new JLabel("Precio:");
 
     private JTextField tID = new JTextField();
     private JTextField tNombre = new JTextField();
-    private JTextField tTelefono = new JTextField();
+    private JTextField tPrecio = new JTextField();
 
     private JButton bIns = new JButton("Insertar");
     private JButton bMod = new JButton("Modificar");
     private JButton bEli = new JButton("Eliminar");
 
-    public GUIPropietario() {
-        createPanelPropietario();
+    public GUIComplementos() {
+        createPanelComplementos();
     }
 
-    private void createPanelPropietario() {
+    private void createPanelComplementos() {
         this.setLayout(new BorderLayout());
 
-        tablePropietario = new JTable(new PropietarioTableModel());
-        tablePropietario.setRowHeight(25);
-        tablePropietario.setFont(new java.awt.Font("Tahoma", 0, 15)); 
-        this.add(new JScrollPane(tablePropietario), BorderLayout.CENTER);
+        tableComplemento = new JTable(new ComplementoTableModel());
+        tableComplemento.setRowHeight(25);
+        tableComplemento.setFont(new java.awt.Font("Tahoma", 0, 15)); 
+        this.add(new JScrollPane(tableComplemento), BorderLayout.CENTER);
 
         this.add(createSouthPanel(), BorderLayout.SOUTH);
     }
@@ -48,7 +48,7 @@ public class GUIPropietario extends GUIPanel {
 
         panel.add(create2ElementPanel(lID, tID));
         panel.add(create2ElementPanel(lNombre, tNombre));
-        panel.add(create2ElementPanel(lTelefono, tTelefono));
+        panel.add(create2ElementPanel(lPrecio, tPrecio));
         panel.add(createButtonPanel());
 
 
@@ -71,14 +71,15 @@ public class GUIPropietario extends GUIPanel {
     public void setFieldId(String string) {
         this.tID.setText(string);
     }
-    
-    public String getFieldTelefono() {
-        return this.tTelefono.getText();
-    }
+   
 
-    public void setFieldTelefono(String string) {
-        this.tTelefono.setText(string);
+    public double getFieldPrecio() {
+        return Double.parseDouble(this.tPrecio.getText());
     }
+    
+    public void setFieldPrecio(String d) {
+        this.tPrecio.setText(d);
+     }
     
 
     private Component createButtonPanel() {
@@ -91,12 +92,12 @@ public class GUIPropietario extends GUIPanel {
     }
 
     public void reloadData() {
-        this.tablePropietario.getSelectionModel().clearSelection();
-        ((PropietarioTableModel) tablePropietario.getModel()).reloadData();
+        this.tableComplemento.getSelectionModel().clearSelection();
+        ((ComplementoTableModel) tableComplemento.getModel()).reloadData();
     }
 
     public JTable getTable() {
-        return tablePropietario;
+        return tableComplemento;
     }
 
     @Override
@@ -107,18 +108,18 @@ public class GUIPropietario extends GUIPanel {
         bMod.setActionCommand("Modificar");
         bEli.addActionListener(ctr);
         bEli.setActionCommand("Eliminar");
-        tablePropietario.getSelectionModel().addListSelectionListener((ListSelectionListener) ctr);
+        tableComplemento.getSelectionModel().addListSelectionListener((ListSelectionListener) ctr);
     }
     
     
-    private class PropietarioTableModel extends AbstractTableModel {
+    private class ComplementoTableModel extends AbstractTableModel {
 
         private String[] columnNames;
         private Object[][] data;
 
-        public PropietarioTableModel() {
-            columnNames = Propietario.columnas;
-            List<Propietario> lista = Propietario.listaPropietarios();
+        public ComplementoTableModel() {
+            columnNames = Complementos.columnas;
+            List<Complementos> lista = Complementos.listaComplementos();
             data = new Object[lista.size()][columnNames.length];
             for (int i = 0; i < lista.size(); i++) {
                 data[i] = lista.get(i).asArray();
@@ -126,7 +127,7 @@ public class GUIPropietario extends GUIPanel {
         }
         
         public void reloadData() {
-            List<Propietario> lista = Propietario.listaPropietarios();
+            List<Complementos> lista = Complementos.listaComplementos();
             data = new Object[lista.size()][columnNames.length];
             for (int i = 0; i < lista.size(); i++) {
                 data[i] = lista.get(i).asArray();

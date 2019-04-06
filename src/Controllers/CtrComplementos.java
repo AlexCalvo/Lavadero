@@ -1,7 +1,7 @@
 package Controllers;
 
-import Models.Propietario;
-import UI.GUIPropietario;
+import Models.Complementos;
+import UI.GUIComplementos;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -10,11 +10,11 @@ import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CtrPropietario implements ActionListener, ListSelectionListener {
-    private GUIPropietario view;
-    private Propietario selectedPropietario;
+public class CtrComplementos implements ActionListener, ListSelectionListener {
+    private GUIComplementos view;
+    private Complementos selectedComplemento;
 
-    public CtrPropietario(GUIPropietario view) {
+    public CtrComplementos(GUIComplementos view) {
         this.view = view;
     }
 
@@ -23,36 +23,36 @@ public class CtrPropietario implements ActionListener, ListSelectionListener {
         switch (actionEvent.getActionCommand()) {
             case "Insertar":
                 if (!view.getFieldId().equals("")) {
-                    selectedPropietario = new Propietario(view.getFieldId(),view.getFieldNombre(),view.getFieldTelefono());
+                    selectedComplemento = new Complementos(view.getFieldId(),view.getFieldNombre(),view.getFieldPrecio());
                     view.reloadData();
                     view.setFieldId("");
                     view.setFieldNombre("");
-                    view.setFieldTelefono("");
-                    selectedPropietario = null;
+                    view.setFieldPrecio("");
+                    selectedComplemento = null;
                 }
                 break;
             case "Modificar":
-                if (selectedPropietario != null) {
+                if (selectedComplemento != null) {
                     if (!view.getFieldNombre().equals("")) {
-                    	selectedPropietario.setId(view.getFieldId());
-                    	selectedPropietario.setNombre(view.getFieldNombre());
-                    	selectedPropietario.setTelefono(view.getFieldTelefono());
+                    	selectedComplemento.setId(view.getFieldId());
+                    	selectedComplemento.setNombre(view.getFieldNombre());
+                    	selectedComplemento.setPrecio(view.getFieldPrecio());
                         view.reloadData();
                         view.setFieldId("");
                         view.setFieldNombre("");
-                        view.setFieldTelefono("");
-                        selectedPropietario = null;
+                        view.setFieldPrecio("");
+                        selectedComplemento = null;
                     }
                 }
                 break;
             case "Eliminar":
-                if (selectedPropietario != null) {
-                    selectedPropietario.delete();
+                if (selectedComplemento != null) {
+                    selectedComplemento.delete();
                     view.reloadData();
                     view.setFieldId("");
                     view.setFieldNombre("");
-                    view.setFieldTelefono("");
-                    selectedPropietario = null;
+                    view.setFieldPrecio("");
+                    selectedComplemento = null;
                 }
                 break;
             default:
@@ -73,10 +73,10 @@ public class CtrPropietario implements ActionListener, ListSelectionListener {
             String id = (String) ((selectionModel.isSelectedIndex(lastIndex)) ? model.getValueAt(lastIndex, 0) : model.getValueAt(firstindex, 0));
 
 
-            selectedPropietario = new Propietario(id);
-            view.setFieldId(selectedPropietario.getId());
-            view.setFieldNombre(selectedPropietario.getNombre());
-            view.setFieldTelefono(selectedPropietario.getTelefono());
+            selectedComplemento = new Complementos(id);
+            view.setFieldId(selectedComplemento.getId());
+            view.setFieldNombre(selectedComplemento.getNombre());
+            view.setFieldPrecio(selectedComplemento.getPrecio()+"");
 
         }
     }
