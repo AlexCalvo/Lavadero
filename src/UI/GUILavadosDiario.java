@@ -31,6 +31,9 @@ public class GUILavadosDiario extends GUIPanel {
 	private JLabel lTelefono = new JLabel("Telefono:");
 	private JLabel lComplemento = new JLabel("Complemento:");
 	private JLabel lTrabajador = new JLabel("Trabajador:");
+	private JLabel lObservaciones = new JLabel("Observaciones:");
+	private JLabel lPropietario = new JLabel("Propietario:");
+	
 
 	private JTextField tMatricula = new JTextField();
 	private JTextField tModelo = new JTextField();
@@ -42,6 +45,9 @@ public class GUILavadosDiario extends GUIPanel {
 	private TextAutoCompleter autoComplemento = createAutoCompleterComplemento(tComplemento);
 	private JTextField tTrabajador = new JTextField();
 	private TextAutoCompleter autoTrabajador = createAutoCompleterTrabajador(tTrabajador);
+	private JTextField tObservaciones = new JTextField();
+	private JTextField tPropietario = new JTextField();
+	
 
 	private JButton bIns = new JButton("Insertar");
 	private JButton bMod = new JButton("Modificar");
@@ -74,6 +80,10 @@ public class GUILavadosDiario extends GUIPanel {
 		panel.add(create2ElementPanel(lTelefono, tTelefono));
 		panel.add(create2ElementPanel(lComplemento, tComplemento));
 		panel.add(create2ElementPanel(lTrabajador, tTrabajador));
+		panel.add(create2ElementPanel(lObservaciones, tObservaciones));
+		panel.add(create2ElementPanel(lPropietario, tPropietario));
+
+
 		panel.add(new JPanel());
 		panel.add(createButtonPanel(), BorderLayout.SOUTH);
 
@@ -142,6 +152,22 @@ public class GUILavadosDiario extends GUIPanel {
 			this.tTrabajador.setText("");
 		else
 			this.tTrabajador.setText(trabajador.getNombre());
+	}
+	
+	public String getFieldObservaciones() {
+		return this.tObservaciones.getText();
+	}
+
+	public void setFieldObservaciones(String string) {
+		this.tObservaciones.setText(string);
+	}
+	
+	public String getFieldPropietario() {
+		return this.tPropietario.getText();
+	}
+
+	public void setFieldPropietario(String string) {
+		this.tPropietario.setText(string);
 	}
 
 	private Component createButtonPanel() {

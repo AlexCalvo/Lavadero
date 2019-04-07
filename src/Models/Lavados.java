@@ -14,7 +14,7 @@ import java.util.List;
 public class Lavados {
 
 	public static final String[] columnas = { "ID", "Matricula", "modelo", "hora", "fecha", "telefono", "Complemento",
-			"Trabajador" };
+			"Trabajador","Observaciones","Propietario" };
 
 	private int id;// clave principal
 	private String matricula;
@@ -24,6 +24,8 @@ public class Lavados {
 	private String telefono;
 	private Complementos comp;
 	private Trabajador trab;
+	private String observaciones;
+	private String propietario;
 
 	public static List<Lavados> listaLavados() {
 		List<Lavados> lista = new ArrayList<Lavados>();
@@ -40,7 +42,9 @@ public class Lavados {
 				String telefono = (String) tupla[5];
 				Complementos prop = new Complementos((String) tupla[6]);
 				Trabajador trab = new Trabajador((int) tupla[7]);
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+				String obs =  (String) tupla[8];
+				String p =  (String) tupla[9];
+				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -66,7 +70,9 @@ public class Lavados {
 				String telefono = (String) tupla[5];
 				Complementos prop = new Complementos((String) tupla[6]);
 				Trabajador trab = new Trabajador((int) tupla[7]);
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+				String obs =  (String) tupla[8];
+				String p =  (String) tupla[9];
+				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -91,7 +97,9 @@ public class Lavados {
 				String telefono = (String) tupla[5];
 				Complementos prop = new Complementos((String) tupla[6]);
 				Trabajador trab = new Trabajador((int) tupla[7]);
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+				String obs =  (String) tupla[8];
+				String p =  (String) tupla[9];
+				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -118,7 +126,9 @@ public class Lavados {
 					String telefono = (String) tupla[5];
 					Complementos prop = new Complementos((String) tupla[6]);
 					Trabajador trab = new Trabajador((int) tupla[7]);
-					lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+					String obs =  (String) tupla[8];
+					String p =  (String) tupla[9];
+					lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
 				}
 			}
 		} catch (DatabaseException e) {
@@ -146,7 +156,9 @@ public class Lavados {
 					String telefono = (String) tupla[5];
 					Complementos prop = new Complementos((String) tupla[6]);
 					Trabajador trab = new Trabajador((int) tupla[7]);
-					lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+					String obs =  (String) tupla[8];
+					String p =  (String) tupla[9];
+					lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
 				}
 			}
 		} catch (DatabaseException e) {
@@ -157,12 +169,12 @@ public class Lavados {
 	}
 
 	// Por propietario
-	public static List<Lavados> listaLavadosPorComplemento(Complementos p) {
+	public static List<Lavados> listaLavadosPorComplemento(Complementos c) {
 		List<Lavados> lista = new ArrayList<Lavados>();
 
 		try (MySqlDB miBD = new MySqlDB()) {
 
-			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Complementos_nombre = \"" + p.getNombre() + "\";")) {
+			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Complementos_nombre = \"" + c.getNombre() + "\";")) {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
@@ -172,7 +184,9 @@ public class Lavados {
 				String telefono = (String) tupla[5];
 				Complementos prop = new Complementos((String) tupla[6]);
 				Trabajador trab = new Trabajador((int) tupla[7]);
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+				String obs =  (String) tupla[8];
+				String p =  (String) tupla[9];
+				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -197,7 +211,9 @@ public class Lavados {
 				String telefono = (String) tupla[5];
 				Complementos prop = new Complementos((String) tupla[6]);
 				Trabajador trab = new Trabajador((int) tupla[7]);
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab));
+				String obs =  (String) tupla[8];
+				String p =  (String) tupla[9];
+				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -218,6 +234,8 @@ public class Lavados {
 			this.telefono = (String) tupla[5];
 			this.comp = new Complementos((String) tupla[6]);
 			this.trab = new Trabajador((int) tupla[7]);
+			this.observaciones = (String)tupla[8];
+			this.propietario = (String)tupla[9];
 
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -226,7 +244,7 @@ public class Lavados {
 	}
 
 	private Lavados(int id, String matricula, Modelo modelo, LocalTime hora, LocalDate fecha, String telefono,
-			Complementos prop, Trabajador trab) {
+			Complementos prop, Trabajador trab,String observaciones,String propietario) {
 		this.id = id;
 		this.matricula = matricula;
 		this.modelo = modelo;
@@ -235,10 +253,12 @@ public class Lavados {
 		this.telefono = telefono;
 		this.comp = prop;
 		this.trab = trab;
+		this.observaciones = observaciones;
+		this.propietario = propietario;
 	}
 
 	public Lavados(String matricula, Modelo modelo, LocalTime hora, LocalDate fecha, String telefono, Complementos prop,
-			Trabajador trab) {
+			Trabajador trab,String observaciones,String propietario) {
 		try (MySqlDB miBD = new MySqlDB()) {
 
 			// Get new ID
@@ -252,7 +272,7 @@ public class Lavados {
 
 			miBD.Insert("INSERT INTO Lavados VALUES(" + newId + ", '" + matricula + "', '" + modelo.getNombre() + "','"
 					+ hora.toString() + "', '" + fecha.toString() + "','" + telefono + "','" + prop.getNombre() + "',"
-					+ trab.getId() + ");");
+					+ trab.getId() + ",'"+observaciones + "','" + propietario + "');");
 
 			this.id = newId;
 			this.matricula = matricula;
@@ -262,6 +282,8 @@ public class Lavados {
 			this.telefono = telefono;
 			this.comp = prop;
 			this.trab = trab;
+			this.observaciones = observaciones;
+			this.propietario = propietario;
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
@@ -348,7 +370,7 @@ public class Lavados {
 
 	public void setProp(Complementos prop) {
 		try (MySqlDB miBD = new MySqlDB()) {
-			miBD.Update("UPDATE Lavados SET Propietarios_id = '" + prop.getNombre() + "' where id = " + this.getId());
+			miBD.Update("UPDATE Lavados SET Complementos_id = '" + prop.getNombre() + "' where id = " + this.getId());
 
 			this.comp = prop;
 		} catch (DatabaseException e) {
@@ -369,6 +391,36 @@ public class Lavados {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		try (MySqlDB miBD = new MySqlDB()) {
+			miBD.Update("UPDATE Lavados SET observaciones = '" + observaciones + "' where id = " + this.getId());
+
+			this.observaciones = observaciones;
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String getPropietario() {
+		return propietario;
+	}
+
+	public void setPropietario(String propietario) {
+		try (MySqlDB miBD = new MySqlDB()) {
+			miBD.Update("UPDATE Lavados SET propietario = '" + propietario + "' where id = " + this.getId());
+
+			this.propietario = propietario;
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 	public void delete() {
 		try (MySqlDB miBD = new MySqlDB()) {
@@ -380,16 +432,21 @@ public class Lavados {
 			telefono = null;
 			comp = null;
 			trab = null;
+			observaciones = null;
+			propietario = null;
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
 
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Lavados [id=" + id + ", matricula=" + matricula + ", modelo=" + modelo + ", hora=" + hora.toString()
-				+ ", telefono=" + telefono + "]";
+		return "Lavados [id=" + id + ", matricula=" + matricula + ", modelo=" + modelo + ", hora=" + hora + ", fecha="
+				+ fecha + ", telefono=" + telefono + ", comp=" + comp + ", trab=" + trab + ", observaciones="
+				+ observaciones + ", propietario=" + propietario + "]";
 	}
 
 	public Object[] asArray() {
@@ -402,6 +459,9 @@ public class Lavados {
 		tmp[5] = telefono;
 		tmp[6] = comp;
 		tmp[7] = trab;
+		tmp[8] = observaciones;
+		tmp[9] = propietario;
+		
 
 		return tmp;
 	}

@@ -74,7 +74,7 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 			}
 
 			break;
-		case "Propietario":
+		case "Complementos":
 			try {
 				Complementos p = view.getFieldComplemento();
 
@@ -120,6 +120,8 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 			view.setFieldTelefono(selectedLavados.getTelefono());
 			view.setFieldComplemento(selectedLavados.getProp());
 			view.setFieldTrabajador(selectedLavados.getTrab());
+            view.setFieldObservaciones(selectedLavados.getObservaciones());
+            view.setFieldPropietario(selectedLavados.getPropietario());
 
 		}
 	}

@@ -26,7 +26,7 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
         System.out.println(actionEvent.getActionCommand());
         switch (actionEvent.getActionCommand()) {
             case "Insertar":
-                selectedLavados = new Lavados(view.getFieldMatricula(), view.getFieldModelo(), view.getFieldHora(), view.getFieldFecha(),view.getFieldTelefono(), view.getFieldComplemento(), view.getFieldTrabajador());
+                selectedLavados = new Lavados(view.getFieldMatricula(), view.getFieldModelo(), view.getFieldHora(), view.getFieldFecha(),view.getFieldTelefono(), view.getFieldComplemento(), view.getFieldTrabajador(),view.getFieldObservaciones(),view.getFieldPropietario());
                 view.reloadData();
                 view.setFieldModelo(null);
                 view.setFieldMatricula("");
@@ -34,6 +34,8 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
                 view.setFieldTelefono("");
                 view.setFieldComplemento(null);
                 view.setFieldTrabajador(null);
+                view.setFieldObservaciones(null);
+                view.setFieldPropietario(null);
                 selectedLavados = null;
                 break;
             case "Modificar":
@@ -54,6 +56,9 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
                     view.setFieldTelefono("");
                     view.setFieldComplemento(null);
                     view.setFieldTrabajador(null);
+                    view.setFieldObservaciones("");
+                    view.setFieldPropietario("");
+                    
                     selectedLavados = null;
                 }
                 break;
@@ -67,6 +72,8 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
                     view.setFieldTelefono("");
                     view.setFieldComplemento(null);
                     view.setFieldTrabajador(null);
+                    view.setFieldObservaciones("");
+                    view.setFieldPropietario("");
                     selectedLavados = null;
                 }
                 break;
@@ -95,6 +102,8 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
             view.setFieldTelefono(selectedLavados.getTelefono());
             view.setFieldComplemento(selectedLavados.getProp());
             view.setFieldTrabajador(selectedLavados.getTrab());
+            view.setFieldObservaciones(selectedLavados.getObservaciones());
+            view.setFieldPropietario(selectedLavados.getPropietario());
 
         }
     }
