@@ -319,7 +319,7 @@ public class GUILavadosGeneral extends GUIPanel {
 			acumulador += num;
 		}
 
-		tsumatorioPrecios.setText(acumulador + " €");
+		tsumatorioPrecios.setText(acumulador + " Eur");
 	}
 
 	private class LavadosGeneralTableModel extends AbstractTableModel {
