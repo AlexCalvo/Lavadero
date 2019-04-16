@@ -211,8 +211,8 @@ public class Lavados {
 				LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
 				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
 				String telefono = (String) tupla[5];
-				Complementos prop = new Complementos((String) tupla[6]);
-				Trabajador trab = new Trabajador((int) tupla[7]);
+				Trabajador trab = new Trabajador((int) tupla[6]);
+                Complementos prop = new Complementos((String) tupla[7]);
 				String obs =  (String) tupla[8];
 				String p =  (String) tupla[9];
 				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
@@ -234,8 +234,8 @@ public class Lavados {
 			this.hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
 			this.fecha = ((Date) tupla[4]).toLocalDate();
 			this.telefono = (String) tupla[5];
-			this.comp = new Complementos((String) tupla[6]);
-			this.trab = new Trabajador((int) tupla[7]);
+			this.trab = new Trabajador((int) tupla[6]);
+			this.comp = new Complementos((String) tupla[7]);
 			this.observaciones = (String)tupla[8];
 			this.propietario = (String)tupla[9];
 
