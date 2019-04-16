@@ -35,8 +35,10 @@ public class Complementos {
 
     public Complementos(String nombre) {
         try (MySqlDB db = new MySqlDB()) {
-            Object[] tupla = db.Select("select * from Complementos where nombre = '" + nombre + "'").get(0);
-
+            List<Object[]> listTupla = db.Select("select * from Complementos where nombre = '" + nombre + "'");
+            if (listTupla.size() == 0)
+                return;
+            Object[] tupla = listTupla.get(0);
             this.nombre = (String) tupla[0];
             this.precio = (double) tupla[1];
         } catch (DatabaseException e) {
@@ -89,7 +91,7 @@ public class Complementos {
 
     public void setPrecio(double precio) {
         try (MySqlDB db = new MySqlDB()) {
-            db.Update("update Complementos set precio = '" + precio + "' where id = '" + this.getNombre()+"';");
+            db.Update("update Complementos set precio = '" + precio + "' where nombre = '" + this.getNombre()+"';");
 
             this.precio = precio;
         } catch (DatabaseException e) {
@@ -99,7 +101,7 @@ public class Complementos {
 
     @Override
     public String toString() {
-        return this.getNombre();
+        return (this.getNombre()==null)?"":this.getNombre();
     }
 
     public Object[] asArray() {
