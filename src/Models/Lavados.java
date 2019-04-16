@@ -2,6 +2,8 @@ package Models;
 
 import DB.DatabaseException;
 import DB.MySqlDB;
+import UI.GUIMain;
+import UI.GUIPrecioModelo;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -10,6 +12,9 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 
 public class Lavados {
 
@@ -286,6 +291,7 @@ public class Lavados {
 			this.trab = trab;
 			this.observaciones = observaciones;
 			this.propietario = propietario;
+			
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
