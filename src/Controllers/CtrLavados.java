@@ -1,7 +1,11 @@
 package Controllers;
 
 import Models.Lavados;
+import UI.GUIEmergente;
 import UI.GUILavadosDiario;
+import UI.GUIMain;
+import UI.GUIPrecioModelo;
+
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 
@@ -9,6 +13,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
+
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,17 +32,22 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
         System.out.println(actionEvent.getActionCommand());
         switch (actionEvent.getActionCommand()) {
             case "Insertar":
-                selectedLavados = new Lavados(view.getFieldMatricula(), view.getFieldModelo(), view.getFieldHora(), view.getFieldFecha(),view.getFieldTelefono(), view.getFieldComplemento(), view.getFieldTrabajador(),view.getFieldObservaciones(),view.getFieldPropietario());
-                view.reloadData();
-                view.setFieldModelo(null);
-                view.setFieldMatricula("");
-                view.setFieldHora(null);
-                view.setFieldTelefono("");
-                view.setFieldComplemento(null);
-                view.setFieldTrabajador(null);
-                view.setFieldObservaciones(null);
-                view.setFieldPropietario(null);
-                selectedLavados = null;
+            	try {
+            		selectedLavados = new Lavados(view.getFieldMatricula(), view.getFieldModelo(), view.getFieldHora(), view.getFieldFecha(),view.getFieldTelefono(), view.getFieldComplemento(), view.getFieldTrabajador(),view.getFieldObservaciones(),view.getFieldPropietario());
+                    view.reloadData();
+                    view.setFieldModelo(null);
+                    view.setFieldMatricula("");
+                    view.setFieldHora(null);
+                    view.setFieldTelefono("");
+                    view.setFieldComplemento(null);
+                    view.setFieldTrabajador(null);
+                    view.setFieldObservaciones(null);
+                    view.setFieldPropietario(null);
+                    selectedLavados = null;
+            	}catch(NullPointerException e) {
+            		ventana();
+            	}
+                
                 break;
             case "Modificar":
                 if (selectedLavados != null) {
@@ -82,7 +93,21 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
         }
     }
 
-    @Override
+    private JFrame ventana() {
+    	JFrame window = new JFrame("Nuevo Modelo");
+        JTabbedPane panel = new GUIEmergente();
+
+        window.setContentPane(panel);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setMinimumSize(new Dimension(640, 480));
+        window.pack();
+        window.setVisible(true);
+
+        return window;
+		
+	}
+
+	@Override
     public void valueChanged(ListSelectionEvent listSelectionEvent) {
         if (!listSelectionEvent.getValueIsAdjusting()) {
 
