@@ -264,7 +264,7 @@ public class Lavados {
 		this.propietario = propietario;
 	}
 
-	public Lavados(String matricula, Modelo modelo, LocalTime hora, LocalDate fecha, String telefono, Complementos prop,
+	public Lavados(String matricula, Modelo modelo, LocalTime hora, LocalDate fecha, String telefono, Complementos comp,
 			Trabajador trab,String observaciones,String propietario) {
 		try (MySqlDB miBD = new MySqlDB()) {
 
@@ -278,8 +278,8 @@ public class Lavados {
 				newId = (int) tupla[0] + 1;
 
 			miBD.Insert("INSERT INTO Lavados VALUES(" + newId + ", '" + matricula + "', '" + modelo.getNombre() + "','"
-					+ hora.toString() + "', '" + fecha.toString() + "','" + telefono + "','" + prop.getNombre() + "',"
-					+ trab.getId() + ",'"+observaciones + "','" + propietario + "');");
+					+ hora.toString() + "', '" + fecha.toString() + "','" + telefono + "'," + trab.getId() + ",'"
+					+ comp.getNombre() + "','"+observaciones + "','" + propietario + "');");
 
 			this.id = newId;
 			this.matricula = matricula;
@@ -287,7 +287,7 @@ public class Lavados {
 			this.hora = hora;
 			this.fecha = fecha;
 			this.telefono = telefono;
-			this.comp = prop;
+			this.comp = comp;
 			this.trab = trab;
 			this.observaciones = observaciones;
 			this.propietario = propietario;
