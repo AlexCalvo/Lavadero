@@ -319,9 +319,7 @@ public class GUILavadosGeneral extends GUIPanel {
 				if ( ((Complementos) tableLavados.getValueAt(i, 6)).getNombre() != null) {
 					num += ((Complementos) tableLavados.getValueAt(i, 6)).getPrecio();
 				}
-			}catch(NullPointerException np) {
-				
-			}
+			}catch(NullPointerException np) {}
 			
 			
 			
