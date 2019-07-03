@@ -33,7 +33,6 @@ public class GUILavadosGeneral extends GUIPanel {
 	private JLabel lTrabajador = new JLabel("Trabajador:");
 	private JLabel lObservaciones = new JLabel("Observaciones:");
 	private JLabel lPropietario = new JLabel("Propietario:");
-	
 
 	private JLabel lsumatorioPrecio = new JLabel("Total:");
 
@@ -48,7 +47,7 @@ public class GUILavadosGeneral extends GUIPanel {
 	private JTextField tTrabajador = new JTextField();
 	private TextAutoCompleter autoTrabajador = createAutoCompleterTrabajador(tTrabajador);
 	private JTextField tObservaciones = new JTextField();
-	private JTextField tPropietario= new JTextField();
+	private JTextField tPropietario = new JTextField();
 
 	private JTextField tsumatorioPrecios = new JTextField();
 
@@ -197,7 +196,7 @@ public class GUILavadosGeneral extends GUIPanel {
 		else
 			this.tTrabajador.setText(trabajador.getNombre());
 	}
-	
+
 	public String getFieldObservaciones() {
 		return this.tObservaciones.getText();
 	}
@@ -205,7 +204,7 @@ public class GUILavadosGeneral extends GUIPanel {
 	public void setFieldObservaciones(String string) {
 		this.tObservaciones.setText(string);
 	}
-	
+
 	public String getFieldPropietario() {
 		return this.tPropietario.getText();
 	}
@@ -308,7 +307,6 @@ public class GUILavadosGeneral extends GUIPanel {
 		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByMatricula(m);
 		calcularTotal();
 	}
-	
 
 	private void calcularTotal() {
 		double acumulador = 0;
@@ -316,6 +314,17 @@ public class GUILavadosGeneral extends GUIPanel {
 
 		for (int i = 0; i < tableLavados.getRowCount(); i++) {
 			num = ((Modelo) tableLavados.getValueAt(i, 2)).getPrecio();
+			
+			try {
+				if ( ((Complementos) tableLavados.getValueAt(i, 6)).getNombre() != null) {
+					num += ((Complementos) tableLavados.getValueAt(i, 6)).getPrecio();
+				}
+			}catch(NullPointerException np) {
+				
+			}
+			
+			
+			
 			acumulador += num;
 		}
 
