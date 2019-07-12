@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Lavados;
+import Models.Modelo;
 import UI.GUIEmergente;
 import UI.GUILavadosDiario;
 import UI.GUIMain;
@@ -14,6 +15,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -93,19 +95,13 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
         }
     }
 
-    private JFrame ventana() {
-    	JFrame window = new JFrame("Nuevo Modelo");
-        JTabbedPane panel = new GUIEmergente();
-
-        window.setContentPane(panel);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setMinimumSize(new Dimension(640, 480));
-        window.pack();
-        window.setVisible(true);
-
-        return window;
+    private void ventana() {
+    	
+    	String prec = JOptionPane.showInputDialog("Inserte precio del nuevo modelo: ");
+    	double p = Double.parseDouble(prec);
 		
 	}
+    
 
 	@Override
     public void valueChanged(ListSelectionEvent listSelectionEvent) {
