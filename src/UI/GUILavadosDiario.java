@@ -1,5 +1,6 @@
 package UI;
 
+import Controllers.ModelNotFoundException;
 import Models.Lavados;
 import Models.Modelo;
 import Models.Complementos;
@@ -98,8 +99,16 @@ public class GUILavadosDiario extends GUIPanel {
 		this.tMatricula.setText(string);
 	}
 
+	public String getStringModelo() {
+		return this.tModelo.getText();
+	}
+
 	public Modelo getFieldModelo() {
-		return (Modelo) this.autoModelo.findItem(autoModelo.getItemSelected().toString());
+		try {
+			return (Modelo) this.autoModelo.findItem(autoModelo.getItemSelected().toString());
+		} catch (NullPointerException e) {
+			throw new ModelNotFoundException();
+		}
 	}
 
 	public void setFieldModelo(Modelo modelo) {
@@ -168,6 +177,14 @@ public class GUILavadosDiario extends GUIPanel {
 
 	public void setFieldPropietario(String string) {
 		this.tPropietario.setText(string);
+	}
+
+	public TextAutoCompleter getAutoModelo() {
+		return autoModelo;
+	}
+
+	public void setAutoModelo(TextAutoCompleter autoModelo) {
+		this.autoModelo = autoModelo;
 	}
 
 	private Component createButtonPanel() {

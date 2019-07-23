@@ -2,10 +2,7 @@ package Controllers;
 
 import Models.Lavados;
 import Models.Modelo;
-import UI.GUIEmergente;
-import UI.GUILavadosDiario;
-import UI.GUIMain;
-import UI.GUIPrecioModelo;
+import UI.*;
 
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
@@ -24,9 +21,11 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
 
     private GUILavadosDiario view;
     private Lavados selectedLavados;
+    private GUIModelo viewModelo;
 
-    public CtrLavados(GUILavadosDiario view) {
+    public CtrLavados(GUILavadosDiario view, GUIModelo viewModelo) {
         this.view = view;
+        this.viewModelo = viewModelo;
     }
 
     @Override
@@ -46,7 +45,7 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
                     view.setFieldObservaciones(null);
                     view.setFieldPropietario(null);
                     selectedLavados = null;
-            	}catch(NullPointerException e) {
+            	}catch(ModelNotFoundException e) {
             		ventana();
             	}
                 
@@ -99,7 +98,12 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
     	
     	String prec = JOptionPane.showInputDialog("Inserte precio del nuevo modelo: ");
     	double p = Double.parseDouble(prec);
-		
+    	Modelo newModelo = new Modelo(view.getStringModelo(), p);
+    	view.setFieldModelo(newModelo);
+		view.getAutoModelo().addItem(newModelo);
+		viewModelo.reloadData();
+
+		this.actionPerformed(new ActionEvent(this, 3,"Insertar"));
 	}
     
 
