@@ -123,7 +123,8 @@ public class Lavados {
 
 			for (Object[] tmp : miBD.Select("SELECT matricula FROM Lavados where Fecha >= '" + ini + "' and Fecha <='"
 					+ fin + "'" + "  group by Matricula having count(Matricula) = " + x + ";")) {
-				for (Object[] tupla : miBD.Select("Select * from Lavados where matricula = \"" + tmp[0] + "\";")) {
+				for (Object[] tupla : miBD.Select("Select * from Lavados where matricula = \"" + tmp[0] + "\" and Fecha >= '" + ini + "' and Fecha <='"
+						+ fin + "';")) {
 					int id = (int) tupla[0];
 					String matricula = (String) tupla[1];
 					Modelo modelo = new Modelo((String) tupla[2]);

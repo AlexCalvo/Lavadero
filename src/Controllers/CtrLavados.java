@@ -97,13 +97,17 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
     private void ventana() {
     	
     	String prec = JOptionPane.showInputDialog("Inserte precio del nuevo modelo: ");
-    	double p = Double.parseDouble(prec);
-    	Modelo newModelo = new Modelo(view.getStringModelo(), p);
-    	view.setFieldModelo(newModelo);
-		view.getAutoModelo().addItem(newModelo);
-		viewModelo.reloadData();
+    	try {
+            double p = Double.parseDouble(prec);
+            Modelo newModelo = new Modelo(view.getStringModelo(), p);
+            view.setFieldModelo(newModelo);
+            view.getAutoModelo().addItem(newModelo);
+            viewModelo.reloadData();
 
-		this.actionPerformed(new ActionEvent(this, 3,"Insertar"));
+            this.actionPerformed(new ActionEvent(this, 3, "Insertar"));
+        } catch (NullPointerException e) {
+    	    //Pass
+        }
 	}
     
 
