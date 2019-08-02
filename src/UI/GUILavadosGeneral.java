@@ -70,6 +70,8 @@ public class GUILavadosGeneral extends GUIPanel {
 	private JButton bQueryTrabajador = new JButton("Por Trabajador");
 	private JButton bRefrescar = new JButton("Refrescar");
 
+	
+	
 	public GUILavadosGeneral() {
 		createPanelGeneral();
 	}
@@ -325,9 +327,11 @@ public class GUILavadosGeneral extends GUIPanel {
 			
 			acumulador += num;
 		}
-
+		
 		tsumatorioPrecios.setText(acumulador + " Eur");
 	}
+	
+	
 
 	private class LavadosGeneralTableModel extends AbstractTableModel {
 

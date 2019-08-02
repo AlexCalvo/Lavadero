@@ -21,7 +21,7 @@ public class GenerateReport {
         List<Lavados> lavados = Lavados.listaLavadosPorMatricula("1234");
 
         String message = "This is a sample PDF document created using PDFBox.";
-        String message2 = lavados.get(0).toString();
+        String message2 = lavados.get(0).getMatricula();
         System.out.println(message2);
 
         PDDocument doc = new PDDocument();
