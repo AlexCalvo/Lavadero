@@ -2,6 +2,9 @@ package Reports;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -26,6 +29,9 @@ public class SimpleTable {
         if (args.length > 0)
             outputFileName = args[0];
         
+        
+        List<Lavados> listaLavados = Models.Lavados.listaLavados();
+        LocalDate fechaActual = listaLavados.get(0).getFecha();
         
         // Create a new font object selecting one of the PDF base fonts
         PDFont fontPlain = PDType1Font.HELVETICA;
@@ -62,6 +68,8 @@ public class SimpleTable {
         BaseTable table = new BaseTable(yPosition, yStartNewPage,
             bottomMargin, tableWidth, margin, document, page, true, drawContent);
 
+       //COMIENZO TABLA
+        
         // the parameter is the row height
         Row<PDPage> headerRow = table.createRow(50);
         // the first parameter is the cell width
@@ -75,30 +83,51 @@ public class SimpleTable {
         table.addHeaderRow(headerRow);
 
         Row<PDPage> row = table.createRow(20);
+        cell = row.createCell(100, "Año " + fechaActual.getYear() );
+        cell.setFillColor(Color.blue);;
+        cell.setFontSize(10);
+        
+        
+        row = table.createRow(20);
         cell = row.createCell(16, "Matricula");
+        cell.setFont(fontBold);
         cell.setFontSize(10);
         
         cell = row.createCell(20, "Modelo");
+        cell.setFont(fontBold);
         cell.setFontSize(10);
 
         cell = row.createCell(16, "Hora");
+        cell.setFont(fontBold);
         cell.setFontSize(10);
         
         cell = row.createCell(16, "Fecha");
+        cell.setFont(fontBold);
         cell.setFontSize(10);
 
         cell = row.createCell(16, "Telefono");
+        cell.setFont(fontBold);
         cell.setFontSize(10);
         
         cell = row.createCell(16, "Complemento");
+        cell.setFont(fontBold);
         cell.setFontSize(10);
         
-        List<Lavados> listaLavados = Models.Lavados.listaLavados();
+       
         
         for(int i = 0; i < listaLavados.size();i++) {
-        	row = table.createRow(20);
-            
+        	
+            if(fechaActual.getYear() != listaLavados.get(i).getFecha().getYear()) {
+            	fechaActual = listaLavados.get(i).getFecha();
+            	row = table.createRow(20);
+                cell = row.createCell(100, "Año " + fechaActual.getYear() );
+                cell.setFillColor(Color.blue);;
+                cell.setFontSize(10);
+            }
+        	
         	try {
+        	
+        	row = table.createRow(20);
         	
         	cell = row.createCell(16, listaLavados.get(i).getMatricula());
             cell.setFontSize(10);
@@ -175,4 +204,46 @@ public class SimpleTable {
         document.save(outputFileName);
         document.close();
     }
+    
+    
+    
+    
+	public static int obtenerAnio(LocalDate date) {
+		if (null == date) {
+			return 0;
+		} else {
+			String formato = "yyyy";
+			SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
+			return Integer.parseInt(dateFormat.format(date));
+		}
+	}
+
+	public static int obtenerMes(LocalDate date) {
+		if (null == date) {
+			return 0;
+		} else {
+			String formato = "MM";
+			SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
+			return Integer.parseInt(dateFormat.format(date));
+		}
+	}
+
+	public static int obtenerDia(LocalDate date) {
+		if (null == date) {
+			return 0;
+		} else {
+			String formato = "dd";
+			SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
+			return Integer.parseInt(dateFormat.format(date));
+		}
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
