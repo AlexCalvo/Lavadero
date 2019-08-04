@@ -87,6 +87,10 @@ public class SimpleTable {
         cell.setFillColor(Color.blue);;
         cell.setFontSize(10);
         
+        row = table.createRow(20);
+        cell = row.createCell(100, "Mes " + fechaActual.getMonth() );
+        cell.setFillColor(Color.CYAN);
+        cell.setFontSize(10);
         
         row = table.createRow(20);
         cell = row.createCell(16, "Matricula");
@@ -118,10 +122,45 @@ public class SimpleTable {
         for(int i = 0; i < listaLavados.size();i++) {
         	
             if(fechaActual.getYear() != listaLavados.get(i).getFecha().getYear()) {
+            	
+                row = table.createRow(20);
+                cell = row.createCell(100,"Cantidad total de este año: " );
+                cell.setFont(fontBold);
+                cell.setFontSize(10);
+                
+                row = table.createRow(20);
+                cell = row.createCell(100,"Numero Lavados de este año: " );
+                cell.setFont(fontBold);
+                cell.setFontSize(10);
+            	
             	fechaActual = listaLavados.get(i).getFecha();
             	row = table.createRow(20);
                 cell = row.createCell(100, "Año " + fechaActual.getYear() );
-                cell.setFillColor(Color.blue);;
+                cell.setFillColor(Color.blue);
+                cell.setFontSize(10);
+                
+                row = table.createRow(20);
+                cell = row.createCell(100, "Mes " + fechaActual.getMonth() );
+                cell.setFillColor(Color.CYAN);
+                cell.setFontSize(10);
+            }
+            
+            if(fechaActual.getMonth() != listaLavados.get(i).getFecha().getMonth()) {
+            	
+                row = table.createRow(20);
+                cell = row.createCell(100,"Cantidad total de este mes: " );
+                cell.setFont(fontBold);
+                cell.setFontSize(10);
+                
+                row = table.createRow(20);
+                cell = row.createCell(100,"Numero Lavados de este mes: " );
+                cell.setFont(fontBold);
+                cell.setFontSize(10);
+            	
+            	fechaActual = listaLavados.get(i).getFecha();
+            	row = table.createRow(20);
+                cell = row.createCell(100, "Mes " + fechaActual.getMonth() );
+                cell.setFillColor(Color.CYAN);
                 cell.setFontSize(10);
             }
         	
@@ -157,7 +196,14 @@ public class SimpleTable {
         
         row = table.createRow(20);
         cell = row.createCell(100,"Cantidad total: " );
+        cell.setFont(fontBold);
         cell.setFontSize(10);
+        
+        row = table.createRow(20);
+        cell = row.createCell(100,"Numero Lavados: " );
+        cell.setFont(fontBold);
+        cell.setFontSize(10);
+        
 
         //cell.setFont(fontBold);->Letra en negrita
 
@@ -205,38 +251,36 @@ public class SimpleTable {
         document.close();
     }
     
-    
-    
-    
-	public static int obtenerAnio(LocalDate date) {
-		if (null == date) {
-			return 0;
-		} else {
-			String formato = "yyyy";
-			SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
-			return Integer.parseInt(dateFormat.format(date));
-		}
-	}
-
-	public static int obtenerMes(LocalDate date) {
-		if (null == date) {
-			return 0;
-		} else {
-			String formato = "MM";
-			SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
-			return Integer.parseInt(dateFormat.format(date));
-		}
-	}
-
-	public static int obtenerDia(LocalDate date) {
-		if (null == date) {
-			return 0;
-		} else {
-			String formato = "dd";
-			SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
-			return Integer.parseInt(dateFormat.format(date));
-		}
-	}
+     
+//	public static int obtenerAnio(LocalDate date) {
+//		if (null == date) {
+//			return 0;
+//		} else {
+//			String formato = "yyyy";
+//			SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
+//			return Integer.parseInt(dateFormat.format(date));
+//		}
+//	}
+//
+//	public static int obtenerMes(LocalDate date) {
+//		if (null == date) {
+//			return 0;
+//		} else {
+//			String formato = "MM";
+//			SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
+//			return Integer.parseInt(dateFormat.format(date));
+//		}
+//	}
+//
+//	public static int obtenerDia(LocalDate date) {
+//		if (null == date) {
+//			return 0;
+//		} else {
+//			String formato = "dd";
+//			SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
+//			return Integer.parseInt(dateFormat.format(date));
+//		}
+//	}
     
     
     
