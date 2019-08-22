@@ -131,7 +131,9 @@ public class Tickets {
             		+ "              "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
             		+ "                                                                           "
-            		+ "21% IVA INCLUIDO");i++;
+            		+ "21% IVA INCLUIDO");
+            i++;
+            if (i == listaLavados.size()) break;
             cell.setFontSize(10);
             cell = row.createCell(33," PARKING MARILYN MONROE"
             		+ "                                                             "
@@ -155,7 +157,9 @@ public class Tickets {
             		+ "              "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
             		+ "                                                                           "
-            		+ "21% IVA INCLUIDO");i++;
+            		+ "21% IVA INCLUIDO");
+		   i++;
+		   if (i == listaLavados.size()) break;
             cell.setFontSize(10);
             cell = row.createCell(34," PARKING MARILYN MONROE"
             		+ "                                                             "
@@ -179,7 +183,9 @@ public class Tickets {
             		+ "              "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
             		+ "                                                                           "
-            		+ "21% IVA INCLUIDO");i++;
+            		+ "21% IVA INCLUIDO");
+		   i++;
+		   if (i == listaLavados.size()) break;
             cell.setFontSize(10);
             
             
@@ -206,7 +212,9 @@ public class Tickets {
             		+ "              "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
             		+ "                                                                           "
-            		+ "21% IVA INCLUIDO");i++;
+            		+ "21% IVA INCLUIDO");
+		   i++;
+		   if (i == listaLavados.size()) break;
             cell.setFontSize(10);
             cell = row.createCell(33," PARKING MARILYN MONROE"
             		+ "                                                             "
@@ -230,7 +238,9 @@ public class Tickets {
             		+ "              "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
             		+ "                                                                           "
-            		+ "21% IVA INCLUIDO");i++;
+            		+ "21% IVA INCLUIDO");
+		   i++;
+		   if (i == listaLavados.size()) break;
             cell.setFontSize(10);
             cell = row.createCell(34," PARKING MARILYN MONROE"
             		+ "                                                             "
@@ -254,7 +264,9 @@ public class Tickets {
             		+ "              "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
             		+ "                                                                           "
-            		+ "21% IVA INCLUIDO");i++;
+            		+ "21% IVA INCLUIDO");
+		   i++;
+		   if (i == listaLavados.size()) break;
             cell.setFontSize(10);
             
             row = table.createRow(200);
@@ -280,7 +292,9 @@ public class Tickets {
             		+ "              "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
             		+ "                                                                           "
-            		+ "21% IVA INCLUIDO");i++;
+            		+ "21% IVA INCLUIDO");
+		   i++;
+		   if (i == listaLavados.size()) break;
             cell.setFontSize(10);
             cell = row.createCell(33," PARKING MARILYN MONROE"
             		+ "                                                             "
@@ -304,7 +318,9 @@ public class Tickets {
             		+ "              "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
             		+ "                                                                           "
-            		+ "21% IVA INCLUIDO");i++;
+            		+ "21% IVA INCLUIDO");
+		   i++;
+		   if (i == listaLavados.size()) break;
             cell.setFontSize(10);
             cell = row.createCell(34," PARKING MARILYN MONROE"
             		+ "                                                             "
