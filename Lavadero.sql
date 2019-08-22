@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `Lavadero`.`Lavados` (
   `Complemento_id` VARCHAR(45) NULL DEFAULT NULL,
   `Observaciones` VARCHAR(300) NULL DEFAULT NULL,
   `Propietario` VARCHAR(45) NULL DEFAULT NULL,
+  `Factura` TINYINT(1) NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`id`),
   INDEX `fk_Lavados_Trabajador1_idx` (`Trabajador_id` ASC),
   INDEX `fk_Lavados_Modelo1_idx` (`Modelo` ASC),
