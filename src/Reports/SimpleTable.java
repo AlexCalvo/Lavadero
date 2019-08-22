@@ -84,7 +84,7 @@ public class SimpleTable {
 
         Row<PDPage> row = table.createRow(20);
         cell = row.createCell(100, "Año " + fechaActual.getYear() );
-        cell.setFillColor(Color.blue);;
+        cell.setFillColor(Color.blue);
         cell.setFontSize(10);
         
         row = table.createRow(20);
