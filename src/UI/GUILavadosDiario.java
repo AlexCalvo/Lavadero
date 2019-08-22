@@ -34,7 +34,7 @@ public class GUILavadosDiario extends GUIPanel {
 	private JLabel lTrabajador = new JLabel("Trabajador:");
 	private JLabel lObservaciones = new JLabel("Observaciones:");
 	private JLabel lPropietario = new JLabel("Propietario:");
-	
+	private JLabel lFactura = new JLabel("Factura:");
 
 	private JTextField tMatricula = new JTextField();
 	private JTextField tModelo = new JTextField();
@@ -48,6 +48,7 @@ public class GUILavadosDiario extends GUIPanel {
 	private TextAutoCompleter autoTrabajador = createAutoCompleterTrabajador(tTrabajador);
 	private JTextField tObservaciones = new JTextField();
 	private JTextField tPropietario = new JTextField();
+	private JCheckBox tFactura = new JCheckBox();
 	
 
 	private JButton bIns = new JButton("Insertar");
@@ -83,8 +84,9 @@ public class GUILavadosDiario extends GUIPanel {
 		panel.add(create2ElementPanel(lTrabajador, tTrabajador));
 		panel.add(create2ElementPanel(lObservaciones, tObservaciones));
 		panel.add(create2ElementPanel(lPropietario, tPropietario));
+		panel.add(create2ElementPanel(lFactura, tFactura));
 
-
+		//Empty pannel to center the ButtonPannel
 		panel.add(new JPanel());
 		panel.add(createButtonPanel(), BorderLayout.SOUTH);
 
@@ -161,6 +163,14 @@ public class GUILavadosDiario extends GUIPanel {
 			this.tTrabajador.setText("");
 		else
 			this.tTrabajador.setText(trabajador.getNombre());
+	}
+
+	public boolean getFieldFactura() {
+		return this.tFactura.isSelected();
+	}
+
+	public void setFieldFactura(boolean factura) {
+		this.tFactura.setSelected(factura);
 	}
 	
 	public String getFieldObservaciones() {

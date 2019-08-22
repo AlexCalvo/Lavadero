@@ -19,7 +19,7 @@ import javax.swing.JTabbedPane;
 public class Lavados {
 
 	public static final String[] columnas = { "ID", "Matricula", "modelo", "hora", "fecha", "telefono", "Complemento",
-			"Trabajador","Observaciones","Propietario" };
+			"Trabajador","Observaciones","Propietario", "Factura" };
 
 	private int id;// clave principal
 	private String matricula;
@@ -31,6 +31,7 @@ public class Lavados {
 	private Trabajador trab;
 	private String observaciones;
 	private String propietario;
+	private boolean factura;
 
 	public static List<Lavados> listaLavados() {
 		List<Lavados> lista = new ArrayList<Lavados>();
@@ -46,12 +47,13 @@ public class Lavados {
 				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
 				String telefono = (String) tupla[5];
                 Trabajador trab = new Trabajador((int) tupla[6]);
-                Complementos prop = null;
+                Complementos comp = null;
                 if (tupla[7] != null)
-				    prop = new Complementos((String) tupla[7]);
+					comp = new Complementos((String) tupla[7]);
 				String obs =  (String) tupla[8];
 				String p =  (String) tupla[9];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
+				boolean f = (Boolean) tupla[10];
+				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -79,7 +81,8 @@ public class Lavados {
 				Trabajador trab = new Trabajador((int) tupla[6]);
 				String obs =  (String) tupla[8];
 				String p =  (String) tupla[9];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab,obs,p));
+				boolean f = (Boolean) tupla[10];
+				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -102,11 +105,12 @@ public class Lavados {
 				LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
 				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
 				String telefono = (String) tupla[5];
-				Complementos prop = new Complementos((String) tupla[7]);
+				Complementos comp = new Complementos((String) tupla[7]);
 				Trabajador trab = new Trabajador((int) tupla[6]);
 				String obs =  (String) tupla[8];
 				String p =  (String) tupla[9];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
+				boolean f = (Boolean) tupla[10];
+				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -132,11 +136,12 @@ public class Lavados {
 					LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
 					LocalDate fecha = ((Date) tupla[4]).toLocalDate();
 					String telefono = (String) tupla[5];
-					Complementos prop = new Complementos((String) tupla[7]);
+					Complementos comp = new Complementos((String) tupla[7]);
 					Trabajador trab = new Trabajador((int) tupla[6]);
 					String obs =  (String) tupla[8];
 					String p =  (String) tupla[9];
-					lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
+					boolean f = (Boolean) tupla[10];
+					lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
 				}
 			}
 		} catch (DatabaseException e) {
@@ -162,11 +167,12 @@ public class Lavados {
 					LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
 					LocalDate fecha = ((Date) tupla[4]).toLocalDate();
 					String telefono = (String) tupla[5];
-					Complementos prop = new Complementos((String) tupla[7]);
+					Complementos comp = new Complementos((String) tupla[7]);
 					Trabajador trab = new Trabajador((int) tupla[6]);
 					String obs =  (String) tupla[8];
 					String p =  (String) tupla[9];
-					lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
+					boolean f = (Boolean) tupla[10];
+					lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
 				}
 			}
 		} catch (DatabaseException e) {
@@ -190,11 +196,12 @@ public class Lavados {
 				LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
 				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
 				String telefono = (String) tupla[5];
-				Complementos prop = new Complementos((String) tupla[7]);
+				Complementos comp = new Complementos((String) tupla[7]);
 				Trabajador trab = new Trabajador((int) tupla[6]);
 				String obs =  (String) tupla[8];
 				String p =  (String) tupla[9];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
+				boolean f = (Boolean) tupla[10];
+				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -218,10 +225,11 @@ public class Lavados {
 				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
 				String telefono = (String) tupla[5];
 				Trabajador trab = new Trabajador((int) tupla[7]);
-                Complementos prop = new Complementos((String) tupla[6]);
+                Complementos comp = new Complementos((String) tupla[6]);
 				String obs =  (String) tupla[8];
 				String p =  (String) tupla[9];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, prop, trab,obs,p));
+				boolean f = (Boolean) tupla[10];
+				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -244,6 +252,7 @@ public class Lavados {
 			this.comp = new Complementos((String) tupla[7]);
 			this.observaciones = (String)tupla[8];
 			this.propietario = (String)tupla[9];
+			this.factura = (Boolean)tupla[10];
 
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -252,7 +261,7 @@ public class Lavados {
 	}
 
 	private Lavados(int id, String matricula, Modelo modelo, LocalTime hora, LocalDate fecha, String telefono,
-			Complementos prop, Trabajador trab,String observaciones,String propietario) {
+			Complementos prop, Trabajador trab, String observaciones, String propietario, boolean factura) {
 		this.id = id;
 		this.matricula = matricula;
 		this.modelo = modelo;
@@ -263,10 +272,11 @@ public class Lavados {
 		this.trab = trab;
 		this.observaciones = observaciones;
 		this.propietario = propietario;
+		this.factura = factura;
 	}
 
 	public Lavados(String matricula, Modelo modelo, LocalTime hora, LocalDate fecha, String telefono, Complementos comp,
-			Trabajador trab,String observaciones,String propietario) {
+			Trabajador trab, String observaciones, String propietario, boolean factura) {
 		try (MySqlDB miBD = new MySqlDB()) {
 
 			// Get new ID
@@ -280,7 +290,7 @@ public class Lavados {
 
 			miBD.Insert("INSERT INTO Lavados VALUES(" + newId + ", '" + matricula + "', '" + modelo.getNombre() + "','"
 					+ hora.toString() + "', '" + fecha.toString() + "','" + telefono + "'," + trab.getId() + ",'"
-					+ comp.getNombre() + "','"+observaciones + "','" + propietario + "');");
+					+ comp.getNombre() + "','"+observaciones + "','" + propietario + "', " + factura + ");");
 
 			this.id = newId;
 			this.matricula = matricula;
@@ -292,6 +302,7 @@ public class Lavados {
 			this.trab = trab;
 			this.observaciones = observaciones;
 			this.propietario = propietario;
+			this.factura = factura;
 			
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -379,7 +390,7 @@ public class Lavados {
 
 	public void setProp(Complementos prop) {
 		try (MySqlDB miBD = new MySqlDB()) {
-			miBD.Update("UPDATE Lavados SET Complementos_id = '" + prop.getNombre() + "' where id = " + this.getId());
+			miBD.Update("UPDATE Lavados SET Complemento_id = '" + prop.getNombre() + "' where id = " + this.getId());
 
 			this.comp = prop;
 		} catch (DatabaseException e) {
@@ -429,7 +440,20 @@ public class Lavados {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public boolean getFactura() {
+		return factura;
+	}
+
+	public void setFactura(boolean factura) {
+		try (MySqlDB miBD = new MySqlDB()) {
+			miBD.Update("UPDATE Lavados SET factura = " + factura + " where id = " + this.getId());
+
+			this.factura = factura;
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void delete() {
 		try (MySqlDB miBD = new MySqlDB()) {
@@ -443,6 +467,7 @@ public class Lavados {
 			trab = null;
 			observaciones = null;
 			propietario = null;
+			factura = false;
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
@@ -455,7 +480,7 @@ public class Lavados {
 	public String toString() {
 		return "Lavados [id=" + id + ", matricula=" + matricula + ", modelo=" + modelo + ", hora=" + hora + ", fecha="
 				+ fecha + ", telefono=" + telefono + ", comp=" + comp + ", trab=" + trab + ", observaciones="
-				+ observaciones + ", propietario=" + propietario + "]";
+				+ observaciones + ", propietario=" + propietario + ", factura=" + factura + "]";
 	}
 
 	public Object[] asArray() {
@@ -470,7 +495,7 @@ public class Lavados {
 		tmp[7] = trab;
 		tmp[8] = observaciones;
 		tmp[9] = propietario;
-		
+		tmp[10] = factura;
 
 		return tmp;
 	}
