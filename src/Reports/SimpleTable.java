@@ -80,7 +80,7 @@ public class SimpleTable {
         cell.setValign(VerticalAlignment.MIDDLE);
         // border style
         cell.setTopBorderStyle(new LineStyle(Color.BLACK, 10));
-        table.addHeaderRow(headerRow);
+       // table.addHeaderRow(headerRow);
 
         Row<PDPage> row = table.createRow(20);
         cell = row.createCell(100, "Año " + fechaActual.getYear() );
@@ -183,7 +183,7 @@ public class SimpleTable {
             cell = row.createCell(16, listaLavados.get(i).getTelefono().toString());
             cell.setFontSize(10);
             
-            cell = row.createCell(16, listaLavados.get(i).getProp().toString());
+            cell = row.createCell(16, listaLavados.get(i).getComp().toString());
             cell.setFontSize(10);
             
             	
@@ -252,35 +252,7 @@ public class SimpleTable {
     }
     
      
-//	public static int obtenerAnio(LocalDate date) {
-//		if (null == date) {
-//			return 0;
-//		} else {
-//			String formato = "yyyy";
-//			SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
-//			return Integer.parseInt(dateFormat.format(date));
-//		}
-//	}
-//
-//	public static int obtenerMes(LocalDate date) {
-//		if (null == date) {
-//			return 0;
-//		} else {
-//			String formato = "MM";
-//			SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
-//			return Integer.parseInt(dateFormat.format(date));
-//		}
-//	}
-//
-//	public static int obtenerDia(LocalDate date) {
-//		if (null == date) {
-//			return 0;
-//		} else {
-//			String formato = "dd";
-//			SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
-//			return Integer.parseInt(dateFormat.format(date));
-//		}
-//	}
+
     
     
     

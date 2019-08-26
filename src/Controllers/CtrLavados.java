@@ -59,7 +59,7 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
                     selectedLavados.setHora(view.getFieldHora());
                     selectedLavados.setTelefono(view.getFieldTelefono());
                     if (view.getFieldComplemento() != null)
-                        selectedLavados.setProp(view.getFieldComplemento());
+                        selectedLavados.setComp(view.getFieldComplemento());
 
                     selectedLavados.setObservaciones(view.getFieldObservaciones());
                     selectedLavados.setPropietario(view.getFieldPropietario());
@@ -137,7 +137,7 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
             view.setFieldMatricula(selectedLavados.getMatricula());
             view.setFieldHora(selectedLavados.getHora());
             view.setFieldTelefono(selectedLavados.getTelefono());
-            view.setFieldComplemento(selectedLavados.getProp());
+            view.setFieldComplemento(selectedLavados.getComp());
             view.setFieldTrabajador(selectedLavados.getTrab());
             view.setFieldObservaciones(selectedLavados.getObservaciones());
             view.setFieldPropietario(selectedLavados.getPropietario());

@@ -38,7 +38,7 @@ public class Lavados {
 
 		try (MySqlDB miBD = new MySqlDB()) {
 
-			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados")) {
+			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados order by fecha")) {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
@@ -182,13 +182,13 @@ public class Lavados {
 		return lista;
 	}
 
-	// Por propietario
+	// Por Complementos
 	public static List<Lavados> listaLavadosPorComplemento(Complementos c) {
 		List<Lavados> lista = new ArrayList<Lavados>();
 
 		try (MySqlDB miBD = new MySqlDB()) {
 
-			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Complementos_nombre = \"" + c.getNombre() + "\";")) {
+			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Complementos_Nombre = " + c.getNombre() )) {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
@@ -384,15 +384,15 @@ public class Lavados {
 		}
 	}
 
-	public Complementos getProp() {
+	public Complementos getComp() {
 		return comp;
 	}
 
-	public void setProp(Complementos prop) {
+	public void setComp(Complementos comp) {
 		try (MySqlDB miBD = new MySqlDB()) {
-			miBD.Update("UPDATE Lavados SET Complemento_id = '" + prop.getNombre() + "' where id = " + this.getId());
+			miBD.Update("UPDATE Lavados SET Complementos_nombre = '" + comp.getNombre() + "' where id = " + this.getId());
 
-			this.comp = prop;
+			this.comp = comp;
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}

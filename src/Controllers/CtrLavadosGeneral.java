@@ -118,7 +118,7 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 			view.setFieldMatricula(selectedLavados.getMatricula());
 			view.setFieldHora(selectedLavados.getHora());
 			view.setFieldTelefono(selectedLavados.getTelefono());
-			view.setFieldComplemento(selectedLavados.getProp());
+			view.setFieldComplemento(selectedLavados.getComp());
 			view.setFieldTrabajador(selectedLavados.getTrab());
             view.setFieldObservaciones(selectedLavados.getObservaciones());
             view.setFieldPropietario(selectedLavados.getPropietario());
