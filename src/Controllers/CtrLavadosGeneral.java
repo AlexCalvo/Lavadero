@@ -74,7 +74,7 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 			}
 
 			break;
-		case "Complementos":
+		case "Complemento":
 			try {
 				Complementos p = view.getFieldComplemento();
 

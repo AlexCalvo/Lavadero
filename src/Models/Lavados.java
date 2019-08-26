@@ -188,7 +188,7 @@ public class Lavados {
 
 		try (MySqlDB miBD = new MySqlDB()) {
 
-			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Complementos_Nombre = " + c.getNombre() )) {
+			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Complemento_id = \"" + c.getNombre() + "\"" )) {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
@@ -224,8 +224,8 @@ public class Lavados {
 				LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
 				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
 				String telefono = (String) tupla[5];
-				Trabajador trab = new Trabajador((int) tupla[7]);
-                Complementos comp = new Complementos((String) tupla[6]);
+				Trabajador trab = new Trabajador((int) tupla[6]);
+                Complementos comp = new Complementos((String) tupla[7]);
 				String obs =  (String) tupla[8];
 				String p =  (String) tupla[9];
 				boolean f = (Boolean) tupla[10];
