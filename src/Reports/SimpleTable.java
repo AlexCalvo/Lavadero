@@ -117,23 +117,27 @@ public class SimpleTable {
         cell.setFont(fontBold);
         cell.setFontSize(10);
         
-       
-        
-        for(int i = 0; i < listaLavados.size();i++) {
+       //Set up monthly and yearly counters
+        int lavadosAnioActual = 0;
+        double lavadosAnioTotal = 0;
+        int lavadosMesActual = 0;
+        double lavadosMesTotal = 0;
+
+        for(Lavados lavado: listaLavados) {
         	
-            if(fechaActual.getYear() != listaLavados.get(i).getFecha().getYear()) {
+            if(fechaActual.getYear() != lavado.getFecha().getYear()) {
             	
                 row = table.createRow(20);
-                cell = row.createCell(100,"Cantidad total de este año: " );
+                cell = row.createCell(100,"Cantidad total de este año: " + lavadosAnioTotal);
                 cell.setFont(fontBold);
                 cell.setFontSize(10);
                 
                 row = table.createRow(20);
-                cell = row.createCell(100,"Numero Lavados de este año: " );
+                cell = row.createCell(100,"Numero Lavados de este año: " + lavadosAnioActual);
                 cell.setFont(fontBold);
                 cell.setFontSize(10);
             	
-            	fechaActual = listaLavados.get(i).getFecha();
+            	fechaActual = lavado.getFecha();
             	row = table.createRow(20);
                 cell = row.createCell(100, "Año " + fechaActual.getYear() );
                 cell.setFillColor(Color.blue);
@@ -145,19 +149,19 @@ public class SimpleTable {
                 cell.setFontSize(10);
             }
             
-            if(fechaActual.getMonth() != listaLavados.get(i).getFecha().getMonth()) {
+            if(fechaActual.getMonth() != lavado.getFecha().getMonth()) {
             	
                 row = table.createRow(20);
-                cell = row.createCell(100,"Cantidad total de este mes: " );
+                cell = row.createCell(100,"Cantidad total de este mes: " + lavadosMesTotal);
                 cell.setFont(fontBold);
                 cell.setFontSize(10);
                 
                 row = table.createRow(20);
-                cell = row.createCell(100,"Numero Lavados de este mes: " );
+                cell = row.createCell(100,"Numero Lavados de este mes: " + lavadosMesActual);
                 cell.setFont(fontBold);
                 cell.setFontSize(10);
             	
-            	fechaActual = listaLavados.get(i).getFecha();
+            	fechaActual = lavado.getFecha();
             	row = table.createRow(20);
                 cell = row.createCell(100, "Mes " + fechaActual.getMonth() );
                 cell.setFillColor(Color.CYAN);
@@ -168,23 +172,32 @@ public class SimpleTable {
         	
         	row = table.createRow(20);
         	
-        	cell = row.createCell(16, listaLavados.get(i).getMatricula());
+        	cell = row.createCell(16, lavado.getMatricula());
             cell.setFontSize(10);
             
-            cell = row.createCell(20, listaLavados.get(i).getModelo().toString());
+            cell = row.createCell(20, lavado.getModelo().toString());
             cell.setFontSize(10);
 
-            cell = row.createCell(16, listaLavados.get(i).getHora().toString());
+            cell = row.createCell(16, lavado.getHora().toString());
             cell.setFontSize(10);
             
-            cell = row.createCell(16, listaLavados.get(i).getFecha().toString());
+            cell = row.createCell(16, lavado.getFecha().toString());
             cell.setFontSize(10);
 
-            cell = row.createCell(16, listaLavados.get(i).getTelefono().toString());
+            cell = row.createCell(16, lavado.getTelefono().toString());
             cell.setFontSize(10);
             
-            cell = row.createCell(16, listaLavados.get(i).getComp().toString());
+            cell = row.createCell(16, lavado.getComp().toString());
             cell.setFontSize(10);
+
+            //Add one to counters
+            lavadosAnioActual++;
+            lavadosMesActual++;
+
+            //Add cost tp counters
+            double precio = lavado.getModelo().getPrecio();
+            lavadosAnioTotal += precio;
+            lavadosMesTotal += precio;
             
             	
             }catch(NullPointerException e) {
