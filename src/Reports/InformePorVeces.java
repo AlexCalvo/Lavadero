@@ -25,7 +25,7 @@ public class InformePorVeces {
 		if (args.length > 0)
 			outputFileName = args[0];
 
-		List<Lavados> listaLavados = Models.Lavados.listaLavadosPorVeces( numVeces);
+		List<Lavados> listaLavados = Models.Lavados.listaLavadosPorVeces(numVeces);
 		LocalDate fechaActual = listaLavados.get(0).getFecha();
 
 		// Create a new font object selecting one of the PDF base fonts
@@ -67,8 +67,7 @@ public class InformePorVeces {
 		// the parameter is the row height
 		Row<PDPage> headerRow = table.createRow(50);
 		// the first parameter is the cell width
-		Cell<PDPage> cell = headerRow.createCell(100,
-				"Lista lavados - " + numVeces + " veces");
+		Cell<PDPage> cell = headerRow.createCell(100, "Lista lavados por veces:"+numVeces);
 		cell.setFont(fontBold);
 		cell.setFontSize(20);
 		// vertical alignment
@@ -112,21 +111,68 @@ public class InformePorVeces {
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		for (int i = 0; i < listaLavados.size(); i++) {
+		// Set up monthly and yearly counters
+		int lavadosAnioActual = 0;
+		double lavadosAnioTotal = 0;
+		int lavadosMesActual = 0;
+		double lavadosMesTotal = 0;
+		double lavadosTotal = 0;
+		int numLavadosTotal = 0;
+		boolean cambioMes = false;
+		boolean cambioAnio = false;
 
-			if (fechaActual.getYear() != listaLavados.get(i).getFecha().getYear()) {
+		for (Lavados lavado : listaLavados) {
+
+			if (fechaActual.getMonth() != lavado.getFecha().getMonth()) {
+
+				cambioMes = true;
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Cantidad total de este año: ");
+				cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal);
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
+				lavadosMesTotal = 0;
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Numero Lavados de este año: ");
+				cell = row.createCell(100, "Numero Lavados de este mes: " + lavadosMesActual);
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
+				lavadosMesActual = 0;
 
-				fechaActual = listaLavados.get(i).getFecha();
+			}
+
+			if (fechaActual.getYear() != lavado.getFecha().getYear()) {
+
+				cambioAnio = true;
+
+				row = table.createRow(20);
+				cell = row.createCell(100, "");
+				
+				row = table.createRow(20);
+				cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal);
+				cell.setFont(fontBold);
+				cell.setFontSize(10);
+				lavadosAnioTotal = 0;
+
+				row = table.createRow(20);
+				cell = row.createCell(100, "Numero Lavados de este año: " + lavadosAnioActual);
+				cell.setFont(fontBold);
+				cell.setFontSize(10);
+				lavadosAnioActual = 0;
+
+			}
+
+			if (cambioMes && !cambioAnio) {
+				fechaActual = lavado.getFecha();
+				row = table.createRow(20);
+				cell = row.createCell(100, "Mes " + fechaActual.getMonth());
+				cell.setFillColor(Color.CYAN);
+				cell.setFontSize(10);
+				cambioMes = false;
+			}
+
+			if (cambioAnio) {
+				fechaActual = lavado.getFecha();
 				row = table.createRow(20);
 				cell = row.createCell(100, "Año " + fechaActual.getYear());
 				cell.setFillColor(Color.blue);
@@ -136,99 +182,91 @@ public class InformePorVeces {
 				cell = row.createCell(100, "Mes " + fechaActual.getMonth());
 				cell.setFillColor(Color.CYAN);
 				cell.setFontSize(10);
-			}
-
-			if (fechaActual.getMonth() != listaLavados.get(i).getFecha().getMonth()) {
-
-				row = table.createRow(20);
-				cell = row.createCell(100, "Cantidad total de este mes: ");
-				cell.setFont(fontBold);
-				cell.setFontSize(10);
-
-				row = table.createRow(20);
-				cell = row.createCell(100, "Numero Lavados de este mes: ");
-				cell.setFont(fontBold);
-				cell.setFontSize(10);
-
-				fechaActual = listaLavados.get(i).getFecha();
-				row = table.createRow(20);
-				cell = row.createCell(100, "Mes " + fechaActual.getMonth());
-				cell.setFillColor(Color.CYAN);
-				cell.setFontSize(10);
+				cambioAnio = false;
 			}
 
 			try {
 
+				// Add one to counters
+				lavadosAnioActual++;
+				lavadosMesActual++;
+				numLavadosTotal++;
+
+				// Add cost tp counters
+				double precio = lavado.getModelo().getPrecio();
+				lavadosAnioTotal += precio;
+				lavadosMesTotal += precio;
+				lavadosTotal += precio;
+
 				row = table.createRow(20);
 
-				cell = row.createCell(16, listaLavados.get(i).getMatricula());
+				cell = row.createCell(16, lavado.getMatricula());
 				cell.setFontSize(10);
 
-				cell = row.createCell(20, listaLavados.get(i).getModelo().toString());
+				cell = row.createCell(20, lavado.getModelo().toString());
 				cell.setFontSize(10);
 
-				cell = row.createCell(16, listaLavados.get(i).getHora().toString());
+				cell = row.createCell(16, lavado.getHora().toString());
 				cell.setFontSize(10);
 
-				cell = row.createCell(16, listaLavados.get(i).getFecha().toString());
+				cell = row.createCell(16, lavado.getFecha().toString());
 				cell.setFontSize(10);
 
-				cell = row.createCell(16, listaLavados.get(i).getTelefono().toString());
+				cell = row.createCell(16, lavado.getTelefono().toString());
 				cell.setFontSize(10);
 
-				cell = row.createCell(16, listaLavados.get(i).getComp().toString());
+				cell = row.createCell(16, lavado.getComp().toString());
 				cell.setFontSize(10);
 
 			} catch (NullPointerException e) {
 				cell = row.createCell(16, "");
 				cell.setFontSize(10);
+
 			}
 
 		}
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total: ");
+		cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal);
+		cell.setFont(fontBold);
+		cell.setFontSize(10);
+		lavadosMesTotal = 0;
+
+		row = table.createRow(20);
+		cell = row.createCell(100, "Numero Lavados de este mes: " + lavadosMesActual);
+		cell.setFont(fontBold);
+		cell.setFontSize(10);
+		lavadosMesActual = 0;
+		
+		row = table.createRow(20);
+		cell = row.createCell(100, "");
+
+		row = table.createRow(20);
+		cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal);
+		cell.setFont(fontBold);
+		cell.setFontSize(10);
+		lavadosAnioTotal = 0;
+		
+
+		row = table.createRow(20);
+		cell = row.createCell(100, "Numero Lavados de este año: " + lavadosAnioActual);
+		cell.setFont(fontBold);
+		cell.setFontSize(10);
+		lavadosAnioActual = 0;
+
+		//Fila en blanco
+		row = table.createRow(20);
+		cell = row.createCell(100, "");
+		
+		row = table.createRow(20);
+		cell = row.createCell(100, "Cantidad total global: " + lavadosTotal + "€");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Numero Lavados: ");
+		cell = row.createCell(100, "Numero Lavados global: " + numLavadosTotal);
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
-
-		// cell.setFont(fontBold);->Letra en negrita
-
-		// row = table.createRow(20);
-		// cell = row.createCell(50, "red right mono");
-		// cell.setTextColor(Color.RED);
-		// cell.setFontSize(15);
-		// cell.setFont(fontMono);
-		// // horizontal alignment
-		// cell.setAlign(HorizontalAlignment.RIGHT);
-		// cell.setBottomBorderStyle(new LineStyle(Color.RED, 5));
-		// cell = row.createCell(50, "green centered italic");
-		// cell.setTextColor(Color.GREEN);
-		// cell.setFontSize(15);
-		// cell.setFont(fontItalic);
-		// cell.setAlign(HorizontalAlignment.CENTER);
-		// cell.setBottomBorderStyle(new LineStyle(Color.GREEN, 5));
-
-		// row = table.createRow(20);
-		// cell = row.createCell(40, "rotated");
-		// cell.setFontSize(15);
-		// // rotate the text
-		// cell.setTextRotated(true);
-		// cell.setAlign(HorizontalAlignment.RIGHT);
-		// cell.setValign(VerticalAlignment.MIDDLE);
-		// // long text that wraps
-		// cell = row.createCell(30, "long text long text long text long text long text
-		// long text long text");
-		// cell.setFontSize(12);
-		// // long text that wraps, with more line spacing
-		// cell = row.createCell(30, "long text long text long text long text long text
-		// long text long text");
-		// cell.setFontSize(12);
-		// cell.setLineSpacing(2);
 
 		table.draw();
 
@@ -242,4 +280,5 @@ public class InformePorVeces {
 		document.save(outputFileName);
 		document.close();
 	}
+
 }

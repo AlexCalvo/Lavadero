@@ -120,15 +120,17 @@ public class SimpleTable {
 		double lavadosAnioTotal = 0;
 		int lavadosMesActual = 0;
 		double lavadosMesTotal = 0;
+		double lavadosTotal = 0;
+		int numLavadosTotal = 0;
 		boolean cambioMes = false;
 		boolean cambioAnio = false;
 
 		for (Lavados lavado : listaLavados) {
 
 			if (fechaActual.getMonth() != lavado.getFecha().getMonth()) {
-				
+
 				cambioMes = true;
-				
+
 				row = table.createRow(20);
 				cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal);
 				cell.setFont(fontBold);
@@ -146,6 +148,9 @@ public class SimpleTable {
 			if (fechaActual.getYear() != lavado.getFecha().getYear()) {
 
 				cambioAnio = true;
+
+				row = table.createRow(20);
+				cell = row.createCell(100, "");
 				
 				row = table.createRow(20);
 				cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal);
@@ -189,11 +194,13 @@ public class SimpleTable {
 				// Add one to counters
 				lavadosAnioActual++;
 				lavadosMesActual++;
+				numLavadosTotal++;
 
 				// Add cost tp counters
 				double precio = lavado.getModelo().getPrecio();
 				lavadosAnioTotal += precio;
 				lavadosMesTotal += precio;
+				lavadosTotal += precio;
 
 				row = table.createRow(20);
 
@@ -222,7 +229,7 @@ public class SimpleTable {
 			}
 
 		}
-		
+
 		row = table.createRow(20);
 		cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal);
 		cell.setFont(fontBold);
@@ -236,10 +243,14 @@ public class SimpleTable {
 		lavadosMesActual = 0;
 		
 		row = table.createRow(20);
+		cell = row.createCell(100, "");
+
+		row = table.createRow(20);
 		cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal);
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosAnioTotal = 0;
+		
 
 		row = table.createRow(20);
 		cell = row.createCell(100, "Numero Lavados de este año: " + lavadosAnioActual);
@@ -247,14 +258,17 @@ public class SimpleTable {
 		cell.setFontSize(10);
 		lavadosAnioActual = 0;
 
-
+		//Fila en blanco
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total: ");
+		cell = row.createCell(100, "");
+		
+		row = table.createRow(20);
+		cell = row.createCell(100, "Cantidad total global: " + lavadosTotal + "€");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Numero Lavados: ");
+		cell = row.createCell(100, "Numero Lavados global: " + numLavadosTotal);
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
