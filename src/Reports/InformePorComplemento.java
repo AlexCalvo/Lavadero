@@ -20,11 +20,14 @@ import be.quodlibet.boxable.VerticalAlignment;
 import be.quodlibet.boxable.line.LineStyle;
 
 public class InformePorComplemento {
-
-	public static void main(String[] args,Complementos comp) throws Exception {
-		String outputFileName = "PorComplemento.pdf";
+	public static void main (String[] args) throws Exception {
+		String outputFileName = "InformeComplemento.pdf";
 		if (args.length > 0)
 			outputFileName = args[0];
+		generateInforme(outputFileName, new Complementos("arenilla"));
+	}
+
+	public static void generateInforme(String outFile, Complementos comp) throws Exception {
 
 		List<Lavados> listaLavados = Models.Lavados.listaLavadosPorComplemento(comp);
 		LocalDate fechaActual = listaLavados.get(0).getFecha();
@@ -278,7 +281,7 @@ public class InformePorComplemento {
 		cos.close();
 
 		// Save the results and ensure that the document is properly closed:
-		document.save(outputFileName);
+		document.save(outFile);
 		document.close();
 	}
 

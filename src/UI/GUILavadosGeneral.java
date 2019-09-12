@@ -70,6 +70,9 @@ public class GUILavadosGeneral extends GUIPanel {
 	private JButton bQueryTrabajador = new JButton("Por Trabajador");
 	private JButton bRefrescar = new JButton("Refrescar");
 
+	private JButton bGenerarInforme = new JButton("Generar informe");
+	private JButton bGenerarFactura = new JButton("Generar factura");
+
 	
 	
 	public GUILavadosGeneral() {
@@ -108,10 +111,10 @@ public class GUILavadosGeneral extends GUIPanel {
 
 	private Component createSouthPanel() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 2, 6, 6));
+		panel.setLayout(new GridLayout(2, 1, 6, 6));
 
 		panel.add(createQueryButtons());
-		// panel.add(create2ElementPanel(lMatricula, tMatricula));
+		panel.add(create2ElementPanel(bGenerarFactura, bGenerarInforme));
 		// panel.add(create2ElementPanel(lModelo, tModelo));
 		// panel.add(create2ElementPanel(lHora, tHora));
 		// panel.add(create2ElementPanel(lFecha, tFecha));
@@ -263,6 +266,11 @@ public class GUILavadosGeneral extends GUIPanel {
 		bQueryTrabajador.addActionListener(ctr);
 		bRefrescar.setActionCommand("Refrescar");
 		bRefrescar.addActionListener(ctr);
+
+		bGenerarFactura.setActionCommand("Factura");
+		bGenerarFactura.addActionListener(ctr);
+		bGenerarInforme.setActionCommand("Informe");
+		bGenerarInforme.addActionListener(ctr);
 
 		tableLavados.getSelectionModel().addListSelectionListener((ListSelectionListener) ctr);
 		tFecha.addDateChangeListener((DateChangeListener) ctr);

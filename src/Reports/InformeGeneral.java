@@ -22,12 +22,16 @@ import be.quodlibet.boxable.text.WrappingFunction;
 
 import UI.GUILavadosGeneral;
 
-public class SimpleTable {
+public class InformeGeneral {
 
-	public static void main(String[] args) throws Exception {
-		String outputFileName = "SimpleTable.pdf";
+	public static void main (String[] args) throws Exception {
+		String outputFileName = "InformeGeneral.pdf";
 		if (args.length > 0)
 			outputFileName = args[0];
+		generateInforme(outputFileName);
+	}
+
+	public static void generateInforme(String outFile) throws Exception {
 
 		List<Lavados> listaLavados = Models.Lavados.listaLavados();
 		LocalDate fechaActual = listaLavados.get(0).getFecha();
@@ -281,7 +285,7 @@ public class SimpleTable {
 		cos.close();
 
 		// Save the results and ensure that the document is properly closed:
-		document.save(outputFileName);
+		document.save(outFile);
 		document.close();
 	}
 

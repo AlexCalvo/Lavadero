@@ -20,10 +20,16 @@ import be.quodlibet.boxable.line.LineStyle;
 
 public class InformeEntreFechas {
 
-	public static void main(String[] args, LocalDate fecIni, LocalDate fecFin) throws Exception {
-		String outputFileName = "EntreFechas.pdf";
+
+	public static void main (String[] args) throws Exception {
+		String outputFileName = "Informe_entreFechas.pdf";
 		if (args.length > 0)
 			outputFileName = args[0];
+		generateInforme(outputFileName, LocalDate.now(), LocalDate.now());
+	}
+
+	public static void generateInforme(String outFile, LocalDate fecIni, LocalDate fecFin) throws Exception {
+
 
 		List<Lavados> listaLavados = Models.Lavados.listaLavadosPorFechas(fecIni, fecFin);
 		LocalDate fechaActual = listaLavados.get(0).getFecha();
@@ -276,7 +282,7 @@ public class InformeEntreFechas {
 		cos.close();
 
 		// Save the results and ensure that the document is properly closed:
-		document.save(outputFileName);
+		document.save(outFile);
 		document.close();
 	}
 

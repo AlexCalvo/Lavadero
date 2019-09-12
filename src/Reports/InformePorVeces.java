@@ -19,13 +19,15 @@ import be.quodlibet.boxable.VerticalAlignment;
 import be.quodlibet.boxable.line.LineStyle;
 
 public class InformePorVeces {
-
-	public static void main(String[] args) throws Exception {
-		String outputFileName = "PorVeces.pdf";
+	public static void main (String[] args) throws Exception {
+		String outputFileName = "InformeVeces.pdf";
 		if (args.length > 0)
 			outputFileName = args[0];
+		generateInforme(outputFileName, 3);
+	}
 
-		List<Lavados> listaLavados = Models.Lavados.listaLavadosPorVeces(3);
+	public static void generateInforme(String outFile, int veces) throws Exception {
+		List<Lavados> listaLavados = Models.Lavados.listaLavadosPorVeces(veces);
 		LocalDate fechaActual = listaLavados.get(0).getFecha();
 		String matriculaActual = listaLavados.get(0).getMatricula();
 
@@ -313,7 +315,7 @@ public class InformePorVeces {
 		cos.close();
 
 		// Save the results and ensure that the document is properly closed:
-		document.save(outputFileName);
+		document.save(outFile);
 		document.close();
 	}
 

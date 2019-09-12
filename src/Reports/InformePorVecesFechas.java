@@ -20,10 +20,14 @@ import be.quodlibet.boxable.VerticalAlignment;
 import be.quodlibet.boxable.line.LineStyle;
 
 public class InformePorVecesFechas {
-	public static void main(String[] args, LocalDate fecIni,LocalDate fecFin,int numVeces) throws Exception {
-		String outputFileName = "PorVecesFechas.pdf";
+	public static void main (String[] args) throws Exception {
+		String outputFileName = "InformeVecesFechas.pdf";
 		if (args.length > 0)
 			outputFileName = args[0];
+		generateInforme(outputFileName, 3, LocalDate.now(), LocalDate.now());
+	}
+
+	public static void generateInforme(String outFile, int numVeces, LocalDate fecIni, LocalDate fecFin) throws Exception {
 
 		List<Lavados> listaLavados = Models.Lavados.listaLavadosPorVecesFechas(fecIni, fecFin, numVeces);
 		LocalDate fechaActual = listaLavados.get(0).getFecha();
@@ -77,7 +81,7 @@ public class InformePorVecesFechas {
 		// table.addHeaderRow(headerRow);
 
 		Row<PDPage> row = table.createRow(20);
-		cell = row.createCell(100, "Año " + fechaActual.getYear());
+		cell = row.createCell(100, "Aï¿½o " + fechaActual.getYear());
 		cell.setFillColor(Color.blue);
 		cell.setFontSize(10);
 
@@ -149,13 +153,13 @@ public class InformePorVecesFechas {
 				cell = row.createCell(100, "");
 				
 				row = table.createRow(20);
-				cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal);
+				cell = row.createCell(100, "Cantidad total de este aï¿½o: " + lavadosAnioTotal);
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
 				lavadosAnioTotal = 0;
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Numero Lavados de este año: " + lavadosAnioActual);
+				cell = row.createCell(100, "Numero Lavados de este aï¿½o: " + lavadosAnioActual);
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
 				lavadosAnioActual = 0;
@@ -174,7 +178,7 @@ public class InformePorVecesFechas {
 			if (cambioAnio) {
 				fechaActual = lavado.getFecha();
 				row = table.createRow(20);
-				cell = row.createCell(100, "Año " + fechaActual.getYear());
+				cell = row.createCell(100, "Aï¿½o " + fechaActual.getYear());
 				cell.setFillColor(Color.blue);
 				cell.setFontSize(10);
 
@@ -242,14 +246,14 @@ public class InformePorVecesFechas {
 		cell = row.createCell(100, "");
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal);
+		cell = row.createCell(100, "Cantidad total de este aï¿½o: " + lavadosAnioTotal);
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosAnioTotal = 0;
 		
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Numero Lavados de este año: " + lavadosAnioActual);
+		cell = row.createCell(100, "Numero Lavados de este aï¿½o: " + lavadosAnioActual);
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosAnioActual = 0;
@@ -259,7 +263,7 @@ public class InformePorVecesFechas {
 		cell = row.createCell(100, "");
 		
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total global: " + lavadosTotal + "€");
+		cell = row.createCell(100, "Cantidad total global: " + lavadosTotal + "ï¿½");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
@@ -277,7 +281,7 @@ public class InformePorVecesFechas {
 		cos.close();
 
 		// Save the results and ensure that the document is properly closed:
-		document.save(outputFileName);
+		document.save(outFile);
 		document.close();
 	}
 
