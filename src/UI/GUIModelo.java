@@ -18,8 +18,8 @@ public class GUIModelo extends GUIPanel {
 	private JButton bMod = new JButton("Modificar");
 	private JButton bEli = new JButton("Eliminar");
 
-	private JLabel lNombre = new JLabel("Nombre:");
-	private JLabel lPrecio = new JLabel("Precio:");
+	private JLabel lNombre = new JLabel("Nombre del modelo:");
+	private JLabel lPrecio = new JLabel("Precio del lavado:");
 
 	private JTextField tPrecio = new JTextField();
 	private JTextField tNombre = new JTextField();
@@ -44,8 +44,8 @@ public class GUIModelo extends GUIPanel {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 2, 5, 5));
 
-		panel.add(create2ElementPanel(lPrecio, tPrecio));
 		panel.add(create2ElementPanel(lNombre, tNombre));
+		panel.add(create2ElementPanel(lPrecio, tPrecio));
 		panel.add(createButtonPanel());
 
 		return panel;
