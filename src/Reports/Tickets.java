@@ -25,10 +25,14 @@ import UI.GUILavadosGeneral;
 public class Tickets {
 
     public static void main (String[] args) throws Exception {
-        String outputFileName = "Tickets.pdf";
-        if (args.length > 0)
-            outputFileName = args[0];
-        
+		String outputFileName = "Tickets.pdf";
+    	if (args.length > 0)
+			outputFileName = args[0];
+    	generateTicket(outputFileName);
+    }
+
+	public static void generateTicket(String outFile) throws Exception {
+
         String textoTicket = " PARKING MARILYN MONROE"
         		+ "                                                             "
         		+ "Promociones y Construcciones"
@@ -364,7 +368,7 @@ public class Tickets {
         cos.close();
 
         // Save the results and ensure that the document is properly closed:
-        document.save(outputFileName);
+        document.save(outFile);
         document.close();
     }
     
