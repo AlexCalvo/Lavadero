@@ -61,6 +61,35 @@ public class Lavados {
 
 		return lista;
 	}
+	
+	public static List<Lavados> listaTickets() {
+        List<Lavados> lista = new ArrayList<Lavados>();
+
+        try (MySqlDB miBD = new MySqlDB()) {
+
+            for (Object[] tupla : miBD.Select("SELECT * FROM Lavados WHERE factura = FALSE order by fecha")) {
+                int id = (int) tupla[0];
+                String matricula = (String) tupla[1];
+                Modelo modelo = new Modelo((String) tupla[2]);
+                // TODO: Waiting on better fix
+                LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
+                LocalDate fecha = ((Date) tupla[4]).toLocalDate();
+                String telefono = (String) tupla[5];
+                Trabajador trab = new Trabajador((int) tupla[6]);
+                Complementos comp = null;
+                if (tupla[7] != null)
+                    comp = new Complementos((String) tupla[7]);
+                String obs =  (String) tupla[8];
+                String p =  (String) tupla[9];
+                boolean f = (Boolean) tupla[10];
+                lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
+            }
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
 
 	// Todos los lavados entre dos fechas dadas
 	public static List<Lavados> listaLavadosPorFechas(LocalDate FechaIn, LocalDate FechaFin) {

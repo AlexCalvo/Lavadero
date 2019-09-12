@@ -57,7 +57,7 @@ public class Tickets {
         		+ "                                                                           "
         		+ "21% IVA INCLUIDO";
         
-        List<Lavados> listaLavados = Models.Lavados.listaLavados();
+        List<Lavados> listaLavados = Models.Lavados.listaTickets();
         LocalDate fechaActual = listaLavados.get(0).getFecha();
         
         // Create a new font object selecting one of the PDF base fonts
@@ -100,23 +100,23 @@ public class Tickets {
         // the parameter is the row height
         Row<PDPage> headerRow = table.createRow(50);
         // the first parameter is the cell width
-        Cell<PDPage> cell = headerRow.createCell(100, "Lista tickets");
+        Cell<PDPage> cell = headerRow.createCell(99, "Lista tickets");
         cell.setFont(fontBold);
         cell.setFontSize(20);
         // vertical alignment
         cell.setValign(VerticalAlignment.MIDDLE);
         // border style
         cell.setTopBorderStyle(new LineStyle(Color.BLACK, 10));
-        table.addHeaderRow(headerRow);
+        //table.addHeaderRow(headerRow);
 
        
        for(int i = 0; i < listaLavados.size();i++) {
         	//PAGINA
             Row<PDPage> row = table.createRow(200);
-            cell = row.createCell(33," PARKING MARILYN MONROE"
+            cell = row.createCell(33,"  PARKING MARILYN MONROE"
             		+ "                                                             "
             		+ "Promociones y Construcciones"
-            		+ "                        "
+            		+ "                      "
             		+ "Puerto SL"
             		+ "                                                                                     "
             		+ "C/Marilyn Monroe, 2"
@@ -124,7 +124,7 @@ public class Tickets {
             		+ "29004 Málaga"
             		+ "                                                                                  "
             		+ "TLF. 952.067.850"
-            		+ "                                                                                    "
+            		+ "                                                                                "
             		+ listaLavados.get(i).getHora() +"      "+ listaLavados.get(i).getFecha()
             		+ "                                                                          "
             		+ "FACTURA SIMPLIFICADA"
@@ -132,17 +132,17 @@ public class Tickets {
             		+ listaLavados.get(i).getId()
             		+ "                                                                                        "
             		+ "Lavado Vehículo Matrícula"
-            		+ "              "
+            		+ "                     "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
-            		+ "                                                                           "
+            		+ "                                                                                 "
             		+ "21% IVA INCLUIDO");
             i++;
             if (i == listaLavados.size()) break;
             cell.setFontSize(10);
-            cell = row.createCell(33," PARKING MARILYN MONROE"
+            cell = row.createCell(33,"  PARKING MARILYN MONROE"
             		+ "                                                             "
             		+ "Promociones y Construcciones"
-            		+ "                        "
+            		+ "                      "
             		+ "Puerto SL"
             		+ "                                                                                     "
             		+ "C/Marilyn Monroe, 2"
@@ -150,7 +150,7 @@ public class Tickets {
             		+ "29004 Málaga"
             		+ "                                                                                  "
             		+ "TLF. 952.067.850"
-            		+ "                                                                                    "
+            		+ "                                                                                "
             		+ listaLavados.get(i).getHora() +"      "+ listaLavados.get(i).getFecha()
             		+ "                                                                          "
             		+ "FACTURA SIMPLIFICADA"
@@ -158,17 +158,17 @@ public class Tickets {
             		+ listaLavados.get(i).getId()
             		+ "                                                                                        "
             		+ "Lavado Vehículo Matrícula"
-            		+ "              "
+            		+ "                     "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
-            		+ "                                                                           "
+            		+ "                                                                                 "
             		+ "21% IVA INCLUIDO");
 		   i++;
 		   if (i == listaLavados.size()) break;
             cell.setFontSize(10);
-            cell = row.createCell(34," PARKING MARILYN MONROE"
+            cell = row.createCell(33,"  PARKING MARILYN MONROE"
             		+ "                                                             "
             		+ "Promociones y Construcciones"
-            		+ "                        "
+            		+ "                      "
             		+ "Puerto SL"
             		+ "                                                                                     "
             		+ "C/Marilyn Monroe, 2"
@@ -176,7 +176,7 @@ public class Tickets {
             		+ "29004 Málaga"
             		+ "                                                                                  "
             		+ "TLF. 952.067.850"
-            		+ "                                                                                    "
+            		+ "                                                                                "
             		+ listaLavados.get(i).getHora() +"      "+ listaLavados.get(i).getFecha()
             		+ "                                                                          "
             		+ "FACTURA SIMPLIFICADA"
@@ -184,100 +184,20 @@ public class Tickets {
             		+ listaLavados.get(i).getId()
             		+ "                                                                                        "
             		+ "Lavado Vehículo Matrícula"
-            		+ "              "
+            		+ "                     "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
-            		+ "                                                                           "
+            		+ "                                                                                 "
             		+ "21% IVA INCLUIDO");
 		   i++;
 		   if (i == listaLavados.size()) break;
             cell.setFontSize(10);
             
-            
-            row = table.createRow(200);
-            cell = row.createCell(33," PARKING MARILYN MONROE"
-            		+ "                                                             "
-            		+ "Promociones y Construcciones"
-            		+ "                        "
-            		+ "Puerto SL"
-            		+ "                                                                                     "
-            		+ "C/Marilyn Monroe, 2"
-            		+ "                                                                                  "
-            		+ "29004 Málaga"
-            		+ "                                                                                  "
-            		+ "TLF. 952.067.850"
-            		+ "                                                                                    "
-            		+ listaLavados.get(i).getHora() +"      "+ listaLavados.get(i).getFecha()
-            		+ "                                                                          "
-            		+ "FACTURA SIMPLIFICADA"
-            		+ "                             "
-            		+ listaLavados.get(i).getId()
-            		+ "                                                                                        "
-            		+ "Lavado Vehículo Matrícula"
-            		+ "              "
-            		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
-            		+ "                                                                           "
-            		+ "21% IVA INCLUIDO");
-		   i++;
-		   if (i == listaLavados.size()) break;
-            cell.setFontSize(10);
-            cell = row.createCell(33," PARKING MARILYN MONROE"
-            		+ "                                                             "
-            		+ "Promociones y Construcciones"
-            		+ "                        "
-            		+ "Puerto SL"
-            		+ "                                                                                     "
-            		+ "C/Marilyn Monroe, 2"
-            		+ "                                                                                  "
-            		+ "29004 Málaga"
-            		+ "                                                                                  "
-            		+ "TLF. 952.067.850"
-            		+ "                                                                                    "
-            		+ listaLavados.get(i).getHora() +"      "+ listaLavados.get(i).getFecha()
-            		+ "                                                                          "
-            		+ "FACTURA SIMPLIFICADA"
-            		+ "                             "
-            		+ listaLavados.get(i).getId()
-            		+ "                                                                                        "
-            		+ "Lavado Vehículo Matrícula"
-            		+ "              "
-            		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
-            		+ "                                                                           "
-            		+ "21% IVA INCLUIDO");
-		   i++;
-		   if (i == listaLavados.size()) break;
-            cell.setFontSize(10);
-            cell = row.createCell(34," PARKING MARILYN MONROE"
-            		+ "                                                             "
-            		+ "Promociones y Construcciones"
-            		+ "                        "
-            		+ "Puerto SL"
-            		+ "                                                                                     "
-            		+ "C/Marilyn Monroe, 2"
-            		+ "                                                                                  "
-            		+ "29004 Málaga"
-            		+ "                                                                                  "
-            		+ "TLF. 952.067.850"
-            		+ "                                                                                    "
-            		+ listaLavados.get(i).getHora() +"      "+ listaLavados.get(i).getFecha()
-            		+ "                                                                          "
-            		+ "FACTURA SIMPLIFICADA"
-            		+ "                             "
-            		+ listaLavados.get(i).getId()
-            		+ "                                                                                        "
-            		+ "Lavado Vehículo Matrícula"
-            		+ "              "
-            		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
-            		+ "                                                                           "
-            		+ "21% IVA INCLUIDO");
-		   i++;
-		   if (i == listaLavados.size()) break;
-            cell.setFontSize(10);
             
             row = table.createRow(200);
-            cell = row.createCell(33," PARKING MARILYN MONROE"
+            cell = row.createCell(33,"  PARKING MARILYN MONROE"
             		+ "                                                             "
             		+ "Promociones y Construcciones"
-            		+ "                        "
+            		+ "                      "
             		+ "Puerto SL"
             		+ "                                                                                     "
             		+ "C/Marilyn Monroe, 2"
@@ -285,7 +205,7 @@ public class Tickets {
             		+ "29004 Málaga"
             		+ "                                                                                  "
             		+ "TLF. 952.067.850"
-            		+ "                                                                                    "
+            		+ "                                                                                "
             		+ listaLavados.get(i).getHora() +"      "+ listaLavados.get(i).getFecha()
             		+ "                                                                          "
             		+ "FACTURA SIMPLIFICADA"
@@ -293,17 +213,17 @@ public class Tickets {
             		+ listaLavados.get(i).getId()
             		+ "                                                                                        "
             		+ "Lavado Vehículo Matrícula"
-            		+ "              "
+            		+ "                     "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
-            		+ "                                                                           "
+            		+ "                                                                                 "
             		+ "21% IVA INCLUIDO");
 		   i++;
 		   if (i == listaLavados.size()) break;
             cell.setFontSize(10);
-            cell = row.createCell(33," PARKING MARILYN MONROE"
+            cell = row.createCell(33,"  PARKING MARILYN MONROE"
             		+ "                                                             "
             		+ "Promociones y Construcciones"
-            		+ "                        "
+            		+ "                      "
             		+ "Puerto SL"
             		+ "                                                                                     "
             		+ "C/Marilyn Monroe, 2"
@@ -311,7 +231,7 @@ public class Tickets {
             		+ "29004 Málaga"
             		+ "                                                                                  "
             		+ "TLF. 952.067.850"
-            		+ "                                                                                    "
+            		+ "                                                                                "
             		+ listaLavados.get(i).getHora() +"      "+ listaLavados.get(i).getFecha()
             		+ "                                                                          "
             		+ "FACTURA SIMPLIFICADA"
@@ -319,17 +239,17 @@ public class Tickets {
             		+ listaLavados.get(i).getId()
             		+ "                                                                                        "
             		+ "Lavado Vehículo Matrícula"
-            		+ "              "
+            		+ "                     "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
-            		+ "                                                                           "
+            		+ "                                                                                 "
             		+ "21% IVA INCLUIDO");
 		   i++;
 		   if (i == listaLavados.size()) break;
             cell.setFontSize(10);
-            cell = row.createCell(34," PARKING MARILYN MONROE"
+            cell = row.createCell(33,"  PARKING MARILYN MONROE"
             		+ "                                                             "
             		+ "Promociones y Construcciones"
-            		+ "                        "
+            		+ "                      "
             		+ "Puerto SL"
             		+ "                                                                                     "
             		+ "C/Marilyn Monroe, 2"
@@ -337,7 +257,7 @@ public class Tickets {
             		+ "29004 Málaga"
             		+ "                                                                                  "
             		+ "TLF. 952.067.850"
-            		+ "                                                                                    "
+            		+ "                                                                                "
             		+ listaLavados.get(i).getHora() +"      "+ listaLavados.get(i).getFecha()
             		+ "                                                                          "
             		+ "FACTURA SIMPLIFICADA"
@@ -345,9 +265,89 @@ public class Tickets {
             		+ listaLavados.get(i).getId()
             		+ "                                                                                        "
             		+ "Lavado Vehículo Matrícula"
-            		+ "              "
+            		+ "                     "
             		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
-            		+ "                                                                           "
+            		+ "                                                                                 "
+            		+ "21% IVA INCLUIDO");
+		   i++;
+		   if (i == listaLavados.size()) break;
+            cell.setFontSize(10);
+            
+            row = table.createRow(200);
+            cell = row.createCell(33,"  PARKING MARILYN MONROE"
+            		+ "                                                             "
+            		+ "Promociones y Construcciones"
+            		+ "                      "
+            		+ "Puerto SL"
+            		+ "                                                                                     "
+            		+ "C/Marilyn Monroe, 2"
+            		+ "                                                                                  "
+            		+ "29004 Málaga"
+            		+ "                                                                                  "
+            		+ "TLF. 952.067.850"
+            		+ "                                                                                "
+            		+ listaLavados.get(i).getHora() +"      "+ listaLavados.get(i).getFecha()
+            		+ "                                                                          "
+            		+ "FACTURA SIMPLIFICADA"
+            		+ "                             "
+            		+ listaLavados.get(i).getId()
+            		+ "                                                                                        "
+            		+ "Lavado Vehículo Matrícula"
+            		+ "                     "
+            		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
+            		+ "                                                                                 "
+            		+ "21% IVA INCLUIDO");
+		   i++;
+		   if (i == listaLavados.size()) break;
+            cell.setFontSize(10);
+            cell = row.createCell(33,"  PARKING MARILYN MONROE"
+            		+ "                                                             "
+            		+ "Promociones y Construcciones"
+            		+ "                      "
+            		+ "Puerto SL"
+            		+ "                                                                                     "
+            		+ "C/Marilyn Monroe, 2"
+            		+ "                                                                                  "
+            		+ "29004 Málaga"
+            		+ "                                                                                  "
+            		+ "TLF. 952.067.850"
+            		+ "                                                                                "
+            		+ listaLavados.get(i).getHora() +"      "+ listaLavados.get(i).getFecha()
+            		+ "                                                                          "
+            		+ "FACTURA SIMPLIFICADA"
+            		+ "                             "
+            		+ listaLavados.get(i).getId()
+            		+ "                                                                                        "
+            		+ "Lavado Vehículo Matrícula"
+            		+ "                     "
+            		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
+            		+ "                                                                                 "
+            		+ "21% IVA INCLUIDO");
+		   i++;
+		   if (i == listaLavados.size()) break;
+            cell.setFontSize(10);
+            cell = row.createCell(33,"  PARKING MARILYN MONROE"
+            		+ "                                                             "
+            		+ "Promociones y Construcciones"
+            		+ "                      "
+            		+ "Puerto SL"
+            		+ "                                                                                     "
+            		+ "C/Marilyn Monroe, 2"
+            		+ "                                                                                  "
+            		+ "29004 Málaga"
+            		+ "                                                                                  "
+            		+ "TLF. 952.067.850"
+            		+ "                                                                                "
+            		+ listaLavados.get(i).getHora() +"      "+ listaLavados.get(i).getFecha()
+            		+ "                                                                          "
+            		+ "FACTURA SIMPLIFICADA"
+            		+ "                             "
+            		+ listaLavados.get(i).getId()
+            		+ "                                                                                        "
+            		+ "Lavado Vehículo Matrícula"
+            		+ "                     "
+            		+ listaLavados.get(i).getMatricula() + "     " + listaLavados.get(i).getModelo().getPrecio()+"€"
+            		+ "                                                                                 "
             		+ "21% IVA INCLUIDO");
             cell.setFontSize(10);
             //FIN PAGINA
