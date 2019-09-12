@@ -25,7 +25,7 @@ public class InformePorVeces {
 		if (args.length > 0)
 			outputFileName = args[0];
 
-		List<Lavados> listaLavados = Models.Lavados.listaLavadosPorVeces(2);
+		List<Lavados> listaLavados = Models.Lavados.listaLavadosPorVeces(3);
 		LocalDate fechaActual = listaLavados.get(0).getFecha();
 		String matriculaActual = listaLavados.get(0).getMatricula();
 
@@ -128,7 +128,8 @@ public class InformePorVeces {
 		boolean cambioAnio = false;
 		boolean cambioMatricula = false;
 
-		for (int i = 0; i < listaLavados.size(); i++) {
+		int i = 0;
+		while (i < listaLavados.size()) {
 
 			if (cambioMatricula) {
 				matriculaActual = listaLavados.get(i).getMatricula();
@@ -137,7 +138,8 @@ public class InformePorVeces {
 				cell.setFont(fontBold);
 				cell.setFillColor(Color.GRAY);
 				cell.setFontSize(10);
-				
+
+				fechaActual = listaLavados.get(i).getFecha();
 				row = table.createRow(20);
 				cell = row.createCell(100, "Año " + fechaActual.getYear());
 				cell.setFillColor(Color.blue);
@@ -150,7 +152,7 @@ public class InformePorVeces {
 				
 			}
 
-			while (matriculaActual == listaLavados.get(i).getMatricula()) {
+			while (i<listaLavados.size() && matriculaActual.equals(listaLavados.get(i).getMatricula())) {
 
 				if (fechaActual.getMonth() != listaLavados.get(i).getFecha().getMonth()) {
 
