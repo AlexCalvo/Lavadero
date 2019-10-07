@@ -144,7 +144,12 @@ public class GUILavadosDiario extends GUIPanel {
 	}
 
 	public Complementos getFieldComplemento() {
-		return (Complementos) this.autoComplemento.findItem(autoComplemento.getItemSelected().toString());
+		try {
+			return (Complementos) this.autoComplemento.findItem(autoComplemento.getItemSelected().toString());
+		}catch(NullPointerException e) {
+			return Complementos.listaComplementos().get(0);
+		}
+		
 	}
 
 	public void setFieldComplemento(Complementos propietario) {
@@ -155,7 +160,11 @@ public class GUILavadosDiario extends GUIPanel {
 	}
 
 	public Trabajador getFieldTrabajador() {
-		return (Trabajador) this.autoTrabajador.findItem(autoTrabajador.getItemSelected().toString());
+		try {
+			return (Trabajador) this.autoTrabajador.findItem(autoTrabajador.getItemSelected().toString());
+		}catch(NullPointerException e) {
+			return Trabajador.listaTrabajador().get(0);
+		}
 	}
 
 	public void setFieldTrabajador(Trabajador trabajador) {

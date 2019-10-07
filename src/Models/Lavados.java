@@ -62,12 +62,13 @@ public class Lavados {
 		return lista;
 	}
 	
-	public static List<Lavados> listaTickets() {
+	public static List<Lavados> listaTickets(LocalDate ini, LocalDate fin) {
         List<Lavados> lista = new ArrayList<Lavados>();
 
         try (MySqlDB miBD = new MySqlDB()) {
 
-            for (Object[] tupla : miBD.Select("SELECT * FROM Lavados WHERE factura = FALSE order by fecha")) {
+            for (Object[] tupla : miBD.Select("SELECT * FROM Lavados WHERE Fecha >= '" + ini + "' and Fecha <='" + 
+            		 fin  + "' and factura = FALSE order by id")) {
                 int id = (int) tupla[0];
                 String matricula = (String) tupla[1];
                 Modelo modelo = new Modelo((String) tupla[2]);

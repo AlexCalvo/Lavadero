@@ -28,10 +28,10 @@ public class Tickets {
 		String outputFileName = "Tickets.pdf";
     	if (args.length > 0)
 			outputFileName = args[0];
-    	generateTicket(outputFileName);
+    	generateTicket(outputFileName,LocalDate.now(),LocalDate.now());
     }
 
-	public static void generateTicket(String outFile) throws Exception {
+	public static void generateTicket(String outFile,LocalDate fecIni, LocalDate fecFin) throws Exception {
 
         String textoTicket = " PARKING MARILYN MONROE"
         		+ "                                                             "
@@ -57,7 +57,7 @@ public class Tickets {
         		+ "                                                                           "
         		+ "21% IVA INCLUIDO";
         
-        List<Lavados> listaLavados = Models.Lavados.listaTickets();
+        List<Lavados> listaLavados = Models.Lavados.listaTickets(fecIni,fecFin);
         LocalDate fechaActual = listaLavados.get(0).getFecha();
         
         // Create a new font object selecting one of the PDF base fonts

@@ -34,8 +34,9 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
         switch (actionEvent.getActionCommand()) {
             case "Insertar":
             	try {
-            		selectedLavados = new Lavados(view.getFieldMatricula(), view.getFieldModelo(), view.getFieldHora(), view.getFieldFecha(),view.getFieldTelefono(), view.getFieldComplemento(), view.getFieldTrabajador(),view.getFieldObservaciones(),view.getFieldPropietario(), view.getFieldFactura());
-                    view.reloadData();
+                	selectedLavados = new Lavados(view.getFieldMatricula(), view.getFieldModelo(), view.getFieldHora(), view.getFieldFecha(),view.getFieldTelefono(), view.getFieldComplemento(), view.getFieldTrabajador(),view.getFieldObservaciones(),view.getFieldPropietario(), view.getFieldFactura());
+            		
+            		view.reloadData();
                     view.setFieldModelo(null);
                     view.setFieldMatricula("");
                     view.setFieldHora(null);

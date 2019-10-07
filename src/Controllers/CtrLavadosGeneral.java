@@ -107,7 +107,9 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 
 			case "Factura":
 				try {
-					Tickets.generateTicket("Factura.pdf");
+					LocalDate fechaIni = view.getFieldFechaIni();
+					LocalDate fechaFin = view.getFieldFechaFin();
+					Tickets.generateTicket("Factura.pdf",fechaIni,fechaFin);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
