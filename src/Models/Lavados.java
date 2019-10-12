@@ -420,7 +420,7 @@ public class Lavados {
 
 	public void setComp(Complementos comp) {
 		try (MySqlDB miBD = new MySqlDB()) {
-			miBD.Update("UPDATE Lavados SET Complementos_nombre = '" + comp.getNombre() + "' where id = " + this.getId());
+			miBD.Update("UPDATE Lavados SET Complemento_id = '" + comp.getNombre() + "' where id = " + this.getId());
 
 			this.comp = comp;
 		} catch (DatabaseException e) {

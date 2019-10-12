@@ -147,7 +147,7 @@ public class GUILavadosDiario extends GUIPanel {
 		try {
 			return (Complementos) this.autoComplemento.findItem(autoComplemento.getItemSelected().toString());
 		}catch(NullPointerException e) {
-			return Complementos.listaComplementos().get(0);
+			return new Complementos("Ninguno");
 		}
 		
 	}
@@ -163,7 +163,7 @@ public class GUILavadosDiario extends GUIPanel {
 		try {
 			return (Trabajador) this.autoTrabajador.findItem(autoTrabajador.getItemSelected().toString());
 		}catch(NullPointerException e) {
-			return Trabajador.listaTrabajador().get(0);
+			return new Trabajador(-1);
 		}
 	}
 
