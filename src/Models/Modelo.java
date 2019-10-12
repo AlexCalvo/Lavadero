@@ -3,6 +3,7 @@ package Models;
 import DB.DatabaseException;
 import DB.MySqlDB;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class Modelo {
 			this.nombre = nombre;
 			this.precio = precio;
 		} catch (DatabaseException e) {
+			JOptionPane.showMessageDialog(null,"Ya se existe ese modelo.");
 			e.printStackTrace();
 		}
 	}
@@ -88,13 +90,14 @@ public class Modelo {
 			miBD.Delete("DELETE FROM Modelo WHERE nombre = '" + this.nombre + "';");
 			nombre = null;
 		} catch (DatabaseException e) {
+			JOptionPane.showMessageDialog(null,"No se puede eliminar un modelo mientras este asociado a algun lavado.");
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public String toString() {
-		return this.getNombre() + " -  " + this.getPrecio() + " €";
+		return this.getNombre() + " -  " + this.getPrecio() + " ï¿½";
 	}
 
 	public Object[] asArray() {

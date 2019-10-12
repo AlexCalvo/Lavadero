@@ -48,8 +48,11 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
                     view.setFieldFactura(false);
 
                     selectedLavados = null;
-            	}catch(ModelNotFoundException e) {
-            		ventana();
+            	} catch(ModelNotFoundException e) {
+            	    if (!view.getStringModelo().equals(""))
+            		    ventana();
+            	    else
+                        JOptionPane.showMessageDialog(null,"El campo modelo no puede estar vacio.");
             	}
                 
                 break;

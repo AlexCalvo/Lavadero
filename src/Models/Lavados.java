@@ -1,5 +1,7 @@
 package Models;
 
+import Controllers.EmptyLicenseException;
+import Controllers.MissingHourException;
 import DB.DatabaseException;
 import DB.MySqlDB;
 import UI.GUIMain;
@@ -13,8 +15,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 
 public class Lavados {
 
@@ -318,6 +319,14 @@ public class Lavados {
 			else
 				newId = (int) tupla[0] + 1;
 
+			if (matricula.equals("")) {
+				throw new EmptyLicenseException();
+			}
+
+			if (hora == null) {
+				throw new MissingHourException();
+			}
+
 			miBD.Insert("INSERT INTO Lavados VALUES(" + newId + ", '" + matricula + "', '" + modelo.getNombre() + "','"
 					+ hora.toString() + "', '" + fecha.toString() + "','" + telefono + "'," + trab.getId() + ",'"
 					+ comp.getNombre() + "','"+observaciones + "','" + propietario + "', " + factura + ");");
@@ -333,7 +342,10 @@ public class Lavados {
 			this.observaciones = observaciones;
 			this.propietario = propietario;
 			this.factura = factura;
-			
+		} catch(MissingHourException e) {
+			JOptionPane.showMessageDialog(null,"El campo hora no puede estar vacio.");
+		} catch(EmptyLicenseException e) {
+			JOptionPane.showMessageDialog(null,"La matricula no puede estar vacia.");
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}

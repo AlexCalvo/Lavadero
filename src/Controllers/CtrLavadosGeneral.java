@@ -38,65 +38,69 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 		switch (actionEvent.getActionCommand()) {
 			case "EntreFechas":
 				try {
+					lastReport = Reports.ENTRE_FECHAS;
 					LocalDate fechaIni = view.getFieldFechaIni();
 					LocalDate fechaFin = view.getFieldFechaFin();
+					if (fechaIni == null || fechaFin == null)
+						throw new NullPointerException();
 					view.reloadEntreFechas(fechaIni, fechaFin);
-					lastReport = Reports.ENTRE_FECHAS;
 				} catch (NullPointerException e) {
-
+					JOptionPane.showMessageDialog(null,"Los campos de fechas deben tener un valor.");
 				}
 				break;
 			case "EntreFechasVeces":
 				try {
+					lastReport = Reports.VECES_FECHA;
 					LocalDate fechaIni = view.getFieldFechaIni();
 					LocalDate fechaFin = view.getFieldFechaFin();
 					int x = Integer.parseInt(view.getNumVeces());
 					view.reloadEntreFechasVeces(fechaIni, fechaFin, x);
-					lastReport = Reports.VECES_FECHA;
 				} catch (NullPointerException e) {
-
+					JOptionPane.showMessageDialog(null,"Los campos de fechas y el campo numero veces deben tener un valor.");
 				} catch (NumberFormatException e) {
-
+					JOptionPane.showMessageDialog(null,"Los campos de fechas y el campo numero veces deben tener un valor.");
 				}
 				break;
 			case "Matricula":
 				try {
-					String m = view.getFieldMatricula();
-					view.reloadMatricula(m);
 					lastReport = Reports.MATRICULA;
+					String m = view.getFieldMatricula();
+					if (m.equals(""))
+						throw new NullPointerException();
+					view.reloadMatricula(m);
 				} catch (NullPointerException e) {
-
+					JOptionPane.showMessageDialog(null,"El campo matricula debe tener un valor.");
 				}
 				break;
 			case "Veces":
 				try {
+					lastReport = Reports.VECES;
 					int v = Integer.parseInt(view.getNumVeces());
 					view.reloadVeces(v);
-					lastReport = Reports.VECES;
 				} catch (NullPointerException e) {
-
+					JOptionPane.showMessageDialog(null,"El campo numero veces debe tener un valor.");
 				} catch (NumberFormatException e) {
-
+					JOptionPane.showMessageDialog(null,"El campo numero veces debe tener un valor.");
 				}
 
 				break;
 			case "Complemento":
 				try {
+					lastReport = Reports.COMPLEMENTO;
 					Complementos p = view.getFieldComplemento();
 					view.reloadComplementos(p);
-					lastReport = Reports.COMPLEMENTO;
 				} catch (NullPointerException e) {
-
+					JOptionPane.showMessageDialog(null,"El campo complemento debe tener un valor.");
 				}
 
 				break;
 			case "Trabajador":
 				try {
+					lastReport = Reports.TRABAJADOR;
 					Trabajador t = view.getFieldTrabajador();
 					view.reloadTrabajador(t);
-					lastReport = Reports.TRABAJADOR;
 				} catch (NullPointerException e) {
-
+					JOptionPane.showMessageDialog(null,"El campo trabajador debe tener un valor.");
 				}
 
 				break;
@@ -111,6 +115,7 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 					LocalDate fechaFin = view.getFieldFechaFin();
 					Tickets.generateTicket("Factura.pdf",fechaIni,fechaFin);
 				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null,"Los campos de fechas deben tener un valor.");
 					e.printStackTrace();
 				}
 				break;
@@ -123,6 +128,7 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 						try {
 							InformeEntreFechas.generateInforme("InformeEntreFechas.pdf", fechaIni, fechaFin);
 						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null,"Los campos de fechas deben tener un valor.");
 							e.printStackTrace();
 						}
 						break;
@@ -131,6 +137,7 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 							Complementos c = view.getFieldComplemento();
 							InformePorComplemento.generateInforme("InformeComplemento.pdf", c);
 						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null,"El campo complemento debe tener un valor.");
 							e.printStackTrace();
 						}
 						break;
@@ -142,7 +149,7 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 							int v = Integer.parseInt(view.getNumVeces());
 							InformePorVecesFechas.generateInforme("InformeVecesFechas.pdf", v, fechaInicial, fechaFinal);
 						} catch (Exception e) {
-							e.printStackTrace();
+							JOptionPane.showMessageDialog(null,"Los campos de fechas y el campo numero veces deben tener un valor.");
 						}
 						break;
 					case VECES:
@@ -150,6 +157,7 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 							int veces = Integer.parseInt(view.getNumVeces());
 							InformePorVeces.generateInforme("InformeVeces.pdf", veces);
 						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null,"El campo numero veces debe tener un valor.");
 							e.printStackTrace();
 						}
 						break;
@@ -165,6 +173,7 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 							String m = view.getFieldMatricula();
 							InformePorMatricula.generateInforme("InformeMatricula.pdf", m);
 						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null,"El campo matricula debe tener un valor.");
 							e.printStackTrace();
 						}
 						break;
@@ -173,6 +182,7 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 							Trabajador t = view.getFieldTrabajador();
 							InformePorTrabajador.generateInforme("InformeTrabajador.pdf", t);
 						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null,"El campo trabajador debe tener un valor.");
 							e.printStackTrace();
 						}
 						break;

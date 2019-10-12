@@ -3,6 +3,7 @@ package Models;
 import DB.DatabaseException;
 import DB.MySqlDB;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +54,8 @@ public class Complementos {
             this.nombre = nombre;
             this.precio = precio;
         } catch (DatabaseException e) {
+            JOptionPane.showMessageDialog(null,"Ya se existe ese complemento.");
+
             e.printStackTrace();
         }
     }
@@ -63,6 +66,7 @@ public class Complementos {
             nombre = null;
             precio = 0;
         } catch (DatabaseException e) {
+            JOptionPane.showMessageDialog(null,"No se puede eliminar un complemento mientras este asociado a algun lavado");
             e.printStackTrace();
         }
     }
