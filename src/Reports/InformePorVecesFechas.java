@@ -162,7 +162,7 @@ public class InformePorVecesFechas {
 					cambioMes = true;
 
 					row = table.createRow(20);
-					cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal);
+					cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal+" €");
 					cell.setFont(fontBold);
 					cell.setFontSize(10);
 					lavadosMesTotal = 0;
@@ -183,7 +183,7 @@ public class InformePorVecesFechas {
 					cell = row.createCell(100, "");
 
 					row = table.createRow(20);
-					cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal);
+					cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal+" €");
 					cell.setFont(fontBold);
 					cell.setFontSize(10);
 					lavadosAnioTotal = 0;
@@ -265,7 +265,7 @@ public class InformePorVecesFechas {
 			cambioMatricula = true;
 
 			row = table.createRow(20);
-			cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal);
+			cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal+" €");
 			cell.setFont(fontBold);
 			cell.setFontSize(10);
 			lavadosMesTotal = 0;
@@ -280,7 +280,7 @@ public class InformePorVecesFechas {
 			cell = row.createCell(100, "");
 
 			row = table.createRow(20);
-			cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal);
+			cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal+" €");
 			cell.setFont(fontBold);
 			cell.setFontSize(10);
 			lavadosAnioTotal = 0;

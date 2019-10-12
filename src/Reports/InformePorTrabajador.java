@@ -11,7 +11,6 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-import Models.Complementos;
 import Models.Lavados;
 import Models.Trabajador;
 import be.quodlibet.boxable.BaseTable;
@@ -28,9 +27,9 @@ public class InformePorTrabajador {
 		generateInforme(outputFileName, new Trabajador(1));
 	}
 
-	public static void generateInforme(String outFile, Trabajador trab) throws Exception {
+	public static void generateInforme(String outFile, Trabajador t) throws Exception {
 
-		List<Lavados> listaLavados = Models.Lavados.listaLavadosPorTrabajador(trab);
+		List<Lavados> listaLavados = Models.Lavados.listaLavadosPorTrabajador(t);
 		LocalDate fechaActual = listaLavados.get(0).getFecha();
 
 		// Create a new font object selecting one of the PDF base fonts
@@ -72,7 +71,7 @@ public class InformePorTrabajador {
 		// the parameter is the row height
 		Row<PDPage> headerRow = table.createRow(50);
 		// the first parameter is the cell width
-		Cell<PDPage> cell = headerRow.createCell(100, "Lista lavados por Trabajador:" + trab.getNombre());
+		Cell<PDPage> cell = headerRow.createCell(100, "Lista lavados por trabajador: "+t.getNombre());
 		cell.setFont(fontBold);
 		cell.setFontSize(20);
 		// vertical alignment
@@ -133,7 +132,7 @@ public class InformePorTrabajador {
 				cambioMes = true;
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal);
+				cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal +" €");
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
 				lavadosMesTotal = 0;
@@ -152,9 +151,9 @@ public class InformePorTrabajador {
 
 				row = table.createRow(20);
 				cell = row.createCell(100, "");
-
+				
 				row = table.createRow(20);
-				cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal);
+				cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal+" €");
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
 				lavadosAnioTotal = 0;
@@ -232,7 +231,7 @@ public class InformePorTrabajador {
 		}
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal);
+		cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal+" €");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosMesTotal = 0;
@@ -242,15 +241,16 @@ public class InformePorTrabajador {
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosMesActual = 0;
-
+		
 		row = table.createRow(20);
 		cell = row.createCell(100, "");
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal);
+		cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal+" €");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosAnioTotal = 0;
+		
 
 		row = table.createRow(20);
 		cell = row.createCell(100, "Numero Lavados de este año: " + lavadosAnioActual);
@@ -258,10 +258,10 @@ public class InformePorTrabajador {
 		cell.setFontSize(10);
 		lavadosAnioActual = 0;
 
-		// Fila en blanco
+		//Fila en blanco
 		row = table.createRow(20);
 		cell = row.createCell(100, "");
-
+		
 		row = table.createRow(20);
 		cell = row.createCell(100, "Cantidad total global: " + lavadosTotal + "€");
 		cell.setFont(fontBold);
@@ -285,4 +285,5 @@ public class InformePorTrabajador {
 		document.close();
 	}
 
+	
 }

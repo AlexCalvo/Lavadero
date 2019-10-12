@@ -134,7 +134,7 @@ public class InformeEntreFechas {
 				cambioMes = true;
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal);
+				cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal+" €");
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
 				lavadosMesTotal = 0;
@@ -155,7 +155,7 @@ public class InformeEntreFechas {
 				cell = row.createCell(100, "");
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal);
+				cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal+" €");
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
 				lavadosAnioTotal = 0;
@@ -233,7 +233,7 @@ public class InformeEntreFechas {
 		}
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal);
+		cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal+" €");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosMesTotal = 0;
@@ -248,7 +248,7 @@ public class InformeEntreFechas {
 		cell = row.createCell(100, "");
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal);
+		cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal+" €");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosAnioTotal = 0;
