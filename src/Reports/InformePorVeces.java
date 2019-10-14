@@ -86,12 +86,12 @@ public class InformePorVeces {
 
 		row = table.createRow(20);
 		cell = row.createCell(100, "Año " + fechaActual.getYear());
-		cell.setFillColor(Color.blue);
+		cell.setFillColor(Color.gray);
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
 		cell = row.createCell(100, "Mes " + fechaActual.getMonth());
-		cell.setFillColor(Color.CYAN);
+		cell.setFillColor(Color.lightGray);
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
@@ -144,12 +144,12 @@ public class InformePorVeces {
 				fechaActual = listaLavados.get(i).getFecha();
 				row = table.createRow(20);
 				cell = row.createCell(100, "Año " + fechaActual.getYear());
-				cell.setFillColor(Color.blue);
+				cell.setFillColor(Color.gray);
 				cell.setFontSize(10);
 
 				row = table.createRow(20);
 				cell = row.createCell(100, "Mes " + fechaActual.getMonth());
-				cell.setFillColor(Color.CYAN);
+				cell.setFillColor(Color.lightGray);
 				cell.setFontSize(10);
 				
 			}
@@ -199,7 +199,7 @@ public class InformePorVeces {
 					fechaActual = listaLavados.get(i).getFecha();
 					row = table.createRow(20);
 					cell = row.createCell(100, "Mes " + fechaActual.getMonth());
-					cell.setFillColor(Color.CYAN);
+					cell.setFillColor(Color.lightGray);
 					cell.setFontSize(10);
 					cambioMes = false;
 				}
@@ -208,12 +208,12 @@ public class InformePorVeces {
 					fechaActual = listaLavados.get(i).getFecha();
 					row = table.createRow(20);
 					cell = row.createCell(100, "Año " + fechaActual.getYear());
-					cell.setFillColor(Color.blue);
+					cell.setFillColor(Color.gray);
 					cell.setFontSize(10);
 
 					row = table.createRow(20);
 					cell = row.createCell(100, "Mes " + fechaActual.getMonth());
-					cell.setFillColor(Color.CYAN);
+					cell.setFillColor(Color.lightGray);
 					cell.setFontSize(10);
 					cambioAnio = false;
 				}
