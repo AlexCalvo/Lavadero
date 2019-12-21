@@ -82,12 +82,12 @@ public class InformePorTrabajador {
 
 		Row<PDPage> row = table.createRow(20);
 		cell = row.createCell(100, "Año " + fechaActual.getYear());
-		cell.setFillColor(Color.blue);
+		cell.setFillColor(Color.gray);
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
 		cell = row.createCell(100, "Mes " + fechaActual.getMonth());
-		cell.setFillColor(Color.CYAN);
+		cell.setFillColor(Color.lightGray);
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
@@ -170,7 +170,7 @@ public class InformePorTrabajador {
 				fechaActual = lavado.getFecha();
 				row = table.createRow(20);
 				cell = row.createCell(100, "Mes " + fechaActual.getMonth());
-				cell.setFillColor(Color.CYAN);
+				cell.setFillColor(Color.lightGray);
 				cell.setFontSize(10);
 				cambioMes = false;
 			}
@@ -179,12 +179,13 @@ public class InformePorTrabajador {
 				fechaActual = lavado.getFecha();
 				row = table.createRow(20);
 				cell = row.createCell(100, "Año " + fechaActual.getYear());
-				cell.setFillColor(Color.blue);
+				cell.setFont(fontBold);
+				cell.setFillColor(Color.gray);
 				cell.setFontSize(10);
 
 				row = table.createRow(20);
 				cell = row.createCell(100, "Mes " + fechaActual.getMonth());
-				cell.setFillColor(Color.CYAN);
+				cell.setFillColor(Color.lightGray);
 				cell.setFontSize(10);
 				cambioAnio = false;
 			}
