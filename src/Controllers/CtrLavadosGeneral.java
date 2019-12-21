@@ -15,6 +15,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 public class CtrLavadosGeneral implements ActionListener, ListSelectionListener, DateChangeListener {
@@ -111,9 +112,16 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 
 			case "Factura":
 				try {
+					String baseDirectoy = "";
+
+					JFileChooser chooser = new JFileChooser();
+					if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+						baseDirectoy = chooser.getSelectedFile().getAbsolutePath();
+					} else
+						return;
 					LocalDate fechaIni = view.getFieldFechaIni();
 					LocalDate fechaFin = view.getFieldFechaFin();
-					Tickets.generateTicket("Factura.pdf",fechaIni,fechaFin);
+					Tickets.generateTicket(baseDirectoy,fechaIni,fechaFin);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null,"Los campos de fechas deben tener un valor.");
 					e.printStackTrace();
@@ -121,12 +129,23 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 				break;
 
 			case "Informe":
+				String baseDirectoy = "";
+
+				JFileChooser chooser = new JFileChooser();
+				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+					baseDirectoy = chooser.getSelectedFile().getAbsolutePath();
+				} else
+					return;
+
 				switch (lastReport) {
 					case ENTRE_FECHAS:
 						LocalDate fechaIni = view.getFieldFechaIni();
 						LocalDate fechaFin = view.getFieldFechaFin();
 						try {
-							InformeEntreFechas.generateInforme("InformeEntreFechas.pdf", fechaIni, fechaFin);
+							InformeEntreFechas.generateInforme(baseDirectoy, fechaIni, fechaFin);
+						} catch (FileNotFoundException e) { // File not found or access denied
+							JOptionPane.showMessageDialog(null,"Archivo no encontrado o acceso denegado.");
+							e.printStackTrace();
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null,"Los campos de fechas deben tener un valor.");
 							e.printStackTrace();
@@ -135,8 +154,11 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 					case COMPLEMENTO:
 						try {
 							Complementos c = view.getFieldComplemento();
-							InformePorComplemento.generateInforme("InformeComplemento.pdf", c);
-						} catch (Exception e) {
+							InformePorComplemento.generateInforme(baseDirectoy, c);
+						} catch (FileNotFoundException e) { // File not found or access denied
+							JOptionPane.showMessageDialog(null,"Archivo no encontrado o acceso denegado.");
+							e.printStackTrace();
+						}  catch (Exception e) {
 							JOptionPane.showMessageDialog(null,"El campo complemento debe tener un valor.");
 							e.printStackTrace();
 						}
@@ -147,32 +169,44 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 							LocalDate fechaInicial = view.getFieldFechaIni();
 							LocalDate fechaFinal = view.getFieldFechaFin();
 							int v = Integer.parseInt(view.getNumVeces());
-							InformePorVecesFechas.generateInforme("InformeVecesFechas.pdf", v, fechaInicial, fechaFinal);
-						} catch (Exception e) {
+							InformePorVecesFechas.generateInforme(baseDirectoy, v, fechaInicial, fechaFinal);
+						} catch (FileNotFoundException e) { // File not found or access denied
+							JOptionPane.showMessageDialog(null,"Archivo no encontrado o acceso denegado.");
+							e.printStackTrace();
+						}  catch (Exception e) {
 							JOptionPane.showMessageDialog(null,"Los campos de fechas y el campo numero veces deben tener un valor.");
 						}
 						break;
 					case VECES:
 						try {
 							int veces = Integer.parseInt(view.getNumVeces());
-							InformePorVeces.generateInforme("InformeVeces.pdf", veces);
-						} catch (Exception e) {
+							InformePorVeces.generateInforme(baseDirectoy, veces);
+						} catch (FileNotFoundException e) { // File not found or access denied
+							JOptionPane.showMessageDialog(null,"Archivo no encontrado o acceso denegado.");
+							e.printStackTrace();
+						}  catch (Exception e) {
 							JOptionPane.showMessageDialog(null,"El campo numero veces debe tener un valor.");
 							e.printStackTrace();
 						}
 						break;
 					case GENERAL:
 						try {
-							InformeGeneral.generateInforme("InformeGeneral.pdf");
-						} catch (Exception e) {
+							InformeGeneral.generateInforme(baseDirectoy);
+						} catch (FileNotFoundException e) { // File not found or access denied
+							JOptionPane.showMessageDialog(null,"Archivo no encontrado o acceso denegado.");
+							e.printStackTrace();
+						}  catch (Exception e) {
 							e.printStackTrace();
 						}
 						break;
 					case MATRICULA:
 						try {
 							String m = view.getFieldMatricula();
-							InformePorMatricula.generateInforme("InformeMatricula.pdf", m);
-						} catch (Exception e) {
+							InformePorMatricula.generateInforme(baseDirectoy, m);
+						} catch (FileNotFoundException e) { // File not found or access denied
+							JOptionPane.showMessageDialog(null,"Archivo no encontrado o acceso denegado.");
+							e.printStackTrace();
+						}  catch (Exception e) {
 							JOptionPane.showMessageDialog(null,"El campo matricula debe tener un valor.");
 							e.printStackTrace();
 						}
@@ -180,8 +214,11 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 					case TRABAJADOR:
 						try {
 							Trabajador t = view.getFieldTrabajador();
-							InformePorTrabajador.generateInforme("InformeTrabajador.pdf", t);
-						} catch (Exception e) {
+							InformePorTrabajador.generateInforme(baseDirectoy, t);
+						} catch (FileNotFoundException e) { // File not found or access denied
+							JOptionPane.showMessageDialog(null,"Archivo no encontrado o acceso denegado.");
+							e.printStackTrace();
+						}  catch (Exception e) {
 							JOptionPane.showMessageDialog(null,"El campo trabajador debe tener un valor.");
 							e.printStackTrace();
 						}

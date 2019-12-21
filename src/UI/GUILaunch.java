@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class GUILaunch {
     public static JFrame createGUI() {
-        JFrame window = new JFrame("LavaderOS");
+        JFrame window = new JFrame("Lavadero Puerto S.L.");
         JTabbedPane panel = new GUIMain();
 
         window.setIconImage(new ImageIcon("logo.png").getImage());
