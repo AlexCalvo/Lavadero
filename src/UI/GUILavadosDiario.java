@@ -14,11 +14,14 @@ import com.mxrck.autocompleter.TextAutoCompleter;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 public class GUILavadosDiario extends GUIPanel {
@@ -57,7 +60,16 @@ public class GUILavadosDiario extends GUIPanel {
 
 	public GUILavadosDiario() {
 		createPanelDiario();
+		setCellRender(tableLavados);
 	}
+	
+	public void setCellRender(JTable table) {
+        Enumeration<TableColumn> en = table.getColumnModel().getColumns();
+        while (en.hasMoreElements()) {
+            TableColumn tc = en.nextElement();
+            tc.setCellRenderer(new CellRenderer());
+        }
+    }
 
 	private void createPanelDiario() {
 		this.setLayout(new BorderLayout(0, 10));

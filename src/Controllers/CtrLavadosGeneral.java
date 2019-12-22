@@ -12,6 +12,7 @@ import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -115,6 +116,13 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 					String baseDirectoy = "";
 
 					JFileChooser chooser = new JFileChooser();
+					
+					FileNameExtensionFilter filtro = new FileNameExtensionFilter(".PDF", "pdf");
+					chooser.setFileFilter(filtro);
+					
+					java.io.File nombre =new java.io.File(chooser.getSelectedFile()+".pdf");
+					chooser.setSelectedFile(nombre);
+					
 					if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 						baseDirectoy = chooser.getSelectedFile().getAbsolutePath();
 					} else
@@ -132,8 +140,15 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 				String baseDirectoy = "";
 
 				JFileChooser chooser = new JFileChooser();
+				
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter(".PDF", "pdf");
+				chooser.setFileFilter(filtro);
+				java.io.File nombre =new java.io.File(chooser.getSelectedFile()+".pdf");
+				chooser.setSelectedFile(nombre);
+				
 				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 					baseDirectoy = chooser.getSelectedFile().getAbsolutePath();
+					
 				} else
 					return;
 

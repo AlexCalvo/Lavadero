@@ -5,8 +5,11 @@ import Models.Modelo;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 import java.util.List;
 
 public class GUIModelo extends GUIPanel {
@@ -26,8 +29,17 @@ public class GUIModelo extends GUIPanel {
 
 	public GUIModelo() {
 		createPanelModelo();
+		setCellRender(tableModelo);
 	}
 
+	public void setCellRender(JTable table) {
+        Enumeration<TableColumn> en = table.getColumnModel().getColumns();
+        while (en.hasMoreElements()) {
+            TableColumn tc = en.nextElement();
+            tc.setCellRenderer(new CellRenderer());
+        }
+    }
+	
 	private void createPanelModelo() {
 		this.setLayout(new BorderLayout());
 

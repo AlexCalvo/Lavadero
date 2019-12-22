@@ -97,7 +97,7 @@ public class Modelo {
 
 	@Override
 	public String toString() {
-		return this.getNombre() + " -  " + this.getPrecio() + " ï¿½";
+		return this.getNombre() + " -  " + this.getPrecio() + " €";
 	}
 
 	public Object[] asArray() {
