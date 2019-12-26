@@ -58,8 +58,8 @@ public class Tickets {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		result += lavado.getMatricula() + "     " + lavado.getModelo().getPrecio() + "€";
-		length = (lavado.getModelo().getPrecio() + "").length();
+		result += lavado.getMatricula() + "     " + lavado.getPrecio() + "€";
+		length = (lavado.getPrecio() + "").length();
 		try {
 			result += new String(new char[5 - length]).replace("\0", " ");
 		} catch (Exception e) {
@@ -147,7 +147,6 @@ public class Tickets {
 				row = table.createRow(200);
 			cell = row.createCell(33, generateText(listaLavados.get(i)));
 			cell.setFontSize(10);
-			i++;
 			// FIN PAGINA
 		}
 

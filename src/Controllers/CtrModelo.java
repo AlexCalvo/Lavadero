@@ -24,10 +24,12 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
         switch (actionEvent.getActionCommand()) {
             case "Insertar":
                 if (!view.getFieldNombre().equals("")) {
-                    selectedModelo = new Modelo(view.getFieldNombre(),view.getFieldPrecio());
+                    selectedModelo = new Modelo(view.getFieldNombre(),view.getFieldPrecioExterior(),view.getFieldPrecioInterior(),view.getFieldPrecioCompleto());
                     view.reloadData();
                     view.setFieldNombre("");
-                    view.setFieldPrecio("");
+                    view.setFieldPrecioExterior("");
+                    view.setFieldPrecioInterior("");
+                    view.setFieldPrecioCompleto("");
                     selectedModelo = null;
                 }
                 break;
@@ -35,10 +37,15 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
                 if (selectedModelo != null) {
                     if (!view.getFieldNombre().equals("")) {
                         selectedModelo.setNombre(view.getFieldNombre());
-                        selectedModelo.setPrecio(view.getFieldPrecio());
+                        selectedModelo.setPrecioExterior(view.getFieldPrecioExterior());
+                        selectedModelo.setPrecioInterior(view.getFieldPrecioInterior());
+                        selectedModelo.setPrecioCompleto(view.getFieldPrecioCompleto());
                         view.reloadData();
                         view.setFieldNombre("");
-                        view.setFieldPrecio("");
+                        view.setFieldPrecioExterior("");
+                        view.setFieldPrecioInterior("");
+                        view.setFieldPrecioCompleto("");
+                      
                         selectedModelo = null;
                     }
                 }
@@ -48,7 +55,9 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
                     selectedModelo.delete();
                     view.reloadData();
                     view.setFieldNombre("");
-                    view.setFieldPrecio("");
+                    view.setFieldPrecioExterior("");
+                    view.setFieldPrecioInterior("");
+                    view.setFieldPrecioCompleto("");
                     selectedModelo = null;
                 }
                 break;
@@ -72,8 +81,9 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
 
             selectedModelo = new Modelo(id);
             view.setFieldNombre(selectedModelo.getNombre());
-            view.setFieldPrecio(selectedModelo.getPrecio() + "");
-
+            view.setFieldPrecioExterior(selectedModelo.getPrecioExterior() + "");
+            view.setFieldPrecioInterior(selectedModelo.getPrecioInterior() + "");
+            view.setFieldPrecioCompleto(selectedModelo.getPrecioCompleto() + "");
         }
     }
 }

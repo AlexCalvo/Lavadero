@@ -9,18 +9,23 @@ import java.util.List;
 
 public class Modelo {
 
-	public static final String[] columnas = { "Nombre", "Precio" };
+	public static final String[] columnas = { "Nombre", "Precio Exterior", "Precio Interior", "Precio Completo" };
 
 	private String nombre;
-	private double precio;
+	private double precioExterior;
+	private double precioInterior;
+	private double precioCompleto;
 
 	public static List<Modelo> listaModelos() {
 		List<Modelo> lista = new ArrayList<Modelo>();
 		try (MySqlDB db = new MySqlDB()) {
 			for (Object[] tupla : db.Select("Select * from Modelo;")) {
 				String nombre = (String) tupla[0];
-				double precio = (double) tupla[1];
-				lista.add(new Modelo(nombre, precio, true));
+				double precioExterior = (double) tupla[1];
+				double precioInterior = (double) tupla[2];
+				double precioCompleto = (double) tupla[3];
+
+				lista.add(new Modelo(nombre, precioExterior, precioInterior, precioCompleto, true));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -33,23 +38,30 @@ public class Modelo {
 			Object[] tupla = db.Select("select * from Modelo where nombre = '" + nombre + "';").get(0);
 
 			this.nombre = (String) tupla[0];
-			this.precio = (double) tupla[1];
+			this.precioExterior = (double) tupla[1];
+			this.precioInterior = (double) tupla[2];
+			this.precioCompleto = (double) tupla[3];
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private Modelo(String nombre, double precio, boolean onlyLocal) {
+	private Modelo(String nombre, double precioExterior, double precioInterior, double precioCompleto,
+			boolean onlyLocal) {
 		this.nombre = nombre;
-		this.precio = precio;
+		this.precioExterior = precioExterior;
+		this.precioInterior = precioInterior;
+		this.precioCompleto = precioCompleto;
 	}
 
-	public Modelo(String nombre, double precio) {
+	public Modelo(String nombre, double precioExterior,double precioInterior, double precioCompleto) {
 		try (MySqlDB db = new MySqlDB()) {
-			db.Insert("insert into Modelo values('" + nombre + "'," + precio + ");");
+			db.Insert("insert into Modelo values('" + nombre + "'," + precioExterior + ", "+ precioInterior +" , "+ precioCompleto+ ");");
 
 			this.nombre = nombre;
-			this.precio = precio;
+			this.precioExterior = precioExterior;
+			this.precioInterior = precioInterior;
+			this.precioCompleto = precioCompleto;
 		} catch (DatabaseException e) {
 			JOptionPane.showMessageDialog(null,"Ya existe ese modelo.");
 			e.printStackTrace();
@@ -71,15 +83,43 @@ public class Modelo {
 
 	}
 
-	public double getPrecio() {
-		return precio;
+	public double getPrecioExterior() {
+		return precioExterior;
 	}
 
-	public void setPrecio(double precio) {
+	public void setPrecioExterior(double precio) {
 		try (MySqlDB db = new MySqlDB()) {
-			db.Update("update Modelo set precio = " + precio + " where nombre = '" + this.getNombre() + "';");
+			db.Update("update Modelo set precioExterior = " + precio + " where nombre = '" + this.getNombre() + "';");
 
-			this.precio = precio;
+			this.precioExterior = precio;
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public double getPrecioInterior() {
+		return precioInterior;
+	}
+
+	public void setPrecioInterior(double precio) {
+		try (MySqlDB db = new MySqlDB()) {
+			db.Update("update Modelo set precioInterior = " + precio + " where nombre = '" + this.getNombre() + "';");
+
+			this.precioInterior = precio;
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public double getPrecioCompleto() {
+		return precioCompleto;
+	}
+
+	public void setPrecioCompleto(double precio) {
+		try (MySqlDB db = new MySqlDB()) {
+			db.Update("update Modelo set precioCompleto = " + precio + " where nombre = '" + this.getNombre() + "';");
+
+			this.precioCompleto = precio;
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
@@ -90,21 +130,24 @@ public class Modelo {
 			miBD.Delete("DELETE FROM Modelo WHERE nombre = '" + this.nombre + "';");
 			nombre = null;
 		} catch (DatabaseException e) {
-			JOptionPane.showMessageDialog(null,"No se puede eliminar un modelo mientras este asociado a algun lavado.");
+			JOptionPane.showMessageDialog(null,
+					"No se puede eliminar un modelo mientras este asociado a algun lavado.");
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public String toString() {
-		return this.getNombre() + " -  " + this.getPrecio() + " €";
+		return this.getNombre();
 	}
 
 	public Object[] asArray() {
 		Object[] tmp = new Object[10];
 		tmp[0] = nombre;
-		tmp[1] = precio;
-
+		tmp[1] = precioExterior;
+		tmp[2] = precioInterior;
+		tmp[3] = precioCompleto;		
+		
 		return tmp;
 	}
 }

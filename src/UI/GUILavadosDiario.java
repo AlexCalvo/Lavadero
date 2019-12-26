@@ -1,5 +1,6 @@
 package UI;
 
+import Controllers.CtrPrecioModelo;
 import Controllers.ModelNotFoundException;
 import Models.Lavados;
 import Models.Modelo;
@@ -52,7 +53,6 @@ public class GUILavadosDiario extends GUIPanel {
 	private JTextField tObservaciones = new JTextField();
 	private JTextField tPropietario = new JTextField();
 	private JCheckBox tFactura = new JCheckBox();
-	
 
 	private JButton bIns = new JButton("Insertar");
 	private JButton bMod = new JButton("Modificar");
@@ -62,14 +62,14 @@ public class GUILavadosDiario extends GUIPanel {
 		createPanelDiario();
 		setCellRender(tableLavados);
 	}
-	
+
 	public void setCellRender(JTable table) {
-        Enumeration<TableColumn> en = table.getColumnModel().getColumns();
-        while (en.hasMoreElements()) {
-            TableColumn tc = en.nextElement();
-            tc.setCellRenderer(new CellRenderer());
-        }
-    }
+		Enumeration<TableColumn> en = table.getColumnModel().getColumns();
+		while (en.hasMoreElements()) {
+			TableColumn tc = en.nextElement();
+			tc.setCellRenderer(new CellRenderer());
+		}
+	}
 
 	private void createPanelDiario() {
 		this.setLayout(new BorderLayout(0, 10));
@@ -92,16 +92,15 @@ public class GUILavadosDiario extends GUIPanel {
 		panel.add(create2ElementPanel(lMatricula, tMatricula));
 		panel.add(create2ElementPanel(lTelefono, tTelefono));
 		panel.add(create2ElementPanel(lModelo, tModelo));
-				
-		
+
 		panel.add(create2ElementPanel(lComplemento, tComplemento));
 		panel.add(create2ElementPanel(lTrabajador, tTrabajador));
-		
+
 		panel.add(create2ElementPanel(lPropietario, tPropietario));
 		panel.add(create2ElementPanel(lFactura, tFactura));
 		panel.add(create2ElementPanel(lObservaciones, tObservaciones));
-		
-		//Empty pannel to center the ButtonPannel
+
+		// Empty pannel to center the ButtonPannel
 		panel.add(new JPanel());
 		panel.add(createButtonPanel(), BorderLayout.SOUTH);
 
@@ -161,10 +160,10 @@ public class GUILavadosDiario extends GUIPanel {
 	public Complementos getFieldComplemento() {
 		try {
 			return (Complementos) this.autoComplemento.findItem(autoComplemento.getItemSelected().toString());
-		}catch(NullPointerException e) {
+		} catch (NullPointerException e) {
 			return new Complementos("Ninguno");
 		}
-		
+
 	}
 
 	public void setFieldComplemento(Complementos propietario) {
@@ -177,7 +176,7 @@ public class GUILavadosDiario extends GUIPanel {
 	public Trabajador getFieldTrabajador() {
 		try {
 			return (Trabajador) this.autoTrabajador.findItem(autoTrabajador.getItemSelected().toString());
-		}catch(NullPointerException e) {
+		} catch (NullPointerException e) {
 			return new Trabajador(-1);
 		}
 	}
@@ -196,7 +195,7 @@ public class GUILavadosDiario extends GUIPanel {
 	public void setFieldFactura(boolean factura) {
 		this.tFactura.setSelected(factura);
 	}
-	
+
 	public String getFieldObservaciones() {
 		return this.tObservaciones.getText();
 	}
@@ -204,7 +203,7 @@ public class GUILavadosDiario extends GUIPanel {
 	public void setFieldObservaciones(String string) {
 		this.tObservaciones.setText(string);
 	}
-	
+
 	public String getFieldPropietario() {
 		return this.tPropietario.getText();
 	}
@@ -212,6 +211,36 @@ public class GUILavadosDiario extends GUIPanel {
 	public void setFieldPropietario(String string) {
 		this.tPropietario.setText(string);
 	}
+
+	public double getFieldPrecio() {
+		
+		String s1 = "Precio Exterior: " + getFieldModelo().getPrecioExterior() + "€";
+		String s2 = "Precio Interior: " + getFieldModelo().getPrecioInterior() + "€";
+		String s3 = "Precio Completo: " + getFieldModelo().getPrecioCompleto() + "€";
+		Object[] possibilities = { s1, s2, s3 };
+		String s = null;
+		
+		// If a string was returned, say so.
+		while ((s == null) || (s.length() <= 0)) {
+			s = (String) JOptionPane.showInputDialog((JFrame)SwingUtilities.windowForComponent(this), "Elige tipo lavado: ",
+					"Tipo Lavado", JOptionPane.PLAIN_MESSAGE, null, possibilities, s1);
+
+			if (s.equals(s1)) {
+				return getFieldModelo().getPrecioExterior() + getFieldComplemento().getPrecio();
+			} else if (s.equals(s2)) {
+				return getFieldModelo().getPrecioInterior() + getFieldComplemento().getPrecio();
+			} else {
+				return getFieldModelo().getPrecioCompleto() + getFieldComplemento().getPrecio();
+			}
+		}
+		return 0;
+		
+	}
+
+
+	// public void setFieldPrecio(String string) {
+	// this.tPropietario.setText(string);
+	// }
 
 	public TextAutoCompleter getAutoModelo() {
 		return autoModelo;

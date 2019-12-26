@@ -19,12 +19,13 @@ import javax.swing.*;
 
 public class Lavados {
 
-	public static final String[] columnas = { "ID", "MATRICULA", "MODELO", "HORA", "FECHA", "TELEFONO", "COMPLEMENTO",
-			"TRABAJADOR", "OBSERVACIONES", "PROPIETARIO", "FACTURA" };
+	public static final String[] columnas = { "ID", "MATRICULA", "MODELO", "PRECIO", "HORA", "FECHA", "TELEFONO",
+			"COMPLEMENTO", "TRABAJADOR", "OBSERVACIONES", "PROPIETARIO", "FACTURA" };
 
 	private int id;// clave principal
 	private String matricula;
 	private Modelo modelo;
+	private double precio;
 	private LocalTime hora;
 	private LocalDate fecha;
 	private String telefono;
@@ -43,18 +44,19 @@ public class Lavados {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
+				double precio = (double) tupla[3];
 				// TODO: Waiting on better fix
-				LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
-				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
-				String telefono = (String) tupla[5];
-				Trabajador trab = new Trabajador((int) tupla[6]);
+				LocalTime hora = ((Time) tupla[4]).toLocalTime().minus(1, ChronoUnit.HOURS);
+				LocalDate fecha = ((Date) tupla[5]).toLocalDate();
+				String telefono = (String) tupla[6];
+				Trabajador trab = new Trabajador((int) tupla[7]);
 				Complementos comp = null;
-				if (tupla[7] != null)
-					comp = new Complementos((String) tupla[7]);
-				String obs = (String) tupla[8];
-				String p = (String) tupla[9];
-				boolean f = (Boolean) tupla[10];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
+				if (tupla[8] != null)
+					comp = new Complementos((String) tupla[8]);
+				String obs = (String) tupla[9];
+				String p = (String) tupla[10];
+				boolean f = (Boolean) tupla[11];
+				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -63,29 +65,29 @@ public class Lavados {
 		return lista;
 	}
 
-	//Lista tickets
+	// Lista tickets
 	public static List<Lavados> listaTickets(LocalDate ini, LocalDate fin) {
 		List<Lavados> lista = new ArrayList<Lavados>();
 
 		try (MySqlDB miBD = new MySqlDB()) {
 
 			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados WHERE Fecha >= '" + ini + "' and Fecha <='" + fin
-					+ "' and Factura = 0 order by id")) {
+					+ "' and Factura = false order by id")) {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
-				// TODO: Waiting on better fix
-				LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
-				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
-				String telefono = (String) tupla[5];
-				Trabajador trab = new Trabajador((int) tupla[6]);
+				double precio = (double) tupla[3];
+				LocalTime hora = ((Time) tupla[4]).toLocalTime().minus(1, ChronoUnit.HOURS);
+				LocalDate fecha = ((Date) tupla[5]).toLocalDate();
+				String telefono = (String) tupla[6];
+				Trabajador trab = new Trabajador((int) tupla[7]);
 				Complementos comp = null;
-				if (tupla[7] != null)
-					comp = new Complementos((String) tupla[7]);
-				String obs = (String) tupla[8];
-				String p = (String) tupla[9];
-				boolean f = (Boolean) tupla[10];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
+				if (tupla[8] != null)
+					comp = new Complementos((String) tupla[8]);
+				String obs = (String) tupla[9];
+				String p = (String) tupla[10];
+				boolean f = (Boolean) tupla[11];
+				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -93,8 +95,8 @@ public class Lavados {
 
 		return lista;
 	}
-	
-	//Lista facturas
+
+	// Lista facturas
 	public static List<Lavados> listaFacturas(LocalDate ini, LocalDate fin) {
 		List<Lavados> lista = new ArrayList<Lavados>();
 
@@ -105,18 +107,18 @@ public class Lavados {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
-				// TODO: Waiting on better fix
-				LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
-				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
-				String telefono = (String) tupla[5];
-				Trabajador trab = new Trabajador((int) tupla[6]);
+				double precio = (double) tupla[3];
+				LocalTime hora = ((Time) tupla[4]).toLocalTime().minus(1, ChronoUnit.HOURS);
+				LocalDate fecha = ((Date) tupla[5]).toLocalDate();
+				String telefono = (String) tupla[6];
+				Trabajador trab = new Trabajador((int) tupla[7]);
 				Complementos comp = null;
-				if (tupla[7] != null)
-					comp = new Complementos((String) tupla[7]);
-				String obs = (String) tupla[8];
-				String p = (String) tupla[9];
-				boolean f = (Boolean) tupla[10];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
+				if (tupla[8] != null)
+					comp = new Complementos((String) tupla[8]);
+				String obs = (String) tupla[9];
+				String p = (String) tupla[10];
+				boolean f = (Boolean) tupla[11];
+				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -136,16 +138,19 @@ public class Lavados {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
+				double precio = (double) tupla[3];
 				// TODO: Waiting on better fix
-				LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
-				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
-				String telefono = (String) tupla[5];
-				Complementos comp = new Complementos((String) tupla[7]);
-				Trabajador trab = new Trabajador((int) tupla[6]);
-				String obs = (String) tupla[8];
-				String p = (String) tupla[9];
-				boolean f = (Boolean) tupla[10];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
+				LocalTime hora = ((Time) tupla[4]).toLocalTime().minus(1, ChronoUnit.HOURS);
+				LocalDate fecha = ((Date) tupla[5]).toLocalDate();
+				String telefono = (String) tupla[6];
+				Trabajador trab = new Trabajador((int) tupla[7]);
+				Complementos comp = null;
+				if (tupla[8] != null)
+					comp = new Complementos((String) tupla[8]);
+				String obs = (String) tupla[9];
+				String p = (String) tupla[10];
+				boolean f = (Boolean) tupla[11];
+				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -164,16 +169,18 @@ public class Lavados {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
-				// TODO: Waiting on better fix
-				LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
-				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
-				String telefono = (String) tupla[5];
-				Complementos comp = new Complementos((String) tupla[7]);
-				Trabajador trab = new Trabajador((int) tupla[6]);
-				String obs = (String) tupla[8];
-				String p = (String) tupla[9];
-				boolean f = (Boolean) tupla[10];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
+				double precio = (double) tupla[3];
+				LocalTime hora = ((Time) tupla[4]).toLocalTime().minus(1, ChronoUnit.HOURS);
+				LocalDate fecha = ((Date) tupla[5]).toLocalDate();
+				String telefono = (String) tupla[6];
+				Trabajador trab = new Trabajador((int) tupla[7]);
+				Complementos comp = null;
+				if (tupla[8] != null)
+					comp = new Complementos((String) tupla[8]);
+				String obs = (String) tupla[9];
+				String p = (String) tupla[10];
+				boolean f = (Boolean) tupla[11];
+				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -195,16 +202,18 @@ public class Lavados {
 					int id = (int) tupla[0];
 					String matricula = (String) tupla[1];
 					Modelo modelo = new Modelo((String) tupla[2]);
-					// TODO: Waiting on better fix
-					LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
-					LocalDate fecha = ((Date) tupla[4]).toLocalDate();
-					String telefono = (String) tupla[5];
-					Complementos comp = new Complementos((String) tupla[7]);
-					Trabajador trab = new Trabajador((int) tupla[6]);
-					String obs = (String) tupla[8];
-					String p = (String) tupla[9];
-					boolean f = (Boolean) tupla[10];
-					lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
+					double precio = (double) tupla[3];
+					LocalTime hora = ((Time) tupla[4]).toLocalTime().minus(1, ChronoUnit.HOURS);
+					LocalDate fecha = ((Date) tupla[5]).toLocalDate();
+					String telefono = (String) tupla[6];
+					Trabajador trab = new Trabajador((int) tupla[7]);
+					Complementos comp = null;
+					if (tupla[8] != null)
+						comp = new Complementos((String) tupla[8]);
+					String obs = (String) tupla[9];
+					String p = (String) tupla[10];
+					boolean f = (Boolean) tupla[11];
+					lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
 				}
 			}
 		} catch (DatabaseException e) {
@@ -226,16 +235,19 @@ public class Lavados {
 					int id = (int) tupla[0];
 					String matricula = (String) tupla[1];
 					Modelo modelo = new Modelo((String) tupla[2]);
+					double precio = (double) tupla[3];
 					// TODO: Waiting on better fix
-					LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
-					LocalDate fecha = ((Date) tupla[4]).toLocalDate();
-					String telefono = (String) tupla[5];
-					Complementos comp = new Complementos((String) tupla[7]);
-					Trabajador trab = new Trabajador((int) tupla[6]);
-					String obs = (String) tupla[8];
-					String p = (String) tupla[9];
-					boolean f = (Boolean) tupla[10];
-					lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
+					LocalTime hora = ((Time) tupla[4]).toLocalTime().minus(1, ChronoUnit.HOURS);
+					LocalDate fecha = ((Date) tupla[5]).toLocalDate();
+					String telefono = (String) tupla[6];
+					Trabajador trab = new Trabajador((int) tupla[7]);
+					Complementos comp = null;
+					if (tupla[8] != null)
+						comp = new Complementos((String) tupla[8]);
+					String obs = (String) tupla[9];
+					String p = (String) tupla[10];
+					boolean f = (Boolean) tupla[11];
+					lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
 				}
 			}
 		} catch (DatabaseException e) {
@@ -256,16 +268,19 @@ public class Lavados {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
+				double precio = (double) tupla[3];
 				// TODO: Waiting on better fix
-				LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
-				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
-				String telefono = (String) tupla[5];
-				Complementos comp = new Complementos((String) tupla[7]);
-				Trabajador trab = new Trabajador((int) tupla[6]);
-				String obs = (String) tupla[8];
-				String p = (String) tupla[9];
-				boolean f = (Boolean) tupla[10];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
+				LocalTime hora = ((Time) tupla[4]).toLocalTime().minus(1, ChronoUnit.HOURS);
+				LocalDate fecha = ((Date) tupla[5]).toLocalDate();
+				String telefono = (String) tupla[6];
+				Trabajador trab = new Trabajador((int) tupla[7]);
+				Complementos comp = null;
+				if (tupla[8] != null)
+					comp = new Complementos((String) tupla[8]);
+				String obs = (String) tupla[9];
+				String p = (String) tupla[10];
+				boolean f = (Boolean) tupla[11];
+				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -284,16 +299,19 @@ public class Lavados {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
+				double precio = (double) tupla[3];
 				// TODO: Waiting on better fix
-				LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
-				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
-				String telefono = (String) tupla[5];
-				Trabajador trab = new Trabajador((int) tupla[6]);
-				Complementos comp = new Complementos((String) tupla[7]);
-				String obs = (String) tupla[8];
-				String p = (String) tupla[9];
-				boolean f = (Boolean) tupla[10];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
+				LocalTime hora = ((Time) tupla[4]).toLocalTime().minus(1, ChronoUnit.HOURS);
+				LocalDate fecha = ((Date) tupla[5]).toLocalDate();
+				String telefono = (String) tupla[6];
+				Trabajador trab = new Trabajador((int) tupla[7]);
+				Complementos comp = null;
+				if (tupla[8] != null)
+					comp = new Complementos((String) tupla[8]);
+				String obs = (String) tupla[9];
+				String p = (String) tupla[10];
+				boolean f = (Boolean) tupla[11];
+				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -307,21 +325,25 @@ public class Lavados {
 		List<Lavados> lista = new ArrayList<Lavados>();
 
 		try (MySqlDB miBD = new MySqlDB()) {
-
+			
 			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where propietario = '" + prop + "';")) {
 				int id = (int) tupla[0];
 				String matricula = (String) tupla[1];
 				Modelo modelo = new Modelo((String) tupla[2]);
+				double precio = (double) tupla[3];
 				// TODO: Waiting on better fix
-				LocalTime hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
-				LocalDate fecha = ((Date) tupla[4]).toLocalDate();
-				String telefono = (String) tupla[5];
-				Trabajador trab = new Trabajador((int) tupla[6]);
-				Complementos comp = new Complementos((String) tupla[7]);
-				String obs = (String) tupla[8];
-				String p = (String) tupla[9];
-				boolean f = (Boolean) tupla[10];
-				lista.add(new Lavados(id, matricula, modelo, hora, fecha, telefono, comp, trab, obs, p, f));
+				LocalTime hora = ((Time) tupla[4]).toLocalTime().minus(1, ChronoUnit.HOURS);
+				LocalDate fecha = ((Date) tupla[5]).toLocalDate();
+				String telefono = (String) tupla[6];
+				Trabajador trab = new Trabajador((int) tupla[7]);
+				Complementos comp = null;
+				if (tupla[8] != null)
+					comp = new Complementos((String) tupla[8]);
+				String obs = (String) tupla[9];
+				String p = (String) tupla[10];
+				boolean f = (Boolean) tupla[11];
+				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
+				System.out.print(matricula);
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -335,15 +357,15 @@ public class Lavados {
 			this.id = (int) tupla[0];
 			this.matricula = (String) tupla[1];
 			this.modelo = new Modelo((String) tupla[2]);
-			// TODO: Waiting on better fix
-			this.hora = ((Time) tupla[3]).toLocalTime().minus(1, ChronoUnit.HOURS);
-			this.fecha = ((Date) tupla[4]).toLocalDate();
-			this.telefono = (String) tupla[5];
-			this.trab = new Trabajador((int) tupla[6]);
-			this.comp = new Complementos((String) tupla[7]);
-			this.observaciones = (String) tupla[8];
-			this.propietario = (String) tupla[9];
-			this.factura = (Boolean) tupla[10];
+			this.precio = (double) tupla[3];
+			this.hora = ((Time) tupla[4]).toLocalTime().minus(1, ChronoUnit.HOURS);
+			this.fecha = ((Date) tupla[5]).toLocalDate();
+			this.telefono = (String) tupla[6];
+			this.trab = new Trabajador((int) tupla[7]);
+			this.comp = new Complementos((String) tupla[8]);
+			this.observaciones = (String) tupla[9];
+			this.propietario = (String) tupla[10];
+			this.factura = (Boolean) tupla[11];
 
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -351,11 +373,13 @@ public class Lavados {
 
 	}
 
-	private Lavados(int id, String matricula, Modelo modelo, LocalTime hora, LocalDate fecha, String telefono,
-			Complementos prop, Trabajador trab, String observaciones, String propietario, boolean factura) {
+	private Lavados(int id, String matricula, Modelo modelo, double precio, LocalTime hora, LocalDate fecha,
+			String telefono, Complementos prop, Trabajador trab, String observaciones, String propietario,
+			boolean factura) {
 		this.id = id;
 		this.matricula = matricula;
 		this.modelo = modelo;
+		this.precio = precio;
 		this.hora = hora;
 		this.fecha = fecha;
 		this.telefono = telefono;
@@ -366,8 +390,8 @@ public class Lavados {
 		this.factura = factura;
 	}
 
-	public Lavados(String matricula, Modelo modelo, LocalTime hora, LocalDate fecha, String telefono, Complementos comp,
-			Trabajador trab, String observaciones, String propietario, boolean factura) {
+	public Lavados(String matricula, Modelo modelo, double precio, LocalTime hora, LocalDate fecha, String telefono,
+			Complementos comp, Trabajador trab, String observaciones, String propietario, boolean factura) {
 		try (MySqlDB miBD = new MySqlDB()) {
 
 			// Get new ID
@@ -387,13 +411,15 @@ public class Lavados {
 				throw new MissingHourException();
 			}
 
-			miBD.Insert("INSERT INTO Lavados VALUES(" + newId + ", '" + matricula + "', '" + modelo.getNombre() + "','"
-					+ hora.toString() + "', '" + fecha.toString() + "','" + telefono + "'," + trab.getId() + ",'"
-					+ comp.getNombre() + "','" + observaciones + "','" + propietario + "', " + factura + ");");
+			miBD.Insert("INSERT INTO Lavados VALUES(" + newId + ", '" + matricula + "', '" + modelo.getNombre() + "',"
+					+ precio + ",'" + hora.toString() + "', '" + fecha.toString() + "','" + telefono + "',"
+					+ trab.getId() + ",'" + comp.getNombre() + "','" + observaciones + "','" + propietario + "', "
+					+ factura + ");");
 
 			this.id = newId;
 			this.matricula = matricula;
 			this.modelo = modelo;
+			this.precio = precio;
 			this.hora = hora;
 			this.fecha = fecha;
 			this.telefono = telefono;
@@ -439,6 +465,20 @@ public class Lavados {
 			miBD.Update("UPDATE Lavados SET modelo = '" + modelo.getNombre() + "' where id = " + this.getId());
 
 			this.modelo = modelo;
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		try (MySqlDB miBD = new MySqlDB()) {
+			miBD.Update("UPDATE Lavados SET precio = " + precio + " where id = " + this.getId());
+
+			this.precio = precio;
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
@@ -562,6 +602,7 @@ public class Lavados {
 			id = -1;
 			matricula = null;
 			modelo = null;
+			precio = -1;
 			hora = null;
 			telefono = null;
 			comp = null;
@@ -577,9 +618,9 @@ public class Lavados {
 
 	@Override
 	public String toString() {
-		return "Lavados [id=" + id + ", matricula=" + matricula + ", modelo=" + modelo + ", hora=" + hora + ", fecha="
-				+ fecha + ", telefono=" + telefono + ", comp=" + comp + ", trab=" + trab + ", observaciones="
-				+ observaciones + ", propietario=" + propietario + ", factura=" + factura + "]";
+		return "Lavados [id=" + id + ", matricula=" + matricula + ", modelo=" + modelo + ",precio=" + precio + ", hora="
+				+ hora + ", fecha=" + fecha + ", telefono=" + telefono + ", comp=" + comp + ", trab=" + trab
+				+ ", observaciones=" + observaciones + ", propietario=" + propietario + ", factura=" + factura + "]";
 	}
 
 	public Object[] asArray() {
@@ -587,14 +628,15 @@ public class Lavados {
 		tmp[0] = id;
 		tmp[1] = matricula;
 		tmp[2] = modelo;
-		tmp[3] = hora;
-		tmp[4] = fecha;
-		tmp[5] = telefono;
-		tmp[6] = comp;
-		tmp[7] = trab;
-		tmp[8] = observaciones;
-		tmp[9] = propietario;
-		tmp[10] = factura;
+		tmp[3] = precio;
+		tmp[4] = hora;
+		tmp[5] = fecha;
+		tmp[6] = telefono;
+		tmp[7] = comp;
+		tmp[8] = trab;
+		tmp[9] = observaciones;
+		tmp[10] = propietario;
+		tmp[11] = factura;
 
 		return tmp;
 	}

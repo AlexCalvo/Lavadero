@@ -30,11 +30,15 @@ public class CtrPrecioModelo implements ActionListener, ListSelectionListener {
 	public void actionPerformed(ActionEvent actionEvent) {
 		switch (actionEvent.getActionCommand()) {
         case "Insertar":
+        	view.setVisible(false);
             if (!lavadoView.getFieldModelo().getNombre().equals("")) {
-                newModelo = new Modelo(lavadoView.getFieldModelo().getNombre(),view.getFieldPrecio());
+            	//view.setSelected(true);
+                newModelo = new Modelo(lavadoView.getFieldModelo().getNombre(),view.getFieldPrecioExterior(),view.getFieldPrecioInterior(),view.getFieldPrecioCompleto());
                 modeloView.reloadData();
                 modeloView.setFieldNombre("");
-                modeloView.setFieldPrecio("");
+                modeloView.setFieldPrecioExterior("");
+                modeloView.setFieldPrecioInterior("");
+                modeloView.setFieldPrecioCompleto("");
                 newModelo = null;
             }
             break;
@@ -59,8 +63,9 @@ public class CtrPrecioModelo implements ActionListener, ListSelectionListener {
 
 	            newModelo = new Modelo(id);
 	            modeloView.setFieldNombre(newModelo.getNombre());
-	            modeloView.setFieldPrecio(newModelo.getPrecio() + "");
-
+	            modeloView.setFieldPrecioExterior(newModelo.getPrecioExterior() + "");
+	            modeloView.setFieldPrecioInterior(newModelo.getPrecioInterior() + "");
+	            modeloView.setFieldPrecioCompleto(newModelo.getPrecioCompleto() + "");
 	        }
         }
 

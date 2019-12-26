@@ -200,7 +200,7 @@ public class InformePorTrabajador {
 				numLavadosTotal++;
 
 				// Add cost tp counters
-				double precio = lavado.getModelo().getPrecio();
+				double precio = lavado.getPrecio();
 				lavadosAnioTotal += precio;
 				lavadosMesTotal += precio;
 				lavadosTotal += precio;

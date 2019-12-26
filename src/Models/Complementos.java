@@ -20,7 +20,7 @@ public class Complementos {
         try (MySqlDB db = new MySqlDB()) {
             for (Object[] tupla : db.Select("Select * from Complementos")) {
                 String nombre = (String) tupla[0];
-                double precio = (Integer)tupla[1];
+                double precio = (double)tupla[1];
                 lista.add(new Complementos(nombre, precio, true));
             }
         } catch (DatabaseException e) {
@@ -41,7 +41,7 @@ public class Complementos {
                 return;
             Object[] tupla = listTupla.get(0);
             this.nombre = (String) tupla[0];
-            this.precio = (Integer) tupla[1];
+            this.precio = (double) tupla[1];
         } catch (DatabaseException e) {
             e.printStackTrace();
         }

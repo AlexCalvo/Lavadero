@@ -29,13 +29,8 @@ public class GUILavadosGeneral extends GUIPanel {
 	private Component panelGeneral;
 	private JTable tableLavados;
 	private JLabel lMatricula = new JLabel("Matricula:");
-	private JLabel lModelo = new JLabel("Modelo:");
-	private JLabel lHora = new JLabel("Hora:");
-	private JLabel lFecha = new JLabel("Fecha:");
-	private JLabel lTelefono = new JLabel("Telefono:");
 	private JLabel lComplemento = new JLabel("Complemento:");
 	private JLabel lTrabajador = new JLabel("Trabajador:");
-	private JLabel lObservaciones = new JLabel("Observaciones:");
 	private JLabel lPropietario = new JLabel("Propietario:");
 
 	private JLabel lsumatorioPrecio = new JLabel("Total:");
@@ -72,6 +67,9 @@ public class GUILavadosGeneral extends GUIPanel {
 	private JButton bQueryPorVeces = new JButton("Por Veces");
 	private JButton bQueryComplemento = new JButton("Por Complemento");
 	private JButton bQueryTrabajador = new JButton("Por Trabajador");
+	private JButton bQueryPropietario = new JButton("Por Propietario");
+	private JButton bQueryTickets = new JButton("Mostrar Tickets");
+	private JButton bQueryFacturas = new JButton("Mostrar Facturas");
 	private JButton bRefrescar = new JButton("Refrescar");
 
 	private JButton bGenerarInforme = new JButton("Generar informe");
@@ -120,6 +118,7 @@ public class GUILavadosGeneral extends GUIPanel {
 		panel.add(create2ElementPanel(lNumVeces, tNumVeces));
 		panel.add(create2ElementPanel(lComplemento, tComplemento));
 		panel.add(create2ElementPanel(lTrabajador, tTrabajador));
+		panel.add(create2ElementPanel(lPropietario, tPropietario));
 
 		return panel;
 	}
@@ -127,9 +126,16 @@ public class GUILavadosGeneral extends GUIPanel {
 	private Component createSouthPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 1, 6, 6));
+		
 
 		panel.add(createQueryButtons());
-		panel.add(create2ElementPanel(bGenerarFactura, bGenerarInforme));
+		JPanel tmp = new JPanel();
+		tmp.add(bQueryTickets);
+		tmp.add(bQueryFacturas);
+		tmp.add(bGenerarFactura);
+		tmp.add(bGenerarInforme);
+		tmp.setLayout(new GridLayout(1, 4, 5, 5));
+		panel.add(tmp);
 		// panel.add(create2ElementPanel(lModelo, tModelo));
 		// panel.add(create2ElementPanel(lHora, tHora));
 		// panel.add(create2ElementPanel(lFecha, tFecha));
@@ -249,6 +255,8 @@ public class GUILavadosGeneral extends GUIPanel {
 		panelQuery.add(bQueryPorVeces);
 		panelQuery.add(bQueryComplemento);
 		panelQuery.add(bQueryTrabajador);
+		panelQuery.add(bQueryPropietario);		
+		
 		panelQuery.add(bRefrescar);
 		panelQuery.add(create2ElementPanel(lsumatorioPrecio, tsumatorioPrecios));
 		return panelQuery;
@@ -279,6 +287,14 @@ public class GUILavadosGeneral extends GUIPanel {
 		bQueryComplemento.addActionListener(ctr);
 		bQueryTrabajador.setActionCommand("Trabajador");
 		bQueryTrabajador.addActionListener(ctr);
+		bQueryPropietario.setActionCommand("Propietario");
+		bQueryPropietario.addActionListener(ctr);
+		
+		bQueryTickets.setActionCommand("MostrarTickets");
+		bQueryTickets.addActionListener(ctr);
+		bQueryFacturas.setActionCommand("MostrarFacturas");
+		bQueryFacturas.addActionListener(ctr);
+		
 		bRefrescar.setActionCommand("Refrescar");
 		bRefrescar.addActionListener(ctr);
 
@@ -332,26 +348,44 @@ public class GUILavadosGeneral extends GUIPanel {
 		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByMatricula(m);
 		calcularTotal();
 	}
+	
+	public void reloadPropietario(String p) {
+		this.tableLavados.getSelectionModel().clearSelection();
+		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredPropietario(p);
+		calcularTotal();
+	}
+	
+	public void reloadFacturas(LocalDate fechaIni, LocalDate fechaFin) {
+		this.tableLavados.getSelectionModel().clearSelection();
+		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredFacturas(fechaIni, fechaFin);
+		calcularTotal();
+	}
+	
+	public void reloadTickets(LocalDate fechaIni, LocalDate fechaFin) {
+		this.tableLavados.getSelectionModel().clearSelection();
+		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredTickets(fechaIni, fechaFin);
+		calcularTotal();
+	}
 
 	private void calcularTotal() {
 		double acumulador = 0;
 		double num = 0;
 
 		for (int i = 0; i < tableLavados.getRowCount(); i++) {
-			num = ((Modelo) tableLavados.getValueAt(i, 2)).getPrecio();
+			num = ((double) tableLavados.getValueAt(i, 3));
 			
-			try {
-				if ( ((Complementos) tableLavados.getValueAt(i, 6)).getNombre() != null) {
-					num += ((Complementos) tableLavados.getValueAt(i, 6)).getPrecio();
-				}
-			}catch(NullPointerException np) {}
+//			try {
+//				if ( ((Complementos) tableLavados.getValueAt(i, 6)).getNombre() != null) {
+//					num += ((Complementos) tableLavados.getValueAt(i, 6)).getPrecio();
+//				}
+//			}catch(NullPointerException np) {}
 			
 			
 			
 			acumulador += num;
 		}
 		
-		tsumatorioPrecios.setText(acumulador + " Eur");
+		tsumatorioPrecios.setText(acumulador + " Euros");
 	}
 	
 	
@@ -400,6 +434,26 @@ public class GUILavadosGeneral extends GUIPanel {
 
 		public void fillFilteredEntreFechasVeces(LocalDate ini, LocalDate fin, int x) {
 			List<Lavados> lista = Lavados.listaLavadosPorVecesFechas(ini, fin, x);
+
+			alterTable(lista);
+		}
+		
+		
+		public void fillFilteredPropietario(String nombre) {
+			List<Lavados> lista = Lavados.listaLavadosPorPropietario(nombre);
+
+			alterTable(lista);
+		}
+		
+		
+		public void fillFilteredTickets(LocalDate ini, LocalDate fin) {
+			List<Lavados> lista = Lavados.listaTickets(ini, fin);
+
+			alterTable(lista);
+		}
+		
+		public void fillFilteredFacturas(LocalDate ini, LocalDate fin) {
+			List<Lavados> lista = Lavados.listaFacturas(ini, fin);
 
 			alterTable(lista);
 		}

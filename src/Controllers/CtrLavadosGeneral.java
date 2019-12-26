@@ -22,7 +22,7 @@ import java.time.LocalDate;
 public class CtrLavadosGeneral implements ActionListener, ListSelectionListener, DateChangeListener {
 
 	private enum Reports {
-		ENTRE_FECHAS, MATRICULA, COMPLEMENTO, TRABAJADOR, VECES, VECES_FECHA, GENERAL
+		ENTRE_FECHAS, MATRICULA, COMPLEMENTO, TRABAJADOR, VECES, VECES_FECHA, GENERAL,PROPIETARIO
 	}
 
 	private GUILavadosGeneral view;
@@ -106,6 +106,42 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 				}
 
 				break;
+			case "Propietario":
+				try {
+					lastReport = Reports.PROPIETARIO;
+					String p = view.getFieldPropietario();
+					view.reloadPropietario(p);
+				} catch (NullPointerException e) {
+					JOptionPane.showMessageDialog(null,"El campo propietario debe tener un valor.");
+				}
+
+				break;
+			case "MostrarFacturas":
+				try {
+					LocalDate fechaIni = view.getFieldFechaIni();
+					LocalDate fechaFin = view.getFieldFechaFin();
+					if (fechaIni == null || fechaFin == null)
+						throw new NullPointerException();
+					view.reloadFacturas(fechaIni, fechaFin);
+				} catch (NullPointerException e) {
+					JOptionPane.showMessageDialog(null,"Los campos fecha deben tener un valor");
+				}
+
+				break;
+			case "MostrarTickets":
+				try {
+					LocalDate fechaIni = view.getFieldFechaIni();
+					LocalDate fechaFin = view.getFieldFechaFin();
+					if (fechaIni == null || fechaFin == null)
+						throw new NullPointerException();
+					view.reloadTickets(fechaIni, fechaFin);
+				} catch (NullPointerException e) {
+					JOptionPane.showMessageDialog(null,"Los campos fecha deben tener un valor");
+				}
+
+
+				break;
+				
 			case "Refrescar":
 				view.reloadData();
 				lastReport = Reports.GENERAL;

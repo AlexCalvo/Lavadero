@@ -22,9 +22,15 @@ public class GUIModelo extends GUIPanel {
 	private JButton bEli = new JButton("Eliminar");
 
 	private JLabel lNombre = new JLabel("Nombre del modelo:");
-	private JLabel lPrecio = new JLabel("Precio del lavado:");
+	private JLabel lPrecioExterior = new JLabel("Precio Exterior:");
+	private JLabel lPrecioInterior = new JLabel("Precio Interior:");
+	private JLabel lPrecioCompleto = new JLabel("Precio Completo:");
 
-	private JTextField tPrecio = new JTextField();
+
+
+	private JTextField tPrecioExterior = new JTextField();
+	private JTextField tPrecioInterior = new JTextField();
+	private JTextField tPrecioCompleto = new JTextField();
 	private JTextField tNombre = new JTextField();
 
 	public GUIModelo() {
@@ -57,7 +63,9 @@ public class GUIModelo extends GUIPanel {
 		panel.setLayout(new GridLayout(2, 2, 5, 5));
 
 		panel.add(create2ElementPanel(lNombre, tNombre));
-		panel.add(create2ElementPanel(lPrecio, tPrecio));
+		panel.add(create2ElementPanel(lPrecioExterior, tPrecioExterior));
+		panel.add(create2ElementPanel(lPrecioInterior, tPrecioInterior));
+		panel.add(create2ElementPanel(lPrecioCompleto, tPrecioCompleto));
 		panel.add(createButtonPanel());
 
 		return panel;
@@ -91,16 +99,32 @@ public class GUIModelo extends GUIPanel {
 		return this.tNombre.getText();
 	}
 
-	public double getFieldPrecio() {
-		return Double.parseDouble(this.tPrecio.getText());
+	public double getFieldPrecioExterior() {
+		return Double.parseDouble(this.tPrecioExterior.getText());
+	}
+	
+	public double getFieldPrecioInterior() {
+		return Double.parseDouble(this.tPrecioInterior.getText());
+	}
+	
+	public double getFieldPrecioCompleto() {
+		return Double.parseDouble(this.tPrecioCompleto.getText());
 	}
 
 	public void setFieldNombre(String string) {
 		this.tNombre.setText(string);
 	}
 
-	public void setFieldPrecio(String d) {
-		this.tPrecio.setText(d);
+	public void setFieldPrecioExterior(String d) {
+		this.tPrecioExterior.setText(d);
+	}
+	
+	public void setFieldPrecioInterior(String d) {
+		this.tPrecioInterior.setText(d);
+	}
+	
+	public void setFieldPrecioCompleto(String d) {
+		this.tPrecioCompleto.setText(d);
 	}
 
 	public void reloadData() {

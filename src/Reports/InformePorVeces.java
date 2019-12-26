@@ -229,7 +229,7 @@ public class InformePorVeces {
 					numLavadosTotal++;
 
 					// Add cost to counters
-					double precio = listaLavados.get(i).getModelo().getPrecio();
+					double precio = listaLavados.get(i).getPrecio();
 					lavadosAnioTotal += precio;
 					lavadosMesTotal += precio;
 					lavadosTotal += precio;
