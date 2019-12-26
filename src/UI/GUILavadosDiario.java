@@ -43,7 +43,7 @@ public class GUILavadosDiario extends GUIPanel {
 	private JTextField tMatricula = new JTextField();
 	private JTextField tModelo = new JTextField();
 	private TextAutoCompleter autoModelo = createAutoCompleterModelo(tModelo);
-	private TimePicker tHora = createTimePicker();
+	private JTextField tHora = new JTextField();
 	private DatePicker tFecha = new DatePicker();
 	private JTextField tTelefono = new JTextField();
 	private JTextField tComplemento = new JTextField();
@@ -135,7 +135,28 @@ public class GUILavadosDiario extends GUIPanel {
 	}
 
 	public LocalTime getFieldHora() {
-		return this.tHora.getTime();
+		String s = tHora.getText();
+		int hora = -1;
+		int minuto = -1;
+		if(s.contains(":")) {
+			hora = Integer.parseInt(s.split(":")[0]);
+			minuto = Integer.parseInt(s.split(":")[1]);
+		}else {
+			if(s.length() == 3) {
+				hora = Integer.parseInt(s.substring(0,1));
+				minuto = Integer.parseInt(s.substring(1));
+				
+			}else if(s.length() == 4) {
+				hora = Integer.parseInt(s.substring(0,2));
+				minuto = Integer.parseInt(s.substring(2));
+			}//Error
+			
+		}
+		if((hora < 24 && hora >= 0) && (minuto < 60 && minuto >= 0)) {
+			return LocalTime.of(hora,minuto,0);
+		}else {
+			return null;
+		}
 	}
 
 	public LocalDate getFieldFecha() {
