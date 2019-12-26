@@ -22,7 +22,7 @@ public class MySqlDB implements AutoCloseable {
             String schema = obj.get("schema").getAsString();
             String user = obj.get("user").getAsString();
             String password = obj.get("password").getAsString();
-            con = DriverManager.getConnection("jdbc:mysql://" + server + "/" + schema + "?user=" + user + "&password=" + password + "");
+            con = DriverManager.getConnection("jdbc:mysql://" + server + "/" + schema + "?user=" + user + "&password=" + password + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
 
         } catch (SQLException ex) {
             throw new DatabaseException("Error al Conectar con la base de datos." + ex.getMessage());

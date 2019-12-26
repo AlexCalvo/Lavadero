@@ -88,16 +88,19 @@ public class GUILavadosDiario extends GUIPanel {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(4, 2, 5, 5));
 
-		panel.add(create2ElementPanel(lMatricula, tMatricula));
-		panel.add(create2ElementPanel(lModelo, tModelo));
 		panel.add(create2ElementPanel(lHora, tHora));
+		panel.add(create2ElementPanel(lMatricula, tMatricula));
 		panel.add(create2ElementPanel(lTelefono, tTelefono));
+		panel.add(create2ElementPanel(lModelo, tModelo));
+				
+		
 		panel.add(create2ElementPanel(lComplemento, tComplemento));
 		panel.add(create2ElementPanel(lTrabajador, tTrabajador));
-		panel.add(create2ElementPanel(lObservaciones, tObservaciones));
+		
 		panel.add(create2ElementPanel(lPropietario, tPropietario));
 		panel.add(create2ElementPanel(lFactura, tFactura));
-
+		panel.add(create2ElementPanel(lObservaciones, tObservaciones));
+		
 		//Empty pannel to center the ButtonPannel
 		panel.add(new JPanel());
 		panel.add(createButtonPanel(), BorderLayout.SOUTH);

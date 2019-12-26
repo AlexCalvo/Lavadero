@@ -2,7 +2,10 @@ package Reports;
 
 import java.awt.Color;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -88,7 +91,7 @@ public class InformeEntreFechas {
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Mes " + fechaActual.getMonth());
+		cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
 		cell.setFillColor(Color.lightGray);
 		cell.setFontSize(10);
 
@@ -171,7 +174,7 @@ public class InformeEntreFechas {
 			if (cambioMes && !cambioAnio) {
 				fechaActual = lavado.getFecha();
 				row = table.createRow(20);
-				cell = row.createCell(100, "Mes " + fechaActual.getMonth());
+				cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
 				cell.setFillColor(Color.lightGray);
 				cell.setFontSize(10);
 				cambioMes = false;
@@ -185,7 +188,7 @@ public class InformeEntreFechas {
 				cell.setFontSize(10);
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Mes " + fechaActual.getMonth());
+				cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
 				cell.setFillColor(Color.lightGray);
 				cell.setFontSize(10);
 				cambioAnio = false;
@@ -285,5 +288,24 @@ public class InformeEntreFechas {
 		document.save(outFile);
 		document.close();
 	}
+	
+//	public String traducirMes(Month month) {
+//		String mesTraducido = "";
+//		switch(month) {
+//			case(JANUARY):mesTraducido = "ENERO";break;
+//			case(Month.FEBRUARY):mesTraducido = "FEBRERO";break;
+//			case("MARCH"):mesTraducido = "MARZO";break;
+//			case("APRIL"):mesTraducido = "ABRIL";break;
+//			case("MAY"):mesTraducido = "MAYO";break;
+//			case("JUNE"):mesTraducido = "JUNIO";break;
+//			case("JULY"):mesTraducido = "JULIO";break;
+//			case("AUGUST"):mesTraducido = "AGOSTO";break;
+//			case("SEPTEMBER"):mesTraducido = "SEPTIEMBRE";break;
+//			case("OCTOBER"):mesTraducido = "OCTUBRE";break;
+//			case("NOVEMBER"):mesTraducido = "NOVIEMBRE";break;
+//			case("DECEMBER"):mesTraducido = "DICIEMBRE";break;
+//		}
+//		return mesTraducido;
+//	}
 
 }

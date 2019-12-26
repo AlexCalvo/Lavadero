@@ -2,7 +2,9 @@ package Reports;
 
 import java.awt.Color;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -86,7 +88,7 @@ public class InformePorComplemento {
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Mes " + fechaActual.getMonth());
+		cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
 		cell.setFillColor(Color.lightGray);
 		cell.setFontSize(10);
 
@@ -169,7 +171,7 @@ public class InformePorComplemento {
 			if (cambioMes && !cambioAnio) {
 				fechaActual = lavado.getFecha();
 				row = table.createRow(20);
-				cell = row.createCell(100, "Mes " + fechaActual.getMonth());
+				cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
 				cell.setFillColor(Color.lightGray);
 				cell.setFontSize(10);
 				cambioMes = false;
@@ -183,7 +185,7 @@ public class InformePorComplemento {
 				cell.setFontSize(10);
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Mes " + fechaActual.getMonth());
+				cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
 				cell.setFillColor(Color.lightGray);
 				cell.setFontSize(10);
 				cambioAnio = false;

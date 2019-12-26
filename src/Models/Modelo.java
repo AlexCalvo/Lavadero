@@ -51,7 +51,7 @@ public class Modelo {
 			this.nombre = nombre;
 			this.precio = precio;
 		} catch (DatabaseException e) {
-			JOptionPane.showMessageDialog(null,"Ya se existe ese modelo.");
+			JOptionPane.showMessageDialog(null,"Ya existe ese modelo.");
 			e.printStackTrace();
 		}
 	}

@@ -68,6 +68,8 @@ public class Tickets {
 		result += "                                                                                 "
 				+ "21% IVA INCLUIDO";
 		System.out.println(result.length());
+		
+		
 		return result;
 	}
 

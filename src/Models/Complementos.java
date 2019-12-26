@@ -20,7 +20,7 @@ public class Complementos {
         try (MySqlDB db = new MySqlDB()) {
             for (Object[] tupla : db.Select("Select * from Complementos")) {
                 String nombre = (String) tupla[0];
-                double precio = (double) tupla[1];
+                double precio = (Integer)tupla[1];
                 lista.add(new Complementos(nombre, precio, true));
             }
         } catch (DatabaseException e) {
@@ -41,7 +41,7 @@ public class Complementos {
                 return;
             Object[] tupla = listTupla.get(0);
             this.nombre = (String) tupla[0];
-            this.precio = (double) tupla[1];
+            this.precio = (Integer) tupla[1];
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class Complementos {
             this.nombre = nombre;
             this.precio = precio;
         } catch (DatabaseException e) {
-            JOptionPane.showMessageDialog(null,"Ya se existe ese complemento.");
+            JOptionPane.showMessageDialog(null,"Ya existe ese complemento.");
 
             e.printStackTrace();
         }
@@ -105,8 +105,9 @@ public class Complementos {
 
     @Override
     public String toString() {
-        return (this.getNombre()==null)?"":this.getNombre();
+        return (this.getNombre()==null)?"":this.getNombre() + " -  " + this.getPrecio() + " €";
     }
+    
 
     public Object[] asArray() {
         Object[] tmp = new Object[10];

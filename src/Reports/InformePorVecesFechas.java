@@ -2,7 +2,9 @@ package Reports;
 
 import java.awt.Color;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -82,7 +84,8 @@ public class InformePorVecesFechas {
 
 		Row<PDPage> row = table.createRow(20);
 		cell = row.createCell(100, "Coche " + matriculaActual);
-		cell.setFillColor(Color.GRAY);
+		cell.setFillColor(Color.BLUE);
+		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
@@ -91,7 +94,7 @@ public class InformePorVecesFechas {
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Mes " + fechaActual.getMonth());
+		cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
 		cell.setFillColor(Color.lightGray);
 		cell.setFontSize(10);
 
@@ -139,7 +142,7 @@ public class InformePorVecesFechas {
 				row = table.createRow(20);
 				cell = row.createCell(100, "Coche: " + matriculaActual);
 				cell.setFont(fontBold);
-				cell.setFillColor(Color.GRAY);
+				cell.setFillColor(Color.BLUE);
 				cell.setFontSize(10);
 
 				fechaActual = listaLavados.get(i).getFecha();
@@ -149,7 +152,7 @@ public class InformePorVecesFechas {
 				cell.setFontSize(10);
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Mes " + fechaActual.getMonth());
+				cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
 				cell.setFillColor(Color.lightGray);
 				cell.setFontSize(10);
 
@@ -199,7 +202,7 @@ public class InformePorVecesFechas {
 				if (cambioMes && !cambioAnio) {
 					fechaActual = listaLavados.get(i).getFecha();
 					row = table.createRow(20);
-					cell = row.createCell(100, "Mes " + fechaActual.getMonth());
+					cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
 					cell.setFillColor(Color.lightGray);
 					cell.setFontSize(10);
 					cambioMes = false;
@@ -213,7 +216,7 @@ public class InformePorVecesFechas {
 					cell.setFontSize(10);
 
 					row = table.createRow(20);
-					cell = row.createCell(100, "Mes " + fechaActual.getMonth());
+					cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
 					cell.setFillColor(Color.lightGray);
 					cell.setFontSize(10);
 					cambioAnio = false;
