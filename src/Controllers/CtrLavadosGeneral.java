@@ -22,7 +22,7 @@ import java.time.LocalDate;
 public class CtrLavadosGeneral implements ActionListener, ListSelectionListener, DateChangeListener {
 
 	private enum Reports {
-		ENTRE_FECHAS, MATRICULA, COMPLEMENTO, TRABAJADOR, VECES, VECES_FECHA, GENERAL,PROPIETARIO
+		ENTRE_FECHAS, MATRICULA, COMPLEMENTO, TRABAJADOR, VECES, VECES_FECHA, GENERAL,PROPIETARIO,FACTURAS
 	}
 
 	private GUILavadosGeneral view;
@@ -118,6 +118,7 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 				break;
 			case "MostrarFacturas":
 				try {
+					lastReport = Reports.FACTURAS;
 					LocalDate fechaIni = view.getFieldFechaIni();
 					LocalDate fechaFin = view.getFieldFechaFin();
 					if (fechaIni == null || fechaFin == null)
@@ -146,7 +147,6 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 				view.reloadData();
 				lastReport = Reports.GENERAL;
 				break;
-
 			case "Factura":
 				try {
 					String baseDirectoy = "";
@@ -172,6 +172,7 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 				}
 				break;
 
+			
 			case "Informe":
 				String baseDirectoy = "";
 
@@ -274,6 +275,30 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 							e.printStackTrace();
 						}
 						break;
+					case PROPIETARIO:
+						try {
+							String propietario = view.getFieldPropietario();
+							InformePorPropietario.generateInforme(baseDirectoy, propietario);
+						} catch (FileNotFoundException e) { // File not found or access denied
+							JOptionPane.showMessageDialog(null,"Archivo no encontrado o acceso denegado.");
+							e.printStackTrace();
+						}  catch (Exception e) {
+							JOptionPane.showMessageDialog(null,"El campo propietario debe tener un valor.");
+							e.printStackTrace();
+						}
+						break;
+					case FACTURAS:
+						LocalDate fechaInic = view.getFieldFechaIni();
+						LocalDate fechaFini = view.getFieldFechaFin();
+						try {
+							Facturas.generateInforme(baseDirectoy, fechaInic, fechaFini);
+						} catch (FileNotFoundException e) { // File not found or access denied
+							JOptionPane.showMessageDialog(null,"Archivo no encontrado o acceso denegado.");
+							e.printStackTrace();
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null,"Los campos de fechas deben tener un valor.");
+							e.printStackTrace();
+						}
 				}
 				break;
 		}

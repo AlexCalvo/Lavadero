@@ -73,7 +73,7 @@ public class GUILavadosGeneral extends GUIPanel {
 	private JButton bRefrescar = new JButton("Refrescar");
 
 	private JButton bGenerarInforme = new JButton("Generar informe");
-	private JButton bGenerarFactura = new JButton("Generar factura");
+	private JButton bGenerarFactura = new JButton("Generar Tickets");
 
 	
 	
