@@ -244,6 +244,18 @@ public class GUILavadosGeneral extends GUIPanel {
 	 * panelBotones.add(bMod); panelBotones.add(bEli); return panelBotones; }
 	 */
 
+	public TextAutoCompleter getAutoModelo() {
+		return autoModelo;
+	}
+
+	public TextAutoCompleter getAutoComplemento() {
+		return autoComplemento;
+	}
+
+	public TextAutoCompleter getAutoTrabajador() {
+		return autoTrabajador;
+	}
+
 	private Component createQueryButtons() {
 		JPanel panelQuery = new JPanel();
 		panelQuery.setLayout(new FlowLayout());

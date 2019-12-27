@@ -1,6 +1,8 @@
 package Controllers;
 
 import Models.Trabajador;
+import UI.GUILavadosDiario;
+import UI.GUILavadosGeneral;
 import UI.GUITrabajador;
 
 import javax.swing.*;
@@ -13,9 +15,13 @@ import java.awt.event.ActionListener;
 public class CtrTrabajador implements ActionListener, ListSelectionListener {
     private GUITrabajador view;
     private Trabajador selectedTrabajador;
+    private GUILavadosDiario lavadosView;
+    private GUILavadosGeneral generalView;
 
-    public CtrTrabajador(GUITrabajador view) {
+    public CtrTrabajador(GUITrabajador view, GUILavadosDiario lavadosView, GUILavadosGeneral generalView) {
         this.view = view;
+        this.lavadosView = lavadosView;
+        this.generalView = generalView;
     }
 
     @Override
@@ -24,6 +30,8 @@ public class CtrTrabajador implements ActionListener, ListSelectionListener {
             case "Insertar":
                 if (!view.getFieldNombre().equals("")) {
                     selectedTrabajador = new Trabajador(view.getFieldNombre());
+                    lavadosView.getAutoTrabajador().addItem(selectedTrabajador);
+                    generalView.getAutoTrabajador().addItem(selectedTrabajador);
                     view.reloadData();
                     view.setFieldNombre("");
                     selectedTrabajador = null;
@@ -41,6 +49,8 @@ public class CtrTrabajador implements ActionListener, ListSelectionListener {
                 break;
             case "Eliminar":
                 if (selectedTrabajador != null) {
+                    lavadosView.getAutoTrabajador().removeItem(selectedTrabajador);
+                    generalView.getAutoTrabajador().removeItem(selectedTrabajador);
                     selectedTrabajador.delete();
                     view.reloadData();
                     view.setFieldNombre("");

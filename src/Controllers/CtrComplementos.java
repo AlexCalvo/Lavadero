@@ -2,6 +2,8 @@ package Controllers;
 
 import Models.Complementos;
 import UI.GUIComplementos;
+import UI.GUILavadosDiario;
+import UI.GUILavadosGeneral;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -13,9 +15,13 @@ import java.awt.event.ActionListener;
 public class CtrComplementos implements ActionListener, ListSelectionListener {
 	private GUIComplementos view;
 	private Complementos selectedComplemento;
+	private GUILavadosDiario lavadosView;
+	private GUILavadosGeneral generalView;
 
-	public CtrComplementos(GUIComplementos view) {
+	public CtrComplementos(GUIComplementos view, GUILavadosDiario lavadosView, GUILavadosGeneral generalView) {
 		this.view = view;
+		this.lavadosView = lavadosView;
+		this.generalView = generalView;
 	}
 
 	@Override
@@ -24,6 +30,8 @@ public class CtrComplementos implements ActionListener, ListSelectionListener {
 		case "Insertar":
 			if (!view.getFieldNombre().equals("")) {
 				selectedComplemento = new Complementos(view.getFieldNombre(), view.getFieldPrecio());
+				lavadosView.getAutoComplemento().addItem(selectedComplemento);
+				generalView.getAutoComplemento().addItem(selectedComplemento);
 				view.reloadData();
 				view.setFieldNombre("");
 				view.setFieldPrecio("");
@@ -44,6 +52,8 @@ public class CtrComplementos implements ActionListener, ListSelectionListener {
 			break;
 		case "Eliminar":
 			if (selectedComplemento != null) {
+				lavadosView.getAutoComplemento().removeItem(selectedComplemento);
+				generalView.getAutoComplemento().removeItem(selectedComplemento);
 				selectedComplemento.delete();
 				view.reloadData();
 				view.setFieldNombre("");

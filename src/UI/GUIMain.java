@@ -18,23 +18,21 @@ public class GUIMain extends JTabbedPane {
 
     public GUIMain() {
 		panelGeneral = new GUILavadosGeneral();
-        ActionListener lavCtrg = new CtrLavadosGeneral(panelGeneral);
-        panelGeneral.addController(lavCtrg);
-
         panelModelo = new GUIModelo();
-        ActionListener modCtr = new CtrModelo(panelModelo);
-        panelModelo.addController(modCtr);
-   
         panelDiario = new GUILavadosDiario();
-        ActionListener lavCtr = new CtrLavados(panelDiario, panelModelo);
-        panelDiario.addController(lavCtr);
-
-        panelComplementos = new GUIComplementos();
-        ActionListener propCtr = new CtrComplementos(panelComplementos);
-        panelComplementos.addController(propCtr);
-        
         panelTrabajador = new GUITrabajador();
-        ActionListener trabCtr = new CtrTrabajador(panelTrabajador);
+        panelComplementos = new GUIComplementos();
+
+        ActionListener lavCtrg = new CtrLavadosGeneral(panelGeneral);
+        ActionListener modCtr = new CtrModelo(panelModelo, panelDiario);
+        ActionListener lavCtr = new CtrLavados(panelDiario, panelModelo);
+        ActionListener complCtr = new CtrComplementos(panelComplementos, panelDiario, panelGeneral);
+        ActionListener trabCtr = new CtrTrabajador(panelTrabajador, panelDiario, panelGeneral);
+
+        panelGeneral.addController(lavCtrg);
+        panelModelo.addController(modCtr);
+        panelDiario.addController(lavCtr);
+        panelComplementos.addController(complCtr);
         panelTrabajador.addController(trabCtr);
 
 

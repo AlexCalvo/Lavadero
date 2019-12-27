@@ -235,9 +235,9 @@ public class GUILavadosDiario extends GUIPanel {
 
 	public double getFieldPrecio() {
 		
-		String s1 = "Precio Exterior: " + getFieldModelo().getPrecioExterior() + "€";
-		String s2 = "Precio Interior: " + getFieldModelo().getPrecioInterior() + "€";
-		String s3 = "Precio Completo: " + getFieldModelo().getPrecioCompleto() + "€";
+		String s1 = "Precio Exterior: " + getFieldModelo().getPrecioExterior() + "ï¿½";
+		String s2 = "Precio Interior: " + getFieldModelo().getPrecioInterior() + "ï¿½";
+		String s3 = "Precio Completo: " + getFieldModelo().getPrecioCompleto() + "ï¿½";
 		Object[] possibilities = { s1, s2, s3 };
 		String s = null;
 		
@@ -269,6 +269,14 @@ public class GUILavadosDiario extends GUIPanel {
 
 	public void setAutoModelo(TextAutoCompleter autoModelo) {
 		this.autoModelo = autoModelo;
+	}
+
+	public TextAutoCompleter getAutoComplemento() {
+		return autoComplemento;
+	}
+
+	public TextAutoCompleter getAutoTrabajador() {
+		return autoTrabajador;
 	}
 
 	private Component createButtonPanel() {

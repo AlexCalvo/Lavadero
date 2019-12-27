@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Modelo;
+import UI.GUILavadosDiario;
 import UI.GUIModelo;
 import UI.GUIPanel;
 
@@ -14,9 +15,11 @@ import java.awt.event.ActionListener;
 public class CtrModelo implements ActionListener, ListSelectionListener {
     private GUIModelo view;
     private Modelo selectedModelo;
+    private GUILavadosDiario lavadosView;
 
-    public CtrModelo(GUIModelo panelModelo) {
+    public CtrModelo(GUIModelo panelModelo, GUILavadosDiario lavadosView) {
         this.view = panelModelo;
+        this.lavadosView = lavadosView;
     }
 
     @Override
@@ -25,6 +28,7 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
             case "Insertar":
                 if (!view.getFieldNombre().equals("")) {
                     selectedModelo = new Modelo(view.getFieldNombre(),view.getFieldPrecioExterior(),view.getFieldPrecioInterior(),view.getFieldPrecioCompleto());
+                    lavadosView.getAutoModelo().addItem(selectedModelo);
                     view.reloadData();
                     view.setFieldNombre("");
                     view.setFieldPrecioExterior("");
@@ -52,6 +56,7 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
                 break;
             case "Eliminar":
                 if (selectedModelo != null) {
+                    lavadosView.getAutoModelo().removeItem(selectedModelo);
                     selectedModelo.delete();
                     view.reloadData();
                     view.setFieldNombre("");
