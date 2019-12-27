@@ -5,7 +5,7 @@ DROP SCHEMA Lavadero;
 CREATE SCHEMA IF NOT EXISTS `Lavadero` DEFAULT CHARACTER SET utf8 ;
 USE `Lavadero` ;
 
--- -----------------------------------------------------
+-- -----------------------------------------------------mysq
 -- Table `Lavadero`.`Complementos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Lavadero`.`Complementos` (
@@ -40,17 +40,18 @@ AUTO_INCREMENT = 5;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Lavadero`.`Lavados` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `Matricula` VARCHAR(45) NULL DEFAULT NULL,
-  `Modelo` VARCHAR(100) NULL DEFAULT NULL,
-  `Precio` DOUBLE NULL DEFAULT NULL,
-  `Hora` TIME NULL DEFAULT NULL,
   `Fecha` DATE NULL DEFAULT NULL,
+  `Hora` TIME NULL DEFAULT NULL,
+  `Matricula` VARCHAR(45) NULL DEFAULT NULL,
+  `Tipo_Lavado` VARCHAR(200) NULL DEFAULT NULL,
+  `Modelo` VARCHAR(100) NULL DEFAULT NULL,
   `Telefono` VARCHAR(45) NULL DEFAULT NULL,
+  `Propietario` VARCHAR(45) NULL DEFAULT NULL,
+  `Precio` DOUBLE NULL DEFAULT NULL,
+  `Factura` TINYINT(1) NOT NULL DEFAULT FALSE,
+  `Observaciones` VARCHAR(300) NULL DEFAULT NULL,
   `Trabajador_id` INT(11) NULL DEFAULT NULL,
   `Complemento_id` VARCHAR(45) NULL DEFAULT NULL,
-  `Observaciones` VARCHAR(300) NULL DEFAULT NULL,
-  `Propietario` VARCHAR(45) NULL DEFAULT NULL,
-  `Factura` TINYINT(1) NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`id`),
   INDEX `fk_Lavados_Trabajador1_idx` (`Trabajador_id` ASC),
   INDEX `fk_Lavados_Modelo1_idx` (`Modelo` ASC),
