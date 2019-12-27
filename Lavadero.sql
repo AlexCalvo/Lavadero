@@ -73,5 +73,5 @@ CREATE TABLE IF NOT EXISTS `Lavadero`.`Lavados` (
     ON UPDATE NO ACTION)
 AUTO_INCREMENT = 23;
 
-INSERT INTO COMPLEMENTOS VALUES("Ninguno",0);
-INSERT INTO TRABAJADOR VALUES(-1,"Sin Trabajador");
+INSERT INTO `Lavadero`.`Complementos` VALUES("Ninguno",0);
+INSERT INTO `Lavadero`.`Trabajador` VALUES(-1,"Sin Trabajador");
