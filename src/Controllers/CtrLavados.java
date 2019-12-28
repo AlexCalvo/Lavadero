@@ -36,7 +36,8 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
 		switch (actionEvent.getActionCommand()) {
 		case "Insertar":
 			try {
-				selectedLavados = new Lavados(view.getFieldMatricula(), view.getFieldModelo(), view.getFieldPrecio(),
+				double precioLavado = view.getFieldPrecio();
+				selectedLavados = new Lavados(view.getFieldMatricula(),view.getFieldTipoLavado(precioLavado),view.getFieldModelo(), precioLavado,
 						view.getFieldHora(), view.getFieldFecha(), view.getFieldTelefono(), view.getFieldComplemento(),
 						view.getFieldTrabajador(), view.getFieldObservaciones(), view.getFieldPropietario(),
 						view.getFieldFactura());
@@ -63,8 +64,10 @@ public class CtrLavados implements ActionListener, ListSelectionListener, DateCh
 			break;
 		case "Modificar":
 			if (selectedLavados != null) {
+				double precioLavado = view.getFieldPrecio();
 				selectedLavados.setModelo(view.getFieldModelo());
-				selectedLavados.setPrecio(view.getFieldPrecio());
+				selectedLavados.setTipoLavado(view.getFieldTipoLavado(precioLavado));
+				selectedLavados.setPrecio(precioLavado);
 				selectedLavados.setMatricula(view.getFieldMatricula());
 				selectedLavados.setHora(view.getFieldHora());
 				selectedLavados.setTelefono(view.getFieldTelefono());

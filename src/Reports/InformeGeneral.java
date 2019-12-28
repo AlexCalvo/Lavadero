@@ -26,7 +26,7 @@ import UI.GUILavadosGeneral;
 
 public class InformeGeneral {
 
-	public static void main (String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 		String outputFileName = "InformeGeneral.pdf";
 		if (args.length > 0)
 			outputFileName = args[0];
@@ -92,32 +92,41 @@ public class InformeGeneral {
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
+		cell = row.createCell(100,
+				"Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase());
 		cell.setFillColor(Color.lightGray);
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
-		cell = row.createCell(16, "Matricula");
+		cell = row.createCell(12, "Matricula");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		cell = row.createCell(20, "Modelo");
+		cell = row.createCell(14, "Modelo");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		cell = row.createCell(16, "Hora");
+		cell = row.createCell(14, "TipoLavado");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		cell = row.createCell(16, "Fecha");
+		cell = row.createCell(12, "Precio");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		cell = row.createCell(16, "Telefono");
+		cell = row.createCell(8, "Hora");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		cell = row.createCell(16, "Complemento");
+		cell = row.createCell(14, "Fecha");
+		cell.setFont(fontBold);
+		cell.setFontSize(10);
+
+		cell = row.createCell(14, "Telefono");
+		cell.setFont(fontBold);
+		cell.setFontSize(10);
+
+		cell = row.createCell(12, "Complemento");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
@@ -138,7 +147,7 @@ public class InformeGeneral {
 				cambioMes = true;
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal+" €");
+				cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal + " €");
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
 				lavadosMesTotal = 0;
@@ -151,15 +160,37 @@ public class InformeGeneral {
 
 			}
 
-			if (fechaActual.getYear() != lavado.getFecha().getYear()) {
+			if (fechaActual.getYear() != lavado.getFecha().getYear() ) {
 
+				// cambioMes = true;
 				cambioAnio = true;
+								
+				if(lavadosMesActual > 0) {
+					
+					row = table.createRow(20);
+					cell = row.createCell(100, "");
+				
+					row = table.createRow(20);
+					cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal + " €");
+					cell.setFont(fontBold);
+					cell.setFontSize(10);
+					lavadosMesTotal = 0;
 
+					row = table.createRow(20);
+					cell = row.createCell(100, "Numero Lavados de este mes: " + lavadosMesActual);
+					cell.setFont(fontBold);
+					cell.setFontSize(10);
+					lavadosMesActual = 0;
+				}
+
+				
+
+				// Fila en blanco
 				row = table.createRow(20);
 				cell = row.createCell(100, "");
-				
+
 				row = table.createRow(20);
-				cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal+" €");
+				cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal + " €");
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
 				lavadosAnioTotal = 0;
@@ -175,7 +206,8 @@ public class InformeGeneral {
 			if (cambioMes && !cambioAnio) {
 				fechaActual = lavado.getFecha();
 				row = table.createRow(20);
-				cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
+				cell = row.createCell(100, "Mes "
+						+ fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase());
 				cell.setFillColor(Color.lightGray);
 				cell.setFontSize(10);
 				cambioMes = false;
@@ -189,7 +221,8 @@ public class InformeGeneral {
 				cell.setFontSize(10);
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Mes " + fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
+				cell = row.createCell(100, "Mes "
+						+ fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase());
 				cell.setFillColor(Color.lightGray);
 				cell.setFontSize(10);
 				cambioAnio = false;
@@ -210,22 +243,28 @@ public class InformeGeneral {
 
 				row = table.createRow(20);
 
-				cell = row.createCell(16, lavado.getMatricula());
+				cell = row.createCell(12, lavado.getMatricula());
 				cell.setFontSize(10);
 
-				cell = row.createCell(20, lavado.getModelo().toString());
+				cell = row.createCell(14, lavado.getModelo().toString());
 				cell.setFontSize(10);
 
-				cell = row.createCell(16, lavado.getHora().toString());
+				cell = row.createCell(14, lavado.getTipoLavado().toString());
 				cell.setFontSize(10);
 
-				cell = row.createCell(16, lavado.getFecha().toString());
+				cell = row.createCell(12, lavado.getPrecio() + "");
 				cell.setFontSize(10);
 
-				cell = row.createCell(16, lavado.getTelefono().toString());
+				cell = row.createCell(8, lavado.getHora().toString());
 				cell.setFontSize(10);
 
-				cell = row.createCell(16, lavado.getComp().toString());
+				cell = row.createCell(14, lavado.getFecha().toString());
+				cell.setFontSize(10);
+
+				cell = row.createCell(14, lavado.getTelefono().toString());
+				cell.setFontSize(10);
+
+				cell = row.createCell(12, lavado.getComp().toString());
 				cell.setFontSize(10);
 
 			} catch (NullPointerException e) {
@@ -237,7 +276,7 @@ public class InformeGeneral {
 		}
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal+" €");
+		cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal + " €");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosMesTotal = 0;
@@ -247,16 +286,15 @@ public class InformeGeneral {
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosMesActual = 0;
-		
+
 		row = table.createRow(20);
 		cell = row.createCell(100, "");
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal+" €");
+		cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal + " €");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosAnioTotal = 0;
-		
 
 		row = table.createRow(20);
 		cell = row.createCell(100, "Numero Lavados de este año: " + lavadosAnioActual);
@@ -264,10 +302,10 @@ public class InformeGeneral {
 		cell.setFontSize(10);
 		lavadosAnioActual = 0;
 
-		//Fila en blanco
+		// Fila en blanco
 		row = table.createRow(20);
 		cell = row.createCell(100, "");
-		
+
 		row = table.createRow(20);
 		cell = row.createCell(100, "Cantidad total global: " + lavadosTotal + "€");
 		cell.setFont(fontBold);

@@ -72,7 +72,7 @@ public class InformePorVeces {
 		// the parameter is the row height
 		Row<PDPage> headerRow = table.createRow(50);
 		// the first parameter is the cell width
-		Cell<PDPage> cell = headerRow.createCell(100, "Lista lavados por veces: " + veces);
+		Cell<PDPage> cell = headerRow.createCell(100, "Lista lavados por veces: " + veces+ " veces");
 		cell.setFont(fontBold);
 		cell.setFontSize(20);
 		// vertical alignment
@@ -98,30 +98,38 @@ public class InformePorVeces {
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
-		cell = row.createCell(16, "Matricula");
+		cell = row.createCell(12, "Matricula");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		cell = row.createCell(20, "Modelo");
+		cell = row.createCell(14, "Modelo");
+		cell.setFont(fontBold);
+		cell.setFontSize(10);
+		
+		cell = row.createCell(14, "TipoLavado");
+		cell.setFont(fontBold);
+		cell.setFontSize(10);
+		
+		cell = row.createCell(12, "Precio");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		cell = row.createCell(16, "Hora");
+		cell = row.createCell(8, "Hora");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		cell = row.createCell(16, "Fecha");
+		cell = row.createCell(14, "Fecha");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		cell = row.createCell(16, "Telefono");
+		cell = row.createCell(14, "Telefono");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		cell = row.createCell(16, "Complemento");
+		cell = row.createCell(12, "Complemento");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
-
+		
 		// Set up monthly and yearly counters
 		int lavadosAnioActual = 0;
 		double lavadosAnioTotal = 0;
@@ -181,6 +189,25 @@ public class InformePorVeces {
 
 					cambioAnio = true;
 
+					if(lavadosMesActual > 0) {
+						
+						row = table.createRow(20);
+						cell = row.createCell(100, "");
+					
+						row = table.createRow(20);
+						cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal + " €");
+						cell.setFont(fontBold);
+						cell.setFontSize(10);
+						lavadosMesTotal = 0;
+
+						row = table.createRow(20);
+						cell = row.createCell(100, "Numero Lavados de este mes: " + lavadosMesActual);
+						cell.setFont(fontBold);
+						cell.setFontSize(10);
+						lavadosMesActual = 0;
+					}
+					
+					//Fila en blanco
 					row = table.createRow(20);
 					cell = row.createCell(100, "");
 
@@ -236,22 +263,28 @@ public class InformePorVeces {
 
 					row = table.createRow(20);
 
-					cell = row.createCell(16, listaLavados.get(i).getMatricula());
+					cell = row.createCell(12, listaLavados.get(i).getMatricula());
 					cell.setFontSize(10);
 
-					cell = row.createCell(20, listaLavados.get(i).getModelo().toString());
+					cell = row.createCell(14, listaLavados.get(i).getModelo().toString());
+					cell.setFontSize(10);
+					
+					cell = row.createCell(14, listaLavados.get(i).getTipoLavado().toString());
+					cell.setFontSize(10);
+					
+					cell = row.createCell(12, listaLavados.get(i).getPrecio()+"");
 					cell.setFontSize(10);
 
-					cell = row.createCell(16, listaLavados.get(i).getHora().toString());
+					cell = row.createCell(8, listaLavados.get(i).getHora().toString());
 					cell.setFontSize(10);
 
-					cell = row.createCell(16, listaLavados.get(i).getFecha().toString());
+					cell = row.createCell(14, listaLavados.get(i).getFecha().toString());
 					cell.setFontSize(10);
 
-					cell = row.createCell(16, listaLavados.get(i).getTelefono().toString());
+					cell = row.createCell(14, listaLavados.get(i).getTelefono().toString());
 					cell.setFontSize(10);
 
-					cell = row.createCell(16, listaLavados.get(i).getComp().toString());
+					cell = row.createCell(12, listaLavados.get(i).getComp().toString());
 					cell.setFontSize(10);
 
 				} catch (NullPointerException e) {

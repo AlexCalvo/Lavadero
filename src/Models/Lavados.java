@@ -19,11 +19,12 @@ import javax.swing.*;
 
 public class Lavados {
 
-	public static final String[] columnas = { "ID", "MATRICULA", "MODELO", "PRECIO", "HORA", "FECHA", "TELEFONO",
-			"COMPLEMENTO", "TRABAJADOR", "OBSERVACIONES", "PROPIETARIO", "FACTURA" };
+	public static final String[] columnas = { "ID", "MATRICULA", "TIPO LAVADO", "MODELO", "PRECIO", "HORA", "FECHA",
+			"TELEFONO", "COMPLEMENTO", "TRABAJADOR", "OBSERVACIONES", "PROPIETARIO", "FACTURA" };
 
 	private int id;// clave principal
 	private String matricula;
+	private String tipoLavado;
 	private Modelo modelo;
 	private double precio;
 	private LocalTime hora;
@@ -46,7 +47,7 @@ public class Lavados {
 				// TODO: Waiting on better fix
 				LocalTime hora = ((Time) tupla[2]).toLocalTime().minus(1, ChronoUnit.HOURS);
 				String matricula = (String) tupla[3];
-				// Tipo Lavados tupla[4]
+				String tipoLavado = (String) tupla[4];
 				Modelo modelo = new Modelo((String) tupla[5]);
 				String telefono = (String) tupla[6];
 				String p = (String) tupla[7];
@@ -57,7 +58,8 @@ public class Lavados {
 				Complementos comp = null;
 				if (tupla[12] != null)
 					comp = new Complementos((String) tupla[12]);
-				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
+				lista.add(new Lavados(id, matricula, tipoLavado, modelo, precio, hora, fecha, telefono, comp, trab, obs,
+						p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -79,7 +81,7 @@ public class Lavados {
 				// TODO: Waiting on better fix
 				LocalTime hora = ((Time) tupla[2]).toLocalTime().minus(1, ChronoUnit.HOURS);
 				String matricula = (String) tupla[3];
-				// Tipo Lavados tupla[4]
+				String tipoLavado = (String) tupla[4];
 				Modelo modelo = new Modelo((String) tupla[5]);
 				String telefono = (String) tupla[6];
 				String p = (String) tupla[7];
@@ -90,7 +92,8 @@ public class Lavados {
 				Complementos comp = null;
 				if (tupla[12] != null)
 					comp = new Complementos((String) tupla[12]);
-				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
+				lista.add(new Lavados(id, matricula, tipoLavado, modelo, precio, hora, fecha, telefono, comp, trab, obs,
+						p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -106,13 +109,13 @@ public class Lavados {
 		try (MySqlDB miBD = new MySqlDB()) {
 
 			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados WHERE Fecha >= '" + ini + "' and Fecha <='" + fin
-					+ "' and factura = 1 order by id")) {
+					+ "' and factura = 1 order by fecha")) {
 				int id = (int) tupla[0];
 				LocalDate fecha = ((Date) tupla[1]).toLocalDate();
 				// TODO: Waiting on better fix
 				LocalTime hora = ((Time) tupla[2]).toLocalTime().minus(1, ChronoUnit.HOURS);
 				String matricula = (String) tupla[3];
-				// Tipo Lavados tupla[4]
+				String tipoLavado = (String) tupla[4];
 				Modelo modelo = new Modelo((String) tupla[5]);
 				String telefono = (String) tupla[6];
 				String p = (String) tupla[7];
@@ -123,7 +126,8 @@ public class Lavados {
 				Complementos comp = null;
 				if (tupla[12] != null)
 					comp = new Complementos((String) tupla[12]);
-				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
+				lista.add(new Lavados(id, matricula, tipoLavado, modelo, precio, hora, fecha, telefono, comp, trab, obs,
+						p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -145,7 +149,7 @@ public class Lavados {
 				// TODO: Waiting on better fix
 				LocalTime hora = ((Time) tupla[2]).toLocalTime().minus(1, ChronoUnit.HOURS);
 				String matricula = (String) tupla[3];
-				// Tipo Lavados tupla[4]
+				String tipoLavado = (String) tupla[4];
 				Modelo modelo = new Modelo((String) tupla[5]);
 				String telefono = (String) tupla[6];
 				String p = (String) tupla[7];
@@ -156,7 +160,8 @@ public class Lavados {
 				Complementos comp = null;
 				if (tupla[12] != null)
 					comp = new Complementos((String) tupla[12]);
-				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
+				lista.add(new Lavados(id, matricula, tipoLavado, modelo, precio, hora, fecha, telefono, comp, trab, obs,
+						p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -171,13 +176,13 @@ public class Lavados {
 
 		try (MySqlDB miBD = new MySqlDB()) {
 
-			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Matricula = '" + m + "';")) {
+			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Matricula = '" + m + "' order by fecha;")) {
 				int id = (int) tupla[0];
 				LocalDate fecha = ((Date) tupla[1]).toLocalDate();
 				// TODO: Waiting on better fix
 				LocalTime hora = ((Time) tupla[2]).toLocalTime().minus(1, ChronoUnit.HOURS);
 				String matricula = (String) tupla[3];
-				// Tipo Lavados tupla[4]
+				String tipoLavado = (String) tupla[4];
 				Modelo modelo = new Modelo((String) tupla[5]);
 				String telefono = (String) tupla[6];
 				String p = (String) tupla[7];
@@ -188,7 +193,8 @@ public class Lavados {
 				Complementos comp = null;
 				if (tupla[12] != null)
 					comp = new Complementos((String) tupla[12]);
-				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
+				lista.add(new Lavados(id, matricula, tipoLavado, modelo, precio, hora, fecha, telefono, comp, trab, obs,
+						p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -206,13 +212,13 @@ public class Lavados {
 			for (Object[] tmp : miBD.Select("SELECT matricula FROM Lavados where Fecha >= '" + ini + "' and Fecha <='"
 					+ fin + "'" + "  group by Matricula having count(Matricula) = " + x + ";")) {
 				for (Object[] tupla : miBD.Select("Select * from Lavados where matricula = \"" + tmp[0]
-						+ "\" and Fecha >= '" + ini + "' and Fecha <='" + fin + "';")) {
+						+ "\" and Fecha >= '" + ini + "' and Fecha <='" + fin + "' order by fecha;")) {
 					int id = (int) tupla[0];
 					LocalDate fecha = ((Date) tupla[1]).toLocalDate();
 					// TODO: Waiting on better fix
 					LocalTime hora = ((Time) tupla[2]).toLocalTime().minus(1, ChronoUnit.HOURS);
 					String matricula = (String) tupla[3];
-					// Tipo Lavados tupla[4]
+					String tipoLavado = (String) tupla[4];
 					Modelo modelo = new Modelo((String) tupla[5]);
 					String telefono = (String) tupla[6];
 					String p = (String) tupla[7];
@@ -223,7 +229,8 @@ public class Lavados {
 					Complementos comp = null;
 					if (tupla[12] != null)
 						comp = new Complementos((String) tupla[12]);
-					lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
+					lista.add(new Lavados(id, matricula, tipoLavado, modelo, precio, hora, fecha, telefono, comp, trab,
+							obs, p, f));
 				}
 			}
 		} catch (DatabaseException e) {
@@ -247,7 +254,7 @@ public class Lavados {
 					// TODO: Waiting on better fix
 					LocalTime hora = ((Time) tupla[2]).toLocalTime().minus(1, ChronoUnit.HOURS);
 					String matricula = (String) tupla[3];
-					// Tipo Lavados tupla[4]
+					String tipoLavado = (String) tupla[4];
 					Modelo modelo = new Modelo((String) tupla[5]);
 					String telefono = (String) tupla[6];
 					String p = (String) tupla[7];
@@ -258,7 +265,8 @@ public class Lavados {
 					Complementos comp = null;
 					if (tupla[12] != null)
 						comp = new Complementos((String) tupla[12]);
-					lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
+					lista.add(new Lavados(id, matricula, tipoLavado, modelo, precio, hora, fecha, telefono, comp, trab,
+							obs, p, f));
 				}
 			}
 		} catch (DatabaseException e) {
@@ -275,13 +283,13 @@ public class Lavados {
 		try (MySqlDB miBD = new MySqlDB()) {
 
 			for (Object[] tupla : miBD
-					.Select("SELECT * FROM Lavados where Complemento_id = \"" + c.getNombre() + "\"")) {
+					.Select("SELECT * FROM Lavados where Complemento_id = '" + c.getNombre() + "' order by fecha")) {
 				int id = (int) tupla[0];
 				LocalDate fecha = ((Date) tupla[1]).toLocalDate();
 				// TODO: Waiting on better fix
 				LocalTime hora = ((Time) tupla[2]).toLocalTime().minus(1, ChronoUnit.HOURS);
 				String matricula = (String) tupla[3];
-				// Tipo Lavados tupla[4]
+				String tipoLavado = (String) tupla[4];
 				Modelo modelo = new Modelo((String) tupla[5]);
 				String telefono = (String) tupla[6];
 				String p = (String) tupla[7];
@@ -292,7 +300,8 @@ public class Lavados {
 				Complementos comp = null;
 				if (tupla[12] != null)
 					comp = new Complementos((String) tupla[12]);
-				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
+				lista.add(new Lavados(id, matricula, tipoLavado, modelo, precio, hora, fecha, telefono, comp, trab, obs,
+						p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -307,13 +316,13 @@ public class Lavados {
 
 		try (MySqlDB miBD = new MySqlDB()) {
 
-			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Trabajador_id = " + t.getId() + ";")) {
+			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where Trabajador_id = " + t.getId() + " order by fecha;")) {
 				int id = (int) tupla[0];
 				LocalDate fecha = ((Date) tupla[1]).toLocalDate();
 				// TODO: Waiting on better fix
 				LocalTime hora = ((Time) tupla[2]).toLocalTime().minus(1, ChronoUnit.HOURS);
 				String matricula = (String) tupla[3];
-				// Tipo Lavados tupla[4]
+				String tipoLavado = (String) tupla[4];
 				Modelo modelo = new Modelo((String) tupla[5]);
 				String telefono = (String) tupla[6];
 				String p = (String) tupla[7];
@@ -324,7 +333,8 @@ public class Lavados {
 				Complementos comp = null;
 				if (tupla[12] != null)
 					comp = new Complementos((String) tupla[12]);
-				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
+				lista.add(new Lavados(id, matricula, tipoLavado, modelo, precio, hora, fecha, telefono, comp, trab, obs,
+						p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -338,14 +348,14 @@ public class Lavados {
 		List<Lavados> lista = new ArrayList<Lavados>();
 
 		try (MySqlDB miBD = new MySqlDB()) {
-			
-			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where propietario = '" + prop + "';")) {
+
+			for (Object[] tupla : miBD.Select("SELECT * FROM Lavados where propietario = '" + prop + "' order by fecha;")) {
 				int id = (int) tupla[0];
 				LocalDate fecha = ((Date) tupla[1]).toLocalDate();
 				// TODO: Waiting on better fix
 				LocalTime hora = ((Time) tupla[2]).toLocalTime().minus(1, ChronoUnit.HOURS);
 				String matricula = (String) tupla[3];
-				// Tipo Lavados tupla[4]
+				String tipoLavado = (String) tupla[4];
 				Modelo modelo = new Modelo((String) tupla[5]);
 				String telefono = (String) tupla[6];
 				String p = (String) tupla[7];
@@ -356,7 +366,8 @@ public class Lavados {
 				Complementos comp = null;
 				if (tupla[12] != null)
 					comp = new Complementos((String) tupla[12]);
-				lista.add(new Lavados(id, matricula, modelo, precio, hora, fecha, telefono, comp, trab, obs, p, f));
+				lista.add(new Lavados(id, matricula, tipoLavado, modelo, precio, hora, fecha, telefono, comp, trab, obs,
+						p, f));
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -371,7 +382,7 @@ public class Lavados {
 			this.fecha = ((Date) tupla[1]).toLocalDate();
 			this.hora = ((Time) tupla[2]).toLocalTime().minus(1, ChronoUnit.HOURS);
 			this.matricula = (String) tupla[3];
-			// Tipo Lavados tupla[4]
+			this.tipoLavado = (String) tupla[4];
 			this.modelo = new Modelo((String) tupla[5]);
 			this.telefono = (String) tupla[6];
 			this.propietario = (String) tupla[7];
@@ -387,11 +398,12 @@ public class Lavados {
 
 	}
 
-	private Lavados(int id, String matricula, Modelo modelo, double precio, LocalTime hora, LocalDate fecha,
-			String telefono, Complementos prop, Trabajador trab, String observaciones, String propietario,
-			boolean factura) {
+	private Lavados(int id, String matricula, String tipoLavado, Modelo modelo, double precio, LocalTime hora,
+			LocalDate fecha, String telefono, Complementos prop, Trabajador trab, String observaciones,
+			String propietario, boolean factura) {
 		this.id = id;
 		this.matricula = matricula;
+		this.tipoLavado = tipoLavado;
 		this.modelo = modelo;
 		this.precio = precio;
 		this.hora = hora;
@@ -404,8 +416,9 @@ public class Lavados {
 		this.factura = factura;
 	}
 
-	public Lavados(String matricula, Modelo modelo, double precio, LocalTime hora, LocalDate fecha, String telefono,
-			Complementos comp, Trabajador trab, String observaciones, String propietario, boolean factura) {
+	public Lavados(String matricula, String tipoLavado, Modelo modelo, double precio, LocalTime hora, LocalDate fecha,
+			String telefono, Complementos comp, Trabajador trab, String observaciones, String propietario,
+			boolean factura) {
 		try (MySqlDB miBD = new MySqlDB()) {
 
 			// Get new ID
@@ -425,12 +438,14 @@ public class Lavados {
 				throw new MissingHourException();
 			}
 
-			miBD.Insert("INSERT INTO Lavados VALUES(" + newId + ", '" + fecha.toString() + "','" + hora.toString() + "', '" + matricula + "', NULL,'" + modelo.getNombre()
-					+ "','" + telefono + "','" + propietario + "'," + precio + ", " + factura + ",'" + observaciones + "',"
-					+ trab.getId() + ",'" + comp.getNombre() + "');");
+			miBD.Insert("INSERT INTO Lavados VALUES(" + newId + ", '" + fecha.toString() + "','" + hora.toString()
+					+ "', '" + matricula + "', '" + tipoLavado + "', '" + modelo.getNombre() + "','" + telefono + "','"
+					+ propietario + "'," + precio + ", " + factura + ",'" + observaciones + "'," + trab.getId() + ",'"
+					+ comp.getNombre() + "');");
 
 			this.id = newId;
 			this.matricula = matricula;
+			this.tipoLavado = tipoLavado;
 			this.modelo = modelo;
 			this.precio = precio;
 			this.hora = hora;
@@ -469,6 +484,20 @@ public class Lavados {
 		}
 	}
 
+	public String getTipoLavado() {
+		return tipoLavado;
+	}
+
+	public void setTipoLavado(String tipoLavado) {
+		try (MySqlDB miBD = new MySqlDB()) {
+			miBD.Update("UPDATE Lavados SET Tipo_Lavado = '" + tipoLavado + "' where id = " + this.getId());
+
+			this.tipoLavado = tipoLavado;
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public Modelo getModelo() {
 		return modelo;
 	}
@@ -614,6 +643,7 @@ public class Lavados {
 			miBD.Delete("DELETE FROM Lavados WHERE id = " + this.id + ";");
 			id = -1;
 			matricula = null;
+			tipoLavado = null;
 			modelo = null;
 			precio = -1;
 			hora = null;
@@ -631,7 +661,7 @@ public class Lavados {
 
 	@Override
 	public String toString() {
-		return "Lavados [id=" + id + ", matricula=" + matricula + ", modelo=" + modelo + ",precio=" + precio + ", hora="
+		return "Lavados [id=" + id + ", matricula=" + matricula + ", "+tipoLavado+ ",modelo=" + modelo + ",precio=" + precio + ", hora="
 				+ hora + ", fecha=" + fecha + ", telefono=" + telefono + ", comp=" + comp + ", trab=" + trab
 				+ ", observaciones=" + observaciones + ", propietario=" + propietario + ", factura=" + factura + "]";
 	}
@@ -640,16 +670,17 @@ public class Lavados {
 		Object[] tmp = new Object[columnas.length];
 		tmp[0] = id;
 		tmp[1] = matricula;
-		tmp[2] = modelo;
-		tmp[3] = precio;
-		tmp[4] = hora;
-		tmp[5] = fecha;
-		tmp[6] = telefono;
-		tmp[7] = comp;
-		tmp[8] = trab;
-		tmp[9] = observaciones;
-		tmp[10] = propietario;
-		tmp[11] = factura;
+		tmp[2] = tipoLavado;
+		tmp[3] = modelo;
+		tmp[4] = precio;
+		tmp[5] = hora;
+		tmp[6] = fecha;
+		tmp[7] = telefono;
+		tmp[8] = comp;
+		tmp[9] = trab;
+		tmp[10] = observaciones;
+		tmp[11] = propietario;
+		tmp[12] = factura;
 
 		return tmp;
 	}

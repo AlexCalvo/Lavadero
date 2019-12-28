@@ -31,6 +31,7 @@ public class GUILavadosDiario extends GUIPanel {
 	private JTable tableLavados;
 	private JLabel lMatricula = new JLabel("Matricula:");
 	private JLabel lModelo = new JLabel("Modelo:");
+	private JLabel lTipoLavado = new JLabel("TipoLavado:");
 	private JLabel lHora = new JLabel("Hora:");
 	private JLabel lFecha = new JLabel("Fecha:");
 	private JLabel lTelefono = new JLabel("Telefono:");
@@ -42,6 +43,7 @@ public class GUILavadosDiario extends GUIPanel {
 
 	private JTextField tMatricula = new JTextField();
 	private JTextField tModelo = new JTextField();
+	private JTextField tTipoLavado = new JTextField();
 	private TextAutoCompleter autoModelo = createAutoCompleterModelo(tModelo);
 	private JTextField tHora = new JTextField();
 	private DatePicker tFecha = new DatePicker();
@@ -92,7 +94,6 @@ public class GUILavadosDiario extends GUIPanel {
 		panel.add(create2ElementPanel(lMatricula, tMatricula));
 		panel.add(create2ElementPanel(lTelefono, tTelefono));
 		panel.add(create2ElementPanel(lModelo, tModelo));
-
 		panel.add(create2ElementPanel(lComplemento, tComplemento));
 		panel.add(create2ElementPanel(lTrabajador, tTrabajador));
 
@@ -115,6 +116,7 @@ public class GUILavadosDiario extends GUIPanel {
 		this.tMatricula.setText(string);
 	}
 
+	
 	public String getStringModelo() {
 		return this.tModelo.getText();
 	}
@@ -232,12 +234,26 @@ public class GUILavadosDiario extends GUIPanel {
 	public void setFieldPropietario(String string) {
 		this.tPropietario.setText(string);
 	}
+	
+	public String getFieldTipoLavado(double precioLavado) {
+		
+		String res = null;
+		if(precioLavado - getFieldComplemento().getPrecio() == getFieldModelo().getPrecioExterior()) {
+			res = "Exterior";
+		}else if(precioLavado - getFieldComplemento().getPrecio() == getFieldModelo().getPrecioInterior()) {
+			res = "Interior";
+		}else {
+			res = "Completo";
+		}
+		return res;
+	}
+
 
 	public double getFieldPrecio() {
 		
-		String s1 = "Precio Exterior: " + getFieldModelo().getPrecioExterior() + "ï¿½";
-		String s2 = "Precio Interior: " + getFieldModelo().getPrecioInterior() + "ï¿½";
-		String s3 = "Precio Completo: " + getFieldModelo().getPrecioCompleto() + "ï¿½";
+		String s1 = "Precio Exterior: " + getFieldModelo().getPrecioExterior() + "€";
+		String s2 = "Precio Interior: " + getFieldModelo().getPrecioInterior() + "€";
+		String s3 = "Precio Completo: " + getFieldModelo().getPrecioCompleto() + "€";
 		Object[] possibilities = { s1, s2, s3 };
 		String s = null;
 		
