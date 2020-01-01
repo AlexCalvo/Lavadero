@@ -138,6 +138,7 @@ public class Modelo {
 
 	@Override
 	public String toString() {
+		
 		return this.getNombre();
 	}
 
@@ -149,5 +150,12 @@ public class Modelo {
 		tmp[3] = DoubleFormatter.df.format(precioCompleto);
 		
 		return tmp;
+	}
+
+	public String showModelo(double precio, double comp) {
+	
+		double precModel = precio- comp;
+	    return this.getNombre() + " -" + precModel;
+		
 	}
 }

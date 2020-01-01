@@ -672,7 +672,8 @@ public class Lavados {
 		tmp[1] = matricula;
 		tmp[2] = tipoLavado;
 		tmp[3] = modelo;
-		tmp[4] = DoubleFormatter.df.format(precio);
+		tmp[4] = precio;
+		//tmp[4] = DoubleFormatter.df.format(precio);
 		tmp[5] = hora;
 		tmp[6] = fecha;
 		tmp[7] = telefono;

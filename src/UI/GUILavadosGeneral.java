@@ -3,6 +3,7 @@ package UI;
 import Models.Lavados;
 import Models.Modelo;
 import Models.Complementos;
+import Models.DoubleFormatter;
 import Models.Trabajador;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
@@ -75,22 +76,18 @@ public class GUILavadosGeneral extends GUIPanel {
 	private JButton bGenerarInforme = new JButton("Generar informe");
 	private JButton bGenerarFactura = new JButton("Generar Tickets");
 
-	
-	
 	public GUILavadosGeneral() {
 		createPanelGeneral();
 		setCellRender(tableLavados);
 	}
-	
-	
-   public void setCellRender(JTable table) {
-        Enumeration<TableColumn> en = table.getColumnModel().getColumns();
-        while (en.hasMoreElements()) {
-            TableColumn tc = en.nextElement();
-            tc.setCellRenderer(new CellRenderer());
-        }
-    }
-	   
+
+	public void setCellRender(JTable table) {
+		Enumeration<TableColumn> en = table.getColumnModel().getColumns();
+		while (en.hasMoreElements()) {
+			TableColumn tc = en.nextElement();
+			tc.setCellRenderer(new CellRenderer());
+		}
+	}
 
 	private void createPanelGeneral() {
 		this.setLayout(new BorderLayout(0, 10));
@@ -126,7 +123,6 @@ public class GUILavadosGeneral extends GUIPanel {
 	private Component createSouthPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 1, 6, 6));
-		
 
 		panel.add(createQueryButtons());
 		JPanel tmp = new JPanel();
@@ -267,8 +263,8 @@ public class GUILavadosGeneral extends GUIPanel {
 		panelQuery.add(bQueryPorVeces);
 		panelQuery.add(bQueryComplemento);
 		panelQuery.add(bQueryTrabajador);
-		panelQuery.add(bQueryPropietario);		
-		
+		panelQuery.add(bQueryPropietario);
+
 		panelQuery.add(bRefrescar);
 		panelQuery.add(create2ElementPanel(lsumatorioPrecio, tsumatorioPrecios));
 		return panelQuery;
@@ -301,12 +297,12 @@ public class GUILavadosGeneral extends GUIPanel {
 		bQueryTrabajador.addActionListener(ctr);
 		bQueryPropietario.setActionCommand("Propietario");
 		bQueryPropietario.addActionListener(ctr);
-		
+
 		bQueryTickets.setActionCommand("MostrarTickets");
 		bQueryTickets.addActionListener(ctr);
 		bQueryFacturas.setActionCommand("MostrarFacturas");
 		bQueryFacturas.addActionListener(ctr);
-		
+
 		bRefrescar.setActionCommand("Refrescar");
 		bRefrescar.addActionListener(ctr);
 
@@ -360,19 +356,19 @@ public class GUILavadosGeneral extends GUIPanel {
 		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredByMatricula(m);
 		calcularTotal();
 	}
-	
+
 	public void reloadPropietario(String p) {
 		this.tableLavados.getSelectionModel().clearSelection();
 		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredPropietario(p);
 		calcularTotal();
 	}
-	
+
 	public void reloadFacturas(LocalDate fechaIni, LocalDate fechaFin) {
 		this.tableLavados.getSelectionModel().clearSelection();
 		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredFacturas(fechaIni, fechaFin);
 		calcularTotal();
 	}
-	
+
 	public void reloadTickets(LocalDate fechaIni, LocalDate fechaFin) {
 		this.tableLavados.getSelectionModel().clearSelection();
 		((LavadosGeneralTableModel) tableLavados.getModel()).fillFilteredTickets(fechaIni, fechaFin);
@@ -384,23 +380,12 @@ public class GUILavadosGeneral extends GUIPanel {
 		double num = 0;
 
 		for (int i = 0; i < tableLavados.getRowCount(); i++) {
-			num = (Double.parseDouble((String) tableLavados.getValueAt(i, 4)));
-			
-//			try {
-//				if ( ((Complementos) tableLavados.getValueAt(i, 6)).getNombre() != null) {
-//					num += ((Complementos) tableLavados.getValueAt(i, 6)).getPrecio();
-//				}
-//			}catch(NullPointerException np) {}
-			
-			
-			
+			num =  (double) tableLavados.getValueAt(i, 4);
 			acumulador += num;
 		}
-		
-		tsumatorioPrecios.setText(acumulador + " Euros");
+
+		tsumatorioPrecios.setText(DoubleFormatter.df.format(acumulador) + " Euros");
 	}
-	
-	
 
 	private class LavadosGeneralTableModel extends AbstractTableModel {
 
@@ -449,21 +434,19 @@ public class GUILavadosGeneral extends GUIPanel {
 
 			alterTable(lista);
 		}
-		
-		
+
 		public void fillFilteredPropietario(String nombre) {
 			List<Lavados> lista = Lavados.listaLavadosPorPropietario(nombre);
 
 			alterTable(lista);
 		}
-		
-		
+
 		public void fillFilteredTickets(LocalDate ini, LocalDate fin) {
 			List<Lavados> lista = Lavados.listaTickets(ini, fin);
 
 			alterTable(lista);
 		}
-		
+
 		public void fillFilteredFacturas(LocalDate ini, LocalDate fin) {
 			List<Lavados> lista = Lavados.listaFacturas(ini, fin);
 

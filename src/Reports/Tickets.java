@@ -15,6 +15,7 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import Models.Lavados;
+import Models.Modelo;
 import UI.GUILavadosGeneral;
 import be.quodlibet.boxable.*;
 import be.quodlibet.boxable.line.LineStyle;
@@ -32,17 +33,18 @@ public class Tickets {
 	}
 
 	private static String generateText(Lavados lavado) {
-		String result = "  PARKING MARILYN MONROE" + "                                                             "
-				+ "Promociones y Construcciones" + "                      " + "Puerto SL"
-				+ "                                                                                     "
-				+ "C/Marilyn Monroe, 2"
-				+ "                                                                                  " + "29004 Málaga"
+		String result = "  PARKING MARILYN MONROE" + "                                                                      "
+				+ "C.I.F.: B-29.355.195                                                           "
+				+ "          Promociones y Construcciones" + "                       " + "Puerto SL           "
+				+ "          "
+				+ "       C/Marilyn Monroe, 2"
+				+ "                             " + "29004 Málaga"
 				+ "                                                                                     "
 				+ "TLF. 952.067.850"
 				+ "                                                                                " + lavado.getHora()
 				+ "      " + lavado.getFecha()
 				+ "                                                                        " + "FACTURA SIMPLIFICADA"
-				+ "                             ";
+				+ "                                                                                  ";
 		int length = (lavado.getId() + "").length();
 		try {
 			result += new String(new char[5 - length]).replace("\0", " ");
@@ -51,7 +53,7 @@ public class Tickets {
 		}
 		result += lavado.getId()
 				+ "                                                                                        "
-				+ "Lavado Vehículo Matrícula" + "                     ";
+				+ "Lavado Vehículo Matrícula" + "                                                                          ";
 		length = lavado.getMatricula().length();
 		try {
 			result += new String(new char[7 - length]).replace("\0", " ");
@@ -88,8 +90,8 @@ public class Tickets {
 				+ "                                                                                        "
 				+ "Lavado Vehículo Matrícula" + "              " + "MATRICULA     TOTAL"
 				+ "                                                                           " + "21% IVA INCLUIDO";
-
-		List<Lavados> listaLavados = Models.Lavados.listaTickets(fecIni, fecFin);
+		
+		List<Lavados> listaLavados = Models.Lavados.listaTickets(fecIni,fecFin);
 		LocalDate fechaActual = listaLavados.get(0).getFecha();
 
 		// Create a new font object selecting one of the PDF base fonts

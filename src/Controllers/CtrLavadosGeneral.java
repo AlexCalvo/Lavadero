@@ -16,6 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
@@ -151,8 +152,9 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 				try {
 					String baseDirectoy = "";
 
-					JFileChooser chooser = new JFileChooser();
-					
+					//TODO
+					JFileChooser chooser = new JFileChooser("Z:\\PCP 2020\\CAJA");
+					//JFileChooser chooser = new JFileChooser();
 					FileNameExtensionFilter filtro = new FileNameExtensionFilter(".PDF", "pdf");
 					chooser.setFileFilter(filtro);
 					
@@ -176,7 +178,9 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 			case "Informe":
 				String baseDirectoy = "";
 
-				JFileChooser chooser = new JFileChooser();
+				//TODO//
+				JFileChooser chooser = new JFileChooser("Z:\\PCP 2020\\CAJA");
+				//JFileChooser chooser = new JFileChooser("C:\\Users\\Hp\\Desktop\\CosasLavadero");
 				
 				FileNameExtensionFilter filtro = new FileNameExtensionFilter(".PDF", "pdf");
 				chooser.setFileFilter(filtro);

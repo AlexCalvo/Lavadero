@@ -105,7 +105,7 @@ public class Complementos {
 
     @Override
     public String toString() {
-        return (this.getNombre()==null)?"":this.getNombre() + " -  " + DoubleFormatter.df.format(this.getPrecio()) + " â‚¬";
+        return (this.getNombre()==null)?"":this.getNombre() + " -  " + DoubleFormatter.df.format(this.getPrecio()) + " €";
     }
     
 
