@@ -661,7 +661,7 @@ public class Lavados {
 
 	@Override
 	public String toString() {
-		return "Lavados [id=" + id + ", matricula=" + matricula + ", "+tipoLavado+ ",modelo=" + modelo + ",precio=" + precio + ", hora="
+		return "Lavados [id=" + id + ", matricula=" + matricula + ", "+tipoLavado+ ",modelo=" + modelo + ",precio=" + DoubleFormatter.df.format(precio) + ", hora="
 				+ hora + ", fecha=" + fecha + ", telefono=" + telefono + ", comp=" + comp + ", trab=" + trab
 				+ ", observaciones=" + observaciones + ", propietario=" + propietario + ", factura=" + factura + "]";
 	}
@@ -672,7 +672,7 @@ public class Lavados {
 		tmp[1] = matricula;
 		tmp[2] = tipoLavado;
 		tmp[3] = modelo;
-		tmp[4] = precio;
+		tmp[4] = DoubleFormatter.df.format(precio);
 		tmp[5] = hora;
 		tmp[6] = fecha;
 		tmp[7] = telefono;

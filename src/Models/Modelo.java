@@ -144,9 +144,9 @@ public class Modelo {
 	public Object[] asArray() {
 		Object[] tmp = new Object[10];
 		tmp[0] = nombre;
-		tmp[1] = precioExterior;
-		tmp[2] = precioInterior;
-		tmp[3] = precioCompleto;		
+		tmp[1] = DoubleFormatter.df.format(precioExterior);
+		tmp[2] = DoubleFormatter.df.format(precioInterior);
+		tmp[3] = DoubleFormatter.df.format(precioCompleto);
 		
 		return tmp;
 	}
