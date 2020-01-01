@@ -2,10 +2,7 @@ package UI;
 
 import Controllers.CtrPrecioModelo;
 import Controllers.ModelNotFoundException;
-import Models.Lavados;
-import Models.Modelo;
-import Models.Complementos;
-import Models.Trabajador;
+import Models.*;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
 import com.github.lgooddatepicker.components.TimePickerSettings;
@@ -251,9 +248,9 @@ public class GUILavadosDiario extends GUIPanel {
 
 	public double getFieldPrecio() {
 		
-		String s1 = "Precio Exterior: " + getFieldModelo().getPrecioExterior() + "€";
-		String s2 = "Precio Interior: " + getFieldModelo().getPrecioInterior() + "€";
-		String s3 = "Precio Completo: " + getFieldModelo().getPrecioCompleto() + "€";
+		String s1 = "Precio Exterior: " + DoubleFormatter.df.format(getFieldModelo().getPrecioExterior()) + "â‚¬";
+		String s2 = "Precio Interior: " + DoubleFormatter.df.format(getFieldModelo().getPrecioInterior()) + "â‚¬";
+		String s3 = "Precio Completo: " + DoubleFormatter.df.format(getFieldModelo().getPrecioCompleto()) + "â‚¬";
 		Object[] possibilities = { s1, s2, s3 };
 		String s = null;
 		

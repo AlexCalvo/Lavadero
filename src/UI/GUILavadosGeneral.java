@@ -384,7 +384,7 @@ public class GUILavadosGeneral extends GUIPanel {
 		double num = 0;
 
 		for (int i = 0; i < tableLavados.getRowCount(); i++) {
-			num = ((double) tableLavados.getValueAt(i, 4));
+			num = (Double.parseDouble((String) tableLavados.getValueAt(i, 4)));
 			
 //			try {
 //				if ( ((Complementos) tableLavados.getValueAt(i, 6)).getNombre() != null) {

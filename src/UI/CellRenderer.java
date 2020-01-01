@@ -34,7 +34,7 @@ public class CellRenderer extends DefaultTableCellRenderer implements TableCellR
 
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-	    //establecemos el fondo blanco o vacío
+	    //establecemos el fondo blanco o vacÃ­o
 	    setBackground(null);
 	    //COnstructor de la clase DefaultTableCellRenderer
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);

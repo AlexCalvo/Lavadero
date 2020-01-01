@@ -105,14 +105,14 @@ public class Complementos {
 
     @Override
     public String toString() {
-        return (this.getNombre()==null)?"":this.getNombre() + " -  " + this.getPrecio() + " €";
+        return (this.getNombre()==null)?"":this.getNombre() + " -  " + DoubleFormatter.df.format(this.getPrecio()) + " â‚¬";
     }
     
 
     public Object[] asArray() {
         Object[] tmp = new Object[10];
         tmp[0] = nombre;
-        tmp[1] = precio;
+        tmp[1] = DoubleFormatter.df.format(precio);
 
         return tmp;
     }

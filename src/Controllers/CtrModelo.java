@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.DoubleFormatter;
 import Models.Modelo;
 import UI.GUILavadosDiario;
 import UI.GUIModelo;
@@ -86,9 +87,9 @@ public class CtrModelo implements ActionListener, ListSelectionListener {
 
             selectedModelo = new Modelo(id);
             view.setFieldNombre(selectedModelo.getNombre());
-            view.setFieldPrecioExterior(selectedModelo.getPrecioExterior() + "");
-            view.setFieldPrecioInterior(selectedModelo.getPrecioInterior() + "");
-            view.setFieldPrecioCompleto(selectedModelo.getPrecioCompleto() + "");
+            view.setFieldPrecioExterior(DoubleFormatter.df.format(selectedModelo.getPrecioExterior()));
+            view.setFieldPrecioInterior(DoubleFormatter.df.format(selectedModelo.getPrecioInterior()));
+            view.setFieldPrecioCompleto(DoubleFormatter.df.format(selectedModelo.getPrecioCompleto()));
         }
     }
 }

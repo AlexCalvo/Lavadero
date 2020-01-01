@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Complementos;
+import Models.DoubleFormatter;
 import UI.GUIComplementos;
 import UI.GUILavadosDiario;
 import UI.GUILavadosGeneral;
@@ -81,7 +82,7 @@ public class CtrComplementos implements ActionListener, ListSelectionListener {
 
 			selectedComplemento = new Complementos(id);
 			view.setFieldNombre(selectedComplemento.getNombre());
-			view.setFieldPrecio(selectedComplemento.getPrecio() + "");
+			view.setFieldPrecio(DoubleFormatter.df.format(selectedComplemento.getPrecio()));
 
 		}
 	}
