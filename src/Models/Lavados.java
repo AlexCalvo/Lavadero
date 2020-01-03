@@ -19,7 +19,7 @@ import javax.swing.*;
 
 public class Lavados {
 
-	public static final String[] columnas = { "ID", "MATRICULA", "TIPO LAVADO", "MODELO", "PRECIO", "HORA", "FECHA",
+	public static final String[] columnas = { "ID", "MATRICULA", "TIPO LAVADO", "MODELO", "PRECIO(€)", "HORA", "FECHA",
 			"TELEFONO", "COMPLEMENTO", "TRABAJADOR", "OBSERVACIONES", "PROPIETARIO", "FACTURA" };
 
 	private int id;// clave principal
