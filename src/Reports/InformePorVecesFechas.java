@@ -99,7 +99,11 @@ public class InformePorVecesFechas {
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
-		cell = row.createCell(12, "Matricula");
+		cell = row.createCell(10, "ID");
+		cell.setFont(fontBold);
+		cell.setFontSize(10);
+				
+		cell = row.createCell(14, "Matricula");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
@@ -123,13 +127,10 @@ public class InformePorVecesFechas {
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		cell = row.createCell(14, "Telefono");
-		cell.setFont(fontBold);
-		cell.setFontSize(10);
 
-		cell = row.createCell(12, "Complemento");
+		cell = row.createCell(14, "Complemento");
 		cell.setFont(fontBold);
-		cell.setFontSize(10);
+		cell.setFontSize(10); 
 
 
 		// Set up monthly and yearly counters
@@ -265,7 +266,10 @@ public class InformePorVecesFechas {
 
 					row = table.createRow(20);
 
-					cell = row.createCell(12, listaLavados.get(i).getMatricula());
+					cell = row.createCell(10, listaLavados.get(i).getId()+"");
+					cell.setFontSize(10);
+
+					cell = row.createCell(14, listaLavados.get(i).getMatricula());
 					cell.setFontSize(10);
 
 					cell = row.createCell(14, listaLavados.get(i).getModelo().toString());
@@ -283,10 +287,7 @@ public class InformePorVecesFechas {
 					cell = row.createCell(14, listaLavados.get(i).getFecha().toString());
 					cell.setFontSize(10);
 
-					cell = row.createCell(14, listaLavados.get(i).getTelefono().toString());
-					cell.setFontSize(10);
-
-					cell = row.createCell(12, listaLavados.get(i).getComp().toString());
+					cell = row.createCell(14, listaLavados.get(i).getComp().toString());
 					cell.setFontSize(10);
 
 				} catch (NullPointerException e) {

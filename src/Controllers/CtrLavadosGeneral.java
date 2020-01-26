@@ -23,7 +23,7 @@ import java.time.LocalDate;
 public class CtrLavadosGeneral implements ActionListener, ListSelectionListener, DateChangeListener {
 
 	private enum Reports {
-		ENTRE_FECHAS, MATRICULA, COMPLEMENTO, TRABAJADOR, VECES, VECES_FECHA, GENERAL,PROPIETARIO,FACTURAS
+		ENTRE_FECHAS, MATRICULA, COMPLEMENTO, TRABAJADOR, VECES, VECES_FECHA, GENERAL,PROPIETARIO,FACTURAS,POR_DIAS
 	}
 
 	private GUILavadosGeneral view;
@@ -174,7 +174,36 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 				}
 				break;
 
-			
+			case "PorDia":
+				String baseDirectory = "";
+				LocalDate fechaInii = view.getFieldFechaIni();
+				LocalDate fechaFinn = view.getFieldFechaFin();
+				
+				//TODO//
+				JFileChooser chooserDias = new JFileChooser("Z:\\PCP 2020\\CAJA");
+				//JFileChooser chooser = new JFileChooser("C:\\Users\\Hp\\Desktop\\CosasLavadero");
+				
+				FileNameExtensionFilter filtroDias = new FileNameExtensionFilter(".PDF", "pdf");
+				chooserDias.setFileFilter(filtroDias);
+				java.io.File nombreDias =new java.io.File(chooserDias.getSelectedFile()+".pdf");
+				chooserDias.setSelectedFile(nombreDias);
+				
+				if (chooserDias.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+					baseDirectory = chooserDias.getSelectedFile().getAbsolutePath();
+					
+				} else
+					return;
+				
+				try {
+					InformePorDias.generateInforme(baseDirectory, fechaInii, fechaFinn);
+				} catch (FileNotFoundException e) { // File not found or access denied
+					JOptionPane.showMessageDialog(null,"Archivo no encontrado o acceso denegado.");
+					e.printStackTrace();
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null,"Los campos de fechas deben tener un valor.");
+					e.printStackTrace();
+				}
+				break;
 			case "Informe":
 				String baseDirectoy = "";
 

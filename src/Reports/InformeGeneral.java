@@ -98,18 +98,22 @@ public class InformeGeneral {
 		cell.setFontSize(10);
 
 		row = table.createRow(20);
-		cell = row.createCell(12, "Matricula");
+		cell = row.createCell(10, "ID");
+		cell.setFont(fontBold);
+		cell.setFontSize(10);
+				
+		cell = row.createCell(14, "Matricula");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
 		cell = row.createCell(14, "Modelo");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
-
+		
 		cell = row.createCell(14, "TipoLavado");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
-
+		
 		cell = row.createCell(12, "Precio");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
@@ -122,13 +126,10 @@ public class InformeGeneral {
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
-		cell = row.createCell(14, "Telefono");
-		cell.setFont(fontBold);
-		cell.setFontSize(10);
 
-		cell = row.createCell(12, "Complemento");
+		cell = row.createCell(14, "Complemento");
 		cell.setFont(fontBold);
-		cell.setFontSize(10);
+		cell.setFontSize(10); 
 
 		// Set up monthly and yearly counters
 		int lavadosAnioActual = 0;
@@ -243,16 +244,19 @@ public class InformeGeneral {
 
 				row = table.createRow(20);
 
-				cell = row.createCell(12, lavado.getMatricula());
+				cell = row.createCell(10, lavado.getId()+"");
+				cell.setFontSize(10);
+
+				cell = row.createCell(14, lavado.getMatricula());
 				cell.setFontSize(10);
 
 				cell = row.createCell(14, lavado.getModelo().toString());
 				cell.setFontSize(10);
-
+				
 				cell = row.createCell(14, lavado.getTipoLavado().toString());
 				cell.setFontSize(10);
-
-				cell = row.createCell(12, lavado.getPrecio() + "");
+				
+				cell = row.createCell(12, lavado.getPrecio()+"");
 				cell.setFontSize(10);
 
 				cell = row.createCell(8, lavado.getHora().toString());
@@ -261,10 +265,7 @@ public class InformeGeneral {
 				cell = row.createCell(14, lavado.getFecha().toString());
 				cell.setFontSize(10);
 
-				cell = row.createCell(14, lavado.getTelefono().toString());
-				cell.setFontSize(10);
-
-				cell = row.createCell(12, lavado.getComp().toString());
+				cell = row.createCell(14, lavado.getComp().toString());
 				cell.setFontSize(10);
 
 			} catch (NullPointerException e) {
