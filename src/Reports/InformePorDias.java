@@ -35,7 +35,7 @@ public class InformePorDias {
 
 	public static void generateInforme(String outFile, LocalDate FechaIn, LocalDate FechaFin) throws Exception {
 
-		List<Lavados> listaLavados = Models.Lavados.listaLavadosPorFechas(FechaIn, FechaFin);
+		List<Lavados> listaLavados = Models.Lavados.listaTickets(FechaIn, FechaFin);
 		LocalDate fechaActual = listaLavados.get(0).getFecha();
 
 		// Create a new font object selecting one of the PDF base fonts
@@ -87,7 +87,7 @@ public class InformePorDias {
 		// table.addHeaderRow(headerRow);
 
 //		Row<PDPage> row = table.createRow(20);
-//		cell = row.createCell(100, "Año " + fechaActual.getYear());
+//		cell = row.createCell(100, "Aï¿½o " + fechaActual.getYear());
 //		cell.setFillColor(Color.gray);
 //		cell.setFontSize(10);
 //
@@ -151,7 +151,7 @@ public class InformePorDias {
 				cell = row.createCell(20, lavadosDiaTotal+"");
 			    cell.setFontSize(10);
 			      
-			    cell = row.createCell(20, precioDia+" €");
+			    cell = row.createCell(20, precioDia+" ï¿½");
 				cell.setFontSize(10);
 				   
 				cell = row.createCell(20, idIni + "-" + idFin);
@@ -192,7 +192,7 @@ public class InformePorDias {
 		cell = row.createCell(20, lavadosDiaTotal+"");
 	    cell.setFontSize(10);
 	      
-	    cell = row.createCell(20, precioDia+" €");
+	    cell = row.createCell(20, precioDia+" ï¿½");
 		cell.setFontSize(10);
 		   
 		cell = row.createCell(20, idIni + "-" + listaLavados.get(listaLavados.size()-1).getId());
@@ -205,7 +205,7 @@ public class InformePorDias {
 		cell = row.createCell(20, numLavadosTotal +"");
 	    cell.setFontSize(10);
 	      
-	    cell = row.createCell(20, precioTotal +" €");
+	    cell = row.createCell(20, precioTotal +" ï¿½");
 		cell.setFontSize(10);
 		   
 		cell = row.createCell(20, "");

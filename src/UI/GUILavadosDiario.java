@@ -178,11 +178,12 @@ public class GUILavadosDiario extends GUIPanel {
 	}
 
 	public Complementos getFieldComplemento() {
-		try {
-			return (Complementos) this.autoComplemento.findItem(autoComplemento.getItemSelected().toString());
-		} catch (NullPointerException e) {
+
+		Complementos res = (Complementos) this.autoComplemento.findItem(tComplemento.getText());
+		if(res == null){
 			return new Complementos("Ninguno");
 		}
+		return res;
 
 	}
 
@@ -194,11 +195,13 @@ public class GUILavadosDiario extends GUIPanel {
 	}
 
 	public Trabajador getFieldTrabajador() {
-		try {
-			return (Trabajador) this.autoTrabajador.findItem(autoTrabajador.getItemSelected().toString());
-		} catch (NullPointerException e) {
+
+		Trabajador res = (Trabajador) this.autoTrabajador.findItem(tTrabajador.getText());
+		if(res == null){
 			return new Trabajador(-1);
 		}
+		return res;
+
 	}
 
 	public void setFieldTrabajador(Trabajador trabajador) {
@@ -249,9 +252,9 @@ public class GUILavadosDiario extends GUIPanel {
 	public double getFieldPrecio() {
 		
 
-		String s1 = "Precio Exterior: " + DoubleFormatter.df.format(getFieldModelo().getPrecioExterior()) + "€";
-		String s2 = "Precio Interior: " + DoubleFormatter.df.format(getFieldModelo().getPrecioInterior()) + "€";
-		String s3 = "Precio Completo: " + DoubleFormatter.df.format(getFieldModelo().getPrecioCompleto()) + "€";
+		String s1 = "Precio Exterior: " + DoubleFormatter.df.format(getFieldModelo().getPrecioExterior()) + "ï¿½";
+		String s2 = "Precio Interior: " + DoubleFormatter.df.format(getFieldModelo().getPrecioInterior()) + "ï¿½";
+		String s3 = "Precio Completo: " + DoubleFormatter.df.format(getFieldModelo().getPrecioCompleto()) + "ï¿½";
 
 
 		Object[] possibilities = { s1, s2, s3 };
@@ -290,6 +293,7 @@ public class GUILavadosDiario extends GUIPanel {
 	public TextAutoCompleter getAutoComplemento() {
 		return autoComplemento;
 	}
+
 
 	public TextAutoCompleter getAutoTrabajador() {
 		return autoTrabajador;
