@@ -204,7 +204,37 @@ public class CtrLavadosGeneral implements ActionListener, ListSelectionListener,
 					e.printStackTrace();
 				}
 				break;
-			case "Informe":
+			case "PorDiaFacturas":
+				String baseDirectoryF = "";
+				LocalDate fechaIniiF = view.getFieldFechaIni();
+				LocalDate fechaFinnF = view.getFieldFechaFin();
+
+				//TODO//
+				JFileChooser chooserDiasF = new JFileChooser("Z:\\PCP 2020\\CAJA");
+				//JFileChooser chooser = new JFileChooser("C:\\Users\\Hp\\Desktop\\CosasLavadero");
+
+				FileNameExtensionFilter filtroDiasFacturas = new FileNameExtensionFilter(".PDF", "pdf");
+				chooserDiasF.setFileFilter(filtroDiasFacturas);
+				java.io.File nombreDiasFacturas =new java.io.File(chooserDiasF.getSelectedFile()+".pdf");
+				chooserDiasF.setSelectedFile(nombreDiasFacturas);
+
+				if (chooserDiasF.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+					baseDirectoryF = chooserDiasF.getSelectedFile().getAbsolutePath();
+
+				} else
+					return;
+
+				try {
+					InformePorDiasFacturas.generateInforme(baseDirectoryF, fechaIniiF, fechaFinnF);
+				} catch (FileNotFoundException e) { // File not found or access denied
+					JOptionPane.showMessageDialog(null,"Archivo no encontrado o acceso denegado.");
+					e.printStackTrace();
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null,"Los campos de fechas deben tener un valor.");
+					e.printStackTrace();
+				}
+				break;
+				case "Informe":
 				String baseDirectoy = "";
 
 				//TODO//

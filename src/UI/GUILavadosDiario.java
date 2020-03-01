@@ -252,9 +252,9 @@ public class GUILavadosDiario extends GUIPanel {
 	public double getFieldPrecio() {
 		
 
-		String s1 = "Precio Exterior: " + DoubleFormatter.df.format(getFieldModelo().getPrecioExterior()) + "�";
-		String s2 = "Precio Interior: " + DoubleFormatter.df.format(getFieldModelo().getPrecioInterior()) + "�";
-		String s3 = "Precio Completo: " + DoubleFormatter.df.format(getFieldModelo().getPrecioCompleto()) + "�";
+		String s1 = "Precio Exterior: " + DoubleFormatter.df.format(getFieldModelo().getPrecioExterior()) + "€";
+		String s2 = "Precio Interior: " + DoubleFormatter.df.format(getFieldModelo().getPrecioInterior()) + "€";
+		String s3 = "Precio Completo: " + DoubleFormatter.df.format(getFieldModelo().getPrecioCompleto()) + "€";
 
 
 		Object[] possibilities = { s1, s2, s3 };

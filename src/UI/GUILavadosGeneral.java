@@ -74,6 +74,7 @@ public class GUILavadosGeneral extends GUIPanel {
 	private JButton bRefrescar = new JButton("Refrescar");
 	
 	private JButton bPorDias = new JButton("Informe Por Dia");
+	private JButton bPorDiasFacturas = new JButton("Informe por Dia(Facturas)");
 	
 	private JButton bGenerarInforme = new JButton("Generar informe");
 	private JButton bGenerarFactura = new JButton("Generar Tickets");
@@ -131,6 +132,7 @@ public class GUILavadosGeneral extends GUIPanel {
 		tmp.add(bQueryTickets);
 		tmp.add(bQueryFacturas);
 		tmp.add(bPorDias);
+		tmp.add(bPorDiasFacturas);
 		tmp.add(bGenerarFactura);
 		tmp.add(bGenerarInforme);
 		tmp.setLayout(new GridLayout(1, 4, 5, 5));
@@ -311,6 +313,9 @@ public class GUILavadosGeneral extends GUIPanel {
 		
 		bPorDias.setActionCommand("PorDia");
 		bPorDias.addActionListener(ctr);
+
+		bPorDiasFacturas.setActionCommand("PorDiaFacturas");
+		bPorDiasFacturas.addActionListener(ctr);
 
 		bGenerarFactura.setActionCommand("Factura");
 		bGenerarFactura.addActionListener(ctr);
