@@ -151,7 +151,7 @@ public class InformePorDiasFacturas {
 				cell = row.createCell(20, lavadosDiaTotal+"");
 			    cell.setFontSize(10);
 			      
-			    cell = row.createCell(20, precioDia+" €");
+			    cell = row.createCell(20, precioDia+" ï¿½");
 				cell.setFontSize(10);
 				   
 				if(lavadosDiaTotal == 1) {
@@ -198,7 +198,7 @@ public class InformePorDiasFacturas {
 		cell = row.createCell(20, lavadosDiaTotal+"");
 	    cell.setFontSize(10);
 	      
-	    cell = row.createCell(20, precioDia+" €");
+	    cell = row.createCell(20, precioDia+" â‚¬");
 		cell.setFontSize(10);
 		   
 		if(lavadosDiaTotal == 1) {
@@ -217,7 +217,7 @@ public class InformePorDiasFacturas {
 		cell = row.createCell(20, numLavadosTotal +"");
 	    cell.setFontSize(10);
 	      
-	    cell = row.createCell(20, precioTotal +" €");
+	    cell = row.createCell(20, precioTotal +" ï¿½");
 		cell.setFontSize(10);
 		   
 		cell = row.createCell(20, "");

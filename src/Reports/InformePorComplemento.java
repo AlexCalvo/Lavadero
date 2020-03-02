@@ -83,7 +83,7 @@ public class InformePorComplemento {
 		// table.addHeaderRow(headerRow);
 
 		Row<PDPage> row = table.createRow(20);
-		cell = row.createCell(100, "Año " + fechaActual.getYear());
+		cell = row.createCell(100, "Aï¿½o " + fechaActual.getYear());
 		cell.setFillColor(Color.gray);
 		cell.setFontSize(10);
 
@@ -143,7 +143,7 @@ public class InformePorComplemento {
 				cambioMes = true;
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal+" €");
+				cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal+" ï¿½");
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
 				lavadosMesTotal = 0;
@@ -166,7 +166,7 @@ public class InformePorComplemento {
 					cell = row.createCell(100, "");
 				
 					row = table.createRow(20);
-					cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal + " €");
+					cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal + " â‚¬");
 					cell.setFont(fontBold);
 					cell.setFontSize(10);
 					lavadosMesTotal = 0;
@@ -183,13 +183,13 @@ public class InformePorComplemento {
 				cell = row.createCell(100, "");
 				
 				row = table.createRow(20);
-				cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal+" €");
+				cell = row.createCell(100, "Cantidad total de este aï¿½o: " + lavadosAnioTotal+" â‚¬");
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
 				lavadosAnioTotal = 0;
 
 				row = table.createRow(20);
-				cell = row.createCell(100, "Numero Lavados de este año: " + lavadosAnioActual);
+				cell = row.createCell(100, "Numero Lavados de este aï¿½o: " + lavadosAnioActual);
 				cell.setFont(fontBold);
 				cell.setFontSize(10);
 				lavadosAnioActual = 0;
@@ -208,7 +208,7 @@ public class InformePorComplemento {
 			if (cambioAnio) {
 				fechaActual = lavado.getFecha();
 				row = table.createRow(20);
-				cell = row.createCell(100, "Año " + fechaActual.getYear());
+				cell = row.createCell(100, "AÃ±o " + fechaActual.getYear());
 				cell.setFillColor(Color.gray);
 				cell.setFontSize(10);
 
@@ -268,7 +268,7 @@ public class InformePorComplemento {
 		}
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal+" €");
+		cell = row.createCell(100, "Cantidad total de este mes: " + lavadosMesTotal+" ï¿½");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosMesTotal = 0;
@@ -283,14 +283,14 @@ public class InformePorComplemento {
 		cell = row.createCell(100, "");
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total de este año: " + lavadosAnioTotal+" €");
+		cell = row.createCell(100, "Cantidad total de este aÃ±o: " + lavadosAnioTotal+" ï¿½");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosAnioTotal = 0;
 		
 
 		row = table.createRow(20);
-		cell = row.createCell(100, "Numero Lavados de este año: " + lavadosAnioActual);
+		cell = row.createCell(100, "Numero Lavados de este aÃ±o: " + lavadosAnioActual);
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 		lavadosAnioActual = 0;
@@ -300,7 +300,7 @@ public class InformePorComplemento {
 		cell = row.createCell(100, "");
 		
 		row = table.createRow(20);
-		cell = row.createCell(100, "Cantidad total global: " + lavadosTotal + "€");
+		cell = row.createCell(100, "Cantidad total global: " + lavadosTotal + "ï¿½");
 		cell.setFont(fontBold);
 		cell.setFontSize(10);
 
