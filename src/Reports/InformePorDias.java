@@ -77,7 +77,7 @@ public class InformePorDias {
 		// the parameter is the row height
 		Row<PDPage> headerRow = table.createRow(50);
 		// the first parameter is the cell width
-		Cell<PDPage> cell = headerRow.createCell(100, "Lista lavados");
+		Cell<PDPage> cell = headerRow.createCell(100, "Lista lavados por dia entre " + FechaIn + " y " + FechaFin);
 		cell.setFont(fontBold);
 		cell.setFontSize(20);
 		// vertical alignment
@@ -151,15 +151,15 @@ public class InformePorDias {
 				cell = row.createCell(20, lavadosDiaTotal+"");
 			    cell.setFontSize(10);
 			      
-			    cell = row.createCell(20, precioDia+" ï¿½");
+			    cell = row.createCell(20, precioDia+" €");
 				cell.setFontSize(10);
 				   
-				cell = row.createCell(20, idIni + "-" + idFin);
+				cell = row.createCell(20, idIni + "-" + (idFin-1));
 				cell.setFontSize(10);
 				
 				fechaActual = lavado.getFecha();
 				idFin = lavado.getId();
-				idIni = lavado.getId()+1;
+				idIni = lavado.getId();
 				lavadosDiaTotal = 0;
 				precioDia = 0;
 //				cambioDia = true;
@@ -192,7 +192,7 @@ public class InformePorDias {
 		cell = row.createCell(20, lavadosDiaTotal+"");
 	    cell.setFontSize(10);
 	      
-	    cell = row.createCell(20, precioDia+" ï¿½");
+	    cell = row.createCell(20, precioDia+" €");
 		cell.setFontSize(10);
 		   
 		cell = row.createCell(20, idIni + "-" + listaLavados.get(listaLavados.size()-1).getId());
@@ -205,7 +205,7 @@ public class InformePorDias {
 		cell = row.createCell(20, numLavadosTotal +"");
 	    cell.setFontSize(10);
 	      
-	    cell = row.createCell(20, precioTotal +" ï¿½");
+	    cell = row.createCell(20, precioTotal +" €");
 		cell.setFontSize(10);
 		   
 		cell = row.createCell(20, "");

@@ -83,9 +83,7 @@ public class Modelo {
 
 	}
 
-	public double getPrecioExterior() {
-		return precioExterior;
-	}
+	
 
 	public void setPrecioExterior(double precio) {
 		try (MySqlDB db = new MySqlDB()) {
@@ -157,5 +155,10 @@ public class Modelo {
 		double precModel = precio- comp;
 	    return this.getNombre() + " -" + precModel;
 		
+	}
+
+	public double getPrecioExterior() {
+		// TODO Auto-generated method stub
+		return precioExterior;
 	}
 }
